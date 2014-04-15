@@ -1,0 +1,753 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CSBAModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="CSBAModelStoreContainer">
+    <EntitySet Name="aspnet_Users" EntityType="CSBAModel.Store.aspnet_Users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Player" EntityType="CSBAModel.Store.Player" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PlayerPosition" EntityType="CSBAModel.Store.PlayerPosition" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Position" EntityType="CSBAModel.Store.Position" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PositionType" EntityType="CSBAModel.Store.PositionType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Season" EntityType="CSBAModel.Store.Season" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SeasonPlayer" EntityType="CSBAModel.Store.SeasonPlayer" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SeasonPlayerPositionStat" EntityType="CSBAModel.Store.SeasonPlayerPositionStat" store:Type="Tables" store:Schema="dbo" store:Name="SeasonPlayerPositionStat">
+      <DefiningQuery>SELECT 
+      [SeasonPlayerPositionStat].[SeasonID] AS [SeasonID], 
+      [SeasonPlayerPositionStat].[PlayerGUID] AS [PlayerGUID], 
+      [SeasonPlayerPositionStat].[PositionID] AS [PositionID], 
+      [SeasonPlayerPositionStat].[StatID] AS [StatID], 
+      [SeasonPlayerPositionStat].[StatValue] AS [StatValue]
+      FROM [dbo].[SeasonPlayerPositionStat] AS [SeasonPlayerPositionStat]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="SeasonStadium" EntityType="CSBAModel.Store.SeasonStadium" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SeasonTeam" EntityType="CSBAModel.Store.SeasonTeam" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SeasonTeamPlayer" EntityType="CSBAModel.Store.SeasonTeamPlayer" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SeasonTeamStadium" EntityType="CSBAModel.Store.SeasonTeamStadium" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Stadium" EntityType="CSBAModel.Store.Stadium" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Stat" EntityType="CSBAModel.Store.Stat" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Team" EntityType="CSBAModel.Store.Team" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="v_PlayerPositions" EntityType="CSBAModel.Store.v_PlayerPositions" store:Type="Views" store:Schema="dbo" store:Name="v_PlayerPositions">
+      <DefiningQuery>SELECT 
+      [v_PlayerPositions].[PlayerGUID] AS [PlayerGUID], 
+      [v_PlayerPositions].[PlayerName] AS [PlayerName], 
+      [v_PlayerPositions].[PlayerImage] AS [PlayerImage], 
+      [v_PlayerPositions].[PrimaryPositionID] AS [PrimaryPositionID], 
+      [v_PlayerPositions].[SecondaryPostiionID] AS [SecondaryPostiionID], 
+      [v_PlayerPositions].[PrimPosName] AS [PrimPosName], 
+      [v_PlayerPositions].[PrimPosNameLong] AS [PrimPosNameLong], 
+      [v_PlayerPositions].[SecPosName] AS [SecPosName], 
+      [v_PlayerPositions].[SecPosNameLong] AS [SecPosNameLong]
+      FROM [dbo].[v_PlayerPositions] AS [v_PlayerPositions]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="v_SeasonTeam" EntityType="CSBAModel.Store.v_SeasonTeam" store:Type="Views" store:Schema="dbo" store:Name="v_SeasonTeam">
+      <DefiningQuery>SELECT 
+      [v_SeasonTeam].[SeasonID] AS [SeasonID], 
+      [v_SeasonTeam].[SeasonName] AS [SeasonName], 
+      [v_SeasonTeam].[TeamID] AS [TeamID], 
+      [v_SeasonTeam].[TeamName] AS [TeamName], 
+      [v_SeasonTeam].[StadiumOrder] AS [StadiumOrder], 
+      [v_SeasonTeam].[ActiveFlg] AS [ActiveFlg], 
+      [v_SeasonTeam].[OwnerName] AS [OwnerName], 
+      [v_SeasonTeam].[OwnerEmail] AS [OwnerEmail], 
+      [v_SeasonTeam].[OwnerUserID] AS [OwnerUserID]
+      FROM [dbo].[v_SeasonTeam] AS [v_SeasonTeam]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="v_SeasonTeamPlayerPosition" EntityType="CSBAModel.Store.v_SeasonTeamPlayerPosition" store:Type="Views" store:Schema="dbo" store:Name="v_SeasonTeamPlayerPosition">
+      <DefiningQuery>SELECT 
+      [v_SeasonTeamPlayerPosition].[SeasonID] AS [SeasonID], 
+      [v_SeasonTeamPlayerPosition].[TeamID] AS [TeamID], 
+      [v_SeasonTeamPlayerPosition].[Points] AS [Points], 
+      [v_SeasonTeamPlayerPosition].[PlayerName] AS [PlayerName], 
+      [v_SeasonTeamPlayerPosition].[PositionName] AS [PositionName], 
+      [v_SeasonTeamPlayerPosition].[PositionNameLong] AS [PositionNameLong], 
+      [v_SeasonTeamPlayerPosition].[TeamName] AS [TeamName], 
+      [v_SeasonTeamPlayerPosition].[PlayerGUID] AS [PlayerGUID]
+      FROM [dbo].[v_SeasonTeamPlayerPosition] AS [v_SeasonTeamPlayerPosition]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="v_SeasonView" EntityType="CSBAModel.Store.v_SeasonView" store:Type="Views" store:Schema="dbo" store:Name="v_SeasonView">
+      <DefiningQuery>SELECT 
+      [v_SeasonView].[SeasonID] AS [SeasonID], 
+      [v_SeasonView].[SeasonName] AS [SeasonName], 
+      [v_SeasonView].[DraftDate] AS [DraftDate], 
+      [v_SeasonView].[StartPoints] AS [StartPoints], 
+      [v_SeasonView].[MinBid] AS [MinBid], 
+      [v_SeasonView].[PlayersDrafted] AS [PlayersDrafted]
+      FROM [dbo].[v_SeasonView] AS [v_SeasonView]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_PlayerPosition_Player" Association="CSBAModel.Store.FK_PlayerPosition_Player">
+      <End Role="Player" EntitySet="Player" />
+      <End Role="PlayerPosition" EntitySet="PlayerPosition" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlayerPosition_Position" Association="CSBAModel.Store.FK_PlayerPosition_Position">
+      <End Role="Position" EntitySet="Position" />
+      <End Role="PlayerPosition" EntitySet="PlayerPosition" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Position_PositionType" Association="CSBAModel.Store.FK_Position_PositionType">
+      <End Role="PositionType" EntitySet="PositionType" />
+      <End Role="Position" EntitySet="Position" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SeasonPlayer_Player" Association="CSBAModel.Store.FK_SeasonPlayer_Player">
+      <End Role="Player" EntitySet="Player" />
+      <End Role="SeasonPlayer" EntitySet="SeasonPlayer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SeasonPlayer_Season" Association="CSBAModel.Store.FK_SeasonPlayer_Season">
+      <End Role="Season" EntitySet="Season" />
+      <End Role="SeasonPlayer" EntitySet="SeasonPlayer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SeasonPlayerPositionStat_Player" Association="CSBAModel.Store.FK_SeasonPlayerPositionStat_Player">
+      <End Role="Player" EntitySet="Player" />
+      <End Role="SeasonPlayerPositionStat" EntitySet="SeasonPlayerPositionStat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SeasonPlayerPositionStat_Stat" Association="CSBAModel.Store.FK_SeasonPlayerPositionStat_Stat">
+      <End Role="Stat" EntitySet="Stat" />
+      <End Role="SeasonPlayerPositionStat" EntitySet="SeasonPlayerPositionStat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SeasonStadium_Season" Association="CSBAModel.Store.FK_SeasonStadium_Season">
+      <End Role="Season" EntitySet="Season" />
+      <End Role="SeasonStadium" EntitySet="SeasonStadium" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SeasonStadium_Stadium" Association="CSBAModel.Store.FK_SeasonStadium_Stadium">
+      <End Role="Stadium" EntitySet="Stadium" />
+      <End Role="SeasonStadium" EntitySet="SeasonStadium" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SeasonTeam_Season" Association="CSBAModel.Store.FK_SeasonTeam_Season">
+      <End Role="Season" EntitySet="Season" />
+      <End Role="SeasonTeam" EntitySet="SeasonTeam" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SeasonTeam_Team" Association="CSBAModel.Store.FK_SeasonTeam_Team">
+      <End Role="Team" EntitySet="Team" />
+      <End Role="SeasonTeam" EntitySet="SeasonTeam" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SeasonTeamPlayer_Player" Association="CSBAModel.Store.FK_SeasonTeamPlayer_Player">
+      <End Role="Player" EntitySet="Player" />
+      <End Role="SeasonTeamPlayer" EntitySet="SeasonTeamPlayer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SeasonTeamStadium_Season" Association="CSBAModel.Store.FK_SeasonTeamStadium_Season">
+      <End Role="Season" EntitySet="Season" />
+      <End Role="SeasonTeamStadium" EntitySet="SeasonTeamStadium" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SeasonTeamStadium_Stadium" Association="CSBAModel.Store.FK_SeasonTeamStadium_Stadium">
+      <End Role="Stadium" EntitySet="Stadium" />
+      <End Role="SeasonTeamStadium" EntitySet="SeasonTeamStadium" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SeasonTeamStadium_Team" Association="CSBAModel.Store.FK_SeasonTeamStadium_Team">
+      <End Role="Team" EntitySet="Team" />
+      <End Role="SeasonTeamStadium" EntitySet="SeasonTeamStadium" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Team_aspnet_Users" Association="CSBAModel.Store.FK_Team_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="Team" EntitySet="Team" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="aspnet_Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="LoweredUserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+    <Property Name="MobileAlias" Type="nvarchar" MaxLength="16" />
+    <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+    <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Player">
+    <Key>
+      <PropertyRef Name="PlayerGUID" />
+    </Key>
+    <Property Name="PlayerGUID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PlayerName" Type="varchar" MaxLength="50" />
+    <Property Name="PlayerImage" Type="image" />
+  </EntityType>
+  <EntityType Name="PlayerPosition">
+    <Key>
+      <PropertyRef Name="PlayerGUID" />
+    </Key>
+    <Property Name="PlayerGUID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PrimaryPositionID" Type="int" Nullable="false" />
+    <Property Name="SecondaryPostiionID" Type="int" />
+  </EntityType>
+  <EntityType Name="Position">
+    <Key>
+      <PropertyRef Name="PositionID" />
+    </Key>
+    <Property Name="PositionID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PositionTypeID" Type="int" />
+    <Property Name="PositionName" Type="nchar" MaxLength="20" />
+    <Property Name="MaxCount" Type="int" />
+    <Property Name="PositionNameLong" Type="nchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="PositionType">
+    <Key>
+      <PropertyRef Name="PositionTypeID" />
+    </Key>
+    <Property Name="PositionTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="PositionTypeDescr" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Season">
+    <Key>
+      <PropertyRef Name="SeasonID" />
+    </Key>
+    <Property Name="SeasonID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SeasonName" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="DraftDate" Type="date" Nullable="false" />
+    <Property Name="StartPoints" Type="int" Nullable="false" />
+    <Property Name="MinBid" Type="int" />
+  </EntityType>
+  <EntityType Name="SeasonPlayer">
+    <Key>
+      <PropertyRef Name="SeasonID" />
+      <PropertyRef Name="PlayerGUID" />
+    </Key>
+    <Property Name="SeasonID" Type="int" Nullable="false" />
+    <Property Name="PlayerGUID" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'CSBA.dbo.SeasonPlayerPositionStat' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="SeasonPlayerPositionStat">
+    <Key>
+      <PropertyRef Name="SeasonID" />
+      <PropertyRef Name="PositionID" />
+      <PropertyRef Name="StatID" />
+    </Key>
+    <Property Name="SeasonID" Type="int" Nullable="false" />
+    <Property Name="PlayerGUID" Type="uniqueidentifier" />
+    <Property Name="PositionID" Type="int" Nullable="false" />
+    <Property Name="StatID" Type="int" Nullable="false" />
+    <Property Name="StatValue" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="SeasonStadium">
+    <Key>
+      <PropertyRef Name="SeasonID" />
+      <PropertyRef Name="StadiumID" />
+    </Key>
+    <Property Name="SeasonID" Type="int" Nullable="false" />
+    <Property Name="StadiumID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SeasonTeam">
+    <Key>
+      <PropertyRef Name="SeasonID" />
+      <PropertyRef Name="TeamID" />
+    </Key>
+    <Property Name="SeasonID" Type="int" Nullable="false" />
+    <Property Name="TeamID" Type="int" Nullable="false" />
+    <Property Name="ActiveFlg" Type="bit" />
+    <Property Name="StadiumOrder" Type="int" />
+  </EntityType>
+  <EntityType Name="SeasonTeamPlayer">
+    <Key>
+      <PropertyRef Name="SeasonID" />
+      <PropertyRef Name="TeamID" />
+      <PropertyRef Name="PlayerGUID" />
+    </Key>
+    <Property Name="SeasonID" Type="int" Nullable="false" />
+    <Property Name="TeamID" Type="int" Nullable="false" />
+    <Property Name="PlayerGUID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Points" Type="int" />
+  </EntityType>
+  <EntityType Name="SeasonTeamStadium">
+    <Key>
+      <PropertyRef Name="SeasonID" />
+      <PropertyRef Name="TeamID" />
+      <PropertyRef Name="StadiumID" />
+    </Key>
+    <Property Name="SeasonID" Type="int" Nullable="false" />
+    <Property Name="TeamID" Type="int" Nullable="false" />
+    <Property Name="StadiumID" Type="int" Nullable="false" />
+    <Property Name="Points" Type="int" />
+    <Property Name="CreateUser" Type="nchar" MaxLength="20" />
+    <Property Name="CreateTS" Type="datetime" />
+    <Property Name="UpdateUser" Type="nchar" MaxLength="20" />
+    <Property Name="UpdateTS" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Stadium">
+    <Key>
+      <PropertyRef Name="StadiumID" />
+    </Key>
+    <Property Name="StadiumID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="StadiumName" Type="nchar" MaxLength="30" />
+    <Property Name="Active_Flg" Type="bit" />
+    <Property Name="StadiumImage" Type="image" />
+  </EntityType>
+  <EntityType Name="Stat">
+    <Key>
+      <PropertyRef Name="StatID" />
+    </Key>
+    <Property Name="StatID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="StatName" Type="nchar" MaxLength="10" />
+    <Property Name="StatFullName" Type="nchar" MaxLength="25" />
+    <Property Name="PositionTypeID" Type="int" />
+  </EntityType>
+  <EntityType Name="Team">
+    <Key>
+      <PropertyRef Name="TeamID" />
+    </Key>
+    <Property Name="TeamID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TeamName" Type="nchar" Nullable="false" MaxLength="25" />
+    <Property Name="OwnerName" Type="nchar" Nullable="false" MaxLength="25" />
+    <Property Name="OwnerUserID" Type="uniqueidentifier" />
+    <Property Name="OwnerEmail" Type="nchar" MaxLength="25" />
+    <Property Name="TeamImage" Type="image" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'CSBA.dbo.v_PlayerPositions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="v_PlayerPositions">
+    <Key>
+      <PropertyRef Name="PlayerGUID" />
+      <PropertyRef Name="PrimaryPositionID" />
+    </Key>
+    <Property Name="PlayerGUID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PlayerName" Type="varchar" MaxLength="50" />
+    <Property Name="PlayerImage" Type="image" />
+    <Property Name="PrimaryPositionID" Type="int" Nullable="false" />
+    <Property Name="SecondaryPostiionID" Type="int" />
+    <Property Name="PrimPosName" Type="nchar" MaxLength="20" />
+    <Property Name="PrimPosNameLong" Type="nchar" MaxLength="20" />
+    <Property Name="SecPosName" Type="nchar" MaxLength="20" />
+    <Property Name="SecPosNameLong" Type="nchar" MaxLength="20" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'CSBA.dbo.v_SeasonTeam' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="v_SeasonTeam">
+    <Key>
+      <PropertyRef Name="SeasonID" />
+      <PropertyRef Name="SeasonName" />
+      <PropertyRef Name="TeamID" />
+      <PropertyRef Name="TeamName" />
+      <PropertyRef Name="OwnerName" />
+    </Key>
+    <Property Name="SeasonID" Type="int" Nullable="false" />
+    <Property Name="SeasonName" Type="nchar" Nullable="false" MaxLength="25" />
+    <Property Name="TeamID" Type="int" Nullable="false" />
+    <Property Name="TeamName" Type="nchar" Nullable="false" MaxLength="25" />
+    <Property Name="StadiumOrder" Type="int" />
+    <Property Name="ActiveFlg" Type="bit" />
+    <Property Name="OwnerName" Type="nchar" Nullable="false" MaxLength="25" />
+    <Property Name="OwnerEmail" Type="nchar" MaxLength="25" />
+    <Property Name="OwnerUserID" Type="uniqueidentifier" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'CSBA.dbo.v_SeasonTeamPlayerPosition' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="v_SeasonTeamPlayerPosition">
+    <Key>
+      <PropertyRef Name="SeasonID" />
+      <PropertyRef Name="TeamID" />
+      <PropertyRef Name="TeamName" />
+      <PropertyRef Name="PlayerGUID" />
+    </Key>
+    <Property Name="SeasonID" Type="int" Nullable="false" />
+    <Property Name="TeamID" Type="int" Nullable="false" />
+    <Property Name="Points" Type="int" />
+    <Property Name="PlayerName" Type="nchar" MaxLength="50" />
+    <Property Name="PositionName" Type="nchar" MaxLength="20" />
+    <Property Name="PositionNameLong" Type="nchar" MaxLength="20" />
+    <Property Name="TeamName" Type="nchar" Nullable="false" MaxLength="25" />
+    <Property Name="PlayerGUID" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+      warning 6002: The table/view 'CSBA.dbo.v_SeasonView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+  <EntityType Name="v_SeasonView">
+    <Key>
+      <PropertyRef Name="SeasonID" />
+      <PropertyRef Name="SeasonName" />
+      <PropertyRef Name="DraftDate" />
+      <PropertyRef Name="StartPoints" />
+    </Key>
+    <Property Name="SeasonID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SeasonName" Type="nchar" Nullable="false" MaxLength="25" />
+    <Property Name="DraftDate" Type="date" Nullable="false" />
+    <Property Name="StartPoints" Type="int" Nullable="false" />
+    <Property Name="MinBid" Type="int" />
+    <Property Name="PlayersDrafted" Type="int" />
+  </EntityType>
+  <Association Name="FK_PlayerPosition_Player">
+    <End Role="Player" Type="CSBAModel.Store.Player" Multiplicity="1" />
+    <End Role="PlayerPosition" Type="CSBAModel.Store.PlayerPosition" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="PlayerGUID" />
+      </Principal>
+      <Dependent Role="PlayerPosition">
+        <PropertyRef Name="PlayerGUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlayerPosition_Position">
+    <End Role="Position" Type="CSBAModel.Store.Position" Multiplicity="1" />
+    <End Role="PlayerPosition" Type="CSBAModel.Store.PlayerPosition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Position">
+        <PropertyRef Name="PositionID" />
+      </Principal>
+      <Dependent Role="PlayerPosition">
+        <PropertyRef Name="PrimaryPositionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Position_PositionType">
+    <End Role="PositionType" Type="CSBAModel.Store.PositionType" Multiplicity="0..1" />
+    <End Role="Position" Type="CSBAModel.Store.Position" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PositionType">
+        <PropertyRef Name="PositionTypeID" />
+      </Principal>
+      <Dependent Role="Position">
+        <PropertyRef Name="PositionTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SeasonPlayer_Player">
+    <End Role="Player" Type="CSBAModel.Store.Player" Multiplicity="1" />
+    <End Role="SeasonPlayer" Type="CSBAModel.Store.SeasonPlayer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="PlayerGUID" />
+      </Principal>
+      <Dependent Role="SeasonPlayer">
+        <PropertyRef Name="PlayerGUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SeasonPlayer_Season">
+    <End Role="Season" Type="CSBAModel.Store.Season" Multiplicity="1" />
+    <End Role="SeasonPlayer" Type="CSBAModel.Store.SeasonPlayer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Season">
+        <PropertyRef Name="SeasonID" />
+      </Principal>
+      <Dependent Role="SeasonPlayer">
+        <PropertyRef Name="SeasonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SeasonPlayerPositionStat_Player">
+    <End Role="Player" Type="CSBAModel.Store.Player" Multiplicity="0..1" />
+    <End Role="SeasonPlayerPositionStat" Type="CSBAModel.Store.SeasonPlayerPositionStat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="PlayerGUID" />
+      </Principal>
+      <Dependent Role="SeasonPlayerPositionStat">
+        <PropertyRef Name="PlayerGUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SeasonPlayerPositionStat_Stat">
+    <End Role="Stat" Type="CSBAModel.Store.Stat" Multiplicity="1" />
+    <End Role="SeasonPlayerPositionStat" Type="CSBAModel.Store.SeasonPlayerPositionStat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stat">
+        <PropertyRef Name="StatID" />
+      </Principal>
+      <Dependent Role="SeasonPlayerPositionStat">
+        <PropertyRef Name="StatID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SeasonStadium_Season">
+    <End Role="Season" Type="CSBAModel.Store.Season" Multiplicity="1" />
+    <End Role="SeasonStadium" Type="CSBAModel.Store.SeasonStadium" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Season">
+        <PropertyRef Name="SeasonID" />
+      </Principal>
+      <Dependent Role="SeasonStadium">
+        <PropertyRef Name="SeasonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SeasonStadium_Stadium">
+    <End Role="Stadium" Type="CSBAModel.Store.Stadium" Multiplicity="1" />
+    <End Role="SeasonStadium" Type="CSBAModel.Store.SeasonStadium" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stadium">
+        <PropertyRef Name="StadiumID" />
+      </Principal>
+      <Dependent Role="SeasonStadium">
+        <PropertyRef Name="StadiumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SeasonTeam_Season">
+    <End Role="Season" Type="CSBAModel.Store.Season" Multiplicity="1" />
+    <End Role="SeasonTeam" Type="CSBAModel.Store.SeasonTeam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Season">
+        <PropertyRef Name="SeasonID" />
+      </Principal>
+      <Dependent Role="SeasonTeam">
+        <PropertyRef Name="SeasonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SeasonTeam_Team">
+    <End Role="Team" Type="CSBAModel.Store.Team" Multiplicity="1" />
+    <End Role="SeasonTeam" Type="CSBAModel.Store.SeasonTeam" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="TeamID" />
+      </Principal>
+      <Dependent Role="SeasonTeam">
+        <PropertyRef Name="TeamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SeasonTeamPlayer_Player">
+    <End Role="Player" Type="CSBAModel.Store.Player" Multiplicity="1" />
+    <End Role="SeasonTeamPlayer" Type="CSBAModel.Store.SeasonTeamPlayer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="PlayerGUID" />
+      </Principal>
+      <Dependent Role="SeasonTeamPlayer">
+        <PropertyRef Name="PlayerGUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SeasonTeamStadium_Season">
+    <End Role="Season" Type="CSBAModel.Store.Season" Multiplicity="1" />
+    <End Role="SeasonTeamStadium" Type="CSBAModel.Store.SeasonTeamStadium" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Season">
+        <PropertyRef Name="SeasonID" />
+      </Principal>
+      <Dependent Role="SeasonTeamStadium">
+        <PropertyRef Name="SeasonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SeasonTeamStadium_Stadium">
+    <End Role="Stadium" Type="CSBAModel.Store.Stadium" Multiplicity="1" />
+    <End Role="SeasonTeamStadium" Type="CSBAModel.Store.SeasonTeamStadium" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stadium">
+        <PropertyRef Name="StadiumID" />
+      </Principal>
+      <Dependent Role="SeasonTeamStadium">
+        <PropertyRef Name="StadiumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SeasonTeamStadium_Team">
+    <End Role="Team" Type="CSBAModel.Store.Team" Multiplicity="1" />
+    <End Role="SeasonTeamStadium" Type="CSBAModel.Store.SeasonTeamStadium" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="TeamID" />
+      </Principal>
+      <Dependent Role="SeasonTeamStadium">
+        <PropertyRef Name="TeamID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Team_aspnet_Users">
+    <End Role="aspnet_Users" Type="CSBAModel.Store.aspnet_Users" Multiplicity="0..1" />
+    <End Role="Team" Type="CSBAModel.Store.Team" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Team">
+        <PropertyRef Name="OwnerUserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="GetSeasonTeamOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_Player_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PlayerGUID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="sp_Player_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PlayerName" Type="nchar" Mode="In" />
+    <Parameter Name="PlayerImage" Type="image" Mode="In" />
+  </Function>
+  <Function Name="sp_Player_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PlayerGUID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="sp_Player_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PlayerGUID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="PlayerName" Type="nchar" Mode="In" />
+    <Parameter Name="PlayerImage" Type="image" Mode="In" />
+  </Function>
+  <Function Name="sp_PlayerPosition_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PlayerGUID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="sp_PlayerPosition_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PlayerGUID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="PrimaryPositionID" Type="int" Mode="In" />
+    <Parameter Name="SecondaryPositionID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_PlayerPosition_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PlayerGUID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="sp_PlayerPosition_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PlayerGUID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="PrimaryPositionID" Type="int" Mode="In" />
+    <Parameter Name="SecondaryPositionID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_Position_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PositionID" Type="int" Mode="In" />
+    <Parameter Name="PositionTypeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_Position_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PositionID" Type="int" Mode="In" />
+    <Parameter Name="PositionTypeID" Type="int" Mode="In" />
+    <Parameter Name="PositionName" Type="nchar" Mode="In" />
+    <Parameter Name="MaxCount" Type="int" Mode="In" />
+    <Parameter Name="PositionNameLong" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_Position_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_Position_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PositionID" Type="int" Mode="In" />
+    <Parameter Name="PositionTypeID" Type="int" Mode="In" />
+    <Parameter Name="PositionName" Type="nchar" Mode="In" />
+    <Parameter Name="MaxCount" Type="int" Mode="In" />
+    <Parameter Name="PositionNameLong" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_PositionType_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PositionTypeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_PositionType_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PositionTypeDescr" Type="nchar" Mode="In" />
+  </Function>
+  <Function Name="sp_PositionType_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PositionTypeID" Type="int" Mode="In" />
+    <Parameter Name="PositionTypeDescr" Type="nchar" Mode="In" />
+  </Function>
+  <Function Name="sp_Season_Clear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_Season_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_Season_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonName" Type="varchar" Mode="In" />
+    <Parameter Name="DraftDate" Type="datetime" Mode="In" />
+    <Parameter Name="StartPoints" Type="int" Mode="In" />
+    <Parameter Name="MinBid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_Season_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_Season_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+    <Parameter Name="SeasonName" Type="varchar" Mode="In" />
+    <Parameter Name="DraftDate" Type="datetime" Mode="In" />
+    <Parameter Name="StartPoints" Type="int" Mode="In" />
+    <Parameter Name="MinBid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SeasonPlayer_delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+    <Parameter Name="PlayerGUID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="sp_SeasonPlayer_deleteAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SeasonPlayer_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+    <Parameter Name="PlayerGUID" Type="uniqueidentifier" Mode="In" />
+  </Function>
+  <Function Name="sp_SeasonPlayerBySeason_Remaining" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SeasonPlayerBySeason_Selected" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SeasonStadium_DeleteAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SeasonStadium_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+    <Parameter Name="StadiumID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SeasonStadiumBySeason_Remaining" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SeasonStadiumBySeason_Selected" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SeasonTeam_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+    <Parameter Name="TeamID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SeasonTeam_DeleteAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SeasonTeam_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+    <Parameter Name="TeamID" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+    <Parameter Name="StadiumOrder" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SeasonTeam_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+    <Parameter Name="TeamID" Type="int" Mode="In" />
+    <Parameter Name="Active" Type="bit" Mode="In" />
+    <Parameter Name="StadiumOrder" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SeasonTeamBySeason_Remaining" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SeasonTeamBySeason_Selected" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SeasonTeamPlayer_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+    <Parameter Name="TeamID" Type="int" Mode="In" />
+    <Parameter Name="PlayerID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SeasonTeamPlayer_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+    <Parameter Name="TeamID" Type="int" Mode="In" />
+    <Parameter Name="PlayerID" Type="int" Mode="In" />
+    <Parameter Name="Points" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SeasonTeamPlayer_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SeasonID" Type="int" Mode="In" />
+    <Parameter Name="TeamID" Type="int" Mode="In" />
+    <Parameter Name="PlayerID" Type="int" Mode="In" />
+    <Parameter Name="Points" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_Stadium_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="StadiumID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_Stadium_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="StadiumName" Type="nchar" Mode="In" />
+    <Parameter Name="StadiumImage" Type="image" Mode="In" />
+    <Parameter Name="Active_Flg" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="sp_Stadium_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="StadiumID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_Stadium_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="StadiumID" Type="int" Mode="In" />
+    <Parameter Name="StadiumName" Type="nchar" Mode="In" />
+    <Parameter Name="Active_Flg" Type="bit" Mode="In" />
+    <Parameter Name="StadiumImage" Type="image" Mode="In" />
+  </Function>
+  <Function Name="sp_Team_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TeamID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_Team_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TeamName" Type="nchar" Mode="In" />
+    <Parameter Name="OwnerName" Type="nchar" Mode="In" />
+    <Parameter Name="OwnerEmail" Type="varchar" Mode="In" />
+    <Parameter Name="OwnerUserID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="TeamImage" Type="image" Mode="In" />
+  </Function>
+  <Function Name="sp_Team_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TeamID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_Team_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TeamID" Type="int" Mode="In" />
+    <Parameter Name="TeamName" Type="nchar" Mode="In" />
+    <Parameter Name="OwnerName" Type="nchar" Mode="In" />
+    <Parameter Name="OwnerUserID" Type="uniqueidentifier" Mode="In" />
+    <Parameter Name="OwnerEmail" Type="nchar" Mode="In" />
+    <Parameter Name="TeamImage" Type="image" Mode="In" />
+  </Function>
+</Schema>

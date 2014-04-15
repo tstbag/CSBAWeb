@@ -1,0 +1,515 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CSBAModelStoreContainer" CdmEntityContainer="CSBAEntities">
+    <EntitySetMapping Name="Positions">
+      <EntityTypeMapping TypeName="CSBAModel.Position">
+        <MappingFragment StoreEntitySet="Position">
+          <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+          <ScalarProperty Name="PositionTypeID" ColumnName="PositionTypeID" />
+          <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+          <ScalarProperty Name="MaxCount" ColumnName="MaxCount" />
+          <ScalarProperty Name="PositionNameLong" ColumnName="PositionNameLong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="CSBAModel.Position">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="CSBAModel.Store.sp_Position_Insert">
+            <ScalarProperty Name="PositionNameLong" ParameterName="PositionNameLong" />
+            <ScalarProperty Name="MaxCount" ParameterName="MaxCount" />
+            <ScalarProperty Name="PositionName" ParameterName="PositionName" />
+            <ScalarProperty Name="PositionTypeID" ParameterName="PositionTypeID" />
+            <ScalarProperty Name="PositionID" ParameterName="PositionID" />
+          </InsertFunction>
+          <DeleteFunction FunctionName="CSBAModel.Store.sp_Position_Delete">
+            <ScalarProperty Name="PositionTypeID" ParameterName="PositionTypeID" />
+            <ScalarProperty Name="PositionID" ParameterName="PositionID" />
+          </DeleteFunction>
+          <UpdateFunction FunctionName="CSBAModel.Store.sp_Position_Update">
+            <ScalarProperty Name="PositionNameLong" ParameterName="PositionNameLong" Version="Current" />
+            <ScalarProperty Name="MaxCount" ParameterName="MaxCount" Version="Current" />
+            <ScalarProperty Name="PositionName" ParameterName="PositionName" Version="Current" />
+            <ScalarProperty Name="PositionTypeID" ParameterName="PositionTypeID" Version="Current" />
+            <ScalarProperty Name="PositionID" ParameterName="PositionID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Seasons">
+      <EntityTypeMapping TypeName="CSBAModel.Season">
+        <MappingFragment StoreEntitySet="Season">
+          <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+          <ScalarProperty Name="SeasonName" ColumnName="SeasonName" />
+          <ScalarProperty Name="DraftDate" ColumnName="DraftDate" />
+          <ScalarProperty Name="StartPoints" ColumnName="StartPoints" />
+          <ScalarProperty Name="MinBid" ColumnName="MinBid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="CSBAModel.Season">
+        <ModificationFunctionMapping>
+          <DeleteFunction FunctionName="CSBAModel.Store.sp_Season_Delete">
+            <ScalarProperty Name="SeasonID" ParameterName="SeasonID" />
+          </DeleteFunction>
+          <InsertFunction FunctionName="CSBAModel.Store.sp_Season_Insert">
+            <ScalarProperty Name="MinBid" ParameterName="MinBid" />
+            <ScalarProperty Name="StartPoints" ParameterName="StartPoints" />
+            <ScalarProperty Name="DraftDate" ParameterName="DraftDate" />
+            <ScalarProperty Name="SeasonName" ParameterName="SeasonName" />
+            <ResultBinding Name="SeasonID" ColumnName="SeasonID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="CSBAModel.Store.sp_Season_Update">
+            <ScalarProperty Name="MinBid" ParameterName="MinBid" Version="Current" />
+            <ScalarProperty Name="StartPoints" ParameterName="StartPoints" Version="Current" />
+            <ScalarProperty Name="DraftDate" ParameterName="DraftDate" Version="Current" />
+            <ScalarProperty Name="SeasonName" ParameterName="SeasonName" Version="Current" />
+            <ScalarProperty Name="SeasonID" ParameterName="SeasonID" Version="Current" />
+          </UpdateFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stats">
+      <EntityTypeMapping TypeName="CSBAModel.Stat">
+        <MappingFragment StoreEntitySet="Stat">
+          <ScalarProperty Name="StatID" ColumnName="StatID" />
+          <ScalarProperty Name="StatName" ColumnName="StatName" />
+          <ScalarProperty Name="StatFullName" ColumnName="StatFullName" />
+          <ScalarProperty Name="PositionTypeID" ColumnName="PositionTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_Season_Delete" FunctionName="CSBAModel.Store.sp_Season_Delete" />
+    <FunctionImportMapping FunctionImportName="sp_Season_Select" FunctionName="CSBAModel.Store.sp_Season_Select">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CSBAModel.sp_Season_Select_Result">
+          <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+          <ScalarProperty Name="SeasonName" ColumnName="SeasonName" />
+          <ScalarProperty Name="DraftDate" ColumnName="DraftDate" />
+          <ScalarProperty Name="StartPoints" ColumnName="StartPoints" />
+          <ScalarProperty Name="MinBid" ColumnName="MinBid" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="v_SeasonView">
+      <EntityTypeMapping TypeName="CSBAModel.v_SeasonView">
+        <MappingFragment StoreEntitySet="v_SeasonView">
+          <ScalarProperty Name="PlayersDrafted" ColumnName="PlayersDrafted" />
+          <ScalarProperty Name="MinBid" ColumnName="MinBid" />
+          <ScalarProperty Name="StartPoints" ColumnName="StartPoints" />
+          <ScalarProperty Name="DraftDate" ColumnName="DraftDate" />
+          <ScalarProperty Name="SeasonName" ColumnName="SeasonName" />
+          <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_SeasonTeam_Delete" FunctionName="CSBAModel.Store.sp_SeasonTeam_Delete" />
+    <FunctionImportMapping FunctionImportName="sp_SeasonTeam_Insert" FunctionName="CSBAModel.Store.sp_SeasonTeam_Insert" />
+    <FunctionImportMapping FunctionImportName="sp_SeasonTeam_Update" FunctionName="CSBAModel.Store.sp_SeasonTeam_Update" />
+    <FunctionImportMapping FunctionImportName="sp_SeasonTeamPlayer_Delete" FunctionName="CSBAModel.Store.sp_SeasonTeamPlayer_Delete" />
+    <FunctionImportMapping FunctionImportName="sp_SeasonTeamPlayer_Insert" FunctionName="CSBAModel.Store.sp_SeasonTeamPlayer_Insert" />
+    <FunctionImportMapping FunctionImportName="sp_SeasonTeamPlayer_Update" FunctionName="CSBAModel.Store.sp_SeasonTeamPlayer_Update" />
+    <EntitySetMapping Name="SeasonTeamStadiums">
+      <EntityTypeMapping TypeName="CSBAModel.SeasonTeamStadium">
+        <MappingFragment StoreEntitySet="SeasonTeamStadium">
+          <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
+          <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+          <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
+          <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="StadiumID" ColumnName="StadiumID" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PositionTypes">
+      <EntityTypeMapping TypeName="CSBAModel.PositionType">
+        <MappingFragment StoreEntitySet="PositionType">
+          <ScalarProperty Name="PositionTypeDescr" ColumnName="PositionTypeDescr" />
+          <ScalarProperty Name="PositionTypeID" ColumnName="PositionTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="CSBAModel.PositionType">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="CSBAModel.Store.sp_PositionType_Insert">
+            <ScalarProperty Name="PositionTypeDescr" ParameterName="PositionTypeDescr" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="CSBAModel.Store.sp_PositionType_Update">
+            <ScalarProperty Name="PositionTypeDescr" ParameterName="PositionTypeDescr" Version="Current" />
+            <ScalarProperty Name="PositionTypeID" ParameterName="PositionTypeID" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="CSBAModel.Store.sp_PositionType_Delete">
+            <ScalarProperty Name="PositionTypeID" ParameterName="PositionTypeID" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_PositionType_Delete" FunctionName="CSBAModel.Store.sp_PositionType_Delete" />
+    <FunctionImportMapping FunctionImportName="sp_PositionType_Insert" FunctionName="CSBAModel.Store.sp_PositionType_Insert" />
+    <FunctionImportMapping FunctionImportName="sp_PositionType_Update" FunctionName="CSBAModel.Store.sp_PositionType_Update" />
+    <FunctionImportMapping FunctionImportName="sp_Position_Delete" FunctionName="CSBAModel.Store.sp_Position_Delete" />
+    <FunctionImportMapping FunctionImportName="sp_Position_Insert" FunctionName="CSBAModel.Store.sp_Position_Insert" />
+    <FunctionImportMapping FunctionImportName="sp_Position_Update" FunctionName="CSBAModel.Store.sp_Position_Update" />
+    <FunctionImportMapping FunctionImportName="GetSeasonTeamOrder" FunctionName="CSBAModel.Store.GetSeasonTeamOrder">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CSBAModel.GetSeasonTeamOrder_Result">
+          <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+          <ScalarProperty Name="SeasonName" ColumnName="SeasonName" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="StadiumOrder" ColumnName="StadiumOrder" />
+          <ScalarProperty Name="ActiveFlg" ColumnName="ActiveFlg" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="v_SeasonTeam">
+      <EntityTypeMapping TypeName="CSBAModel.v_SeasonTeam">
+        <MappingFragment StoreEntitySet="v_SeasonTeam">
+          <ScalarProperty Name="OwnerUserID" ColumnName="OwnerUserID" />
+          <ScalarProperty Name="OwnerEmail" ColumnName="OwnerEmail" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="ActiveFlg" ColumnName="ActiveFlg" />
+          <ScalarProperty Name="StadiumOrder" ColumnName="StadiumOrder" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="SeasonName" ColumnName="SeasonName" />
+          <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_Season_Insert" FunctionName="CSBAModel.Store.sp_Season_Insert" />
+    <FunctionImportMapping FunctionImportName="sp_Season_Update" FunctionName="CSBAModel.Store.sp_Season_Update" />
+    <FunctionImportMapping FunctionImportName="sp_Season_Clear" FunctionName="CSBAModel.Store.sp_Season_Clear" />
+    <EntitySetMapping Name="SeasonPlayerPositionStats">
+      <EntityTypeMapping TypeName="CSBAModel.SeasonPlayerPositionStat">
+        <MappingFragment StoreEntitySet="SeasonPlayerPositionStat">
+          <ScalarProperty Name="StatValue" ColumnName="StatValue" />
+          <ScalarProperty Name="StatID" ColumnName="StatID" />
+          <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+          <ScalarProperty Name="PlayerGUID" ColumnName="PlayerGUID" />
+          <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SeasonTeams">
+      <EntityTypeMapping TypeName="CSBAModel.SeasonTeam">
+        <MappingFragment StoreEntitySet="SeasonTeam">
+          <ScalarProperty Name="StadiumOrder" ColumnName="StadiumOrder" />
+          <ScalarProperty Name="ActiveFlg" ColumnName="ActiveFlg" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SeasonTeamPlayers">
+      <EntityTypeMapping TypeName="CSBAModel.SeasonTeamPlayer">
+        <MappingFragment StoreEntitySet="SeasonTeamPlayer">
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="PlayerGUID" ColumnName="PlayerGUID" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Players">
+      <EntityTypeMapping TypeName="CSBAModel.Player">
+        <MappingFragment StoreEntitySet="Player">
+          <ScalarProperty Name="PlayerImage" ColumnName="PlayerImage" />
+          <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+          <ScalarProperty Name="PlayerGUID" ColumnName="PlayerGUID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="CSBAModel.Player">
+        <ModificationFunctionMapping>
+          <DeleteFunction FunctionName="CSBAModel.Store.sp_Player_Delete">
+            <ScalarProperty Name="PlayerGUID" ParameterName="PlayerGUID" />
+          </DeleteFunction>
+          <UpdateFunction FunctionName="CSBAModel.Store.sp_Player_Update">
+            <ScalarProperty Name="PlayerImage" ParameterName="PlayerImage" Version="Current" />
+            <ScalarProperty Name="PlayerName" ParameterName="PlayerName" Version="Current" />
+            <ScalarProperty Name="PlayerGUID" ParameterName="PlayerGUID" Version="Current" />
+          </UpdateFunction>
+          <InsertFunction FunctionName="CSBAModel.Store.sp_Player_Insert">
+            <ScalarProperty Name="PlayerImage" ParameterName="PlayerImage" />
+            <ScalarProperty Name="PlayerName" ParameterName="PlayerName" />
+            <ResultBinding Name="PlayerGUID" ColumnName="PlayerGUID" />
+          </InsertFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="v_SeasonTeamPlayerPosition">
+      <EntityTypeMapping TypeName="CSBAModel.v_SeasonTeamPlayerPosition">
+        <MappingFragment StoreEntitySet="v_SeasonTeamPlayerPosition">
+          <ScalarProperty Name="PlayerGUID" ColumnName="PlayerGUID" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="PositionNameLong" ColumnName="PositionNameLong" />
+          <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+          <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_Player_Delete" FunctionName="CSBAModel.Store.sp_Player_Delete" />
+    <FunctionImportMapping FunctionImportName="sp_Player_Select" FunctionName="CSBAModel.Store.sp_Player_Select">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CSBAModel.sp_Player_Select_Result">
+          <ScalarProperty Name="PlayerGUID" ColumnName="PlayerGUID" />
+          <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Player_Update" FunctionName="CSBAModel.Store.sp_Player_Update" />
+    <FunctionImportMapping FunctionImportName="sp_Player_Insert" FunctionName="CSBAModel.Store.sp_Player_Insert" />
+    <FunctionImportMapping FunctionImportName="sp_Position_Select" FunctionName="CSBAModel.Store.sp_Position_Select">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CSBAModel.sp_Position_Select_Result">
+          <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+          <ScalarProperty Name="PositionTypeID" ColumnName="PositionTypeID" />
+          <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+          <ScalarProperty Name="MaxCount" ColumnName="MaxCount" />
+          <ScalarProperty Name="PositionNameLong" ColumnName="PositionNameLong" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="v_PlayerPositions">
+      <EntityTypeMapping TypeName="CSBAModel.v_PlayerPositions">
+        <MappingFragment StoreEntitySet="v_PlayerPositions">
+          <ScalarProperty Name="SecPosNameLong" ColumnName="SecPosNameLong" />
+          <ScalarProperty Name="SecPosName" ColumnName="SecPosName" />
+          <ScalarProperty Name="PrimPosNameLong" ColumnName="PrimPosNameLong" />
+          <ScalarProperty Name="PrimPosName" ColumnName="PrimPosName" />
+          <ScalarProperty Name="SecondaryPostiionID" ColumnName="SecondaryPostiionID" />
+          <ScalarProperty Name="PrimaryPositionID" ColumnName="PrimaryPositionID" />
+          <ScalarProperty Name="PlayerImage" ColumnName="PlayerImage" />
+          <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+          <ScalarProperty Name="PlayerGUID" ColumnName="PlayerGUID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlayerPositions">
+      <EntityTypeMapping TypeName="CSBAModel.PlayerPosition">
+        <MappingFragment StoreEntitySet="PlayerPosition">
+          <ScalarProperty Name="SecondaryPostiionID" ColumnName="SecondaryPostiionID" />
+          <ScalarProperty Name="PrimaryPositionID" ColumnName="PrimaryPositionID" />
+          <ScalarProperty Name="PlayerGUID" ColumnName="PlayerGUID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="CSBAModel.PlayerPosition">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="CSBAModel.Store.sp_PlayerPosition_Insert">
+            <ScalarProperty Name="SecondaryPostiionID" ParameterName="SecondaryPositionID" />
+            <ScalarProperty Name="PrimaryPositionID" ParameterName="PrimaryPositionID" />
+            <ScalarProperty Name="PlayerGUID" ParameterName="PlayerGUID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="CSBAModel.Store.sp_PlayerPosition_Update">
+            <ScalarProperty Name="SecondaryPostiionID" ParameterName="SecondaryPositionID" Version="Current" />
+            <ScalarProperty Name="PrimaryPositionID" ParameterName="PrimaryPositionID" Version="Current" />
+            <ScalarProperty Name="PlayerGUID" ParameterName="PlayerGUID" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="CSBAModel.Store.sp_PlayerPosition_Delete">
+            <ScalarProperty Name="PlayerGUID" ParameterName="PlayerGUID" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_PlayerPosition_Delete" FunctionName="CSBAModel.Store.sp_PlayerPosition_Delete" />
+    <FunctionImportMapping FunctionImportName="sp_PlayerPosition_Insert" FunctionName="CSBAModel.Store.sp_PlayerPosition_Insert" />
+    <FunctionImportMapping FunctionImportName="sp_PlayerPosition_Update" FunctionName="CSBAModel.Store.sp_PlayerPosition_Update" />
+    <EntitySetMapping Name="Teams">
+      <EntityTypeMapping TypeName="CSBAModel.Team">
+        <MappingFragment StoreEntitySet="Team">
+          <ScalarProperty Name="TeamImage" ColumnName="TeamImage" />
+          <ScalarProperty Name="OwnerEmail" ColumnName="OwnerEmail" />
+          <ScalarProperty Name="OwnerUserID" ColumnName="OwnerUserID" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="CSBAModel.Team">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="CSBAModel.Store.sp_Team_Insert">
+            <ScalarProperty Name="TeamImage" ParameterName="TeamImage" />
+            <ScalarProperty Name="OwnerUserID" ParameterName="OwnerUserID" />
+            <ScalarProperty Name="OwnerEmail" ParameterName="OwnerEmail" />
+            <ScalarProperty Name="OwnerName" ParameterName="OwnerName" />
+            <ScalarProperty Name="TeamName" ParameterName="TeamName" />
+            <ResultBinding Name="TeamID" ColumnName="TeamID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="CSBAModel.Store.sp_Team_Update">
+            <ScalarProperty Name="TeamImage" ParameterName="TeamImage" Version="Current" />
+            <ScalarProperty Name="OwnerEmail" ParameterName="OwnerEmail" Version="Current" />
+            <ScalarProperty Name="OwnerUserID" ParameterName="OwnerUserID" Version="Current" />
+            <ScalarProperty Name="OwnerName" ParameterName="OwnerName" Version="Current" />
+            <ScalarProperty Name="TeamName" ParameterName="TeamName" Version="Current" />
+            <ScalarProperty Name="TeamID" ParameterName="TeamID" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="CSBAModel.Store.sp_Team_Delete">
+            <ScalarProperty Name="TeamID" ParameterName="TeamID" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_Team_Delete" FunctionName="CSBAModel.Store.sp_Team_Delete" />
+    <FunctionImportMapping FunctionImportName="sp_Team_Insert" FunctionName="CSBAModel.Store.sp_Team_Insert" />
+    <FunctionImportMapping FunctionImportName="sp_Team_Update" FunctionName="CSBAModel.Store.sp_Team_Update" />
+    <FunctionImportMapping FunctionImportName="sp_Team_Select" FunctionName="CSBAModel.Store.sp_Team_Select">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CSBAModel.sp_Team_Select_Result">
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+          <ScalarProperty Name="OwnerUserID" ColumnName="OwnerUserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="OwnerEmail" ColumnName="OwnerEmail" />
+          <ScalarProperty Name="TeamImage" ColumnName="TeamImage" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="aspnet_Users">
+      <EntityTypeMapping TypeName="CSBAModel.aspnet_Users">
+        <MappingFragment StoreEntitySet="aspnet_Users">
+          <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+          <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+          <ScalarProperty Name="MobileAlias" ColumnName="MobileAlias" />
+          <ScalarProperty Name="LoweredUserName" ColumnName="LoweredUserName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_SeasonTeamBySeason_Remaining" FunctionName="CSBAModel.Store.sp_SeasonTeamBySeason_Remaining">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CSBAModel.sp_SeasonTeamBySeason_Remaining_Result">
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_SeasonTeamBySeason_Selected" FunctionName="CSBAModel.Store.sp_SeasonTeamBySeason_Selected">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CSBAModel.sp_SeasonTeamBySeason_Selected_Result">
+          <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="ActiveFlg" ColumnName="ActiveFlg" />
+          <ScalarProperty Name="StadiumOrder" ColumnName="StadiumOrder" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_SeasonTeam_DeleteAll" FunctionName="CSBAModel.Store.sp_SeasonTeam_DeleteAll" />
+    <FunctionImportMapping FunctionImportName="sp_SeasonPlayer_delete" FunctionName="CSBAModel.Store.sp_SeasonPlayer_delete" />
+    <FunctionImportMapping FunctionImportName="sp_SeasonPlayer_deleteAll" FunctionName="CSBAModel.Store.sp_SeasonPlayer_deleteAll" />
+    <FunctionImportMapping FunctionImportName="sp_SeasonPlayer_Insert" FunctionName="CSBAModel.Store.sp_SeasonPlayer_Insert" />
+    <AssociationSetMapping Name="SeasonPlayer" TypeName="CSBAModel.SeasonPlayer" StoreEntitySet="SeasonPlayer">
+      <EndProperty Name="Season">
+        <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+      </EndProperty>
+      <EndProperty Name="Player">
+        <ScalarProperty Name="PlayerGUID" ColumnName="PlayerGUID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="sp_SeasonPlayerBySeason_Remaining" FunctionName="CSBAModel.Store.sp_SeasonPlayerBySeason_Remaining">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CSBAModel.sp_SeasonPlayerBySeason_Remaining_Result">
+          <ScalarProperty Name="PlayerGUID" ColumnName="PlayerGUID" />
+          <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_SeasonPlayerBySeason_Selected" FunctionName="CSBAModel.Store.sp_SeasonPlayerBySeason_Selected">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CSBAModel.sp_SeasonPlayerBySeason_Selected_Result">
+          <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+          <ScalarProperty Name="PlayerGUID" ColumnName="PlayerGUID" />
+          <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_PlayerPosition_Select" FunctionName="CSBAModel.Store.sp_PlayerPosition_Select">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CSBAModel.sp_PlayerPosition_Select_Result">
+          <ScalarProperty Name="PlayerGUID" ColumnName="PlayerGUID" />
+          <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+          <ScalarProperty Name="PlayerImage" ColumnName="PlayerImage" />
+          <ScalarProperty Name="PrimaryPositionID" ColumnName="PrimaryPositionID" />
+          <ScalarProperty Name="SecondaryPostiionID" ColumnName="SecondaryPostiionID" />
+          <ScalarProperty Name="PrimPosName" ColumnName="PrimPosName" />
+          <ScalarProperty Name="PrimPosNameLong" ColumnName="PrimPosNameLong" />
+          <ScalarProperty Name="SecPosName" ColumnName="SecPosName" />
+          <ScalarProperty Name="SecPosNameLong" ColumnName="SecPosNameLong" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Stadia">
+      <EntityTypeMapping TypeName="CSBAModel.Stadium">
+        <MappingFragment StoreEntitySet="Stadium">
+          <ScalarProperty Name="StadiumImage" ColumnName="StadiumImage" />
+          <ScalarProperty Name="Active_Flg" ColumnName="Active_Flg" />
+          <ScalarProperty Name="StadiumName" ColumnName="StadiumName" />
+          <ScalarProperty Name="StadiumID" ColumnName="StadiumID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="CSBAModel.Stadium">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="CSBAModel.Store.sp_Stadium_Insert">
+            <ScalarProperty Name="Active_Flg" ParameterName="Active_Flg" />
+            <ScalarProperty Name="StadiumImage" ParameterName="StadiumImage" />
+            <ScalarProperty Name="StadiumName" ParameterName="StadiumName" />
+            <ResultBinding Name="StadiumID" ColumnName="StadiumID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="CSBAModel.Store.sp_Stadium_Update">
+            <ScalarProperty Name="StadiumImage" ParameterName="StadiumImage" Version="Current" />
+            <ScalarProperty Name="Active_Flg" ParameterName="Active_Flg" Version="Current" />
+            <ScalarProperty Name="StadiumName" ParameterName="StadiumName" Version="Current" />
+            <ScalarProperty Name="StadiumID" ParameterName="StadiumID" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="CSBAModel.Store.sp_Stadium_Delete">
+            <ScalarProperty Name="StadiumID" ParameterName="StadiumID" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="SeasonStadium" TypeName="CSBAModel.SeasonStadium" StoreEntitySet="SeasonStadium">
+      <EndProperty Name="Stadium">
+        <ScalarProperty Name="StadiumID" ColumnName="StadiumID" />
+      </EndProperty>
+      <EndProperty Name="Season">
+        <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="sp_Stadium_Delete" FunctionName="CSBAModel.Store.sp_Stadium_Delete" />
+    <FunctionImportMapping FunctionImportName="sp_Stadium_Insert" FunctionName="CSBAModel.Store.sp_Stadium_Insert" />
+    <FunctionImportMapping FunctionImportName="sp_Stadium_Select" FunctionName="CSBAModel.Store.sp_Stadium_Select">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CSBAModel.sp_Stadium_Select_Result">
+          <ScalarProperty Name="StadiumID" ColumnName="StadiumID" />
+          <ScalarProperty Name="StadiumName" ColumnName="StadiumName" />
+          <ScalarProperty Name="Active_Flg" ColumnName="Active_Flg" />
+          <ScalarProperty Name="StadiumImage" ColumnName="StadiumImage" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Stadium_Update" FunctionName="CSBAModel.Store.sp_Stadium_Update" />
+    <FunctionImportMapping FunctionImportName="sp_SeasonStadiumBySeason_Remaining" FunctionName="CSBAModel.Store.sp_SeasonStadiumBySeason_Remaining">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CSBAModel.sp_SeasonStadiumBySeason_Remaining_Result">
+          <ScalarProperty Name="StadiumID" ColumnName="StadiumID" />
+          <ScalarProperty Name="StadiumName" ColumnName="StadiumName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_SeasonStadiumBySeason_Selected" FunctionName="CSBAModel.Store.sp_SeasonStadiumBySeason_Selected">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CSBAModel.sp_SeasonStadiumBySeason_Selected_Result">
+          <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+          <ScalarProperty Name="StadiumID" ColumnName="StadiumID" />
+          <ScalarProperty Name="StadiumName" ColumnName="StadiumName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_SeasonStadium_DeleteAll" FunctionName="CSBAModel.Store.sp_SeasonStadium_DeleteAll" />
+    <FunctionImportMapping FunctionImportName="sp_SeasonStadium_Insert" FunctionName="CSBAModel.Store.sp_SeasonStadium_Insert" />
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,7 @@
+C:\Users\Dad\Source\Repos\CSBA\CSBA.Contracts\bin\Debug\CSBA.Contracts.dll
+C:\Users\Dad\Source\Repos\CSBA\CSBA.Contracts\bin\Debug\CSBA.Contracts.pdb
+C:\Users\Dad\Source\Repos\CSBA\CSBA.Contracts\bin\Debug\CSBA.DomainModels.dll
+C:\Users\Dad\Source\Repos\CSBA\CSBA.Contracts\bin\Debug\CSBA.DomainModels.pdb
+C:\Users\Dad\Source\Repos\CSBA\CSBA.Contracts\obj\Debug\CSBA.Contracts.csprojResolveAssemblyReference.cache
+C:\Users\Dad\Source\Repos\CSBA\CSBA.Contracts\obj\Debug\CSBA.Contracts.dll
+C:\Users\Dad\Source\Repos\CSBA\CSBA.Contracts\obj\Debug\CSBA.Contracts.pdb

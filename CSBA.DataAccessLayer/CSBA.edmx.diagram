@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8682376062234f3880b8f0b9321e9ba6" Name="Diagram1" ZoomLevel="106">
+        <EntityTypeShape EntityType="CSBAModel.Position" Width="2.125" PointX="5.875" PointY="4.25" IsExpanded="true" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="CSBAModel.Season" Width="1.5" PointX="1.25" PointY="17.125" IsExpanded="true" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="CSBAModel.Stat" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSBAModel.v_SeasonView" Width="1.5" PointX="22.375" PointY="1.5" />
+        <EntityTypeShape EntityType="CSBAModel.SeasonTeamStadium" Width="3" PointX="11.375" PointY="15" />
+        <AssociationConnector Association="CSBAModel.FK_SeasonTeamStadium_Season" />
+        <EntityTypeShape EntityType="CSBAModel.PositionType" Width="1.5" PointX="3" PointY="6.5" FillColor="0, 192, 0" />
+        <AssociationConnector Association="CSBAModel.FK_Position_PositionType" />
+        <AssociationConnector Association="CSBAModel.FK_Stat_PositionType" />
+        <EntityTypeShape EntityType="CSBAModel.v_SeasonTeam" Width="1.5" PointX="17.875" PointY="22" />
+        <EntityTypeShape EntityType="CSBAModel.SeasonPlayerPositionStat" Width="1.5" PointX="14.5" PointY="23.125" />
+        <EntityTypeShape EntityType="CSBAModel.SeasonTeam" Width="1.5" PointX="10.267898959232447" PointY="9.837717984727453" />
+        <EntityTypeShape EntityType="CSBAModel.SeasonTeamPlayer" Width="1.5" PointX="1.3733624691950914" PointY="29.133772014236904" />
+        <AssociationConnector Association="CSBAModel.FK_SeasonTeam_Season" />
+        <AssociationConnector Association="CSBAModel.FK_SeasonPlayerPositionStat_Stat" />
+        <EntityTypeShape EntityType="CSBAModel.Player" Width="1.5" PointX="5.75" PointY="8" FillColor="0, 192, 0" />
+        <AssociationConnector Association="CSBAModel.FK_SeasonPlayerPositionStat_Player" />
+        <AssociationConnector Association="CSBAModel.FK_SeasonTeamPlayer_Player" />
+        <EntityTypeShape EntityType="CSBAModel.v_SeasonTeamPlayerPosition" Width="1.5" PointX="16.375" PointY="27.5" />
+        <EntityTypeShape EntityType="CSBAModel.v_PlayerPositions" Width="1.5" PointX="15.625" PointY="4.25" />
+        <EntityTypeShape EntityType="CSBAModel.PlayerPosition" Width="2.375" PointX="3" PointY="22.5" />
+        <AssociationConnector Association="CSBAModel.FK_PlayerPosition_Player" />
+        <AssociationConnector Association="CSBAModel.FK_PlayerPosition_Position" />
+        <EntityTypeShape EntityType="CSBAModel.Team" Width="1.5" PointX="5.5" PointY="31.125" FillColor="0, 192, 0" />
+        <AssociationConnector Association="CSBAModel.FK_SeasonTeam_Team" />
+        <AssociationConnector Association="CSBAModel.FK_SeasonTeamStadium_Team" />
+        <EntityTypeShape EntityType="CSBAModel.aspnet_Users" Width="1.5" PointX="1.5" PointY="32.375" />
+        <AssociationConnector Association="CSBAModel.FK_Team_aspnet_Users" />
+        <AssociationConnector Association="CSBAModel.SeasonPlayer" />
+        <EntityTypeShape EntityType="CSBAModel.Stadium" Width="1.5" PointX="1.7412868746282939" PointY="29.404536633475" FillColor="0, 192, 0" />
+        <AssociationConnector Association="CSBAModel.FK_SeasonTeamStadium_Stadium" />
+        <AssociationConnector Association="CSBAModel.SeasonStadium" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

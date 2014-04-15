@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{34B641E6-FEED-4705-80A4-641C66244E1A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CSBA.DataAccessLayer</RootNamespace>
+    <AssemblyName>CSBA.DataAccessLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'WorkComputer|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\WorkComputer\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="aspnet_Users.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CSBA.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CSBA.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CSBA.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CSBA.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CSBA.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\aspnet_UsersDAL.cs" />
+    <Compile Include="DAL\CSBA_ADO_HelperFunctions.cs" />
+    <Compile Include="DAL\PlayerDAL.cs" />
+    <Compile Include="DAL\PlayerPositionDAL.cs" />
+    <Compile Include="DAL\PositionDAL.cs" />
+    <Compile Include="DAL\PositionTypeDAL.cs" />
+    <Compile Include="DAL\SeasonDAL.cs" />
+    <Compile Include="DAL\SeasonPlayerDAL.cs" />
+    <Compile Include="DAL\SeasonStadiumDAL.cs" />
+    <Compile Include="DAL\SeasonTeamDAL.cs" />
+    <Compile Include="DAL\SeasonTeamPlayerPositionDAL.cs" />
+    <Compile Include="DAL\SeasonTeamStadiumDAL.cs" />
+    <Compile Include="DAL\StadiumDAL.cs" />
+    <Compile Include="DAL\StatDAL.cs" />
+    <Compile Include="DAL\TeamDAL.cs" />
+    <Compile Include="GetSeasonTeamOrder_Result.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Player.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PlayerPosition.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Position.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PositionType.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Season.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SeasonPlayerPositionStat.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SeasonTeam.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SeasonTeamPlayer.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SeasonTeamStadium.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_PlayerPosition_Select_Result.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_Player_Select_Result.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_Position_Select_Result.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_SeasonPlayerBySeason_Remaining_Result.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_SeasonPlayerBySeason_Selected_Result.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_SeasonStadiumBySeason_Remaining_Result.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_SeasonStadiumBySeason_Selected_Result.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_SeasonTeamBySeason_Remaining_Result.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_SeasonTeamBySeason_Selected_Result.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_Season_Select_Result.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_Stadium_Select_Result.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_Team_Select_Result.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Stadium.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Stat.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Team.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="v_PlayerPositions.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="v_SeasonTeam.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="v_SeasonTeamPlayerPosition.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="v_SeasonView.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="APP_DATA\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CSBA.Contracts\CSBA.Contracts.csproj">
+      <Project>{953b5578-a904-4990-b666-5cf08e38d1b3}</Project>
+      <Name>CSBA.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CSBA.DomainModels\CSBA.DomainModels.csproj">
+      <Project>{8f77bd17-d292-49d0-806b-74de8204daee}</Project>
+      <Name>CSBA.DomainModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="CSBA.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CSBA.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="CSBA.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CSBA.edmx</DependentUpon>
+      <LastGenOutput>CSBA.Context.cs</LastGenOutput>
+    </None>
+    <None Include="CSBA.edmx.diagram">
+      <DependentUpon>CSBA.edmx</DependentUpon>
+    </None>
+    <None Include="CSBA.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CSBA.edmx</DependentUpon>
+      <LastGenOutput>CSBA.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

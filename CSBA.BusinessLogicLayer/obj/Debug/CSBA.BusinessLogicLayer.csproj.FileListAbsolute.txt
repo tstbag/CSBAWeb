@@ -1,0 +1,16 @@
+C:\Users\Dad\Source\Repos\CSBA\CSBA.BusinessLogicLayer\bin\Debug\CSBA.BusinessLogicLayer.dll.config
+C:\Users\Dad\Source\Repos\CSBA\CSBA.BusinessLogicLayer\bin\Debug\CSBA.BusinessLogicLayer.dll
+C:\Users\Dad\Source\Repos\CSBA\CSBA.BusinessLogicLayer\bin\Debug\CSBA.BusinessLogicLayer.pdb
+C:\Users\Dad\Source\Repos\CSBA\CSBA.BusinessLogicLayer\bin\Debug\CSBA.Contracts.dll
+C:\Users\Dad\Source\Repos\CSBA\CSBA.BusinessLogicLayer\bin\Debug\CSBA.DataAccessLayer.dll
+C:\Users\Dad\Source\Repos\CSBA\CSBA.BusinessLogicLayer\bin\Debug\CSBA.DomainModels.dll
+C:\Users\Dad\Source\Repos\CSBA\CSBA.BusinessLogicLayer\bin\Debug\EntityFramework.dll
+C:\Users\Dad\Source\Repos\CSBA\CSBA.BusinessLogicLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Dad\Source\Repos\CSBA\CSBA.BusinessLogicLayer\bin\Debug\CSBA.Contracts.pdb
+C:\Users\Dad\Source\Repos\CSBA\CSBA.BusinessLogicLayer\bin\Debug\CSBA.DataAccessLayer.pdb
+C:\Users\Dad\Source\Repos\CSBA\CSBA.BusinessLogicLayer\bin\Debug\CSBA.DomainModels.pdb
+C:\Users\Dad\Source\Repos\CSBA\CSBA.BusinessLogicLayer\bin\Debug\EntityFramework.xml
+C:\Users\Dad\Source\Repos\CSBA\CSBA.BusinessLogicLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Dad\Source\Repos\CSBA\CSBA.BusinessLogicLayer\obj\Debug\CSBA.BusinessLogicLayer.csprojResolveAssemblyReference.cache
+C:\Users\Dad\Source\Repos\CSBA\CSBA.BusinessLogicLayer\obj\Debug\CSBA.BusinessLogicLayer.dll
+C:\Users\Dad\Source\Repos\CSBA\CSBA.BusinessLogicLayer\obj\Debug\CSBA.BusinessLogicLayer.pdb
