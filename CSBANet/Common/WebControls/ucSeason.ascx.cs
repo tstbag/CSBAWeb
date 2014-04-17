@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.Security;
+using System.Security.Principal;
 using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Diagnostics;
@@ -28,9 +30,7 @@ namespace CSBANet.Controls
             try
             {
                 SeasonDomainModel Season = new SeasonDomainModel();
-
                 rGridSeason.DataSource = BLL.ListSeason();
-
             }
             catch (Exception ex)
             {
@@ -41,11 +41,8 @@ namespace CSBANet.Controls
                 Session["LastException"] = ex;                      // Throw the exception in the session variable, will be used in error page
                 string url = string.Format(ConfigurationManager.AppSettings["ErrorPageURL"], errMethod, errMsg); //Set the URL
                 Response.Redirect(url);                             // Go to the error page.
-
             }
-
         }
-
 
         protected void rGridSeason_ItemDataBound(object sender, Telerik.Web.UI.GridItemEventArgs e)
         {
@@ -69,9 +66,34 @@ namespace CSBANet.Controls
                     rCal.SelectedDate = (DateTime)(DataBinder.Eval(edtItem.DataItem, "DraftDate"));
                     rCal.FocusedDate = rCal.SelectedDate;
 
+                    //RadTextBox rtb =  (RadTextBox)edtItem.FindControl("txtTest"); 
+
+
+                    //RadAjaxManager m = RadAjaxManager.GetCurrent(this.Page);
+                    //foreach (AjaxSetting aset in m.AjaxSettings)
+                    //{
+                    //    if (aset.AjaxControlID == "RadAjaxManager1")
+                    //    {
+                    //        aset.UpdatedControls.Add(new AjaxUpdatedControl(rGridSeason.ClientID, RadAjaxLoadingPanel1.ClientID));
+                    //        aset.UpdatedControls.Add(new AjaxUpdatedControl(rtb.ClientID, RadAjaxLoadingPanel1.ClientID));  
+                    //    }
+                    //}
+
+
                 }
-                else if (e.Item is GridItem)
+                else if (e.Item is GridDataItem)
                 {
+                    if (!Roles.IsUserInRole(Page.User.Identity.Name, "CSBA_Admin"))
+                    {
+                        GridDataItem item = (GridDataItem)e.Item;
+                        ImageButton EditButton = (ImageButton)item["EditCommandColumn"].Controls[0];
+                        EditButton.Visible = false;
+                        ImageButton deleteButton = (ImageButton)item["Delete"].Controls[0];
+                        deleteButton.Visible = false;
+                        Button btnClear = (Button)item["Clear"].Controls[0];
+                        btnClear.Visible = false;
+                    }
+                    //imageButton.Enabled = false;
 
                 }
             }
@@ -86,28 +108,6 @@ namespace CSBANet.Controls
                 Response.Redirect(url);                             // Go to the error page.
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         protected void rGridSeason_UpdateCommand(object sender, Telerik.Web.UI.GridCommandEventArgs e)
         {
@@ -164,8 +164,6 @@ namespace CSBANet.Controls
                 }
         }
 
-
-
         protected void rGridSeason_UpdIns(object sender, GridCommandEventArgs e, string Action)
         {
             try
@@ -204,12 +202,7 @@ namespace CSBANet.Controls
                 string url = string.Format(ConfigurationManager.AppSettings["ErrorPageURL"], errMethod, errMsg); //Set the URL
                 Response.Redirect(url);                             // Go to the error page.
             }
-
-
-
         }
-
-        
 
         protected void rGridSeason_PreRender(object sender, EventArgs e)
         {
@@ -233,15 +226,23 @@ namespace CSBANet.Controls
                 }
             }
 
+            if (!Roles.IsUserInRole(Page.User.Identity.Name, "CSBA_Admin"))
+            {
+                rGridSeason.MasterTableView.GetColumn("EditCommandColumn").Visible = false;
+                rGridSeason.MasterTableView.GetColumn("Delete").Visible = false;
+                rGridSeason.MasterTableView.GetColumn("Clear").Visible = false;  
+            }
+
         }
 
-        protected void rNTBMinBid_TextChanged(object sender, EventArgs e)
-        {
-            RadNumericTextBox rtb = (RadNumericTextBox)sender;
 
-            txtTest.Text = rtb.Text;
+        //protected void rNTBMinBid_TextChanged(object sender, EventArgs e)
+        //{
+        //    RadNumericTextBox rtb = (RadNumericTextBox)sender;
+        //    TextBox txtBox = rGridSeason.FindControl("txtTest") as TextBox;
 
-        }
+        //    txtBox.Text = rtb.Text;
+        //}
 
 
 

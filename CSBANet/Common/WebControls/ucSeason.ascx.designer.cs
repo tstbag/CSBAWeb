@@ -31,6 +31,15 @@ namespace CSBANet.Controls {
         protected global::Telerik.Web.UI.RadAjaxLoadingPanel RadAjaxLoadingPanel1;
         
         /// <summary>
+        /// HdnSelectedRowIndex control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField HdnSelectedRowIndex;
+        
+        /// <summary>
         /// rGridSeason control.
         /// </summary>
         /// <remarks>
@@ -38,14 +47,5 @@ namespace CSBANet.Controls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadGrid rGridSeason;
-        
-        /// <summary>
-        /// txtTest control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Telerik.Web.UI.RadTextBox txtTest;
     }
 }

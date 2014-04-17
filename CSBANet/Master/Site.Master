@@ -55,11 +55,8 @@
                 </div>
 
             </div>
-
             <div class="float-left">
-
-
-                <telerik:RadMenu ID="RadMenu1" CssClass="mainMenu" runat="server" Skin="Office2010Silver">
+                <telerik:RadMenu ID="RadMenu1" CssClass="mainMenu" runat="server" Skin="<%$ appSettings:Telerik.Skin%>" >
                     <Items>
                         <telerik:RadMenuItem Text="Home" NavigateUrl="~/Default.aspx" />
                         <telerik:RadMenuItem Text="Season">
@@ -69,34 +66,26 @@
                                 <telerik:RadMenuItem Text="Manage Season + Stadium" NavigateUrl="../Season/ManageSeasonStadium.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
                                 <telerik:RadMenuItem Text="Manage Season + Team" NavigateUrl="../Season/ManageSeasonTeam.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
                                 <telerik:RadMenuItem Text="Manage Season + Player" NavigateUrl="../Season/ManageSeasonPlayer.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
-
-                                
                             </Items>
                         </telerik:RadMenuItem>
-
                         <telerik:RadMenuItem Text="Stadium">
                             <GroupSettings Width="300px" />
                             <Items>
                                 <telerik:RadMenuItem Text="Manage Stadium" NavigateUrl="../Stadium/ManageStadium.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
                             </Items>
                         </telerik:RadMenuItem>
-
                         <telerik:RadMenuItem Text="Team">
                             <GroupSettings Width="300px" />
                             <Items>
                                 <telerik:RadMenuItem Text="Manage Team" NavigateUrl="../Team/ManageTeam.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
                             </Items>
                         </telerik:RadMenuItem>
-
-
                         <telerik:RadMenuItem Text="Player">
                             <GroupSettings Width="300px" />
                             <Items>
                                 <telerik:RadMenuItem Text="Manage Player" NavigateUrl="../Player/ManagePlayer.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
                             </Items>
                         </telerik:RadMenuItem>
-
-
                     </Items>
                 </telerik:RadMenu>
             </div>

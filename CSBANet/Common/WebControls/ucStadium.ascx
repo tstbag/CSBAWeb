@@ -39,7 +39,7 @@
             BorderWidth="1px"
             AllowFilteringByColumn="True"
             AllowSorting="True"
-            Skin="Web20"
+            Skin="<%$ appSettings:Telerik.Skin%>" 
             CellSpacing="0"
             GridLines="None"
             AllowMultiRowEdit="True"

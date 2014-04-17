@@ -1,9 +1,17 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucSeason.ascx.cs" Inherits="CSBANet.Controls.ucSeason" %>
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
-
-
-
+<script type="text/javascript">
+    function OnClientFilesUploaded(sender, args) {
+        $find('<%=RadAjaxManager1.ClientID %>').ajaxRequest();
+    }
+    function DoPostBackWithRowIndex(rowIndex) {
+        if (document.getElementById('<%=HdnSelectedRowIndex.ClientID%>') != null) {
+            document.getElementById('<%=HdnSelectedRowIndex.ClientID%>').value = rowIndex;
+        }
+        return true;
+    }
+</script>
 
 <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
     <AjaxSettings>
@@ -11,7 +19,6 @@
             <UpdatedControls>
                 <telerik:AjaxUpdatedControl ControlID="rGridSeason"></telerik:AjaxUpdatedControl>
                 <telerik:AjaxUpdatedControl ControlID="txtTest" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
-                
             </UpdatedControls>
         </telerik:AjaxSetting>
     </AjaxSettings>
@@ -23,9 +30,11 @@
 <asp:Panel runat="server" Width="50%">
     <h2>Manage Season
     </h2>
+    <asp:HiddenField ID="HdnSelectedRowIndex" runat="server" />
     <telerik:RadGrid ID="rGridSeason"
         runat="server" PagerStyle-Mode="Slider" PageSize="7"
-        OnNeedDataSource="rGridSeason_NeedDataSource" OnPreRender="rGridSeason_PreRender"
+        OnNeedDataSource="rGridSeason_NeedDataSource"
+        OnPreRender="rGridSeason_PreRender"
         OnItemDataBound="rGridSeason_ItemDataBound"
         OnItemCommand="rGridSeason_ItemCommand"
         OnUpdateCommand="rGridSeason_UpdateCommand"
@@ -35,7 +44,7 @@
         BorderWidth="1px"
         AllowFilteringByColumn="True"
         AllowSorting="True"
-        Skin="Web20"
+        Skin="<%$ appSettings:Telerik.Skin%>"
         AllowMultiRowEdit="True"
         AllowMultiRowSelection="True">
         <GroupingSettings CaseSensitive="False" />
@@ -49,29 +58,23 @@
 
                 <telerik:GridEditCommandColumn HeaderText="Action" ButtonType="ImageButton">
                 </telerik:GridEditCommandColumn>
-
-
                 <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderText="Season ID" Visible="false" DataField="SeasonID" UniqueName="SeasonID">
                     <ItemTemplate>
                         <asp:Label ID="lblSeasonID" runat="server" Visible="false" Text='<%# DataBinder.Eval(Container, "DataItem.SeasonID") %>'></asp:Label>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
-
-
                 <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderText="Season Name" DataField="SeasonName" UniqueName="SeasonName">
                     <ItemTemplate>
                         <asp:Label ID="lblSeasonName" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.SeasonName") %>'>
                         </asp:Label>
                     </ItemTemplate>
                 </telerik:GridTemplateColumn>
-
                 <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderStyle-Width="125px" HeaderText="Draft Date" DataField="DraftDate" UniqueName="DraftDate">
                     <ItemTemplate>
                         <telerik:RadDatePicker ID="rDTSeasonStart" Enabled="false" runat="server" Width="125px" SelectedDate='<%# DataBinder.Eval(Container, "DataItem.DraftDate") %>'></telerik:RadDatePicker>
                     </ItemTemplate>
                     <HeaderStyle Width="125px" />
                 </telerik:GridTemplateColumn>
-
                 <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderStyle-Width="125px" HeaderText="Start Points" DataField="StartPoints" UniqueName="StartPoints">
                     <ItemTemplate>
                         <asp:Label ID="lblStartPoints" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.StartPoints") %>'>
@@ -79,7 +82,6 @@
                     </ItemTemplate>
                     <HeaderStyle Width="125px" />
                 </telerik:GridTemplateColumn>
-
                 <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderStyle-Width="125px" HeaderText="Min Bid" DataField="MinBid" UniqueName="MinBid">
                     <ItemTemplate>
                         <asp:Label ID="lblMinBid" runat="server" Width="125px" Text='<%# DataBinder.Eval(Container, "DataItem.MinBid") %>'>
@@ -87,15 +89,10 @@
                     </ItemTemplate>
                     <HeaderStyle Width="125px" />
                 </telerik:GridTemplateColumn>
-
-
                 <telerik:GridButtonColumn Text="Delete" CommandName="Delete" UniqueName="Delete" ConfirmText="Are you sure you want to delete this?" ButtonType="ImageButton" />
-
-                <telerik:GridButtonColumn Text="Clear" CommandName="Clear" UniqueName="Clear" ConfirmText="Are you sure you want to reset this season?" ButtonType="ImageButton" ConfirmDialogType="RadWindow" ImageUrl="~/Content/images/clear.png">
-
+                <telerik:GridButtonColumn Text="Clear" CommandName="Clear" UniqueName="Clear" ConfirmText="Are you sure you want to reset this season?" ButtonType="PushButton" ConfirmDialogType="RadWindow">
                     <ItemStyle Height="25px" Width="25px" />
                 </telerik:GridButtonColumn>
-
             </Columns>
             <EditFormSettings EditFormType="Template">
                 <EditColumn UniqueName="EditCommandColumn1" ButtonType="PushButton" FilterControlAltText="Filter EditCommandColumn1 column"></EditColumn>
@@ -128,14 +125,9 @@
                                 </asp:Label>
                             </asp:TableCell>
                             <asp:TableCell>
-                                <%--                            <telerik:RadTextBox ID="rTBDraftDate" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.DraftDate") %>'>
-                            </telerik:RadTextBox>--%>
-
                                 <telerik:RadCalendar ID="calSeasonStart" runat="server"></telerik:RadCalendar>
-
                             </asp:TableCell>
                         </asp:TableRow>
-
                         <asp:TableRow>
                             <asp:TableCell>
                                 <asp:Label ID="lblStartPoints" runat="server" Text="Start Points">
@@ -146,20 +138,17 @@
                                 </telerik:RadTextBox>
                             </asp:TableCell>
                         </asp:TableRow>
-
-
                         <asp:TableRow>
                             <asp:TableCell>
                                 <asp:Label ID="lblMinBid" runat="server" Text="Min Bid"></asp:Label>
                             </asp:TableCell>
                             <asp:TableCell>
-                                <telerik:RadNumericTextBox ID="rNTBMinBid" ShowSpinButtons="true" AutoPostBack="true" NumberFormat-DecimalDigits="0" OnTextChanged="rNTBMinBid_TextChanged" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.MinBid") %>'>
+                                <telerik:RadNumericTextBox ID="rNTBMinBid" ShowSpinButtons="true" AutoPostBack="true" NumberFormat-DecimalDigits="0" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.MinBid") %>'>
                                 </telerik:RadNumericTextBox>
-                                
+                                <telerik:RadTextBox ID="txtTest" runat="server"></telerik:RadTextBox>
                             </asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>
-
                             <asp:TableCell ColumnSpan="2">
                                 <telerik:RadButton ID="btnUpdate" Text='<%# (Container is GridEditFormInsertItem) ? "Insert" : "Update" %>'
                                     runat="server" ButtonType="SkinnedButton" CommandName='<%# (Container is GridEditFormInsertItem) ? "PerformInsert" : "Update" %>'>
@@ -168,15 +157,13 @@
                                 <telerik:RadButton ID="btnCancel" Text="Cancel" runat="server" CausesValidation="False"
                                     CommandName="Cancel">
                                 </telerik:RadButton>
-
                             </asp:TableCell>
                         </asp:TableRow>
                     </asp:Table>
                 </FormTemplate>
             </EditFormSettings>
-
         </MasterTableView>
         <PagerStyle Mode="Slider" />
     </telerik:RadGrid>
-    <telerik:RadTextBox ID="txtTest" runat="server" ></telerik:RadTextBox>
+
 </asp:Panel>
