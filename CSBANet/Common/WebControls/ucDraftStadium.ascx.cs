@@ -13,5 +13,20 @@ namespace CSBANet.Common.WebControls
         {
 
         }
+
+        protected void rGridStadium_NeedDataSource(object sender, Telerik.Web.UI.GridNeedDataSourceEventArgs e)
+        {
+
+        }
+
+        protected void rGridStadium_ItemDataBound(object sender, Telerik.Web.UI.GridItemEventArgs e)
+        {
+
+        }
+
+        protected void rGridStadium_ItemCommand(object sender, Telerik.Web.UI.GridCommandEventArgs e)
+        {
+
+        }
     }
 }

@@ -19,6 +19,6 @@ namespace CSBANet.Draft {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::CSBANet.Common.WebControls.ucPlayerGrid ucDraftStadium;
+        protected global::CSBANet.Common.WebControls.ucDraftStadium ucDraftStadium;
     }
 }

@@ -1,15 +1,32 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucSeason.ascx.cs" Inherits="CSBANet.Controls.ucSeason" %>
-
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 
+
+
+
+
+<telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+    <AjaxSettings>
+        <telerik:AjaxSetting AjaxControlID="rGridSeason">
+            <UpdatedControls>
+                <telerik:AjaxUpdatedControl ControlID="rGridSeason"></telerik:AjaxUpdatedControl>
+                <telerik:AjaxUpdatedControl ControlID="txtTest" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
+                
+            </UpdatedControls>
+        </telerik:AjaxSetting>
+    </AjaxSettings>
+</telerik:RadAjaxManager>
+
+
+<telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server">
+</telerik:RadAjaxLoadingPanel>
 <asp:Panel runat="server" Width="50%">
-    <h2>
-        Manage Season
+    <h2>Manage Season
     </h2>
     <telerik:RadGrid ID="rGridSeason"
         runat="server" PagerStyle-Mode="Slider" PageSize="7"
         OnNeedDataSource="rGridSeason_NeedDataSource" OnPreRender="rGridSeason_PreRender"
-        OnItemDataBound="rGridSeason_ItemDataBound" 
+        OnItemDataBound="rGridSeason_ItemDataBound"
         OnItemCommand="rGridSeason_ItemCommand"
         OnUpdateCommand="rGridSeason_UpdateCommand"
         OnInsertCommand="rGridSeason_InsertCommand"
@@ -74,7 +91,7 @@
 
                 <telerik:GridButtonColumn Text="Delete" CommandName="Delete" UniqueName="Delete" ConfirmText="Are you sure you want to delete this?" ButtonType="ImageButton" />
 
-                <telerik:GridButtonColumn Text="Clear" CommandName="Clear"  UniqueName="Clear" ConfirmText="Are you sure you want to reset this season?" ButtonType="ImageButton" ConfirmDialogType="RadWindow" ImageUrl="~/Content/images/clear.png" >
+                <telerik:GridButtonColumn Text="Clear" CommandName="Clear" UniqueName="Clear" ConfirmText="Are you sure you want to reset this season?" ButtonType="ImageButton" ConfirmDialogType="RadWindow" ImageUrl="~/Content/images/clear.png">
 
                     <ItemStyle Height="25px" Width="25px" />
                 </telerik:GridButtonColumn>
@@ -136,8 +153,9 @@
                                 <asp:Label ID="lblMinBid" runat="server" Text="Min Bid"></asp:Label>
                             </asp:TableCell>
                             <asp:TableCell>
-                                <telerik:RadTextBox ID="rTBMinBid" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.MinBid") %>'>
-                                </telerik:RadTextBox>
+                                <telerik:RadNumericTextBox ID="rNTBMinBid" ShowSpinButtons="true" AutoPostBack="true" NumberFormat-DecimalDigits="0" OnTextChanged="rNTBMinBid_TextChanged" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.MinBid") %>'>
+                                </telerik:RadNumericTextBox>
+                                
                             </asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>
@@ -160,4 +178,5 @@
         </MasterTableView>
         <PagerStyle Mode="Slider" />
     </telerik:RadGrid>
+    <telerik:RadTextBox ID="txtTest" runat="server" ></telerik:RadTextBox>
 </asp:Panel>

@@ -28,7 +28,12 @@
     <telerik:RadAjaxPanel ID="RadAjaxPanel1" runat="server">
         <telerik:RadGrid ID="rGridPlayer"
             runat="server"
-            OnNeedDataSource="rGridPlayer_NeedDataSource" OnPreRender="rGridPlayer_PreRender"
+            PageSize="4" 
+            AllowPaging="true" 
+            PagerStyle-Mode="Slider" 
+            PagerStyle-Position="Bottom"   
+            OnNeedDataSource="rGridPlayer_NeedDataSource" 
+            OnPreRender="rGridPlayer_PreRender"
             OnItemDataBound="rGridPlayer_ItemDataBound"
             OnItemCommand="rGridPlayer_ItemCommand"
             OnUpdateCommand="rGridPlayer_UpdateCommand"
@@ -90,16 +95,8 @@
                                 AutoAdjustImageControlSize="false" Height="80px" Width="80px" ToolTip='<%#Eval("PlayerName", "Photo of {0}") %>'
                                 AlternateText='<%#Eval("PlayerName", "Photo of {0}") %>'></telerik:RadBinaryImage>
                         </ItemTemplate>
-
-
                     </telerik:GridTemplateColumn>
-
-
-
-
                     <telerik:GridButtonColumn Text="Delete" CommandName="Delete" UniqueName="Delete" ConfirmText="Are you sure you want to delete this?" ButtonType="ImageButton" />
-
-
                 </Columns>
                 <EditFormSettings EditFormType="Template">
                     <EditColumn UniqueName="EditCommandColumn1" ButtonType="PushButton" FilterControlAltText="Filter EditCommandColumn1 column"></EditColumn>

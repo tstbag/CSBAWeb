@@ -179,7 +179,7 @@ namespace CSBANet.Controls
                     SeasonDM.SeasonID = Convert.ToInt32((eeditedItem.FindControl("lblSeasonID") as Label).Text.ToString());
                 }
                 SeasonDM.SeasonName = (eeditedItem.FindControl("rTBSeason") as RadTextBox).Text.ToString();
-                SeasonDM.MinBid = Convert.ToInt32((eeditedItem.FindControl("rTBMinBid") as RadTextBox).Text.ToString());
+                SeasonDM.MinBid = Convert.ToInt32((eeditedItem.FindControl("rNTBMinBid") as RadNumericTextBox).Text.ToString());
                 SeasonDM.StartPoints = Convert.ToInt32((eeditedItem.FindControl("rTBStartPoints") as RadTextBox).Text.ToString());
                 SeasonDM.DraftDate = (eeditedItem.FindControl("calSeasonStart") as RadCalendar).SelectedDate;
 
@@ -232,6 +232,14 @@ namespace CSBANet.Controls
                     item.Visible = false;
                 }
             }
+
+        }
+
+        protected void rNTBMinBid_TextChanged(object sender, EventArgs e)
+        {
+            RadNumericTextBox rtb = (RadNumericTextBox)sender;
+
+            txtTest.Text = rtb.Text;
 
         }
 
