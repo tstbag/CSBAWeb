@@ -109,6 +109,8 @@ namespace CSBANet.Common.WebControls
                     rDDPrimPos.DataValueField = "PositionID";
                     rDDPrimPos.DataTextField = "PositionNameLong";
                     rDDPrimPos.DataBind();
+                    var DDLIP = new Telerik.Web.UI.DropDownListItem("-- Select Position --","0");
+                    rDDPrimPos.Items.Insert(0, DDLIP);                    
                     if (DataBinder.Eval(dataItem.DataItem, "PrimaryPositionID") != null)
                     {
                         rDDPrimPos.SelectedValue = DataBinder.Eval(dataItem.DataItem, "PrimaryPositionID").ToString();
@@ -119,20 +121,32 @@ namespace CSBANet.Common.WebControls
                     rDDSecPos.DataValueField = "PositionID";
                     rDDSecPos.DataTextField = "PositionNameLong";
                     rDDSecPos.DataBind();
+                    var DDLIS = new Telerik.Web.UI.DropDownListItem("-- Select Position --", "0");
+                    rDDSecPos.Items.Insert(0, DDLIS);                    
+
                     if (DataBinder.Eval(dataItem.DataItem, "SecondaryPostiionID") != null)
                     {
                         rDDSecPos.SelectedValue = DataBinder.Eval(dataItem.DataItem, "SecondaryPostiionID").ToString();
                     }
 
+                    //Image imgPlayer = (Image)e.Item.FindControl("imgPlayer");
 
 
+                    //byte[] buffer = null;
+                    
+                    
+                    //buffer = (byte[])dataItem.DataItem["PlayerImage"];
+                    //MemoryStream memStream = new MemoryStream(buffer);
+                    //MemoryStream memStream1 = new MemoryStream();
+                    //System.Drawing.Bitmap.FromStream(memStream).Save(memStream1, System.Drawing.Imaging.ImageFormat.Png);
+                    //imgPlayer.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(memStream1.ToArray());
 
 
+                    //byte[] bytes = (dataItem.DataItem["PlayerImage"] as (byte[]));
 
+                    //string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
 
-
-
-
+                    //Image1.ImageUrl = "data:image/png;base64," + base64String;
 
 
 
@@ -141,29 +155,6 @@ namespace CSBANet.Common.WebControls
                     //{
                     //    //rImage.ResetChanges();                        
                     //}
-
-                    byte[] buffer = null;
-
-
-
-                    //buffer = (byte[])dataItem.DataItem["PlayerImage"];
-
-                    //MemoryStream memStream = new MemoryStream(buffer);
-                    //MemoryStream memStream1 = new MemoryStream();
-                    //System.Drawing.Bitmap.FromStream(memStream).Save(memStream1, System.Drawing.Imaging.ImageFormat.Png);
-                    //rImage.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(memStream1.ToArray());
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                 }
@@ -272,8 +263,23 @@ namespace CSBANet.Common.WebControls
                 }
 
                 // Setup PlayerPositionDM
-                PlayerPositionDM.PrimaryPositionID = Convert.ToInt32(((eeditedItem.FindControl("rDDPrimPos") as RadDropDownList)).SelectedValue);
-                PlayerPositionDM.SecondaryPostiionID = Convert.ToInt32(((eeditedItem.FindControl("rDDSecPos") as RadDropDownList)).SelectedValue);
+                if (Convert.ToInt32(((eeditedItem.FindControl("rDDPrimPos") as RadDropDownList)).SelectedValue) == 0)
+                {
+                    PlayerPositionDM.PrimaryPositionID = null;
+                }
+                else
+                {
+                    PlayerPositionDM.PrimaryPositionID = Convert.ToInt32(((eeditedItem.FindControl("rDDPrimPos") as RadDropDownList)).SelectedValue);
+                }
+
+                if (Convert.ToInt32(((eeditedItem.FindControl("rDDSecPos") as RadDropDownList)).SelectedValue) == 0)
+                {
+                    PlayerPositionDM.PrimaryPositionID = null;
+                }
+                else
+                {
+                    PlayerPositionDM.SecondaryPostiionID = Convert.ToInt32(((eeditedItem.FindControl("rDDSecPos") as RadDropDownList)).SelectedValue);
+                }
 
                 if (Action == "Update")
                 {

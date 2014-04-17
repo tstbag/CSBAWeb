@@ -3,3 +3,8 @@ C:\Users\Dad\Source\Repos\CSBA\CSBA.DomainModels\bin\Debug\CSBA.DomainModels.pdb
 C:\Users\Dad\Source\Repos\CSBA\CSBA.DomainModels\obj\Debug\CSBA.DomainModels.csprojResolveAssemblyReference.cache
 C:\Users\Dad\Source\Repos\CSBA\CSBA.DomainModels\obj\Debug\CSBA.DomainModels.dll
 C:\Users\Dad\Source\Repos\CSBA\CSBA.DomainModels\obj\Debug\CSBA.DomainModels.pdb
+C:\Users\Bert.Gibbons\Source\Repos\CSBAWeb\CSBA.DomainModels\bin\Debug\CSBA.DomainModels.dll
+C:\Users\Bert.Gibbons\Source\Repos\CSBAWeb\CSBA.DomainModels\bin\Debug\CSBA.DomainModels.pdb
+C:\Users\Bert.Gibbons\Source\Repos\CSBAWeb\CSBA.DomainModels\obj\Debug\CSBA.DomainModels.csprojResolveAssemblyReference.cache
+C:\Users\Bert.Gibbons\Source\Repos\CSBAWeb\CSBA.DomainModels\obj\Debug\CSBA.DomainModels.dll
+C:\Users\Bert.Gibbons\Source\Repos\CSBAWeb\CSBA.DomainModels\obj\Debug\CSBA.DomainModels.pdb

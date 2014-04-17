@@ -18,8 +18,7 @@
 </telerik:RadAjaxManager>
 
 <asp:Panel ID="pnlTeam" runat="server" Width="70%">
-    <h2>
-        Manage Team
+    <h2>Manage Team
     </h2>
     <telerik:RadAjaxPanel ID="RadAjaxPanel1" runat="server">
         <telerik:RadGrid ID="rGridTeam"
@@ -107,103 +106,112 @@
                 <EditFormSettings EditFormType="Template">
                     <EditColumn UniqueName="EditCommandColumn1" ButtonType="PushButton" FilterControlAltText="Filter EditCommandColumn1 column"></EditColumn>
                     <FormTemplate>
-                        <asp:Table ID="tblEnterAddress" runat="server" CellSpacing="2" CellPadding="1" BorderWidth="1px" Width="100%"
-                            Style="border-collapse: collapse;">
-                            <asp:TableRow>
-                                <asp:TableCell Width="10%">
-                                    <asp:Label ID="lblTeamIDlit" runat="server" Text="TeamID">
-                                    </asp:Label>
-                                </asp:TableCell>
-                                <asp:TableCell>
-                                    <asp:Label ID="lblTeamID" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.TeamID") %>'>
-                                    </asp:Label>
-                                </asp:TableCell>
-                            </asp:TableRow>
+                        <div style="float: left; padding-left: 40px">
+                            <asp:Label ID="lblPicture" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.TeamName") %>'></asp:Label>
+                            <br />
+                            <telerik:RadBinaryImage runat="server" ID="imgPlayer" DataValue='<%#Eval("TeamImage") %>' CssClass="float-right"
+                                AutoAdjustImageControlSize="false" Width="200px" Height="150px" />
+                        </div>
 
-                            <asp:TableRow>
-                                <asp:TableCell Width="10%">
-                                    <asp:Label ID="lblTeamName" runat="server" Text="Team Name">
-                                    </asp:Label>
-                                </asp:TableCell>
-                                <asp:TableCell>
-                                    <telerik:RadTextBox ID="rTBTeamName" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.TeamName") %>'>
-                                    </telerik:RadTextBox>
-                                    <asp:RequiredFieldValidator ID="reqTeamName" runat="server" Font-Bold="true" ForeColor="Red" ControlToValidate="rTBTeamName" ErrorMessage="* Required"></asp:RequiredFieldValidator>
-                                </asp:TableCell>
-                            </asp:TableRow>
+                        <div style="float: right; width: 50%">
+                            <asp:Table ID="tblEnterAddress" runat="server" CellSpacing="2" CellPadding="1" Width="100%"
+                                Style="border-collapse: collapse;">
+                                <asp:TableRow Visible="false">
+                                    <asp:TableCell >
+                                        <asp:Label ID="lblTeamIDlit" runat="server" Text="TeamID">
+                                        </asp:Label>
+                                    </asp:TableCell>
+                                    <asp:TableCell>
+                                        <asp:Label ID="lblTeamID" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.TeamID") %>'>
+                                        </asp:Label>
+                                    </asp:TableCell>
+                                </asp:TableRow>
 
-                            <asp:TableRow>
-                                <asp:TableCell Width="10%">
-                                    <asp:Label ID="lblOwnerName" runat="server" Text="Owner Name">
-                                    </asp:Label>
-                                </asp:TableCell>
+                                <asp:TableRow>
+                                    <asp:TableCell >
+                                        <asp:Label ID="lblTeamName" runat="server" Text="Team Name"  Width="120px">
+                                        </asp:Label>
+                                    </asp:TableCell>
+                                    <asp:TableCell>
+                                        <telerik:RadTextBox ID="rTBTeamName" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.TeamName") %>'>
+                                        </telerik:RadTextBox>
+                                        <asp:RequiredFieldValidator ID="reqTeamName" runat="server" Font-Bold="true" ForeColor="Red" ControlToValidate="rTBTeamName" ErrorMessage="* Required"></asp:RequiredFieldValidator>
+                                    </asp:TableCell>
+                                </asp:TableRow>
 
-                                <asp:TableCell>
-                                    <telerik:RadTextBox ID="rTBOwnerName" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.OwnerName") %>'>
-                                    </telerik:RadTextBox>
-                                    <asp:RequiredFieldValidator ID="reqOwnerName" runat="server" Font-Bold="true" ForeColor="Red" ControlToValidate="rTBOwnerName" ErrorMessage="* Required"></asp:RequiredFieldValidator>
-                                </asp:TableCell>
-                            </asp:TableRow>
-                            <asp:TableRow Visible="false">
-                                <asp:TableCell Width="10%">
-                                    <asp:Label ID="lblOwnerUserIDlit" runat="server" Text="Owner UserID">
-                                    </asp:Label>
-                                </asp:TableCell>
-                                <asp:TableCell>
-                                    <asp:Label ID="lblOwnerUserID" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.OwnerUserID") %>'>
-                                    </asp:Label>
-                                </asp:TableCell>
-                            </asp:TableRow>
-                            <asp:TableRow>
-                                <asp:TableCell Width="10%">
-                                    <asp:Label ID="lblUserNameLit" runat="server" Text="Owner User Name">
-                                    </asp:Label>
-                                </asp:TableCell>
-                                <asp:TableCell>
-                                    <telerik:RadDropDownList ID="rDDUserName" runat="server">
-                                    </telerik:RadDropDownList>
-                                </asp:TableCell>
-                            </asp:TableRow>
-                            <asp:TableRow>
-                                <asp:TableCell Width="10%">
-                                    <asp:Label ID="lblOwnerEmail" runat="server" Text="Owner Email">
-                                    </asp:Label>
-                                </asp:TableCell>
+                                <asp:TableRow>
+                                    <asp:TableCell Width="10%">
+                                        <asp:Label ID="lblOwnerName" runat="server" Text="Owner Name">
+                                        </asp:Label>
+                                    </asp:TableCell>
 
-                                <asp:TableCell>
-                                    <telerik:RadTextBox ID="rTBOwnerEmail" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.OwnerEmail") %>'>
-                                    </telerik:RadTextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" Font-Bold="true" ForeColor="Red" ControlToValidate="rTBOwnerEmail" ErrorMessage="* Required"></asp:RequiredFieldValidator>
-                                </asp:TableCell>
-                            </asp:TableRow>
+                                    <asp:TableCell>
+                                        <telerik:RadTextBox ID="rTBOwnerName" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.OwnerName") %>'>
+                                        </telerik:RadTextBox>
+                                        <asp:RequiredFieldValidator ID="reqOwnerName" runat="server" Font-Bold="true" ForeColor="Red" ControlToValidate="rTBOwnerName" ErrorMessage="* Required"></asp:RequiredFieldValidator>
+                                    </asp:TableCell>
+                                </asp:TableRow>
+                                <asp:TableRow Visible="false">
+                                    <asp:TableCell Width="10%">
+                                        <asp:Label ID="lblOwnerUserIDlit" runat="server" Text="Owner UserID">
+                                        </asp:Label>
+                                    </asp:TableCell>
+                                    <asp:TableCell>
+                                        <asp:Label ID="lblOwnerUserID" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.OwnerUserID") %>'>
+                                        </asp:Label>
+                                    </asp:TableCell>
+                                </asp:TableRow>
+                                <asp:TableRow>
+                                    <asp:TableCell Width="10%">
+                                        <asp:Label ID="lblUserNameLit" runat="server" Text="Owner User Name">
+                                        </asp:Label>
+                                    </asp:TableCell>
+                                    <asp:TableCell>
+                                        <telerik:RadDropDownList ID="rDDUserName" runat="server">
+                                        </telerik:RadDropDownList>
+                                    </asp:TableCell>
+                                </asp:TableRow>
+                                <asp:TableRow>
+                                    <asp:TableCell Width="10%">
+                                        <asp:Label ID="lblOwnerEmail" runat="server" Text="Owner Email">
+                                        </asp:Label>
+                                    </asp:TableCell>
 
-                            <asp:TableRow>
-                                <asp:TableCell>
+                                    <asp:TableCell>
+                                        <telerik:RadTextBox ID="rTBOwnerEmail" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.OwnerEmail") %>'>
+                                        </telerik:RadTextBox>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" Font-Bold="true" ForeColor="Red" ControlToValidate="rTBOwnerEmail" ErrorMessage="* Required"></asp:RequiredFieldValidator>
+                                    </asp:TableCell>
+                                </asp:TableRow>
 
-                                </asp:TableCell>
-                                <asp:TableCell Width="100%">
-                                    <telerik:RadAsyncUpload ID="AsyncUpload1" runat="server"
-                                        OnClientFilesUploaded="OnClientFilesUploaded" OnFileUploaded="AsyncUpload1_FileUploaded"
-                                        MaxFileSize="2097152" AllowedFileExtensions="jpg,png,gif,bmp"
-                                        AutoAddFileInputs="false" Localization-Select="Upload" />
-                                    <asp:Label ID="Label1" Text="*Size limit: 2MB" runat="server" Style="font-size: 10px;"></asp:Label>
+                                <asp:TableRow>
+                                    <asp:TableCell>
 
-                                </asp:TableCell>
-                            </asp:TableRow>
+                                    </asp:TableCell>
+                                    <asp:TableCell Width="100%">
+                                        <telerik:RadAsyncUpload ID="AsyncUpload1" runat="server"
+                                            OnClientFilesUploaded="OnClientFilesUploaded" OnFileUploaded="AsyncUpload1_FileUploaded"
+                                            MaxFileSize="2097152" AllowedFileExtensions="jpg,png,gif,bmp"
+                                            AutoAddFileInputs="false" Localization-Select="Upload" />
+                                        <asp:Label ID="Label1" Text="*Size limit: 2MB" runat="server" Style="font-size: 10px;"></asp:Label>
 
-                            <asp:TableRow>
-                                <asp:TableCell ColumnSpan="2">
-                                    <telerik:RadButton ID="btnUpdate" Text='<%# (Container is GridEditFormInsertItem) ? "Insert" : "Update" %>'
-                                        runat="server" ButtonType="SkinnedButton" CommandName='<%# (Container is GridEditFormInsertItem) ? "PerformInsert" : "Update" %>'>
-                                    </telerik:RadButton>
-                                    &nbsp;
+                                    </asp:TableCell>
+                                </asp:TableRow>
+
+                                <asp:TableRow>
+                                    <asp:TableCell ColumnSpan="2">
+                                        <telerik:RadButton ID="btnUpdate" Text='<%# (Container is GridEditFormInsertItem) ? "Insert" : "Update" %>'
+                                            runat="server" ButtonType="SkinnedButton" CommandName='<%# (Container is GridEditFormInsertItem) ? "PerformInsert" : "Update" %>'>
+                                        </telerik:RadButton>
+                                        &nbsp;
                                 <telerik:RadButton ID="btnCancel" ButtonType="SkinnedButton" Text="Cancel" runat="server" CausesValidation="False"
                                     CommandName="Cancel">
                                 </telerik:RadButton>
 
-                                </asp:TableCell>
-                            </asp:TableRow>
-                        </asp:Table>
+                                    </asp:TableCell>
+                                </asp:TableRow>
+                            </asp:Table>
+                        </div>
                     </FormTemplate>
                 </EditFormSettings>
 

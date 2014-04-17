@@ -380,7 +380,7 @@ th {
 td {
     padding: 0.25em 0.25em 0.25em 0em;
     border: 0 none;
-    font-size: smaller;
+    font-size: medium;
 }
 
 tr.pager td {
