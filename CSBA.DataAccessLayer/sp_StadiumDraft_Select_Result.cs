@@ -11,11 +11,18 @@ namespace CSBA.DataAccessLayer
 {
     using System;
     
-    public partial class sp_Stadium_Select_Result
+    public partial class sp_StadiumDraft_Select_Result
     {
-        public int StadiumID { get; set; }
+        public int SeasonID { get; set; }
+        public int TeamID { get; set; }
+        public Nullable<bool> ActiveFlg { get; set; }
+        public Nullable<int> StadiumOrder { get; set; }
+        public Nullable<int> StadiumID { get; set; }
+        public Nullable<int> Points { get; set; }
+        public string TeamName { get; set; }
+        public Nullable<System.Guid> OwnerUserID { get; set; }
         public string StadiumName { get; set; }
-        public Nullable<bool> Active_Flg { get; set; }
         public byte[] StadiumImage { get; set; }
+        public string IsOwner { get; set; }
     }
 }

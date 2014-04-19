@@ -3,7 +3,7 @@
 }
 
 .Labels {
-    font-size:medium;
+    font-size:larger;
     font-weight:bold;
 
 }
@@ -67,6 +67,10 @@ mark {
     float: right;
 }
 
+.float-none {
+    float: none;
+}
+
 .clear-fix:after {
     content: ".";
     clear: both;
@@ -117,13 +121,13 @@ h5, h6 {
 #body {
     background-color: #efeeef;
     clear: both;
-    padding-bottom: 35px;
+    padding-bottom: 10px;
 }
 
 .main-content {
     background: url("~/Content/images/accent.png") no-repeat;
     padding-left: 5px;
-    padding-top: 5px;
+    padding-top: 0px;
 }
 
 .featured + .main-content {
@@ -131,7 +135,7 @@ h5, h6 {
 }
 
 header .content-wrapper {
-    padding-top: 5px;
+    padding-top: 0px;
 }
 
 footer {
@@ -503,7 +507,7 @@ tr.pager td {
     /* features */
     section.feature {
         float: none;
-        padding: 10px;
+        padding: 5px;
         width: auto;
     }
 

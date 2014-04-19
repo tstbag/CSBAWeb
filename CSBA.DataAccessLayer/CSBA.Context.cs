@@ -619,13 +619,13 @@ namespace CSBA.DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_Stadium_Insert", stadiumNameParameter, stadiumImageParameter, active_FlgParameter);
         }
     
-        public virtual ObjectResult<sp_Stadium_Select_Result> sp_Stadium_Select(Nullable<int> stadiumID)
+        public virtual int sp_Stadium_Select(Nullable<int> stadiumID)
         {
             var stadiumIDParameter = stadiumID.HasValue ?
                 new ObjectParameter("StadiumID", stadiumID) :
                 new ObjectParameter("StadiumID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Stadium_Select_Result>("sp_Stadium_Select", stadiumIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Stadium_Select", stadiumIDParameter);
         }
     
         public virtual int sp_Stadium_Update(Nullable<int> stadiumID, string stadiumName, Nullable<bool> active_Flg, byte[] stadiumImage)
@@ -687,6 +687,19 @@ namespace CSBA.DataAccessLayer
                 new ObjectParameter("StadiumID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SeasonStadium_Insert", seasonIDParameter, stadiumIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_StadiumDraft_Select_Result> sp_StadiumDraft_Select(Nullable<int> seasonID, Nullable<System.Guid> userID)
+        {
+            var seasonIDParameter = seasonID.HasValue ?
+                new ObjectParameter("SeasonID", seasonID) :
+                new ObjectParameter("SeasonID", typeof(int));
+    
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_StadiumDraft_Select_Result>("sp_StadiumDraft_Select", seasonIDParameter, userIDParameter);
         }
     }
 }

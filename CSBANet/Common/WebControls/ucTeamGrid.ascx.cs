@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.Security;
 using System.IO;
 using System.Web.UI.WebControls;
 using System.Configuration;
@@ -72,8 +73,6 @@ namespace CSBANet.Common.WebControls
                 }
                 else if (e.Item is GridEditableItem && e.Item.IsInEditMode)
                 {
-                    //GridDataItem dataItem = e.Item as GridDataItem;
-
                     GridEditFormItem dataItem = e.Item as GridEditFormItem;
 
                     RadDropDownList rDDUserName = (RadDropDownList)dataItem.FindControl("rDDUserName");
@@ -86,9 +85,22 @@ namespace CSBANet.Common.WebControls
 
 
                 }
-                else if (e.Item is GridItem)
+                else if (e.Item is GridDataItem)
                 {
+                    GridDataItem dataItem = e.Item as GridDataItem;
 
+                    MembershipUser currentUser  = Membership.GetUser();
+
+                    if (!Roles.IsUserInRole(Page.User.Identity.Name, "CSBA_Admin"))
+                    {
+                        if (DataBinder.Eval(dataItem.DataItem, "OwnerUserID").ToString() != currentUser.ProviderUserKey.ToString())
+                        {
+                            ImageButton EditButton = (ImageButton)dataItem["EditCommandColumn"].Controls[0];
+                            EditButton.Visible = false;
+                            ImageButton deleteButton = (ImageButton)dataItem["Delete"].Controls[0];
+                            deleteButton.Visible = false;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -209,5 +221,27 @@ namespace CSBANet.Common.WebControls
                 }
             }
         }
+        protected void rGridTeam_PreRender(object sender, EventArgs e)
+        {
+            if (rGridTeam.EditItems.Count > 0)
+            {
+                foreach (GridDataItem item in rGridTeam.MasterTableView.Items)
+                {
+                    if (item != rGridTeam.EditItems[0])
+                    {
+                        item.Visible = false;
+                    }
+                }
+            }
+
+            foreach (GridItem item in rGridTeam.MasterTableView.Items)
+            {
+                if (item is GridDataItem && item.Edit)
+                {
+                    item.Visible = false;
+                }
+            }
+        }
+
     }
 }

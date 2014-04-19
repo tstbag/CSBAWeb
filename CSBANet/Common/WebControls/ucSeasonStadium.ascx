@@ -9,18 +9,23 @@
 </telerik:RadScriptBlock>
 <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server" EnablePageHeadUpdate="false">
     <AjaxSettings>
-        <telerik:AjaxSetting AjaxControlID="RadAjaxManager1">
+        <telerik:AjaxSetting AjaxControlID="rDDSeason">
             <UpdatedControls>
-                <telerik:AjaxUpdatedControl ControlID="RadImageEditor1" />
+                <telerik:AjaxUpdatedControl ControlID="rGridSeason"></telerik:AjaxUpdatedControl>
             </UpdatedControls>
         </telerik:AjaxSetting>
     </AjaxSettings>
+    <AjaxSettings>
+        <telerik:AjaxSetting AjaxControlID="rGridSeason">
+            <UpdatedControls>
+                <telerik:AjaxUpdatedControl ControlID="rGridSeason"></telerik:AjaxUpdatedControl>
+            </UpdatedControls>
+        </telerik:AjaxSetting>
+    </AjaxSettings>
+
 </telerik:RadAjaxManager>
 
 <asp:Panel ID="pnlSeasonStadium" runat="server" Width="70%">
-    <h2>
-        Manage Season / Stadium
-    </h2>
     <asp:Table ID="Table1" runat="server">
         <asp:TableRow>
             <asp:TableCell>

@@ -259,10 +259,6 @@
           <Property Name="TeamID" Type="int" Nullable="false" />
           <Property Name="StadiumID" Type="int" Nullable="false" />
           <Property Name="Points" Type="int" />
-          <Property Name="CreateUser" Type="nchar" MaxLength="20" />
-          <Property Name="CreateTS" Type="datetime" />
-          <Property Name="UpdateUser" Type="nchar" MaxLength="20" />
-          <Property Name="UpdateTS" Type="datetime" />
         </EntityType>
         <EntityType Name="Stadium">
           <Key>
@@ -734,6 +730,10 @@
           <Parameter Name="Active_Flg" Type="bit" Mode="In" />
           <Parameter Name="StadiumImage" Type="image" Mode="In" />
         </Function>
+        <Function Name="sp_StadiumDraft_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SeasonID" Type="int" Mode="In" />
+          <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="sp_Team_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TeamID" Type="int" Mode="In" />
         </Function>
@@ -1010,7 +1010,7 @@
             <Parameter Name="StadiumImage" Mode="In" Type="Binary" />
             <Parameter Name="Active_Flg" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="sp_Stadium_Select" ReturnType="Collection(CSBAModel.sp_Stadium_Select_Result)">
+          <FunctionImport Name="sp_Stadium_Select">
           <Parameter Name="StadiumID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Stadium_Update">
@@ -1026,11 +1026,15 @@
           <Parameter Name="SeasonID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SeasonStadium_DeleteAll">
-            <Parameter Name="SeasonID" Mode="In" Type="Int32" />
+          <Parameter Name="SeasonID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SeasonStadium_Insert">
             <Parameter Name="SeasonID" Mode="In" Type="Int32" />
             <Parameter Name="StadiumID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_StadiumDraft_Select" ReturnType="Collection(CSBAModel.sp_StadiumDraft_Select_Result)">
+            <Parameter Name="SeasonID" Mode="In" Type="Int32" />
+            <Parameter Name="UserID" Mode="In" Type="Guid" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="Position">
@@ -1101,10 +1105,6 @@
           <Property Type="Int32" Name="TeamID" Nullable="false" />
           <Property Type="Int32" Name="StadiumID" Nullable="false" />
           <Property Type="Int32" Name="Points" />
-          <Property Type="String" Name="CreateUser" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Type="DateTime" Name="CreateTS" Precision="3" />
-          <Property Type="String" Name="UpdateUser" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Type="DateTime" Name="UpdateTS" Precision="3" />
           <NavigationProperty Name="Season" Relationship="CSBAModel.FK_SeasonTeamStadium_Season" FromRole="SeasonTeamStadium" ToRole="Season" />
           <NavigationProperty Name="Team" Relationship="CSBAModel.FK_SeasonTeamStadium_Team" FromRole="SeasonTeamStadium" ToRole="Team" />
           <NavigationProperty Name="Stadium" Relationship="CSBAModel.FK_SeasonTeamStadium_Stadium" FromRole="SeasonTeamStadium" ToRole="Stadium" />
@@ -1488,12 +1488,6 @@
           <End Type="CSBAModel.Season" Role="Season" Multiplicity="*" />
           <End Type="CSBAModel.Stadium" Role="Stadium" Multiplicity="*" />
         </Association>
-        <ComplexType Name="sp_Stadium_Select_Result">
-          <Property Type="Int32" Name="StadiumID" Nullable="false" />
-          <Property Type="String" Name="StadiumName" Nullable="true" MaxLength="30" />
-          <Property Type="Boolean" Name="Active_Flg" Nullable="true" />
-          <Property Type="Binary" Name="StadiumImage" Nullable="true" MaxLength="Max" />
-        </ComplexType>
         <ComplexType Name="sp_SeasonStadiumBySeason_Remaining_Result">
           <Property Type="Int32" Name="StadiumID" Nullable="false" />
           <Property Type="String" Name="StadiumName" Nullable="true" MaxLength="30" />
@@ -1502,6 +1496,19 @@
           <Property Type="Int32" Name="SeasonID" Nullable="false" />
           <Property Type="Int32" Name="StadiumID" Nullable="false" />
           <Property Type="String" Name="StadiumName" Nullable="true" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="sp_StadiumDraft_Select_Result">
+          <Property Type="Int32" Name="SeasonID" Nullable="false" />
+          <Property Type="Int32" Name="TeamID" Nullable="false" />
+          <Property Type="Boolean" Name="ActiveFlg" Nullable="true" />
+          <Property Type="Int32" Name="StadiumOrder" Nullable="true" />
+          <Property Type="Int32" Name="StadiumID" Nullable="true" />
+          <Property Type="Int32" Name="Points" Nullable="true" />
+          <Property Type="String" Name="TeamName" Nullable="false" MaxLength="25" />
+          <Property Type="Guid" Name="OwnerUserID" Nullable="true" />
+          <Property Type="String" Name="StadiumName" Nullable="true" MaxLength="30" />
+          <Property Type="Binary" Name="StadiumImage" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="IsOwner" Nullable="false" MaxLength="5" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1617,10 +1624,6 @@
           <EntitySetMapping Name="SeasonTeamStadiums">
             <EntityTypeMapping TypeName="CSBAModel.SeasonTeamStadium">
               <MappingFragment StoreEntitySet="SeasonTeamStadium">
-                <ScalarProperty Name="UpdateTS" ColumnName="UpdateTS" />
-                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
-                <ScalarProperty Name="CreateTS" ColumnName="CreateTS" />
-                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
                 <ScalarProperty Name="Points" ColumnName="Points" />
                 <ScalarProperty Name="StadiumID" ColumnName="StadiumID" />
                 <ScalarProperty Name="TeamID" ColumnName="TeamID" />
@@ -1990,14 +1993,6 @@
           <FunctionImportMapping FunctionImportName="sp_Stadium_Delete" FunctionName="CSBAModel.Store.sp_Stadium_Delete" />
           <FunctionImportMapping FunctionImportName="sp_Stadium_Insert" FunctionName="CSBAModel.Store.sp_Stadium_Insert" />
           <FunctionImportMapping FunctionImportName="sp_Stadium_Select" FunctionName="CSBAModel.Store.sp_Stadium_Select">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CSBAModel.sp_Stadium_Select_Result">
-                <ScalarProperty Name="StadiumID" ColumnName="StadiumID" />
-                <ScalarProperty Name="StadiumName" ColumnName="StadiumName" />
-                <ScalarProperty Name="Active_Flg" ColumnName="Active_Flg" />
-                <ScalarProperty Name="StadiumImage" ColumnName="StadiumImage" />
-              </ComplexTypeMapping>
-            </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_Stadium_Update" FunctionName="CSBAModel.Store.sp_Stadium_Update" />
           <FunctionImportMapping FunctionImportName="sp_SeasonStadiumBySeason_Remaining" FunctionName="CSBAModel.Store.sp_SeasonStadiumBySeason_Remaining">
@@ -2019,6 +2014,23 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_SeasonStadium_DeleteAll" FunctionName="CSBAModel.Store.sp_SeasonStadium_DeleteAll" />
           <FunctionImportMapping FunctionImportName="sp_SeasonStadium_Insert" FunctionName="CSBAModel.Store.sp_SeasonStadium_Insert" />
+          <FunctionImportMapping FunctionImportName="sp_StadiumDraft_Select" FunctionName="CSBAModel.Store.sp_StadiumDraft_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CSBAModel.sp_StadiumDraft_Select_Result">
+                <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="ActiveFlg" ColumnName="ActiveFlg" />
+                <ScalarProperty Name="StadiumOrder" ColumnName="StadiumOrder" />
+                <ScalarProperty Name="StadiumID" ColumnName="StadiumID" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="OwnerUserID" ColumnName="OwnerUserID" />
+                <ScalarProperty Name="StadiumName" ColumnName="StadiumName" />
+                <ScalarProperty Name="StadiumImage" ColumnName="StadiumImage" />
+                <ScalarProperty Name="IsOwner" ColumnName="IsOwner" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

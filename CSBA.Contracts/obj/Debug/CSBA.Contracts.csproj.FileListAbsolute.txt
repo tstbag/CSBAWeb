@@ -12,3 +12,10 @@ C:\Users\Bert.Gibbons\Source\Repos\CSBAWeb\CSBA.Contracts\bin\Debug\CSBA.DomainM
 C:\Users\Bert.Gibbons\Source\Repos\CSBAWeb\CSBA.Contracts\obj\Debug\CSBA.Contracts.csprojResolveAssemblyReference.cache
 C:\Users\Bert.Gibbons\Source\Repos\CSBAWeb\CSBA.Contracts\obj\Debug\CSBA.Contracts.dll
 C:\Users\Bert.Gibbons\Source\Repos\CSBAWeb\CSBA.Contracts\obj\Debug\CSBA.Contracts.pdb
+C:\Users\Dad\Source\Repos\CSBAWeb\CSBA.Contracts\bin\Debug\CSBA.Contracts.dll
+C:\Users\Dad\Source\Repos\CSBAWeb\CSBA.Contracts\bin\Debug\CSBA.Contracts.pdb
+C:\Users\Dad\Source\Repos\CSBAWeb\CSBA.Contracts\bin\Debug\CSBA.DomainModels.dll
+C:\Users\Dad\Source\Repos\CSBAWeb\CSBA.Contracts\bin\Debug\CSBA.DomainModels.pdb
+C:\Users\Dad\Source\Repos\CSBAWeb\CSBA.Contracts\obj\Debug\CSBA.Contracts.csprojResolveAssemblyReference.cache
+C:\Users\Dad\Source\Repos\CSBAWeb\CSBA.Contracts\obj\Debug\CSBA.Contracts.dll
+C:\Users\Dad\Source\Repos\CSBAWeb\CSBA.Contracts\obj\Debug\CSBA.Contracts.pdb

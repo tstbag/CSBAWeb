@@ -28,8 +28,6 @@
 <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server">
 </telerik:RadAjaxLoadingPanel>
 <asp:Panel runat="server" Width="50%">
-    <h2>Manage Season
-    </h2>
     <asp:HiddenField ID="HdnSelectedRowIndex" runat="server" />
     <telerik:RadGrid ID="rGridSeason"
         runat="server" PagerStyle-Mode="Slider" PageSize="7"
@@ -99,7 +97,7 @@
                 <FormTemplate>
                     <asp:Table ID="tblEnterAddress" runat="server" CellSpacing="2" CellPadding="1" Width="100%"
                         Style="border-collapse: collapse;">
-                        <asp:TableRow>
+                        <asp:TableRow Visible="false" >
                             <asp:TableCell Width="10%">
                                 <asp:Label ID="lblSeason" runat="server" Text="SeasonID">
                                 </asp:Label>
@@ -145,7 +143,6 @@
                             <asp:TableCell>
                                 <telerik:RadNumericTextBox ID="rNTBMinBid" ShowSpinButtons="true" AutoPostBack="true" NumberFormat-DecimalDigits="0" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.MinBid") %>'>
                                 </telerik:RadNumericTextBox>
-                                <telerik:RadTextBox ID="txtTest" runat="server"></telerik:RadTextBox>
                             </asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow>

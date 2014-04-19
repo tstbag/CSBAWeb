@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="CSBAModel.Season" Width="1.5" PointX="1.25" PointY="17.125" IsExpanded="true" FillColor="0, 192, 0" />
         <EntityTypeShape EntityType="CSBAModel.Stat" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="CSBAModel.v_SeasonView" Width="1.5" PointX="22.375" PointY="1.5" />
-        <EntityTypeShape EntityType="CSBAModel.SeasonTeamStadium" Width="3" PointX="11.375" PointY="15" />
+        <EntityTypeShape EntityType="CSBAModel.SeasonTeamStadium" Width="3" PointX="11.375" PointY="15.125" />
         <AssociationConnector Association="CSBAModel.FK_SeasonTeamStadium_Season" />
         <EntityTypeShape EntityType="CSBAModel.PositionType" Width="1.5" PointX="3" PointY="6.5" FillColor="0, 192, 0" />
         <AssociationConnector Association="CSBAModel.FK_Position_PositionType" />

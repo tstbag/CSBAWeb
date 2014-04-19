@@ -59,6 +59,7 @@
     <Compile Include="DM\SeasonTeamDomainModel.cs" />
     <Compile Include="DM\SeasonTeamPlayerPositionDomainModel.cs" />
     <Compile Include="DM\SeasonTeamStadiumDomainModel.cs" />
+    <Compile Include="DM\sp_StadiumDraft_Select_Result_DomainModel.cs" />
     <Compile Include="DM\StadiumDomainModel.cs" />
     <Compile Include="DM\StatDomainModel.cs" />
     <Compile Include="DM\TeamDomainModel.cs" />

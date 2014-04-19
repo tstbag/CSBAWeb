@@ -10,25 +10,43 @@
         }
     </script>
 </telerik:RadScriptBlock>
+
+<%--<h2>Draft Stadium
+    </h2>--%>
+
 <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server" EnablePageHeadUpdate="false">
     <AjaxSettings>
         <telerik:AjaxSetting AjaxControlID="RadAjaxManager1">
             <UpdatedControls>
+                <telerik:AjaxUpdatedControl ControlID="RadImageEditor1" />
             </UpdatedControls>
         </telerik:AjaxSetting>
+
+
     </AjaxSettings>
 </telerik:RadAjaxManager>
 
+<asp:Table ID="Table1" runat="server">
+    <asp:TableRow>
+        <asp:TableCell>
+            <asp:Label ID="lblSeason" runat="server" Text="Season"></asp:Label>
+        </asp:TableCell>
+        <asp:TableCell>
+            <telerik:RadDropDownList ID="rDDSeason" runat="server" Skin="<%$ appSettings:Telerik.Skin%>" OnSelectedIndexChanged="rDDSeason_SelectedIndexChanged" AutoPostBack="true">
+            </telerik:RadDropDownList>
+        </asp:TableCell>
+    </asp:TableRow>
+</asp:Table>
+
 <asp:Panel ID="pnlPickStadium" runat="server" Width="50%">
-    <h2>Draft Stadium
-    </h2>
-        <telerik:RadAjaxPanel ID="RadAjaxPanel1" runat="server">
+
+    <telerik:RadAjaxPanel ID="RadAjaxPanel1" runat="server">
         <telerik:RadGrid ID="rGridStadium"
-            runat="server" 
-            PageSize="4" 
-            AllowPaging="true" 
-            PagerStyle-Mode="Slider" 
-            PagerStyle-Position="Bottom"            
+            runat="server"
+            PageSize="4"
+            AllowPaging="true"
+            PagerStyle-Mode="Slider"
+            PagerStyle-Position="Bottom"
             OnNeedDataSource="rGridStadium_NeedDataSource"
             OnItemDataBound="rGridStadium_ItemDataBound"
             OnItemCommand="rGridStadium_ItemCommand"
@@ -36,12 +54,12 @@
             BorderWidth="1px"
             AllowFilteringByColumn="True"
             AllowSorting="True"
-            Skin="<%$ appSettings:Telerik.Skin%>" 
+            Skin="<%$ appSettings:Telerik.Skin%>"
             CellSpacing="0"
             GridLines="None"
             AllowMultiRowEdit="True"
             AllowMultiRowSelection="True">
-            <PagerStyle  />
+            <PagerStyle />
             <GroupingSettings CaseSensitive="False" />
             <MasterTableView DataKeyNames="StadiumID"
                 CommandItemDisplay="Bottom"

@@ -20,8 +20,6 @@
 </telerik:RadAjaxManager>
 
 <asp:Panel ID="pnlStadium" runat="server" Width="60%">
-    <h2>Manage Stadium
-    </h2>
     <telerik:RadAjaxPanel ID="RadAjaxPanel1" runat="server">
         <telerik:RadGrid ID="rGridStadium"
             runat="server"

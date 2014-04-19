@@ -27,68 +27,80 @@
         </telerik:RadScriptManager>
         <header>
             <div class="content-wrapper">
-<%--                <div class="float-right">
-                    <p class="site-title">
-                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Content/themes/base/images/volunteer-green-logo1.jpg" Height="61px" Width="107px" />
-                    </p>
-                </div>--%>
-                <div class="float-right">
-                    <section id="login">
-                        <asp:LoginView ID="LoginView1" runat="server" ViewStateMode="Enabled">
-                            <AnonymousTemplate>
-                                <ul>
-                                    <li><a id="registerLink" runat="server" href="~/Account/Register.aspx">Register</a></li>
-                                    <li><a id="forgotPWLink" runat="server" href="~/Account/Forgot.aspx">Forgot Password?</a></li>
-                                    <li><a id="loginLink" runat="server" href="~/Account/Login.aspx">Log in</a></li>
-                                </ul>
-                            </AnonymousTemplate>
-                            <LoggedInTemplate>
-                                <p>
-                                    Hello, <a id="A2" runat="server" class="username" href="~/Account/ManageUser.aspx" title="Manage your account">
-                                        <asp:LoginName ID="LoginName1" runat="server" CssClass="username" />
-                                    </a>!
-                                <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" />
-                                </p>
-                            </LoggedInTemplate>
-                        </asp:LoginView>
-                    </section>
-                </div>
+                <asp:Table runat="server" Width="100%">
+                    <asp:TableRow>
+                        <asp:TableCell>
+                            <div class="float-left">
+                                <telerik:RadMenu ID="RadMenu1" CssClass="mainMenu" runat="server" Skin="<%$ appSettings:Telerik.Skin%>">
+                                    <Items>
+                                        <telerik:RadMenuItem Text="Home" NavigateUrl="~/Default.aspx" />
+                                        <telerik:RadMenuItem Text="Season">
+                                            <GroupSettings Width="300px" />
+                                            <Items>
+                                                <telerik:RadMenuItem Text="Manage Season" NavigateUrl="../Season/ManageSeason.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
+                                                <telerik:RadMenuItem Text="Manage Season + Stadium" NavigateUrl="../Season/ManageSeasonStadium.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
+                                                <telerik:RadMenuItem Text="Manage Season + Team" NavigateUrl="../Season/ManageSeasonTeam.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
+                                                <telerik:RadMenuItem Text="Manage Season + Player" NavigateUrl="../Season/ManageSeasonPlayer.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
+                                            </Items>
+                                        </telerik:RadMenuItem>
+                                        <telerik:RadMenuItem Text="Stadium">
+                                            <GroupSettings Width="300px" />
+                                            <Items>
+                                                <telerik:RadMenuItem Text="Manage Stadium" NavigateUrl="../Stadium/ManageStadium.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
+                                            </Items>
+                                        </telerik:RadMenuItem>
+                                        <telerik:RadMenuItem Text="Team">
+                                            <GroupSettings Width="300px" />
+                                            <Items>
+                                                <telerik:RadMenuItem Text="Manage Team" NavigateUrl="../Team/ManageTeam.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
+                                            </Items>
+                                        </telerik:RadMenuItem>
+                                        <telerik:RadMenuItem Text="Player">
+                                            <GroupSettings Width="300px" />
+                                            <Items>
+                                                <telerik:RadMenuItem Text="Manage Player" NavigateUrl="../Player/ManagePlayer.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
+                                            </Items>
+                                        </telerik:RadMenuItem>
+                                    </Items>
+                                </telerik:RadMenu>
+                            </div>
+                        </asp:TableCell>
+                        <asp:TableCell>
+                            <div class="float-left">
+                                <asp:Label ID="lblTitle" CssClass="Labels" runat="server"></asp:Label>
+                            </div>
+                        </asp:TableCell>
+                        <asp:TableCell>
+                            <div class="float-right">
+                                <section id="login">
+                                    <asp:LoginView ID="LoginView1" runat="server" ViewStateMode="Enabled">
+                                        <AnonymousTemplate>
+                                            <ul>
+                                                <li><a id="registerLink" runat="server" href="~/Account/Register.aspx">Register</a></li>
+                                                <li><a id="forgotPWLink" runat="server" href="~/Account/Forgot.aspx">Forgot Password?</a></li>
+                                                <li><a id="loginLink" runat="server" href="~/Account/Login.aspx">Log in</a></li>
+                                            </ul>
+                                        </AnonymousTemplate>
+                                        <LoggedInTemplate>
+                                            <p>
+                                                Hello, <a id="A2" runat="server" class="username" href="~/Account/ManageUser.aspx" title="Manage your account">
+                                                    <asp:LoginName ID="LoginName1" runat="server" CssClass="username" />
+                                                </a>!
+                               
+                                    <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" />
+                                            </p>
+                                        </LoggedInTemplate>
+                                    </asp:LoginView>
+                                </section>
+                            </div>
+                        </asp:TableCell>
+                    </asp:TableRow>
+                </asp:Table>
+
 
             </div>
-            <div class="float-left">
-                <telerik:RadMenu ID="RadMenu1" CssClass="mainMenu" runat="server" Skin="<%$ appSettings:Telerik.Skin%>" >
-                    <Items>
-                        <telerik:RadMenuItem Text="Home" NavigateUrl="~/Default.aspx" />
-                        <telerik:RadMenuItem Text="Season">
-                            <GroupSettings Width="300px" />
-                            <Items>
-                                <telerik:RadMenuItem Text="Manage Season" NavigateUrl="../Season/ManageSeason.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
-                                <telerik:RadMenuItem Text="Manage Season + Stadium" NavigateUrl="../Season/ManageSeasonStadium.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
-                                <telerik:RadMenuItem Text="Manage Season + Team" NavigateUrl="../Season/ManageSeasonTeam.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
-                                <telerik:RadMenuItem Text="Manage Season + Player" NavigateUrl="../Season/ManageSeasonPlayer.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
-                            </Items>
-                        </telerik:RadMenuItem>
-                        <telerik:RadMenuItem Text="Stadium">
-                            <GroupSettings Width="300px" />
-                            <Items>
-                                <telerik:RadMenuItem Text="Manage Stadium" NavigateUrl="../Stadium/ManageStadium.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
-                            </Items>
-                        </telerik:RadMenuItem>
-                        <telerik:RadMenuItem Text="Team">
-                            <GroupSettings Width="300px" />
-                            <Items>
-                                <telerik:RadMenuItem Text="Manage Team" NavigateUrl="../Team/ManageTeam.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
-                            </Items>
-                        </telerik:RadMenuItem>
-                        <telerik:RadMenuItem Text="Player">
-                            <GroupSettings Width="300px" />
-                            <Items>
-                                <telerik:RadMenuItem Text="Manage Player" NavigateUrl="../Player/ManagePlayer.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
-                            </Items>
-                        </telerik:RadMenuItem>
-                    </Items>
-                </telerik:RadMenu>
-            </div>
+
+
         </header>
         <div id="body">
             <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
@@ -99,7 +111,7 @@
         <footer>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+                    <p>&copy; <%: DateTime.Now.Year %> - CSBA</p>
                 </div>
             </div>
         </footer>

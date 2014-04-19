@@ -11,7 +11,8 @@ namespace CSBANet.Season
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Label lblTitle = (Master.FindControl("lblTitle") as Label);
+            lblTitle.Text = "Manage Season / Team";
         }
     }
 }

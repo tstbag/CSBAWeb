@@ -26,3 +26,17 @@ C:\Users\Bert.Gibbons\Source\Repos\CSBAWeb\CSBA.DataAccessLayer\bin\Debug\Entity
 C:\Users\Bert.Gibbons\Source\Repos\CSBAWeb\CSBA.DataAccessLayer\obj\Debug\CSBA.DataAccessLayer.csprojResolveAssemblyReference.cache
 C:\Users\Bert.Gibbons\Source\Repos\CSBAWeb\CSBA.DataAccessLayer\obj\Debug\CSBA.DataAccessLayer.dll
 C:\Users\Bert.Gibbons\Source\Repos\CSBAWeb\CSBA.DataAccessLayer\obj\Debug\CSBA.DataAccessLayer.pdb
+C:\Users\Dad\Source\Repos\CSBAWeb\CSBA.DataAccessLayer\bin\Debug\CSBA.DataAccessLayer.dll.config
+C:\Users\Dad\Source\Repos\CSBAWeb\CSBA.DataAccessLayer\bin\Debug\CSBA.DataAccessLayer.dll
+C:\Users\Dad\Source\Repos\CSBAWeb\CSBA.DataAccessLayer\bin\Debug\CSBA.DataAccessLayer.pdb
+C:\Users\Dad\Source\Repos\CSBAWeb\CSBA.DataAccessLayer\bin\Debug\CSBA.Contracts.dll
+C:\Users\Dad\Source\Repos\CSBAWeb\CSBA.DataAccessLayer\bin\Debug\CSBA.DomainModels.dll
+C:\Users\Dad\Source\Repos\CSBAWeb\CSBA.DataAccessLayer\bin\Debug\EntityFramework.dll
+C:\Users\Dad\Source\Repos\CSBAWeb\CSBA.DataAccessLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Dad\Source\Repos\CSBAWeb\CSBA.DataAccessLayer\bin\Debug\CSBA.Contracts.pdb
+C:\Users\Dad\Source\Repos\CSBAWeb\CSBA.DataAccessLayer\bin\Debug\CSBA.DomainModels.pdb
+C:\Users\Dad\Source\Repos\CSBAWeb\CSBA.DataAccessLayer\bin\Debug\EntityFramework.xml
+C:\Users\Dad\Source\Repos\CSBAWeb\CSBA.DataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Dad\Source\Repos\CSBAWeb\CSBA.DataAccessLayer\obj\Debug\CSBA.DataAccessLayer.csprojResolveAssemblyReference.cache
+C:\Users\Dad\Source\Repos\CSBAWeb\CSBA.DataAccessLayer\obj\Debug\CSBA.DataAccessLayer.dll
+C:\Users\Dad\Source\Repos\CSBAWeb\CSBA.DataAccessLayer\obj\Debug\CSBA.DataAccessLayer.pdb

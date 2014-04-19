@@ -18,10 +18,6 @@ namespace CSBA.DataAccessLayer
         public int TeamID { get; set; }
         public int StadiumID { get; set; }
         public Nullable<int> Points { get; set; }
-        public string CreateUser { get; set; }
-        public Nullable<System.DateTime> CreateTS { get; set; }
-        public string UpdateUser { get; set; }
-        public Nullable<System.DateTime> UpdateTS { get; set; }
     
         public virtual Season Season { get; set; }
         public virtual Team Team { get; set; }

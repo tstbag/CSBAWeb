@@ -79,6 +79,7 @@
     </Compile>
     <Compile Include="DAL\aspnet_UsersDAL.cs" />
     <Compile Include="DAL\CSBA_ADO_HelperFunctions.cs" />
+    <Compile Include="DAL\DraftStadiumDAL.cs" />
     <Compile Include="DAL\PlayerDAL.cs" />
     <Compile Include="DAL\PlayerPositionDAL.cs" />
     <Compile Include="DAL\PositionDAL.cs" />
@@ -153,7 +154,7 @@
     <Compile Include="sp_Season_Select_Result.cs">
       <DependentUpon>CSBA.tt</DependentUpon>
     </Compile>
-    <Compile Include="sp_Stadium_Select_Result.cs">
+    <Compile Include="sp_StadiumDraft_Select_Result.cs">
       <DependentUpon>CSBA.tt</DependentUpon>
     </Compile>
     <Compile Include="sp_Team_Select_Result.cs">

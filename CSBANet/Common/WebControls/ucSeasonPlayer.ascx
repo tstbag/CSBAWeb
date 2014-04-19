@@ -19,9 +19,6 @@
 </telerik:RadAjaxManager>
 
 <asp:Panel ID="pnlSeasonPlayer" runat="server" Width="70%">
-    <h2>
-        Manage Season / Player
-    </h2>
     <asp:Table ID="Table1" runat="server">
         <asp:TableRow>
             <asp:TableCell>

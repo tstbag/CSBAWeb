@@ -18,12 +18,15 @@
 </telerik:RadAjaxManager>
 
 <asp:Panel ID="pnlTeam" runat="server" Width="70%">
-    <h2>Manage Team
-    </h2>
     <telerik:RadAjaxPanel ID="RadAjaxPanel1" runat="server">
         <telerik:RadGrid ID="rGridTeam"
             runat="server"
-            OnNeedDataSource="rGridTeam_NeedDataSource"
+            PageSize="4"
+            AllowPaging="true"
+            PagerStyle-Mode="Slider"
+            PagerStyle-Position="Bottom"
+            OnNeedDataSource="rGridTeam_NeedDataSource" 
+            OnPreRender="rGridTeam_PreRender"
             OnItemDataBound="rGridTeam_ItemDataBound"
             OnItemCommand="rGridTeam_ItemCommand"
             OnUpdateCommand="rGridTeam_UpdateCommand"
@@ -167,7 +170,7 @@
                                         </asp:Label>
                                     </asp:TableCell>
                                     <asp:TableCell>
-                                        <telerik:RadDropDownList ID="rDDUserName" runat="server">
+                                        <telerik:RadDropDownList ID="rDDUserName" Skin="<%$ appSettings:Telerik.Skin%>"  runat="server">
                                         </telerik:RadDropDownList>
                                     </asp:TableCell>
                                 </asp:TableRow>
@@ -189,7 +192,7 @@
 
                                     </asp:TableCell>
                                     <asp:TableCell Width="100%">
-                                        <telerik:RadAsyncUpload ID="AsyncUpload1" runat="server"
+                                        <telerik:RadAsyncUpload ID="AsyncUpload1" runat="server" Skin="<%$ appSettings:Telerik.Skin%>" 
                                             OnClientFilesUploaded="OnClientFilesUploaded" OnFileUploaded="AsyncUpload1_FileUploaded"
                                             MaxFileSize="2097152" AllowedFileExtensions="jpg,png,gif,bmp"
                                             AutoAddFileInputs="false" Localization-Select="Upload" />
@@ -201,10 +204,10 @@
                                 <asp:TableRow>
                                     <asp:TableCell ColumnSpan="2">
                                         <telerik:RadButton ID="btnUpdate" Text='<%# (Container is GridEditFormInsertItem) ? "Insert" : "Update" %>'
-                                            runat="server" ButtonType="SkinnedButton" CommandName='<%# (Container is GridEditFormInsertItem) ? "PerformInsert" : "Update" %>'>
+                                            runat="server" ButtonType="SkinnedButton" Skin="<%$ appSettings:Telerik.Skin%>"  CommandName='<%# (Container is GridEditFormInsertItem) ? "PerformInsert" : "Update" %>'>
                                         </telerik:RadButton>
                                         &nbsp;
-                                <telerik:RadButton ID="btnCancel" ButtonType="SkinnedButton" Text="Cancel" runat="server" CausesValidation="False"
+                                <telerik:RadButton ID="btnCancel" ButtonType="SkinnedButton" Skin="<%$ appSettings:Telerik.Skin%>"  Text="Cancel" runat="server" CausesValidation="False"
                                     CommandName="Cancel">
                                 </telerik:RadButton>
 

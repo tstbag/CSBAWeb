@@ -125,7 +125,9 @@
     <Content Include="Season\ManageSeason.aspx" />
     <Content Include="Stadium\ManageStadium.aspx" />
     <Content Include="Team\ManageTeam.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\Login.aspx.cs">
@@ -274,6 +276,7 @@
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Web.WorkComputer.config">
       <DependentUpon>Web.config</DependentUpon>
