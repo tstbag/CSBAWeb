@@ -10,18 +10,15 @@
 namespace CSBA.DataAccessLayer
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class v_PlayerPositions
+    public partial class PickAPlayer_Result
     {
         public System.Guid PlayerGUID { get; set; }
         public string PlayerName { get; set; }
         public byte[] PlayerImage { get; set; }
-        public int PrimaryPositionID { get; set; }
-        public Nullable<int> SecondaryPostiionID { get; set; }
-        public string PrimPosName { get; set; }
-        public string PrimPosNameLong { get; set; }
-        public string SecPosName { get; set; }
-        public string SecPosNameLong { get; set; }
+        public string PrimPositionName { get; set; }
+        public string PrimPositionTypeDescr { get; set; }
+        public string SecPositionName { get; set; }
+        public string SecPositionTypeDescr { get; set; }
     }
 }

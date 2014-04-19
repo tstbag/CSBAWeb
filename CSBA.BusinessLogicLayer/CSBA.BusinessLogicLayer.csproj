@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\aspnet_UsersBusinessLogic.cs" />
+    <Compile Include="BLL\DraftPlayerBusinessLogicLayer.cs" />
     <Compile Include="BLL\DraftStadiumBLL.cs" />
     <Compile Include="BLL\PlayerBusinessLogic.cs" />
     <Compile Include="BLL\PlayerPostiionBusinessLogic.cs" />

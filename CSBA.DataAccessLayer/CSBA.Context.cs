@@ -37,14 +37,13 @@ namespace CSBA.DataAccessLayer
         public DbSet<v_SeasonTeam> v_SeasonTeam { get; set; }
         public DbSet<SeasonPlayerPositionStat> SeasonPlayerPositionStats { get; set; }
         public DbSet<SeasonTeam> SeasonTeams { get; set; }
-        public DbSet<SeasonTeamPlayer> SeasonTeamPlayers { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<v_SeasonTeamPlayerPosition> v_SeasonTeamPlayerPosition { get; set; }
-        public DbSet<v_PlayerPositions> v_PlayerPositions { get; set; }
         public DbSet<PlayerPosition> PlayerPositions { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<aspnet_Users> aspnet_Users { get; set; }
         public DbSet<Stadium> Stadia { get; set; }
+        public DbSet<SeasonTeamPlayer> SeasonTeamPlayers { get; set; }
     
         public virtual int sp_Season_Delete(Nullable<int> seasonID)
         {
@@ -117,65 +116,6 @@ namespace CSBA.DataAccessLayer
                 new ObjectParameter("StadiumOrder", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SeasonTeam_Update", seasonIDParameter, teamIDParameter, activeParameter, stadiumOrderParameter);
-        }
-    
-        public virtual int sp_SeasonTeamPlayer_Delete(Nullable<int> seasonID, Nullable<int> teamID, Nullable<int> playerID)
-        {
-            var seasonIDParameter = seasonID.HasValue ?
-                new ObjectParameter("SeasonID", seasonID) :
-                new ObjectParameter("SeasonID", typeof(int));
-    
-            var teamIDParameter = teamID.HasValue ?
-                new ObjectParameter("TeamID", teamID) :
-                new ObjectParameter("TeamID", typeof(int));
-    
-            var playerIDParameter = playerID.HasValue ?
-                new ObjectParameter("PlayerID", playerID) :
-                new ObjectParameter("PlayerID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SeasonTeamPlayer_Delete", seasonIDParameter, teamIDParameter, playerIDParameter);
-        }
-    
-        public virtual int sp_SeasonTeamPlayer_Insert(Nullable<int> seasonID, Nullable<int> teamID, Nullable<int> playerID, Nullable<int> points)
-        {
-            var seasonIDParameter = seasonID.HasValue ?
-                new ObjectParameter("SeasonID", seasonID) :
-                new ObjectParameter("SeasonID", typeof(int));
-    
-            var teamIDParameter = teamID.HasValue ?
-                new ObjectParameter("TeamID", teamID) :
-                new ObjectParameter("TeamID", typeof(int));
-    
-            var playerIDParameter = playerID.HasValue ?
-                new ObjectParameter("PlayerID", playerID) :
-                new ObjectParameter("PlayerID", typeof(int));
-    
-            var pointsParameter = points.HasValue ?
-                new ObjectParameter("Points", points) :
-                new ObjectParameter("Points", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SeasonTeamPlayer_Insert", seasonIDParameter, teamIDParameter, playerIDParameter, pointsParameter);
-        }
-    
-        public virtual int sp_SeasonTeamPlayer_Update(Nullable<int> seasonID, Nullable<int> teamID, Nullable<int> playerID, Nullable<int> points)
-        {
-            var seasonIDParameter = seasonID.HasValue ?
-                new ObjectParameter("SeasonID", seasonID) :
-                new ObjectParameter("SeasonID", typeof(int));
-    
-            var teamIDParameter = teamID.HasValue ?
-                new ObjectParameter("TeamID", teamID) :
-                new ObjectParameter("TeamID", typeof(int));
-    
-            var playerIDParameter = playerID.HasValue ?
-                new ObjectParameter("PlayerID", playerID) :
-                new ObjectParameter("PlayerID", typeof(int));
-    
-            var pointsParameter = points.HasValue ?
-                new ObjectParameter("Points", points) :
-                new ObjectParameter("Points", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SeasonTeamPlayer_Update", seasonIDParameter, teamIDParameter, playerIDParameter, pointsParameter);
         }
     
         public virtual int sp_PositionType_Delete(Nullable<int> positionTypeID)
@@ -270,15 +210,6 @@ namespace CSBA.DataAccessLayer
                 new ObjectParameter("PositionNameLong", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Position_Update", positionIDParameter, positionTypeIDParameter, positionNameParameter, maxCountParameter, positionNameLongParameter);
-        }
-    
-        public virtual ObjectResult<GetSeasonTeamOrder_Result> GetSeasonTeamOrder(Nullable<int> seasonID)
-        {
-            var seasonIDParameter = seasonID.HasValue ?
-                new ObjectParameter("SeasonID", seasonID) :
-                new ObjectParameter("SeasonID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSeasonTeamOrder_Result>("GetSeasonTeamOrder", seasonIDParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> sp_Season_Insert(string seasonName, Nullable<System.DateTime> draftDate, Nullable<int> startPoints, Nullable<int> minBid)
@@ -700,6 +631,92 @@ namespace CSBA.DataAccessLayer
                 new ObjectParameter("UserID", typeof(System.Guid));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_StadiumDraft_Select_Result>("sp_StadiumDraft_Select", seasonIDParameter, userIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_SeasonTeamDraft_Select_Result> sp_SeasonTeamDraft_Select(Nullable<int> seasonID)
+        {
+            var seasonIDParameter = seasonID.HasValue ?
+                new ObjectParameter("SeasonID", seasonID) :
+                new ObjectParameter("SeasonID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SeasonTeamDraft_Select_Result>("sp_SeasonTeamDraft_Select", seasonIDParameter);
+        }
+    
+        public virtual ObjectResult<PickAPlayer_Result> PickAPlayer(Nullable<int> seasonID)
+        {
+            var seasonIDParameter = seasonID.HasValue ?
+                new ObjectParameter("SeasonID", seasonID) :
+                new ObjectParameter("SeasonID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PickAPlayer_Result>("PickAPlayer", seasonIDParameter);
+        }
+    
+        public virtual ObjectResult<GetSeasonTeamOrder_Result> GetSeasonTeamOrder(Nullable<int> seasonID)
+        {
+            var seasonIDParameter = seasonID.HasValue ?
+                new ObjectParameter("SeasonID", seasonID) :
+                new ObjectParameter("SeasonID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSeasonTeamOrder_Result>("GetSeasonTeamOrder", seasonIDParameter);
+        }
+    
+        public virtual int sp_SeasonTeamPlayer_Delete(Nullable<int> seasonID, Nullable<int> teamID, Nullable<System.Guid> playerGUID)
+        {
+            var seasonIDParameter = seasonID.HasValue ?
+                new ObjectParameter("SeasonID", seasonID) :
+                new ObjectParameter("SeasonID", typeof(int));
+    
+            var teamIDParameter = teamID.HasValue ?
+                new ObjectParameter("TeamID", teamID) :
+                new ObjectParameter("TeamID", typeof(int));
+    
+            var playerGUIDParameter = playerGUID.HasValue ?
+                new ObjectParameter("PlayerGUID", playerGUID) :
+                new ObjectParameter("PlayerGUID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SeasonTeamPlayer_Delete", seasonIDParameter, teamIDParameter, playerGUIDParameter);
+        }
+    
+        public virtual int sp_SeasonTeamPlayer_Insert(Nullable<int> seasonID, Nullable<int> teamID, Nullable<System.Guid> playerGUID, Nullable<int> points)
+        {
+            var seasonIDParameter = seasonID.HasValue ?
+                new ObjectParameter("SeasonID", seasonID) :
+                new ObjectParameter("SeasonID", typeof(int));
+    
+            var teamIDParameter = teamID.HasValue ?
+                new ObjectParameter("TeamID", teamID) :
+                new ObjectParameter("TeamID", typeof(int));
+    
+            var playerGUIDParameter = playerGUID.HasValue ?
+                new ObjectParameter("PlayerGUID", playerGUID) :
+                new ObjectParameter("PlayerGUID", typeof(System.Guid));
+    
+            var pointsParameter = points.HasValue ?
+                new ObjectParameter("Points", points) :
+                new ObjectParameter("Points", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SeasonTeamPlayer_Insert", seasonIDParameter, teamIDParameter, playerGUIDParameter, pointsParameter);
+        }
+    
+        public virtual int sp_SeasonTeamPlayer_Update(Nullable<int> seasonID, Nullable<int> teamID, Nullable<System.Guid> playerGUID, Nullable<int> points)
+        {
+            var seasonIDParameter = seasonID.HasValue ?
+                new ObjectParameter("SeasonID", seasonID) :
+                new ObjectParameter("SeasonID", typeof(int));
+    
+            var teamIDParameter = teamID.HasValue ?
+                new ObjectParameter("TeamID", teamID) :
+                new ObjectParameter("TeamID", typeof(int));
+    
+            var playerGUIDParameter = playerGUID.HasValue ?
+                new ObjectParameter("PlayerGUID", playerGUID) :
+                new ObjectParameter("PlayerGUID", typeof(System.Guid));
+    
+            var pointsParameter = points.HasValue ?
+                new ObjectParameter("Points", points) :
+                new ObjectParameter("Points", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SeasonTeamPlayer_Update", seasonIDParameter, teamIDParameter, playerGUIDParameter, pointsParameter);
         }
     }
 }

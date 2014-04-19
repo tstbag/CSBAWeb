@@ -79,6 +79,7 @@
     </Compile>
     <Compile Include="DAL\aspnet_UsersDAL.cs" />
     <Compile Include="DAL\CSBA_ADO_HelperFunctions.cs" />
+    <Compile Include="DAL\DraftPlayerDAL.cs" />
     <Compile Include="DAL\DraftStadiumDAL.cs" />
     <Compile Include="DAL\PlayerDAL.cs" />
     <Compile Include="DAL\PlayerPositionDAL.cs" />
@@ -94,6 +95,9 @@
     <Compile Include="DAL\StatDAL.cs" />
     <Compile Include="DAL\TeamDAL.cs" />
     <Compile Include="GetSeasonTeamOrder_Result.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PickAPlayer_Result.cs">
       <DependentUpon>CSBA.tt</DependentUpon>
     </Compile>
     <Compile Include="Player.cs">
@@ -151,6 +155,9 @@
     <Compile Include="sp_SeasonTeamBySeason_Selected_Result.cs">
       <DependentUpon>CSBA.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_SeasonTeamDraft_Select_Result.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_Season_Select_Result.cs">
       <DependentUpon>CSBA.tt</DependentUpon>
     </Compile>
@@ -167,9 +174,6 @@
       <DependentUpon>CSBA.tt</DependentUpon>
     </Compile>
     <Compile Include="Team.cs">
-      <DependentUpon>CSBA.tt</DependentUpon>
-    </Compile>
-    <Compile Include="v_PlayerPositions.cs">
       <DependentUpon>CSBA.tt</DependentUpon>
     </Compile>
     <Compile Include="v_SeasonTeam.cs">

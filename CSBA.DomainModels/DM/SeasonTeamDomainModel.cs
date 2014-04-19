@@ -13,5 +13,6 @@ namespace CSBA.DomainModels
         public string TeamName { get; set; }
         public int? StadiumOrder { get; set; }
         public bool? ActiveFlg { get; set; }
+        public Nullable<int> MaxBid { get; set; }
     }
 }

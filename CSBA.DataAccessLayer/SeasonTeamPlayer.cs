@@ -20,5 +20,7 @@ namespace CSBA.DataAccessLayer
         public Nullable<int> Points { get; set; }
     
         public virtual Player Player { get; set; }
+        public virtual Season Season { get; set; }
+        public virtual Team Team { get; set; }
     }
 }

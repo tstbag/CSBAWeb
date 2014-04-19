@@ -22,8 +22,6 @@
 </telerik:RadAjaxManager>
 
 <asp:Panel ID="pnlPlayer" runat="server" Width="60%">
-    <h2>Manage Players  
-    </h2>
     <telerik:RadAjaxPanel ID="RadAjaxPanel1" runat="server">
         <telerik:RadGrid ID="rGridPlayer"
             runat="server"

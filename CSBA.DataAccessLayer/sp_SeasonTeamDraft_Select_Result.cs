@@ -10,27 +10,21 @@
 namespace CSBA.DataAccessLayer
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Team
+    public partial class sp_SeasonTeamDraft_Select_Result
     {
-        public Team()
-        {
-            this.SeasonTeams = new HashSet<SeasonTeam>();
-            this.SeasonTeamStadiums = new HashSet<SeasonTeamStadium>();
-            this.SeasonTeamPlayers = new HashSet<SeasonTeamPlayer>();
-        }
-    
+        public int SeasonID { get; set; }
         public int TeamID { get; set; }
         public string TeamName { get; set; }
         public string OwnerName { get; set; }
         public Nullable<System.Guid> OwnerUserID { get; set; }
         public string OwnerEmail { get; set; }
-        public byte[] TeamImage { get; set; }
-    
-        public virtual ICollection<SeasonTeam> SeasonTeams { get; set; }
-        public virtual ICollection<SeasonTeamStadium> SeasonTeamStadiums { get; set; }
-        public virtual aspnet_Users aspnet_Users { get; set; }
-        public virtual ICollection<SeasonTeamPlayer> SeasonTeamPlayers { get; set; }
+        public int SumPoints { get; set; }
+        public int CountPlayers { get; set; }
+        public int StartPoints { get; set; }
+        public Nullable<int> MinBid { get; set; }
+        public Nullable<int> MaxBid { get; set; }
+        public int CountHitter { get; set; }
+        public int PitcherCount { get; set; }
     }
 }

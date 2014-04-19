@@ -23,7 +23,9 @@ namespace CSBA.DataAccessLayer
                             SeasonName = result.SeasonName,
                             StadiumOrder = result.StadiumOrder,
                             TeamID = result.TeamID,
-                            TeamName = result.TeamName
+                            TeamName = result.TeamName,
+                            MaxBid = result.MaxBid
+
                         }).ToList();
 
             return list;

@@ -29,9 +29,9 @@
             <div class="content-wrapper">
                 <asp:Table runat="server" Width="100%">
                     <asp:TableRow>
-                        <asp:TableCell>
+                        <asp:TableCell Width="45%">
                             <div class="float-left">
-                                <telerik:RadMenu ID="RadMenu1" CssClass="mainMenu" runat="server" Skin="<%$ appSettings:Telerik.Skin%>">
+                                <telerik:RadMenu ID="RadMenu1" EnableShadows="true" EnableRoundedCorners="true" ClickToOpen="true"   CssClass="mainMenu" runat="server" Skin="<%$ appSettings:Telerik.Skin%>">
                                     <Items>
                                         <telerik:RadMenuItem Text="Home" NavigateUrl="~/Default.aspx" />
                                         <telerik:RadMenuItem Text="Season">
@@ -44,23 +44,33 @@
                                             </Items>
                                         </telerik:RadMenuItem>
                                         <telerik:RadMenuItem Text="Stadium">
-                                            <GroupSettings Width="300px" />
+                                            <GroupSettings Width="300px" Height="30px" />
                                             <Items>
                                                 <telerik:RadMenuItem Text="Manage Stadium" NavigateUrl="../Stadium/ManageStadium.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
                                             </Items>
                                         </telerik:RadMenuItem>
                                         <telerik:RadMenuItem Text="Team">
-                                            <GroupSettings Width="300px" />
+                                            <GroupSettings Width="300px" Height="30px" />
                                             <Items>
                                                 <telerik:RadMenuItem Text="Manage Team" NavigateUrl="../Team/ManageTeam.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
                                             </Items>
                                         </telerik:RadMenuItem>
                                         <telerik:RadMenuItem Text="Player">
-                                            <GroupSettings Width="300px" />
+                                            <GroupSettings Width="300px" Height="30px" />
                                             <Items>
                                                 <telerik:RadMenuItem Text="Manage Player" NavigateUrl="../Player/ManagePlayer.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
                                             </Items>
                                         </telerik:RadMenuItem>
+                                        <telerik:RadMenuItem Text="Draft">
+                                            <GroupSettings Width="300px" />
+                                            <Items>
+                                                <telerik:RadMenuItem Text="Draft Stadium" NavigateUrl="../Draft/DraftStadium.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
+                                                <telerik:RadMenuItem Text="Draft Player" NavigateUrl="../Draft/DraftPlayer.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
+                                            </Items>
+
+                                        </telerik:RadMenuItem>
+
+
                                     </Items>
                                 </telerik:RadMenu>
                             </div>

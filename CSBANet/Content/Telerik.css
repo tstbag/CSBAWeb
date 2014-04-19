@@ -5,6 +5,7 @@
 .Labels {
     font-size:larger;
     font-weight:bold;
+    font-family: Helvetica;
 
 }
 
@@ -26,7 +27,7 @@ body {
     border-top: solid 10px #000;
     color: #333;
     font-size: .85em;
-    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    font-family: Verdana, Helvetica, Sans-Serif;
     margin: 0;
     padding: 0;
 }
@@ -250,6 +251,7 @@ aside {
 
 .label {
     font-weight: 700;
+    font-family: Verdana, Helvetica, Sans-Serif;
 }
 
 /* login page */
@@ -320,6 +322,7 @@ label {
     display: block;
     font-size: 1.2em;
     font-weight: 600;
+    font-family: Verdana, Helvetica, Sans-Serif;
 }
 
     label.checkbox {
@@ -353,6 +356,7 @@ th {
         th a:link, th a:visited, th a:active, th a:hover {
             color: #333;
             font-weight: 600;
+            font-family: Verdana, Helvetica, Sans-Serif;
             text-decoration: none;
             padding: 0;
         }
@@ -371,6 +375,7 @@ th {
             right: 0em;
             top: 0;
             font-size: 0.75em;
+            font-family: Verdana, Helvetica, Sans-Serif;
         }
 
         th.asc a:after {
@@ -385,6 +390,7 @@ td {
     padding: 0.25em 0.25em 0.25em 0em;
     border: 0 none;
     font-size: medium;
+    font-family: Verdana, Helvetica, Sans-Serif;
 }
 
 tr.pager td {

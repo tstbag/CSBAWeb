@@ -7,12 +7,12 @@ using System.Web.UI.WebControls;
 
 namespace CSBANet.Draft
 {
-    public partial class DraftStadium : System.Web.UI.Page
+    public partial class DraftPlayer : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             Label lblTitle = (Master.FindControl("lblTitle") as Label);
-            lblTitle.Text = "Draft Stadium";
+            lblTitle.Text = "Draft Player";
         }
     }
 }

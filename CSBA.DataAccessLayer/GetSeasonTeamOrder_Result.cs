@@ -19,5 +19,6 @@ namespace CSBA.DataAccessLayer
         public string TeamName { get; set; }
         public Nullable<int> StadiumOrder { get; set; }
         public Nullable<bool> ActiveFlg { get; set; }
+        public Nullable<int> MaxBid { get; set; }
     }
 }

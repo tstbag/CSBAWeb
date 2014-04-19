@@ -106,6 +106,7 @@
     <Content Include="App_Data\RadCaptcha\X.wav" />
     <Content Include="App_Data\RadCaptcha\Y.wav" />
     <Content Include="App_Data\RadCaptcha\Z.wav" />
+    <Content Include="Common\WebControls\ucDraftPlayer.ascx" />
     <Content Include="Common\WebControls\ucDraftStadium.ascx" />
     <Content Include="Common\WebControls\ucPlayerGrid.ascx" />
     <Content Include="Common\WebControls\ucSeasonPlayer.ascx" />
@@ -113,9 +114,19 @@
     <Content Include="Common\WebControls\ucSeasonTeamOrder.ascx" />
     <Content Include="Common\WebControls\ucStadium.ascx" />
     <Content Include="Common\WebControls\ucTeamGrid.ascx" />
+    <Content Include="Content\images\1B.jpg" />
+    <Content Include="Content\images\2B.jpg" />
+    <Content Include="Content\images\3B.jpg" />
+    <Content Include="Content\images\C.jpg" />
+    <Content Include="Content\images\CF.jpg" />
+    <Content Include="Content\images\LF.jpg" />
+    <Content Include="Content\images\P.jpg" />
+    <Content Include="Content\images\RF.jpg" />
+    <Content Include="Content\images\SS.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Telerik.css" />
     <Content Include="Common\WebControls\ucSeason.ascx" />
+    <Content Include="Draft\DraftPlayer.aspx" />
     <Content Include="Draft\DraftStadium.aspx" />
     <Content Include="ErrorPage.aspx" />
     <Content Include="Player\ManagePlayer.aspx" />
@@ -136,6 +147,13 @@
     </Compile>
     <Compile Include="Account\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\WebControls\ucDraftPlayer.ascx.cs">
+      <DependentUpon>ucDraftPlayer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\WebControls\ucDraftPlayer.ascx.designer.cs">
+      <DependentUpon>ucDraftPlayer.ascx</DependentUpon>
     </Compile>
     <Compile Include="Common\WebControls\ucDraftStadium.ascx.cs">
       <DependentUpon>ucDraftStadium.ascx</DependentUpon>
@@ -192,6 +210,13 @@
     </Compile>
     <Compile Include="Common\WebControls\ucTeamGrid.ascx.designer.cs">
       <DependentUpon>ucTeamGrid.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Draft\DraftPlayer.aspx.cs">
+      <DependentUpon>DraftPlayer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Draft\DraftPlayer.aspx.designer.cs">
+      <DependentUpon>DraftPlayer.aspx</DependentUpon>
     </Compile>
     <Compile Include="Draft\DraftStadium.aspx.cs">
       <DependentUpon>DraftStadium.aspx</DependentUpon>
@@ -282,9 +307,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\images\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CSBA.BusinessLogicLayer\CSBA.BusinessLogicLayer.csproj">
       <Project>{d393076e-29b2-4066-80d0-90a12532dd6a}</Project>
@@ -331,7 +354,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

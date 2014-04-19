@@ -17,8 +17,8 @@ namespace CSBA.DataAccessLayer
         public Player()
         {
             this.SeasonPlayerPositionStats = new HashSet<SeasonPlayerPositionStat>();
-            this.SeasonTeamPlayers = new HashSet<SeasonTeamPlayer>();
             this.Seasons = new HashSet<Season>();
+            this.SeasonTeamPlayers = new HashSet<SeasonTeamPlayer>();
         }
     
         public System.Guid PlayerGUID { get; set; }
@@ -26,8 +26,8 @@ namespace CSBA.DataAccessLayer
         public byte[] PlayerImage { get; set; }
     
         public virtual ICollection<SeasonPlayerPositionStat> SeasonPlayerPositionStats { get; set; }
-        public virtual ICollection<SeasonTeamPlayer> SeasonTeamPlayers { get; set; }
         public virtual PlayerPosition PlayerPosition { get; set; }
         public virtual ICollection<Season> Seasons { get; set; }
+        public virtual ICollection<SeasonTeamPlayer> SeasonTeamPlayers { get; set; }
     }
 }
