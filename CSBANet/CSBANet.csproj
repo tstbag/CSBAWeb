@@ -136,6 +136,7 @@
     <Content Include="Season\ManageSeason.aspx" />
     <Content Include="Stadium\ManageStadium.aspx" />
     <Content Include="Team\ManageTeam.aspx" />
+    <Content Include="Team\WebForm1.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -289,6 +290,13 @@
     <Compile Include="Team\ManageTeam.aspx.designer.cs">
       <DependentUpon>ManageTeam.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Team\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Team\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -296,6 +304,7 @@
     <Content Include="App_Data\RadSpell\de-DE.tdf" />
     <Content Include="App_Data\RadSpell\en-US.tdf" />
     <Content Include="App_Data\RadSpell\fr-FR.tdf" />
+    <None Include="Properties\PublishProfiles\CSBA_Local_Profile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

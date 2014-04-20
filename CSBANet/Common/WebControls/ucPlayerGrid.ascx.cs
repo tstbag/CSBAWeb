@@ -245,7 +245,7 @@ namespace CSBANet.Common.WebControls
                 {
                     PlayerDM.PlayerGUID = new Guid((eeditedItem.FindControl("lblPlayerGUID") as Label).Text.ToString());
                 }
-                PlayerDM.PlayerName = (eeditedItem.FindControl("rTBPlayerName") as RadTextBox).Text.ToString();
+                PlayerDM.PlayerName = (eeditedItem.FindControl("rTBPlayerName") as RadTextBox).Text.Trim();
 
                 // Deal with the image
                 var aUpload = (eeditedItem.FindControl("AsyncUpload1") as RadAsyncUpload);
@@ -274,7 +274,7 @@ namespace CSBANet.Common.WebControls
 
                 if (Convert.ToInt32(((eeditedItem.FindControl("rDDSecPos") as RadDropDownList)).SelectedValue) == 0)
                 {
-                    PlayerPositionDM.PrimaryPositionID = null;
+                    PlayerPositionDM.SecondaryPostiionID = null;
                 }
                 else
                 {
