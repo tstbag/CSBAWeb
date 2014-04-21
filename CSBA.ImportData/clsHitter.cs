@@ -19,8 +19,8 @@ namespace CSBA.ImportData
         public double? FLDP2 { get; set; }
         public string Agility { get; set; }
         public string RN { get; set; }
-        public double? AVG { get; set; }
 
+        public double? AVG { get; set; }
         public double? OBA { get; set; }
         public double? SLG { get; set; }
         public int? AB { get; set; }

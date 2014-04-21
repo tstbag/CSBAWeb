@@ -50,6 +50,7 @@ namespace CSBA.DataAccessLayer
                                   PlayerGUID = result.PlayerGUID,
                                   PlayerImage = result.PlayerImage,
                                   PlayerName = result.PlayerName,
+                                  PrimPositionTypeID = result.PrimPositionTypeID,
                                   PrimPositionName = result.PrimPositionName,
                                   PrimPositionTypeDescr = result.PrimPositionTypeDescr,
                                   SecPositionName = result.SecPositionName,
@@ -61,7 +62,7 @@ namespace CSBA.DataAccessLayer
             return PickPlayer;
         }
 
-        public void  DraftPlayer(SeasonTeamPlayerDomainModel STP)
+        public void DraftPlayer(SeasonTeamPlayerDomainModel STP)
         {
             using (CSBAEntities context = new CSBAEntities())
             {

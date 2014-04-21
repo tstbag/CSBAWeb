@@ -46,7 +46,7 @@
 <asp:Table ID="Table1" runat="server">
     <asp:TableRow>
         <asp:TableCell>
-            <asp:Label ID="lblSeason" runat="server" Text="Season"></asp:Label>
+            <asp:Label ID="lblSeason" runat="server" CssClass="MediumLabels" Width="100px" Text="Season"></asp:Label>
         </asp:TableCell>
         <asp:TableCell>
             <telerik:RadDropDownList ID="rDDSeason"
@@ -59,29 +59,25 @@
 
     </asp:TableRow>
 </asp:Table>
-<%--    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-        <ContentTemplate>
-            <asp:Timer ID="Timer1" runat="server" Interval="1000" OnTick="Timer1_Tick">
-            </asp:Timer>
-            <asp:Label ID="Label1" runat="server"></asp:Label>
-        </ContentTemplate>--%>
-<%--</asp:UpdatePanel>--%>
-<asp:Panel ID="pnlDraftPlayer" runat="server" Height="465px" BorderWidth="2px">
+<asp:Panel ID="pnlDraftPlayer" runat="server" Height="470px" >
 
-    <div style="float: left; padding-left: 5px;">
+    <div style="float: left; padding-left: 5px;  width: 47%; height: 100%;">
         <asp:Table ID="tblTest" runat="server">
             <asp:TableRow>
-                <asp:TableCell Width="150px" ColumnSpan="2">
+                <asp:TableCell>
+                    <asp:Label ID="lblPlayerNameLit" runat="server" CssClass="MediumLabels" Text="Player Name"></asp:Label>
+                </asp:TableCell>
+                <asp:TableCell Width="150px">
                     <asp:HiddenField ID="hddPlayerGUID" runat="server" />
-                    <asp:Label ID="lblCurrPlayer" runat="server" Text="PlayerName"></asp:Label>
+                    <asp:Label ID="lblCurrPlayer" runat="server" Text="PlayerName" Width="300px" CssClass="LargerLabels"></asp:Label>
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableCell>
-                    <telerik:RadBinaryImage ID="imgPlayer" runat="server" AutoAdjustImageControlSize="false" Width="160px" Height="170px" AlternateText="Player Image" />
+                    <telerik:RadBinaryImage ID="imgPlayer" runat="server" AutoAdjustImageControlSize="false" Width="250px" Height="320px" AlternateText="Player Image" />
                 </asp:TableCell>
                 <asp:TableCell>
-                    <telerik:RadBinaryImage ID="imgPositon" runat="server" AutoAdjustImageControlSize="false" Width="160px" Height="170px" AlternateText="Position Image"/>
+                    <telerik:RadBinaryImage ID="imgPositon" runat="server" AutoAdjustImageControlSize="false" Width="250px" Height="230px" AlternateText="Position Image" />
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
@@ -95,20 +91,20 @@
 
             <asp:TableRow>
                 <asp:TableCell>
-                    <telerik:RadButton ID="rBTNAssign" runat="server" Text="Assign" OnClick="rBTNAssign_Click" ButtonType="SkinnedButton"></telerik:RadButton>
+                    <telerik:RadButton ID="rBTNAssign" runat="server" Width="75px" Text="Assign" CssClass="MediumLabels" OnClick="rBTNAssign_Click" ButtonType="SkinnedButton"></telerik:RadButton>
                 </asp:TableCell>
                 <asp:TableCell>
-                    <telerik:RadDropDownList ID="rDDSeasonTeam" OnItemDataBound="rDDSeasonTeam_ItemDataBound" DropDownHeight="100px" runat="server">
+                    <telerik:RadDropDownList ID="rDDSeasonTeam" OnItemDataBound="rDDSeasonTeam_ItemDataBound" CssClass="MediumLabels" DropDownHeight="100px" runat="server">
                     </telerik:RadDropDownList>
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableCell>
-                    <telerik:RadButton ID="rBTNPickPlayer" runat="server" Text="Pick Player" OnClick="rBTNPickPlayer_Click" ButtonType="SkinnedButton"></telerik:RadButton>
+                    <telerik:RadButton ID="rBTNPickPlayer" runat="server" Width="75px" CssClass="MediumLabels" Text="Pick Player" OnClick="rBTNPickPlayer_Click" ButtonType="SkinnedButton"></telerik:RadButton>
                 </asp:TableCell>
                 <asp:TableCell>
 
-                    <telerik:RadNumericTextBox ID="rNTBCurrBid" OnTextChanged="rNTBCurrBid_TextChanged" Width="60px" ShowSpinButtons="true" AutoPostBack="true" NumberFormat-DecimalDigits="0" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.MinBid") %>'>
+                    <telerik:RadNumericTextBox ID="rNTBCurrBid" OnTextChanged="rNTBCurrBid_TextChanged" CssClass="MediumLabels" Width="60px" ShowSpinButtons="true" AutoPostBack="true" NumberFormat-DecimalDigits="0" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.MinBid") %>'>
                     </telerik:RadNumericTextBox>
                 </asp:TableCell>
             </asp:TableRow>
@@ -122,7 +118,6 @@
             OnItemDataBound="rGridDraftPlayer_ItemDataBound"
             OnItemCommand="rGridDraftPlayer_ItemCommand"
             AutoGenerateColumns="False"
-            BorderWidth="4px"
             AllowFilteringByColumn="True"
             AllowSorting="True"
             Skin="<%$ appSettings:Telerik.Skin%>"
@@ -197,7 +192,24 @@
     </div>
 
 
-    <asp:Label ID="lblMessage" runat="server">
-
-    </asp:Label>
 </asp:Panel>
+<asp:Panel ID="Panel1" runat="server" Height="245px" >
+    <div style="float: left; padding-left: 0px;">
+        <telerik:RadGrid ID="rGridStats"
+            runat="server" CssClass="Lables"
+            AutoGenerateColumns="true"
+            AllowFilteringByColumn="False"
+            AllowSorting="False"
+            Skin="<%$ appSettings:Telerik.Skin%>"
+            CellSpacing="0"
+            GridLines="None"
+            AllowMultiRowEdit="True"
+            AllowMultiRowSelection="True">
+            <PagerStyle />
+        </telerik:RadGrid>
+    </div>
+</asp:Panel>
+
+<asp:Label ID="lblMessage" runat="server">
+
+</asp:Label>

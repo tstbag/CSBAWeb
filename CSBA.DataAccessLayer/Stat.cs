@@ -21,7 +21,6 @@ namespace CSBA.DataAccessLayer
     
         public int StatID { get; set; }
         public string StatName { get; set; }
-        public string StatFullName { get; set; }
         public Nullable<int> PositionTypeID { get; set; }
     
         public virtual PositionType PositionType { get; set; }

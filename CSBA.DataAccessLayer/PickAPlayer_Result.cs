@@ -16,6 +16,7 @@ namespace CSBA.DataAccessLayer
         public System.Guid PlayerGUID { get; set; }
         public string PlayerName { get; set; }
         public byte[] PlayerImage { get; set; }
+        public Nullable<int> PrimPositionTypeID { get; set; }
         public string PrimPositionName { get; set; }
         public string PrimPositionTypeDescr { get; set; }
         public string SecPositionName { get; set; }

@@ -85,6 +85,15 @@ namespace CSBANet.Common.WebControls {
         protected global::System.Web.UI.WebControls.Table tblTest;
         
         /// <summary>
+        /// lblPlayerNameLit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPlayerNameLit;
+        
+        /// <summary>
         /// hddPlayerGUID control.
         /// </summary>
         /// <remarks>
@@ -173,6 +182,24 @@ namespace CSBANet.Common.WebControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadGrid rGridDraftPlayer;
+        
+        /// <summary>
+        /// Panel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel1;
+        
+        /// <summary>
+        /// rGridStats control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadGrid rGridStats;
         
         /// <summary>
         /// lblMessage control.

@@ -64,6 +64,36 @@
       [v_SeasonView].[PlayersDrafted] AS [PlayersDrafted]
       FROM [dbo].[v_SeasonView] AS [v_SeasonView]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="v_Stat_Hitter_View" EntityType="CSBAModel.Store.v_Stat_Hitter_View" store:Type="Views" store:Schema="dbo" store:Name="v_Stat_Hitter_View">
+            <DefiningQuery>SELECT 
+      [v_Stat_Hitter_View].[SeasonName] AS [SeasonName], 
+      [v_Stat_Hitter_View].[PlayerName] AS [PlayerName], 
+      [v_Stat_Hitter_View].[PlayerGUID] AS [PlayerGUID], 
+      [v_Stat_Hitter_View].[Rangep1] AS [Rangep1], 
+      [v_Stat_Hitter_View].[FLDP1] AS [FLDP1], 
+      [v_Stat_Hitter_View].[RangeP2] AS [RangeP2], 
+      [v_Stat_Hitter_View].[FLDP2] AS [FLDP2], 
+      [v_Stat_Hitter_View].[Agility] AS [Agility], 
+      [v_Stat_Hitter_View].[RN] AS [RN], 
+      [v_Stat_Hitter_View].[AVG] AS [AVG], 
+      [v_Stat_Hitter_View].[OBA] AS [OBA], 
+      [v_Stat_Hitter_View].[SLG] AS [SLG], 
+      [v_Stat_Hitter_View].[AB] AS [AB], 
+      [v_Stat_Hitter_View].[Hits] AS [Hits], 
+      [v_Stat_Hitter_View].[Doubles] AS [Doubles], 
+      [v_Stat_Hitter_View].[Triples] AS [Triples], 
+      [v_Stat_Hitter_View].[HR] AS [HR], 
+      [v_Stat_Hitter_View].[Runs] AS [Runs], 
+      [v_Stat_Hitter_View].[RBI] AS [RBI], 
+      [v_Stat_Hitter_View].[HP] AS [HP], 
+      [v_Stat_Hitter_View].[BB] AS [BB], 
+      [v_Stat_Hitter_View].[Ks] AS [Ks], 
+      [v_Stat_Hitter_View].[SB] AS [SB], 
+      [v_Stat_Hitter_View].[CS] AS [CS], 
+      [v_Stat_Hitter_View].[TB] AS [TB], 
+      [v_Stat_Hitter_View].[EBH] AS [EBH]
+      FROM [dbo].[v_Stat_Hitter_View] AS [v_Stat_Hitter_View]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_PlayerPosition_Player" Association="CSBAModel.Store.FK_PlayerPosition_Player">
             <End Role="Player" EntitySet="Player" />
             <End Role="PlayerPosition" EntitySet="PlayerPosition" />
@@ -131,6 +161,10 @@
           <AssociationSet Name="FK_SeasonTeamStadium_Team" Association="CSBAModel.Store.FK_SeasonTeamStadium_Team">
             <End Role="Team" EntitySet="Team" />
             <End Role="SeasonTeamStadium" EntitySet="SeasonTeamStadium" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stat_PositionType" Association="CSBAModel.Store.FK_Stat_PositionType">
+            <End Role="PositionType" EntitySet="PositionType" />
+            <End Role="Stat" EntitySet="Stat" />
           </AssociationSet>
           <AssociationSet Name="FK_Team_aspnet_Users" Association="CSBAModel.Store.FK_Team_aspnet_Users">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
@@ -269,8 +303,7 @@
             <PropertyRef Name="StatID" />
           </Key>
           <Property Name="StatID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="StatName" Type="nchar" MaxLength="10" />
-          <Property Name="StatFullName" Type="nchar" MaxLength="25" />
+          <Property Name="StatName" Type="varchar" MaxLength="50" />
           <Property Name="PositionTypeID" Type="int" />
         </EntityType>
         <EntityType Name="Team">
@@ -340,6 +373,40 @@
           <Property Name="StartPoints" Type="int" Nullable="false" />
           <Property Name="MinBid" Type="int" />
           <Property Name="PlayersDrafted" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'CSBA.dbo.v_Stat_Hitter_View' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="v_Stat_Hitter_View">
+          <Key>
+            <PropertyRef Name="SeasonName" />
+          </Key>
+          <Property Name="SeasonName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="PlayerName" Type="varchar" MaxLength="50" />
+          <Property Name="PlayerGUID" Type="uniqueidentifier" />
+          <Property Name="Rangep1" Type="nvarchar" MaxLength="10" />
+          <Property Name="FLDP1" Type="nvarchar" MaxLength="10" />
+          <Property Name="RangeP2" Type="nvarchar" MaxLength="10" />
+          <Property Name="FLDP2" Type="nvarchar" MaxLength="10" />
+          <Property Name="Agility" Type="nvarchar" MaxLength="10" />
+          <Property Name="RN" Type="nvarchar" MaxLength="10" />
+          <Property Name="AVG" Type="nvarchar" MaxLength="10" />
+          <Property Name="OBA" Type="nvarchar" MaxLength="10" />
+          <Property Name="SLG" Type="nvarchar" MaxLength="10" />
+          <Property Name="AB" Type="nvarchar" MaxLength="10" />
+          <Property Name="Hits" Type="nvarchar" MaxLength="10" />
+          <Property Name="Doubles" Type="nvarchar" MaxLength="10" />
+          <Property Name="Triples" Type="nvarchar" MaxLength="10" />
+          <Property Name="HR" Type="nvarchar" MaxLength="10" />
+          <Property Name="Runs" Type="nvarchar" MaxLength="10" />
+          <Property Name="RBI" Type="nvarchar" MaxLength="10" />
+          <Property Name="HP" Type="nvarchar" MaxLength="10" />
+          <Property Name="BB" Type="nvarchar" MaxLength="10" />
+          <Property Name="Ks" Type="nvarchar" MaxLength="10" />
+          <Property Name="SB" Type="nvarchar" MaxLength="10" />
+          <Property Name="CS" Type="nvarchar" MaxLength="10" />
+          <Property Name="TB" Type="nvarchar" MaxLength="10" />
+          <Property Name="EBH" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <Association Name="FK_PlayerPosition_Player">
           <End Role="Player" Type="CSBAModel.Store.Player" Multiplicity="1" />
@@ -545,6 +612,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Stat_PositionType">
+          <End Role="PositionType" Type="CSBAModel.Store.PositionType" Multiplicity="0..1" />
+          <End Role="Stat" Type="CSBAModel.Store.Stat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PositionType">
+              <PropertyRef Name="PositionTypeID" />
+            </Principal>
+            <Dependent Role="Stat">
+              <PropertyRef Name="PositionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Team_aspnet_Users">
           <End Role="aspnet_Users" Type="CSBAModel.Store.aspnet_Users" Multiplicity="0..1" />
           <End Role="Team" Type="CSBAModel.Store.Team" Multiplicity="*" />
@@ -662,6 +741,17 @@
         <Function Name="sp_SeasonPlayerBySeason_Selected" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SeasonID" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_SeasonPlayerPositionStat_DeleteAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SeasonID" Type="int" Mode="In" />
+          <Parameter Name="PlayerGUID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="sp_SeasonPlayerPositionStat_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SeasonID" Type="int" Mode="In" />
+          <Parameter Name="PlayerGUID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="PositionID" Type="int" Mode="In" />
+          <Parameter Name="StatID" Type="int" Mode="In" />
+          <Parameter Name="StatValue" Type="nchar" Mode="In" />
+        </Function>
         <Function Name="sp_SeasonStadium_DeleteAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SeasonID" Type="int" Mode="In" />
         </Function>
@@ -685,13 +775,13 @@
         <Function Name="sp_SeasonTeam_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SeasonID" Type="int" Mode="In" />
           <Parameter Name="TeamID" Type="int" Mode="In" />
-          <Parameter Name="Active" Type="bit" Mode="In" />
+          <Parameter Name="ActiveFlg" Type="bit" Mode="In" />
           <Parameter Name="StadiumOrder" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_SeasonTeam_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SeasonID" Type="int" Mode="In" />
           <Parameter Name="TeamID" Type="int" Mode="In" />
-          <Parameter Name="Active" Type="bit" Mode="In" />
+          <Parameter Name="ActiveFlg" Type="bit" Mode="In" />
           <Parameter Name="StadiumOrder" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_SeasonTeamBySeason_Remaining" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -741,6 +831,13 @@
           <Parameter Name="SeasonID" Type="int" Mode="In" />
           <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
         </Function>
+        <Function Name="sp_Stat_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StatName" Type="varchar" Mode="In" />
+          <Parameter Name="PositionTypeID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Stat_Player_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PlayerGUID" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="sp_Team_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TeamID" Type="int" Mode="In" />
         </Function>
@@ -769,7 +866,6 @@
         <EntityContainer Name="CSBAEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Positions" EntityType="CSBAModel.Position" />
           <EntitySet Name="Seasons" EntityType="CSBAModel.Season" />
-          <EntitySet Name="Stats" EntityType="CSBAModel.Stat" />
           <FunctionImport Name="sp_Season_Delete">
           <Parameter Name="SeasonID" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -784,13 +880,13 @@
           <FunctionImport Name="sp_SeasonTeam_Insert">
             <Parameter Name="SeasonID" Mode="In" Type="Int32" />
             <Parameter Name="TeamID" Mode="In" Type="Int32" />
-            <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="ActiveFlg" Mode="In" Type="Boolean" />
             <Parameter Name="StadiumOrder" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SeasonTeam_Update">
             <Parameter Name="SeasonID" Mode="In" Type="Int32" />
             <Parameter Name="TeamID" Mode="In" Type="Int32" />
-            <Parameter Name="Active" Mode="In" Type="Boolean" />
+            <Parameter Name="ActiveFlg" Mode="In" Type="Boolean" />
             <Parameter Name="StadiumOrder" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="SeasonTeamStadiums" EntityType="CSBAModel.SeasonTeamStadium" />
@@ -802,10 +898,6 @@
           <AssociationSet Name="FK_Position_PositionType" Association="CSBAModel.FK_Position_PositionType">
             <End Role="PositionType" EntitySet="PositionTypes" />
             <End Role="Position" EntitySet="Positions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Stat_PositionType" Association="CSBAModel.FK_Stat_PositionType">
-            <End Role="PositionType" EntitySet="PositionTypes" />
-            <End Role="Stat" EntitySet="Stats" />
           </AssociationSet>
           <FunctionImport Name="sp_PositionType_Delete">
           <Parameter Name="PositionTypeID" Mode="In" Type="Int32" />
@@ -857,10 +949,6 @@
           <AssociationSet Name="FK_SeasonTeam_Season" Association="CSBAModel.FK_SeasonTeam_Season">
             <End Role="Season" EntitySet="Seasons" />
             <End Role="SeasonTeam" EntitySet="SeasonTeams" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SeasonPlayerPositionStat_Stat" Association="CSBAModel.FK_SeasonPlayerPositionStat_Stat">
-            <End Role="Stat" EntitySet="Stats" />
-            <End Role="SeasonPlayerPositionStat" EntitySet="SeasonPlayerPositionStats" />
           </AssociationSet>
           <EntitySet Name="Players" EntityType="CSBAModel.Player" />
           <AssociationSet Name="FK_SeasonPlayerPositionStat_Player" Association="CSBAModel.FK_SeasonPlayerPositionStat_Player">
@@ -1020,9 +1108,6 @@
           <FunctionImport Name="sp_SeasonTeamDraft_Select" ReturnType="Collection(CSBAModel.sp_SeasonTeamDraft_Select_Result)">
           <Parameter Name="SeasonID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="PickAPlayer" ReturnType="Collection(CSBAModel.PickAPlayer_Result)">
-          <Parameter Name="SeasonID" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="GetSeasonTeamOrder" ReturnType="Collection(CSBAModel.GetSeasonTeamOrder_Result)">
           <Parameter Name="SeasonID" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1056,6 +1141,37 @@
             <Parameter Name="PlayerGUID" Mode="In" Type="Guid" />
             <Parameter Name="Points" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Stats" EntityType="CSBAModel.Stat" />
+          <AssociationSet Name="FK_Stat_PositionType" Association="CSBAModel.FK_Stat_PositionType">
+            <End Role="PositionType" EntitySet="PositionTypes" />
+            <End Role="Stat" EntitySet="Stats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SeasonPlayerPositionStat_Stat" Association="CSBAModel.FK_SeasonPlayerPositionStat_Stat">
+            <End Role="Stat" EntitySet="Stats" />
+            <End Role="SeasonPlayerPositionStat" EntitySet="SeasonPlayerPositionStats" />
+          </AssociationSet>
+          <FunctionImport Name="sp_Stat_Insert" ReturnType="Collection(Int32)">
+            <Parameter Name="StatName" Mode="In" Type="String" />
+            <Parameter Name="PositionTypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_SeasonPlayerPositionStat_Insert">
+            <Parameter Name="SeasonID" Mode="In" Type="Int32" />
+            <Parameter Name="PlayerGUID" Mode="In" Type="Guid" />
+            <Parameter Name="PositionID" Mode="In" Type="Int32" />
+            <Parameter Name="StatID" Mode="In" Type="Int32" />
+            <Parameter Name="StatValue" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_SeasonPlayerPositionStat_DeleteAll">
+            <Parameter Name="SeasonID" Mode="In" Type="Int32" />
+            <Parameter Name="PlayerGUID" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Stat_Player_Select">
+          <Parameter Name="PlayerGUID" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <EntitySet Name="v_Stat_Hitter_View" EntityType="CSBAModel.v_Stat_Hitter_View" />
+          <FunctionImport Name="PickAPlayer" ReturnType="Collection(CSBAModel.PickAPlayer_Result)">
+            <Parameter Name="SeasonID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Position">
           <Key>
@@ -1083,17 +1199,6 @@
           <NavigationProperty Name="Players" Relationship="CSBAModel.SeasonPlayer" FromRole="Season" ToRole="Player" />
           <NavigationProperty Name="Stadia" Relationship="CSBAModel.SeasonStadium" FromRole="Season" ToRole="Stadium" />
           <NavigationProperty Name="SeasonTeamPlayers" Relationship="CSBAModel.FK_SeasonTeamPlayer_Season" FromRole="Season" ToRole="SeasonTeamPlayer" />
-        </EntityType>
-        <EntityType Name="Stat">
-          <Key>
-            <PropertyRef Name="StatID" />
-          </Key>
-          <Property Name="StatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StatName" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
-          <Property Name="StatFullName" Type="String" MaxLength="25" Unicode="true" FixedLength="true" />
-          <Property Name="PositionTypeID" Type="Int32" />
-          <NavigationProperty Name="PositionType" Relationship="CSBAModel.FK_Stat_PositionType" FromRole="Stat" ToRole="PositionType" />
-          <NavigationProperty Name="SeasonPlayerPositionStats" Relationship="CSBAModel.FK_SeasonPlayerPositionStat_Stat" FromRole="Stat" ToRole="SeasonPlayerPositionStat" />
         </EntityType>
         <ComplexType Name="sp_Season_Select_Result">
           <Property Type="Int32" Name="SeasonID" Nullable="false" />
@@ -1163,18 +1268,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Stat_PositionType">
-          <End Type="CSBAModel.PositionType" Role="PositionType" Multiplicity="0..1" />
-          <End Type="CSBAModel.Stat" Role="Stat" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PositionType">
-              <PropertyRef Name="PositionTypeID" />
-            </Principal>
-            <Dependent Role="Stat">
-              <PropertyRef Name="PositionTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="v_SeasonTeam">
           <Key>
             <PropertyRef Name="SeasonID" />
@@ -1204,8 +1297,8 @@
           <Property Type="Int32" Name="PositionID" Nullable="false" />
           <Property Type="Int32" Name="StatID" Nullable="false" />
           <Property Type="String" Name="StatValue" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Stat" Relationship="CSBAModel.FK_SeasonPlayerPositionStat_Stat" FromRole="SeasonPlayerPositionStat" ToRole="Stat" />
           <NavigationProperty Name="Player" Relationship="CSBAModel.FK_SeasonPlayerPositionStat_Player" FromRole="SeasonPlayerPositionStat" ToRole="Player" />
+          <NavigationProperty Name="Stat" Relationship="CSBAModel.FK_SeasonPlayerPositionStat_Stat" FromRole="SeasonPlayerPositionStat" ToRole="Stat" />
         </EntityType>
         <EntityType Name="SeasonTeam">
           <Key>
@@ -1228,18 +1321,6 @@
             </Principal>
             <Dependent Role="SeasonTeam">
               <PropertyRef Name="SeasonID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SeasonPlayerPositionStat_Stat">
-          <End Type="CSBAModel.Stat" Role="Stat" Multiplicity="1" />
-          <End Type="CSBAModel.SeasonPlayerPositionStat" Role="SeasonPlayerPositionStat" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Stat">
-              <PropertyRef Name="StatID" />
-            </Principal>
-            <Dependent Role="SeasonPlayerPositionStat">
-              <PropertyRef Name="StatID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1500,15 +1581,6 @@
           <Property Type="Int32" Name="CountHitter" Nullable="false" />
           <Property Type="Int32" Name="PitcherCount" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="PickAPlayer_Result">
-          <Property Type="Guid" Name="PlayerGUID" Nullable="false" />
-          <Property Type="String" Name="PlayerName" Nullable="true" MaxLength="50" />
-          <Property Type="Binary" Name="PlayerImage" Nullable="true" MaxLength="Max" />
-          <Property Type="String" Name="PrimPositionName" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="PrimPositionTypeDescr" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="SecPositionName" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="SecPositionTypeDescr" Nullable="true" MaxLength="10" />
-        </ComplexType>
         <ComplexType Name="GetSeasonTeamOrder_Result">
           <Property Type="Int32" Name="SeasonID" Nullable="false" />
           <Property Type="String" Name="SeasonName" Nullable="false" MaxLength="50" />
@@ -1568,6 +1640,81 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Stat">
+          <Key>
+            <PropertyRef Name="StatID" />
+          </Key>
+          <Property Type="Int32" Name="StatID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="StatName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="PositionTypeID" />
+          <NavigationProperty Name="PositionType" Relationship="CSBAModel.FK_Stat_PositionType" FromRole="Stat" ToRole="PositionType" />
+          <NavigationProperty Name="SeasonPlayerPositionStats" Relationship="CSBAModel.FK_SeasonPlayerPositionStat_Stat" FromRole="Stat" ToRole="SeasonPlayerPositionStat" />
+        </EntityType>
+        <Association Name="FK_Stat_PositionType">
+          <End Type="CSBAModel.PositionType" Role="PositionType" Multiplicity="0..1" />
+          <End Type="CSBAModel.Stat" Role="Stat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PositionType">
+              <PropertyRef Name="PositionTypeID" />
+            </Principal>
+            <Dependent Role="Stat">
+              <PropertyRef Name="PositionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SeasonPlayerPositionStat_Stat">
+          <End Type="CSBAModel.Stat" Role="Stat" Multiplicity="1" />
+          <End Type="CSBAModel.SeasonPlayerPositionStat" Role="SeasonPlayerPositionStat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stat">
+              <PropertyRef Name="StatID" />
+            </Principal>
+            <Dependent Role="SeasonPlayerPositionStat">
+              <PropertyRef Name="StatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="v_Stat_Hitter_View">
+          <Key>
+            <PropertyRef Name="SeasonName" />
+          </Key>
+          <Property Type="String" Name="SeasonName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PlayerName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Guid" Name="PlayerGUID" />
+          <Property Type="String" Name="Rangep1" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FLDP1" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RangeP2" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FLDP2" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Agility" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RN" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AVG" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="OBA" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SLG" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="AB" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Hits" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Doubles" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Triples" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="HR" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Runs" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="RBI" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="HP" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="BB" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Ks" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SB" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CS" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TB" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EBH" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="PickAPlayer_Result">
+          <Property Type="Guid" Name="PlayerGUID" Nullable="false" />
+          <Property Type="String" Name="PlayerName" Nullable="true" MaxLength="50" />
+          <Property Type="Binary" Name="PlayerImage" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="PrimPositionTypeID" Nullable="true" />
+          <Property Type="String" Name="PrimPositionName" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="PrimPositionTypeDescr" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="SecPositionName" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="SecPositionTypeDescr" Nullable="true" MaxLength="10" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1637,16 +1784,6 @@
                   <ScalarProperty Name="SeasonID" ParameterName="SeasonID" Version="Current" />
                 </UpdateFunction>
               </ModificationFunctionMapping>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Stats">
-            <EntityTypeMapping TypeName="CSBAModel.Stat">
-              <MappingFragment StoreEntitySet="Stat">
-                <ScalarProperty Name="StatID" ColumnName="StatID" />
-                <ScalarProperty Name="StatName" ColumnName="StatName" />
-                <ScalarProperty Name="StatFullName" ColumnName="StatFullName" />
-                <ScalarProperty Name="PositionTypeID" ColumnName="PositionTypeID" />
-              </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_Season_Delete" FunctionName="CSBAModel.Store.sp_Season_Delete" />
@@ -1741,6 +1878,17 @@
                 <ScalarProperty Name="PlayerGUID" ColumnName="PlayerGUID" />
                 <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
               </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="CSBAModel.SeasonPlayerPositionStat">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="CSBAModel.Store.sp_SeasonPlayerPositionStat_Insert">
+                  <ScalarProperty Name="StatValue" ParameterName="StatValue" />
+                  <ScalarProperty Name="StatID" ParameterName="StatID" />
+                  <ScalarProperty Name="PositionID" ParameterName="PositionID" />
+                  <ScalarProperty Name="PlayerGUID" ParameterName="PlayerGUID" />
+                  <ScalarProperty Name="SeasonID" ParameterName="SeasonID" />
+                </InsertFunction>
+              </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="SeasonTeams">
@@ -2068,19 +2216,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="PickAPlayer" FunctionName="CSBAModel.Store.PickAPlayer">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CSBAModel.PickAPlayer_Result">
-                <ScalarProperty Name="PlayerGUID" ColumnName="PlayerGUID" />
-                <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
-                <ScalarProperty Name="PlayerImage" ColumnName="PlayerImage" />
-                <ScalarProperty Name="PrimPositionName" ColumnName="PrimPositionName" />
-                <ScalarProperty Name="PrimPositionTypeDescr" ColumnName="PrimPositionTypeDescr" />
-                <ScalarProperty Name="SecPositionName" ColumnName="SecPositionName" />
-                <ScalarProperty Name="SecPositionTypeDescr" ColumnName="SecPositionTypeDescr" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetSeasonTeamOrder" FunctionName="CSBAModel.Store.GetSeasonTeamOrder">
             <ResultMapping>
               <ComplexTypeMapping TypeName="CSBAModel.GetSeasonTeamOrder_Result">
@@ -2128,6 +2263,74 @@
           <FunctionImportMapping FunctionImportName="sp_SeasonTeamPlayer_Delete" FunctionName="CSBAModel.Store.sp_SeasonTeamPlayer_Delete" />
           <FunctionImportMapping FunctionImportName="sp_SeasonTeamPlayer_Insert" FunctionName="CSBAModel.Store.sp_SeasonTeamPlayer_Insert" />
           <FunctionImportMapping FunctionImportName="sp_SeasonTeamPlayer_Update" FunctionName="CSBAModel.Store.sp_SeasonTeamPlayer_Update" />
+          <EntitySetMapping Name="Stats">
+            <EntityTypeMapping TypeName="CSBAModel.Stat">
+              <MappingFragment StoreEntitySet="Stat">
+                <ScalarProperty Name="PositionTypeID" ColumnName="PositionTypeID" />
+                <ScalarProperty Name="StatName" ColumnName="StatName" />
+                <ScalarProperty Name="StatID" ColumnName="StatID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="CSBAModel.Stat">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="CSBAModel.Store.sp_Stat_Insert">
+                  <ScalarProperty Name="PositionTypeID" ParameterName="PositionTypeID" />
+                  <ScalarProperty Name="StatName" ParameterName="StatName" />
+                  <ResultBinding Name="StatID" ColumnName="StatID" />
+                </InsertFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_Stat_Insert" FunctionName="CSBAModel.Store.sp_Stat_Insert" />
+          <FunctionImportMapping FunctionImportName="sp_SeasonPlayerPositionStat_Insert" FunctionName="CSBAModel.Store.sp_SeasonPlayerPositionStat_Insert" />
+          <FunctionImportMapping FunctionImportName="sp_SeasonPlayerPositionStat_DeleteAll" FunctionName="CSBAModel.Store.sp_SeasonPlayerPositionStat_DeleteAll" />
+          <FunctionImportMapping FunctionImportName="sp_Stat_Player_Select" FunctionName="CSBAModel.Store.sp_Stat_Player_Select" />
+          <EntitySetMapping Name="v_Stat_Hitter_View">
+            <EntityTypeMapping TypeName="CSBAModel.v_Stat_Hitter_View">
+              <MappingFragment StoreEntitySet="v_Stat_Hitter_View">
+                <ScalarProperty Name="EBH" ColumnName="EBH" />
+                <ScalarProperty Name="TB" ColumnName="TB" />
+                <ScalarProperty Name="CS" ColumnName="CS" />
+                <ScalarProperty Name="SB" ColumnName="SB" />
+                <ScalarProperty Name="Ks" ColumnName="Ks" />
+                <ScalarProperty Name="BB" ColumnName="BB" />
+                <ScalarProperty Name="HP" ColumnName="HP" />
+                <ScalarProperty Name="RBI" ColumnName="RBI" />
+                <ScalarProperty Name="Runs" ColumnName="Runs" />
+                <ScalarProperty Name="HR" ColumnName="HR" />
+                <ScalarProperty Name="Triples" ColumnName="Triples" />
+                <ScalarProperty Name="Doubles" ColumnName="Doubles" />
+                <ScalarProperty Name="Hits" ColumnName="Hits" />
+                <ScalarProperty Name="AB" ColumnName="AB" />
+                <ScalarProperty Name="SLG" ColumnName="SLG" />
+                <ScalarProperty Name="OBA" ColumnName="OBA" />
+                <ScalarProperty Name="AVG" ColumnName="AVG" />
+                <ScalarProperty Name="RN" ColumnName="RN" />
+                <ScalarProperty Name="Agility" ColumnName="Agility" />
+                <ScalarProperty Name="FLDP2" ColumnName="FLDP2" />
+                <ScalarProperty Name="RangeP2" ColumnName="RangeP2" />
+                <ScalarProperty Name="FLDP1" ColumnName="FLDP1" />
+                <ScalarProperty Name="Rangep1" ColumnName="Rangep1" />
+                <ScalarProperty Name="PlayerGUID" ColumnName="PlayerGUID" />
+                <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+                <ScalarProperty Name="SeasonName" ColumnName="SeasonName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="PickAPlayer" FunctionName="CSBAModel.Store.PickAPlayer">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CSBAModel.PickAPlayer_Result">
+                <ScalarProperty Name="PlayerGUID" ColumnName="PlayerGUID" />
+                <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+                <ScalarProperty Name="PlayerImage" ColumnName="PlayerImage" />
+                <ScalarProperty Name="PrimPositionTypeID" ColumnName="PrimPositionTypeID" />
+                <ScalarProperty Name="PrimPositionName" ColumnName="PrimPositionName" />
+                <ScalarProperty Name="PrimPositionTypeDescr" ColumnName="PrimPositionTypeDescr" />
+                <ScalarProperty Name="SecPositionName" ColumnName="SecPositionName" />
+                <ScalarProperty Name="SecPositionTypeDescr" ColumnName="SecPositionTypeDescr" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

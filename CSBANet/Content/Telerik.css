@@ -2,8 +2,21 @@
     cursor: auto;
 }
 
+.MediumLabels {
+    font-size: medium;
+    font-weight: bold;
+    font-family: Helvetica;
+}
+
+.LargerLabels {
+    font-size: xx-large;
+    font-weight: bold;
+    font-family: Helvetica;
+    text-align: center;
+}
+
 .Labels {
-    font-size:larger;
+    font-size:xx-large;
     font-weight:bold;
     font-family: Helvetica;
 
@@ -389,7 +402,7 @@ th {
 td {
     padding: 0.25em 0.25em 0.25em 0em;
     border: 0 none;
-    font-size: medium;
+    font-size: small;
     font-family: Verdana, Helvetica, Sans-Serif;
 }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.IO;
@@ -21,8 +22,13 @@ namespace CSBANet.Common.WebControls
     {
         SeasonBusinessLogic SeasonBLL = new SeasonBusinessLogic();
         SeasonTeamBusinessLogic SeasonTeamBLL = new SeasonTeamBusinessLogic();
-
         DraftPlayerBusinessLogicLayer DraftPlayerBLL = new DraftPlayerBusinessLogicLayer();
+
+        PlayerDomainModel PagePlayer = new PlayerDomainModel();
+
+        SeasonPlayerPositionStatBusinessLogic sppsBLL = new SeasonPlayerPositionStatBusinessLogic();
+
+        PickAPlayerDomainModel PlayerDrafted = new PickAPlayerDomainModel();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -117,6 +123,50 @@ namespace CSBANet.Common.WebControls
             }
         }
 
+        protected void rGridStats_NeedDataSource(object sender, Telerik.Web.UI.GridNeedDataSourceEventArgs e)
+        {
+            try
+            {
+                //PlayerDrafted.PlayerGUID = PagePlayer.PlayerGUID;
+                DataTable dt = sppsBLL.GetDynamicStats(PlayerDrafted);
+                rGridStats.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                StackTrace st = new StackTrace();
+                StackFrame sf = st.GetFrame(0);
+                string errMethod = sf.GetMethod().Name.ToString();  // Get the current method name
+                string errMsg = "600";                              // Gotta pass something, we're retro-fitting an existing method
+                Session["LastException"] = ex;                      // Throw the exception in the session variable, will be used in error page
+                string url = string.Format(ConfigurationManager.AppSettings["ErrorPageURL"], errMethod, errMsg); //Set the URL
+                Response.Redirect(url);                             // Go to the error page.
+            }
+
+        }
+
+        public void BindStatsGrid(PickAPlayerDomainModel PickPlayer)
+        {
+            try
+            {
+                //PickPlayer.PlayerGUID = PagePlayer.PlayerGUID;
+                DataTable dt = sppsBLL.GetDynamicStats(PickPlayer);
+                rGridStats.DataSource = dt;
+                rGridStats.DataBind();
+
+                //rGridStats.Rebind();
+            }
+            catch (Exception ex)
+            {
+                StackTrace st = new StackTrace();
+                StackFrame sf = st.GetFrame(0);
+                string errMethod = sf.GetMethod().Name.ToString();  // Get the current method name
+                string errMsg = "600";                              // Gotta pass something, we're retro-fitting an existing method
+                Session["LastException"] = ex;                      // Throw the exception in the session variable, will be used in error page
+                string url = string.Format(ConfigurationManager.AppSettings["ErrorPageURL"], errMethod, errMsg); //Set the URL
+                Response.Redirect(url);                             // Go to the error page.
+            }
+        }
+
         protected void GetGridDataSource()
         {
             try
@@ -180,7 +230,7 @@ namespace CSBANet.Common.WebControls
             try
             {
                 PickAPlayerDomainModel PickPlayer = new PickAPlayerDomainModel();
-                var PlayerDrafted = DraftPlayerBLL.PickAPLayer(Convert.ToInt32(rDDSeason.SelectedValue));
+                PlayerDrafted = DraftPlayerBLL.PickAPLayer(Convert.ToInt32(rDDSeason.SelectedValue));
 
                 if (PlayerDrafted != null)
                 {
@@ -189,7 +239,11 @@ namespace CSBANet.Common.WebControls
                     imgPositon.ImageUrl = "~/Content/images/" + PlayerDrafted.PrimPositionName.Trim() + ".jpg" ;
 
                     lblCurrPlayer.Text = PlayerDrafted.PlayerName;
+
+                    BindStatsGrid(PlayerDrafted);
                     LoadrDDSeasonTeam();
+
+                    rNTBCurrBid.Value = 2;
                 }
                 else
                 {
@@ -228,8 +282,9 @@ namespace CSBANet.Common.WebControls
             DraftPlayerBLL.DraftPlayer(STP);
 
             RepaintScreen();
-
+            
         }
+
 
 
     }

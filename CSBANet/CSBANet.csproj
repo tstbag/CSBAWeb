@@ -109,6 +109,7 @@
     <Content Include="Common\WebControls\ucDraftPlayer.ascx" />
     <Content Include="Common\WebControls\ucDraftStadium.ascx" />
     <Content Include="Common\WebControls\ucPlayerGrid.ascx" />
+    <Content Include="Common\WebControls\ucPlayerStats.ascx" />
     <Content Include="Common\WebControls\ucSeasonPlayer.ascx" />
     <Content Include="Common\WebControls\ucSeasonStadium.ascx" />
     <Content Include="Common\WebControls\ucSeasonTeamOrder.ascx" />
@@ -169,6 +170,13 @@
     </Compile>
     <Compile Include="Common\WebControls\ucPlayerGrid.ascx.designer.cs">
       <DependentUpon>ucPlayerGrid.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\WebControls\ucPlayerStats.ascx.cs">
+      <DependentUpon>ucPlayerStats.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\WebControls\ucPlayerStats.ascx.designer.cs">
+      <DependentUpon>ucPlayerStats.ascx</DependentUpon>
     </Compile>
     <Compile Include="Common\WebControls\ucSeason.ascx.cs">
       <DependentUpon>ucSeason.ascx</DependentUpon>
@@ -363,7 +371,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

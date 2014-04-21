@@ -87,6 +87,7 @@
     <Compile Include="DAL\PositionTypeDAL.cs" />
     <Compile Include="DAL\SeasonDAL.cs" />
     <Compile Include="DAL\SeasonPlayerDAL.cs" />
+    <Compile Include="DAL\SeasonPlayerPositionStatDAL.cs" />
     <Compile Include="DAL\SeasonStadiumDAL.cs" />
     <Compile Include="DAL\SeasonTeamDAL.cs" />
     <Compile Include="DAL\SeasonTeamPlayerPositionDAL.cs" />
@@ -183,6 +184,9 @@
       <DependentUpon>CSBA.tt</DependentUpon>
     </Compile>
     <Compile Include="v_SeasonView.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="v_Stat_Hitter_View.cs">
       <DependentUpon>CSBA.tt</DependentUpon>
     </Compile>
   </ItemGroup>

@@ -10,9 +10,7 @@ namespace CSBA.DomainModels
         #region Automatic Properties
         public int StatID { get; set; }
         public string StatName { get; set; }
-        public string StatFullName { get; set; }
-        public int? PositionTypeID { get; set; }
-        public string PositionType { get; set; }
+        public Nullable<int> PositionTypeID { get; set; }
         #endregion
     }
 }

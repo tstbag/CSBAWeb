@@ -149,7 +149,7 @@
                                     <asp:TableCell Width="100%">
                                         <telerik:RadAsyncUpload ID="AsyncUpload1" runat="server"
                                             OnClientFilesUploaded="OnClientFilesUploaded" OnFileUploaded="AsyncUpload1_FileUploaded"
-                                            MaxFileSize="2097152" AllowedFileExtensions="jpg,png,gif,bmp"
+                                            MaxFileSize="102097152" AllowedFileExtensions="jpg,png,gif,bmp"
                                             AutoAddFileInputs="false" Localization-Select="Upload" />
                                         <asp:Label ID="Label1" Text="*Size limit: 2MB" runat="server" Style="font-size: 10px;"></asp:Label>
 

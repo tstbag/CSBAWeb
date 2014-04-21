@@ -20,7 +20,7 @@ namespace CSBA.DataAccessLayer
         public int StatID { get; set; }
         public string StatValue { get; set; }
     
-        public virtual Stat Stat { get; set; }
         public virtual Player Player { get; set; }
+        public virtual Stat Stat { get; set; }
     }
 }

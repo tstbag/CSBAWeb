@@ -65,6 +65,7 @@
     <Compile Include="BLL\PositionTypeBusinessLogic.cs" />
     <Compile Include="BLL\SeasonBusinessLogic.cs" />
     <Compile Include="BLL\SeasonPlayerBusinessLogic.cs" />
+    <Compile Include="BLL\SeasonPlayerPositionStatBusinessLogic.cs" />
     <Compile Include="BLL\SeasonStadiumBusinessLogic.cs" />
     <Compile Include="BLL\SeasonTeamBusinessLogic.cs" />
     <Compile Include="BLL\SeasonTeamStadiumBusinessLogic.cs" />

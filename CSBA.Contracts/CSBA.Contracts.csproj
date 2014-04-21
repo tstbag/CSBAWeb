@@ -54,6 +54,7 @@
     <Compile Include="CN\Player_IDALBLL.cs" />
     <Compile Include="CN\PositionType_IDALBLL.cs" />
     <Compile Include="CN\Position_IDALBLL.cs" />
+    <Compile Include="CN\SeasonPlayerPositionStat_IDALBLL.cs" />
     <Compile Include="CN\SeasonPlayer_IDALBLL.cs" />
     <Compile Include="CN\SeasonStadium_IDALBLL.cs" />
     <Compile Include="CN\SeasonTeamStadium_IDALBLL.cs" />

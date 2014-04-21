@@ -7,18 +7,15 @@
       <Diagram DiagramId="8682376062234f3880b8f0b9321e9ba6" Name="Diagram1" ZoomLevel="106">
         <EntityTypeShape EntityType="CSBAModel.Position" Width="2.125" PointX="5.875" PointY="4.25" IsExpanded="true" FillColor="0, 192, 0" />
         <EntityTypeShape EntityType="CSBAModel.Season" Width="1.5" PointX="1.25" PointY="17.125" IsExpanded="true" FillColor="0, 192, 0" />
-        <EntityTypeShape EntityType="CSBAModel.Stat" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="CSBAModel.v_SeasonView" Width="1.5" PointX="22.375" PointY="1.5" />
         <EntityTypeShape EntityType="CSBAModel.SeasonTeamStadium" Width="3" PointX="11.375" PointY="15.125" />
         <AssociationConnector Association="CSBAModel.FK_SeasonTeamStadium_Season" />
         <EntityTypeShape EntityType="CSBAModel.PositionType" Width="1.5" PointX="3" PointY="6.5" FillColor="0, 192, 0" />
         <AssociationConnector Association="CSBAModel.FK_Position_PositionType" />
-        <AssociationConnector Association="CSBAModel.FK_Stat_PositionType" />
         <EntityTypeShape EntityType="CSBAModel.v_SeasonTeam" Width="1.5" PointX="17.875" PointY="22" />
-        <EntityTypeShape EntityType="CSBAModel.SeasonPlayerPositionStat" Width="1.5" PointX="14.5" PointY="23.125" />
+        <EntityTypeShape EntityType="CSBAModel.SeasonPlayerPositionStat" Width="2.75" PointX="12.75" PointY="20.75" FillColor="0, 192, 0" />
         <EntityTypeShape EntityType="CSBAModel.SeasonTeam" Width="1.5" PointX="10.267898959232447" PointY="9.837717984727453" />
         <AssociationConnector Association="CSBAModel.FK_SeasonTeam_Season" />
-        <AssociationConnector Association="CSBAModel.FK_SeasonPlayerPositionStat_Stat" />
         <EntityTypeShape EntityType="CSBAModel.Player" Width="1.5" PointX="5.75" PointY="8" FillColor="0, 192, 0" />
         <AssociationConnector Association="CSBAModel.FK_SeasonPlayerPositionStat_Player" />
         <EntityTypeShape EntityType="CSBAModel.v_SeasonTeamPlayerPosition" Width="1.5" PointX="16.375" PointY="27.5" />
@@ -38,6 +35,10 @@
         <AssociationConnector Association="CSBAModel.FK_SeasonTeamPlayer_Player" />
         <AssociationConnector Association="CSBAModel.FK_SeasonTeamPlayer_Season" />
         <AssociationConnector Association="CSBAModel.FK_SeasonTeamPlayer_Team" />
+        <EntityTypeShape EntityType="CSBAModel.Stat" Width="1.5" PointX="0.5" PointY="22.75" FillColor="0, 192, 0" />
+        <AssociationConnector Association="CSBAModel.FK_Stat_PositionType" />
+        <AssociationConnector Association="CSBAModel.FK_SeasonPlayerPositionStat_Stat" />
+        <EntityTypeShape EntityType="CSBAModel.v_Stat_Hitter_View" Width="1.5" PointX="3.9428645092727916" PointY="20.689767996170449" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

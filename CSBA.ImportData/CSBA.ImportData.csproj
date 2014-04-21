@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="cImportData.cs" />
     <Compile Include="clsHitter.cs" />
+    <Compile Include="clsPitcher.cs" />
     <Compile Include="HelperMethods\hExcel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

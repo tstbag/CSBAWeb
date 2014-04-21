@@ -8,9 +8,5 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
-
-
-    <uc1:ucDraftPlayer runat="server" id="ucDraftPlayer" />
-
-
+    <uc1:ucDraftPlayer runat="server" ID="ucDraftPlayer" />
 </asp:Content>
