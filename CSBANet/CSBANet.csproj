@@ -120,6 +120,7 @@
     <Content Include="Content\images\3B.jpg" />
     <Content Include="Content\images\C.jpg" />
     <Content Include="Content\images\CF.jpg" />
+    <Content Include="Content\images\CL.jpg" />
     <Content Include="Content\images\LF.jpg" />
     <Content Include="Content\images\P.jpg" />
     <Content Include="Content\images\RF.jpg" />
@@ -371,7 +372,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
