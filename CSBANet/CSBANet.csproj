@@ -124,6 +124,7 @@
     <Content Include="Content\images\LF.jpg" />
     <Content Include="Content\images\P.jpg" />
     <Content Include="Content\images\RF.jpg" />
+    <Content Include="Content\images\SP.jpg" />
     <Content Include="Content\images\SS.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Telerik.css" />
