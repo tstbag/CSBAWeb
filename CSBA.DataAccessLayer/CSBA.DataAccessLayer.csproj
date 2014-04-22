@@ -165,6 +165,9 @@
     <Compile Include="sp_StadiumDraft_Select_Result.cs">
       <DependentUpon>CSBA.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_Team_Roster_Select_Result.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_Team_Select_Result.cs">
       <DependentUpon>CSBA.tt</DependentUpon>
     </Compile>
@@ -187,6 +190,9 @@
       <DependentUpon>CSBA.tt</DependentUpon>
     </Compile>
     <Compile Include="v_Stat_Hitter_View.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="v_Team_Draft_Roster.cs">
       <DependentUpon>CSBA.tt</DependentUpon>
     </Compile>
   </ItemGroup>

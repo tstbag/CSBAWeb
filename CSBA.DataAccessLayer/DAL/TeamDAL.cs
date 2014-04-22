@@ -58,6 +58,37 @@ namespace CSBA.DataAccessLayer
 
         }
 
+
+        public List<v_Team_Draft_RosterDomainModel> ListTeamRoster(int SeasonID, int TeamID)
+        {
+            //Create a return type Object
+            List<v_Team_Draft_RosterDomainModel> list = new List<v_Team_Draft_RosterDomainModel>();
+
+            //Create a Context object to Connect to the database
+            using (CSBAEntities context = new CSBAEntities())
+            {
+                list = (from result in context.sp_Team_Roster_Select(SeasonID, TeamID)
+                        select new  v_Team_Draft_RosterDomainModel
+                        {
+                            ActiveFlg = result.ActiveFlg,
+                            PlayerImage = result.PlayerImage,
+                            PlayerName = result.PlayerName,
+                            Points = result.Points,
+                            PrimPos = result.PrimPos,
+                            SeasonID = result.SeasonID,
+                            SeasonName = result.SeasonName,
+                            SecPos = result.SecPos,
+                            TeamID = result.TeamID,
+                            TeamName = result.TeamName
+
+                        }).ToList();
+
+            } // Guaranteed to close the Connection
+
+            //return the list
+            return list;
+        }
+
         #endregion
 
         #region Update

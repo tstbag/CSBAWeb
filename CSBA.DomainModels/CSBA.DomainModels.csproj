@@ -69,6 +69,7 @@
     <Compile Include="DM\TeamDomainModel.cs" />
     <Compile Include="DM\v_PlayerPositionDomainModel.cs" />
     <Compile Include="DM\v_Stat_Hitter_ViewDomainModel.cs" />
+    <Compile Include="DM\v_Team_Draft_RosterDomainModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

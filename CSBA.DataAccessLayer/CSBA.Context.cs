@@ -45,6 +45,7 @@ namespace CSBA.DataAccessLayer
         public DbSet<SeasonTeamPlayer> SeasonTeamPlayers { get; set; }
         public DbSet<Stat> Stats { get; set; }
         public DbSet<v_Stat_Hitter_View> v_Stat_Hitter_View { get; set; }
+        public DbSet<v_Team_Draft_Roster> v_Team_Draft_Roster { get; set; }
     
         public virtual int sp_Season_Delete(Nullable<int> seasonID)
         {
@@ -778,6 +779,19 @@ namespace CSBA.DataAccessLayer
                 new ObjectParameter("SeasonID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PickAPlayer_Result>("PickAPlayer", seasonIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_Team_Roster_Select_Result> sp_Team_Roster_Select(Nullable<int> seasonID, Nullable<int> teamID)
+        {
+            var seasonIDParameter = seasonID.HasValue ?
+                new ObjectParameter("SeasonID", seasonID) :
+                new ObjectParameter("SeasonID", typeof(int));
+    
+            var teamIDParameter = teamID.HasValue ?
+                new ObjectParameter("TeamID", teamID) :
+                new ObjectParameter("TeamID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Team_Roster_Select_Result>("sp_Team_Roster_Select", seasonIDParameter, teamIDParameter);
         }
     }
 }

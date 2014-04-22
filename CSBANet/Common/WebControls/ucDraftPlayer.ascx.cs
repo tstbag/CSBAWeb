@@ -285,6 +285,18 @@ namespace CSBANet.Common.WebControls
             
         }
 
+        protected void rBTNTeamName_Click(object sender, EventArgs e)
+        {
+            RadButton rb = (RadButton)sender;
+
+            int iTeamID = Convert.ToInt32(rb.CommandArgument);
+            int iSeasonID = Convert.ToInt32(rDDSeason.SelectedValue);
+
+            Response.Redirect(string.Format("~/Team/TeamRoster.aspx?SeasonID={0}&TeamID={1}", iSeasonID, iTeamID));
+
+
+        }
+
 
 
     }

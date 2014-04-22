@@ -62,7 +62,7 @@
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderText="Player Name" DataField="PlayerName" UniqueName="PlayerName">
                         <ItemTemplate>
-                            <asp:Label ID="lblPlayerName" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.PlayerName") %>'>
+                            <asp:Label ID="lblPlayerName" runat="server"  Text='<%# DataBinder.Eval(Container, "DataItem.PlayerName") %>'>
                             </asp:Label>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
@@ -79,7 +79,7 @@
                     <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" AllowFiltering="false" HeaderText="Player Image" DataField="PlayerImage" UniqueName="PlayerImage">
                         <ItemTemplate>
                             <telerik:RadBinaryImage runat="server" ID="RadBinaryImage1" DataValue='<%#Eval("PlayerImage") %>'
-                                AutoAdjustImageControlSize="false" Height="80px" Width="80px" ToolTip='<%#Eval("PlayerName", "Photo of {0}") %>'
+                                AutoAdjustImageControlSize="false" Height="80px" Width="62.5px" ToolTip='<%#Eval("PlayerName", "Photo of {0}") %>'
                                 AlternateText='<%#Eval("PlayerName", "Photo of {0}") %>'></telerik:RadBinaryImage>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
@@ -89,11 +89,11 @@
                     <EditColumn UniqueName="EditCommandColumn1" ButtonType="PushButton" FilterControlAltText="Filter EditCommandColumn1 column"></EditColumn>
                     <FormTemplate>
 
-                        <div style="float: left; padding-left: 40px">
-                            <asp:Label ID="lblPicture" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.PlayerName") %>'></asp:Label>
+                        <div style="float: left; padding-top: 10px;  padding-left: 40px">
+                            <asp:Label ID="lblPicture" runat="server"  CssClass="LargerLabels" Text='<%# DataBinder.Eval(Container, "DataItem.PlayerName") %>'></asp:Label>
                             <br />
                             <telerik:RadBinaryImage runat="server" ID="imgPlayer" DataValue='<%#Eval("PlayerImage") %>' CssClass="float-right"
-                                AutoAdjustImageControlSize="false" Width="200px" Height="150px" />
+                                AutoAdjustImageControlSize="false" Width="250px" Height="320px" />
                         </div>
 
                         <div style="float: right; width: 50%">

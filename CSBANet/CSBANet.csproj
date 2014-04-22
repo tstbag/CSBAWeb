@@ -115,6 +115,7 @@
     <Content Include="Common\WebControls\ucSeasonTeamOrder.ascx" />
     <Content Include="Common\WebControls\ucStadium.ascx" />
     <Content Include="Common\WebControls\ucTeamGrid.ascx" />
+    <Content Include="Common\WebControls\ucTeamRoster.ascx" />
     <Content Include="Content\images\1B.jpg" />
     <Content Include="Content\images\2B.jpg" />
     <Content Include="Content\images\3B.jpg" />
@@ -129,6 +130,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\Telerik.css" />
     <Content Include="Common\WebControls\ucSeason.ascx" />
+    <Content Include="default.aspx" />
     <Content Include="Draft\DraftPlayer.aspx" />
     <Content Include="Draft\DraftStadium.aspx" />
     <Content Include="ErrorPage.aspx" />
@@ -139,6 +141,7 @@
     <Content Include="Season\ManageSeason.aspx" />
     <Content Include="Stadium\ManageStadium.aspx" />
     <Content Include="Team\ManageTeam.aspx" />
+    <Content Include="Team\TeamRoster.aspx" />
     <Content Include="Team\WebForm1.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -222,6 +225,20 @@
     <Compile Include="Common\WebControls\ucTeamGrid.ascx.designer.cs">
       <DependentUpon>ucTeamGrid.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Common\WebControls\ucTeamRoster.ascx.cs">
+      <DependentUpon>ucTeamRoster.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\WebControls\ucTeamRoster.ascx.designer.cs">
+      <DependentUpon>ucTeamRoster.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Draft\DraftPlayer.aspx.cs">
       <DependentUpon>DraftPlayer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -300,6 +317,13 @@
     <Compile Include="Team\ManageTeam.aspx.designer.cs">
       <DependentUpon>ManageTeam.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Team\TeamRoster.aspx.cs">
+      <DependentUpon>TeamRoster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Team\TeamRoster.aspx.designer.cs">
+      <DependentUpon>TeamRoster.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Team\WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -373,7 +397,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

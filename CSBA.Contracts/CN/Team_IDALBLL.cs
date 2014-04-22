@@ -11,5 +11,6 @@ namespace CSBA.Contracts
         List<TeamDomainModel> ListTeams();
         TeamDomainModel InsertTeam(TeamDomainModel team);
         void UpdateTeam(TeamDomainModel team);
+        List<v_Team_Draft_RosterDomainModel> ListTeamRoster(int SeasonID, int TeamID);
     }
 }

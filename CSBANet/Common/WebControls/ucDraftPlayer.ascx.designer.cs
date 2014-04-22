@@ -85,15 +85,6 @@ namespace CSBANet.Common.WebControls {
         protected global::System.Web.UI.WebControls.Table tblTest;
         
         /// <summary>
-        /// lblPlayerNameLit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPlayerNameLit;
-        
-        /// <summary>
         /// hddPlayerGUID control.
         /// </summary>
         /// <remarks>
@@ -128,15 +119,6 @@ namespace CSBANet.Common.WebControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Telerik.Web.UI.RadBinaryImage imgPositon;
-        
-        /// <summary>
-        /// lblBidPoints control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBidPoints;
         
         /// <summary>
         /// rBTNAssign control.

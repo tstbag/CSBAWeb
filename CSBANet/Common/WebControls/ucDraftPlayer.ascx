@@ -59,59 +59,52 @@
 
     </asp:TableRow>
 </asp:Table>
-<asp:Panel ID="pnlDraftPlayer" runat="server" Height="470px" >
 
-    <div style="float: left; padding-left: 5px;  width: 47%; height: 100%;">
-        <asp:Table ID="tblTest" runat="server">
+<asp:Panel ID="pnlDraftPlayer" runat="server" Height="455px">
+    <div style="float: left; padding-left: 5px; width: 47%; height: 100%;">
+        <asp:Table ID="tblTest" runat="server" Width="100%">
             <asp:TableRow>
-                <asp:TableCell>
-                    <asp:Label ID="lblPlayerNameLit" runat="server" CssClass="MediumLabels" Text="Player Name"></asp:Label>
+                            <asp:TableCell Width="50%" >
+
                 </asp:TableCell>
-                <asp:TableCell Width="150px">
+                <asp:TableCell Width="50%" >
                     <asp:HiddenField ID="hddPlayerGUID" runat="server" />
-                    <asp:Label ID="lblCurrPlayer" runat="server" Text="PlayerName" Width="300px" CssClass="LargerLabels"></asp:Label>
+                    <asp:Label ID="lblCurrPlayer" runat="server" Text="Player Name" Width="260px" CssClass="LargerLabels"></asp:Label>
                 </asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow>
-                <asp:TableCell>
-                    <telerik:RadBinaryImage ID="imgPlayer" runat="server" AutoAdjustImageControlSize="false" Width="250px" Height="320px" AlternateText="Player Image" />
-                </asp:TableCell>
-                <asp:TableCell>
-                    <telerik:RadBinaryImage ID="imgPositon" runat="server" AutoAdjustImageControlSize="false" Width="250px" Height="230px" AlternateText="Position Image" />
-                </asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow>
-                <asp:TableCell>
-                    <asp:Label ID="lblBidPoints" runat="server" Text="Current Bid"></asp:Label>
-                </asp:TableCell>
-                <asp:TableCell>
 
+            </asp:TableRow>
+            <asp:TableRow>
+                <asp:TableCell Width="50%" >
+                    <telerik:RadBinaryImage ID="imgPlayer" runat="server" Skin="<%$ appSettings:Telerik.Skin%>" AutoAdjustImageControlSize="false" Width="250px" Height="320px" AlternateText="Player Image" />
+                </asp:TableCell>
+                <asp:TableCell Width="50%" >
+                    <telerik:RadBinaryImage ID="imgPositon" runat="server" Skin="<%$ appSettings:Telerik.Skin%>" CssClass="imgAdjust" AutoAdjustImageControlSize="false" Width="250px" Height="230px" AlternateText="Position Image" />
                 </asp:TableCell>
             </asp:TableRow>
+            <asp:TableRow>
+                <asp:TableCell Width="50%">
+                    <telerik:RadButton ID="rBTNAssign" runat="server" Skin="<%$ appSettings:Telerik.Skin%>" Width="75px" Text="Assign" CssClass="MediumLabels" OnClick="rBTNAssign_Click" ButtonType="SkinnedButton"></telerik:RadButton>
+                </asp:TableCell>
+                <asp:TableCell Width="50%">
 
-            <asp:TableRow>
-                <asp:TableCell>
-                    <telerik:RadButton ID="rBTNAssign" runat="server" Width="75px" Text="Assign" CssClass="MediumLabels" OnClick="rBTNAssign_Click" ButtonType="SkinnedButton"></telerik:RadButton>
+                <telerik:RadDropDownList ID="rDDSeasonTeam" OnItemDataBound="rDDSeasonTeam_ItemDataBound" Skin="<%$ appSettings:Telerik.Skin%>" DropDownHeight="100px" runat="server">
+                </telerik:RadDropDownList>
                 </asp:TableCell>
-                <asp:TableCell>
-                    <telerik:RadDropDownList ID="rDDSeasonTeam" OnItemDataBound="rDDSeasonTeam_ItemDataBound" CssClass="MediumLabels" DropDownHeight="100px" runat="server">
-                    </telerik:RadDropDownList>
-                </asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow>
+            </asp:TableRow >
+            <asp:TableRow Width="50%" >
                 <asp:TableCell>
                     <telerik:RadButton ID="rBTNPickPlayer" runat="server" Width="75px" CssClass="MediumLabels" Text="Pick Player" OnClick="rBTNPickPlayer_Click" ButtonType="SkinnedButton"></telerik:RadButton>
                 </asp:TableCell>
-                <asp:TableCell>
-
-                    <telerik:RadNumericTextBox ID="rNTBCurrBid" OnTextChanged="rNTBCurrBid_TextChanged" CssClass="MediumLabels" Width="60px" ShowSpinButtons="true" AutoPostBack="true" NumberFormat-DecimalDigits="0" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.MinBid") %>'>
+                <asp:TableCell Width="50%">
+                    <%--<asp:Label ID="lblCurrBid" runat="server" Text="Bid Points:" CssClass="MediumLabels"></asp:Label>--%>
+                    <telerik:RadNumericTextBox ID="rNTBCurrBid"  OnTextChanged="rNTBCurrBid_TextChanged" CssClass="MediumLabels" Width="60px" ShowSpinButtons="true" AutoPostBack="true" NumberFormat-DecimalDigits="0" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.MinBid") %>'>
                     </telerik:RadNumericTextBox>
                 </asp:TableCell>
             </asp:TableRow>
         </asp:Table>
     </div>
 
-    <div style="float: right; padding-left: 0px;">
+    <div style="float: right; padding-left: 0px;  width: 50%;">
         <telerik:RadGrid ID="rGridDraftPlayer"
             runat="server"
             OnNeedDataSource="rGridDraftPlayer_NeedDataSource"
@@ -154,8 +147,8 @@
 
                     <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" SortExpression="TeamName" HeaderText="Team Name" DataField="TeamName" UniqueName="TeamName">
                         <ItemTemplate>
-                            <asp:Label ID="lblTeamName" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.TeamName") %>'>
-                            </asp:Label>
+                            <telerik:RadButton  ID="rBTNTeamName"  ButtonType="LinkButton" Width="70px" CommandArgument='<%# DataBinder.Eval(Container, "DataItem.TeamID") %>'  OnClick="rBTNTeamName_Click" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.TeamName") %>'>
+                            </telerik:RadButton>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
@@ -193,11 +186,11 @@
 
 
 </asp:Panel>
-<asp:Panel ID="Panel1" runat="server" Height="245px" >
-    <div style="float: left; padding-left: 0px;">
+<asp:Panel ID="Panel1" runat="server" Height="245px" Width="100%">
+    <div style="float: left; width: 100%; padding-left: 0px;">
         <telerik:RadGrid ID="rGridStats"
             runat="server" CssClass="Lables"
-            AutoGenerateColumns="true"
+            AutoGenerateColumns="true" Width="100%"
             AllowFilteringByColumn="False"
             AllowSorting="False"
             Skin="<%$ appSettings:Telerik.Skin%>"

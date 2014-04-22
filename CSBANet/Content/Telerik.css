@@ -2,6 +2,13 @@
     cursor: auto;
 }
 
+.imgAdjust {
+    justify-content:center;
+     vertical-align: top;
+     align-content: center;
+     align-items: center;
+}
+
 .MediumLabels {
     font-size: medium;
     font-weight: bold;

@@ -28,5 +28,11 @@ namespace CSBA.BusinessLogicLayer
         {
             dal.UpdateTeam(team);
         }
+
+        public List<v_Team_Draft_RosterDomainModel> ListTeamRoster(int SeasonID, int TeamID)
+        {
+            return dal.ListTeamRoster(SeasonID, TeamID);
+        }
+
     }
 }

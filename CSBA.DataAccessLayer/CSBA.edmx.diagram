@@ -39,6 +39,7 @@
         <AssociationConnector Association="CSBAModel.FK_Stat_PositionType" />
         <AssociationConnector Association="CSBAModel.FK_SeasonPlayerPositionStat_Stat" />
         <EntityTypeShape EntityType="CSBAModel.v_Stat_Hitter_View" Width="1.5" PointX="3.9428645092727916" PointY="20.689767996170449" />
+        <EntityTypeShape EntityType="CSBAModel.v_Team_Draft_Roster" Width="1.5" PointX="1.1058925246381632" PointY="26.028574300011886" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
