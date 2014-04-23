@@ -143,7 +143,6 @@
     <Content Include="Stadium\ManageStadium.aspx" />
     <Content Include="Team\ManageTeam.aspx" />
     <Content Include="Team\TeamRoster.aspx" />
-    <Content Include="Team\WebForm1.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -332,13 +331,6 @@
     <Compile Include="Team\TeamRoster.aspx.designer.cs">
       <DependentUpon>TeamRoster.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Team\WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Team\WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -405,7 +397,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
+      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
