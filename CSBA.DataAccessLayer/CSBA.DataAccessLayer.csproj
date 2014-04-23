@@ -120,6 +120,9 @@
     <Compile Include="SeasonPlayerPositionStat.cs">
       <DependentUpon>CSBA.tt</DependentUpon>
     </Compile>
+    <Compile Include="SeasonPlayerRecycle.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
     <Compile Include="SeasonTeam.cs">
       <DependentUpon>CSBA.tt</DependentUpon>
     </Compile>

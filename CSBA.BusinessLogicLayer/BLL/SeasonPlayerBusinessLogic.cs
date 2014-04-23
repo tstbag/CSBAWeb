@@ -32,5 +32,16 @@ namespace CSBA.BusinessLogicLayer
         {
             return SPDAL.ListRemainingPlayers(SeasonID);
         }
+
+
+        public void InsertSeasonPlayerRecycle(SeasonPlayerDomainModel _SeasonPlayer)
+        {
+            SPDAL.InsertSeasonPlayerRecycle(_SeasonPlayer);
+        }
+
+        public void DeleteSeasonRecyclePlayerAll(SeasonPlayerDomainModel _SeasonPlayer)
+        {
+            SPDAL.DeleteSeasonRecyclePlayerAll(_SeasonPlayer);
+        }
     }
 }

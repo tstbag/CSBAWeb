@@ -26,7 +26,7 @@ namespace CSBANet.Common.WebControls
 
         PlayerDomainModel PagePlayer = new PlayerDomainModel();
 
-        SeasonPlayerPositionStatBusinessLogic sppsBLL = new SeasonPlayerPositionStatBusinessLogic();
+
 
         PickAPlayerDomainModel PlayerDrafted = new PickAPlayerDomainModel();
 
@@ -38,6 +38,8 @@ namespace CSBANet.Common.WebControls
             rDDSeason.DataValueField = "SeasonID";
             rDDSeason.DataTextField = "SeasonName";
             rDDSeason.DataBind();
+
+
         }
 
         //protected void Timer1_Tick(object sender, EventArgs e)
@@ -62,6 +64,9 @@ namespace CSBANet.Common.WebControls
             {
                 var ds = SeasonTeamBLL.SeasonTeamOrder(Convert.ToInt32(rDDSeason.SelectedValue));
                 rDDSeasonTeam.Items.Clear();
+
+                var itemRecycle = new DropDownListItem("Recycle Bin", "0");
+                rDDSeasonTeam.Items.Add(itemRecycle);
                 foreach (var element in ds)
                 {
                     var item = new DropDownListItem(element.TeamName.ToString(), element.TeamID.ToString());
@@ -123,37 +128,14 @@ namespace CSBANet.Common.WebControls
             }
         }
 
-        protected void rGridStats_NeedDataSource(object sender, Telerik.Web.UI.GridNeedDataSourceEventArgs e)
-        {
-            try
-            {
-                //PlayerDrafted.PlayerGUID = PagePlayer.PlayerGUID;
-                DataTable dt = sppsBLL.GetDynamicStats(PlayerDrafted);
-                rGridStats.DataSource = dt;
-            }
-            catch (Exception ex)
-            {
-                StackTrace st = new StackTrace();
-                StackFrame sf = st.GetFrame(0);
-                string errMethod = sf.GetMethod().Name.ToString();  // Get the current method name
-                string errMsg = "600";                              // Gotta pass something, we're retro-fitting an existing method
-                Session["LastException"] = ex;                      // Throw the exception in the session variable, will be used in error page
-                string url = string.Format(ConfigurationManager.AppSettings["ErrorPageURL"], errMethod, errMsg); //Set the URL
-                Response.Redirect(url);                             // Go to the error page.
-            }
 
-        }
 
         public void BindStatsGrid(PickAPlayerDomainModel PickPlayer)
         {
             try
             {
-                //PickPlayer.PlayerGUID = PagePlayer.PlayerGUID;
-                DataTable dt = sppsBLL.GetDynamicStats(PickPlayer);
-                rGridStats.DataSource = dt;
-                rGridStats.DataBind();
+                ucPlayerStats.BindChildStatsGrid();
 
-                //rGridStats.Rebind();
             }
             catch (Exception ex)
             {
@@ -234,11 +216,18 @@ namespace CSBANet.Common.WebControls
 
                 if (PlayerDrafted != null)
                 {
+                    hddSeasonID.Value = "0"; // I want all seasons
                     hddPlayerGUID.Value = PlayerDrafted.PlayerGUID.ToString();
+                    hddPrimPosID.Value = PlayerDrafted.PrimPositionTypeID.ToString();
                     imgPlayer.DataValue = PlayerDrafted.PlayerImage;
                     imgPositon.ImageUrl = "~/Content/images/" + PlayerDrafted.PrimPositionName.Trim() + ".jpg" ;
 
                     lblCurrPlayer.Text = PlayerDrafted.PlayerName;
+
+                    imgPlayer.Visible = true;
+                    imgPositon.Visible = true;
+                    lblCurrPlayer.Visible = true;
+                    rBTNAssign.Enabled = true; 
 
                     BindStatsGrid(PlayerDrafted);
                     LoadrDDSeasonTeam();
@@ -273,17 +262,37 @@ namespace CSBANet.Common.WebControls
 
         protected void rBTNAssign_Click(object sender, EventArgs e)
         {
-            SeasonTeamPlayerDomainModel STP = new SeasonTeamPlayerDomainModel();
-            STP.SeasonID = Convert.ToInt32(rDDSeason.SelectedValue);
-            STP.TeamID = Convert.ToInt32(rDDSeasonTeam.SelectedValue);
-            STP.PlayerGUID = new Guid(hddPlayerGUID.Value);
-            STP.Points = Convert.ToInt32(rNTBCurrBid.Value);
 
-            DraftPlayerBLL.DraftPlayer(STP);
+            if (rDDSeasonTeam.SelectedValue == "0")     // Put player in recycle bin
+            {
+                SeasonPlayerDomainModel SP = new SeasonPlayerDomainModel();
+                SeasonPlayerBusinessLogic SPBLL = new SeasonPlayerBusinessLogic();
+                SP.SeasonID = Convert.ToInt32(rDDSeason.SelectedValue);
+                SP.PlayerGUID = new Guid(hddPlayerGUID.Value);
+                SPBLL.InsertSeasonPlayerRecycle(SP);
+            }
+            else
+            {
+                SeasonTeamPlayerDomainModel STP = new SeasonTeamPlayerDomainModel();
+                STP.SeasonID = Convert.ToInt32(rDDSeason.SelectedValue);
+                STP.TeamID = Convert.ToInt32(rDDSeasonTeam.SelectedValue);
+                STP.PlayerGUID = new Guid(hddPlayerGUID.Value);
+                STP.Points = Convert.ToInt32(rNTBCurrBid.Value);
 
+                DraftPlayerBLL.DraftPlayer(STP);
+            }
             RepaintScreen();
             
         }
+
+        protected void rBTNEmptyRecycleBin_Click(object sender, EventArgs e)
+        {
+            SeasonPlayerDomainModel SP = new SeasonPlayerDomainModel();
+            SeasonPlayerBusinessLogic SPBLL = new SeasonPlayerBusinessLogic();
+            SP.SeasonID = Convert.ToInt32(rDDSeason.SelectedValue);
+            SPBLL.DeleteSeasonRecyclePlayerAll(SP);
+        }
+
 
         protected void rBTNTeamName_Click(object sender, EventArgs e)
         {
@@ -296,6 +305,7 @@ namespace CSBANet.Common.WebControls
 
 
         }
+
 
 
 

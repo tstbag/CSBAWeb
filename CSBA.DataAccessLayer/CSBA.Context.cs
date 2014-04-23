@@ -45,6 +45,7 @@ namespace CSBA.DataAccessLayer
         public DbSet<SeasonTeamPlayer> SeasonTeamPlayers { get; set; }
         public DbSet<Stat> Stats { get; set; }
         public DbSet<v_Stat_Hitter_View> v_Stat_Hitter_View { get; set; }
+        public DbSet<SeasonPlayerRecycle> SeasonPlayerRecycles { get; set; }
         public DbSet<v_Team_Draft_Roster> v_Team_Draft_Roster { get; set; }
     
         public virtual int sp_Season_Delete(Nullable<int> seasonID)
@@ -792,6 +793,28 @@ namespace CSBA.DataAccessLayer
                 new ObjectParameter("TeamID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Team_Roster_Select_Result>("sp_Team_Roster_Select", seasonIDParameter, teamIDParameter);
+        }
+    
+        public virtual int sp_SeasonPlayerRecycle_deleteAll(Nullable<int> seasonID)
+        {
+            var seasonIDParameter = seasonID.HasValue ?
+                new ObjectParameter("SeasonID", seasonID) :
+                new ObjectParameter("SeasonID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SeasonPlayerRecycle_deleteAll", seasonIDParameter);
+        }
+    
+        public virtual int sp_SeasonPlayerRecycle_Insert(Nullable<int> seasonID, Nullable<System.Guid> playerGUID)
+        {
+            var seasonIDParameter = seasonID.HasValue ?
+                new ObjectParameter("SeasonID", seasonID) :
+                new ObjectParameter("SeasonID", typeof(int));
+    
+            var playerGUIDParameter = playerGUID.HasValue ?
+                new ObjectParameter("PlayerGUID", playerGUID) :
+                new ObjectParameter("PlayerGUID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SeasonPlayerRecycle_Insert", seasonIDParameter, playerGUIDParameter);
         }
     }
 }

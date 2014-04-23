@@ -47,17 +47,14 @@ namespace CSBA.DataAccessLayer
             return list;
         }
 
+        public void InsertSeasonPlayerRecycle(SeasonPlayerDomainModel _SeasonPlayer)
+        {
+            using (CSBAEntities context = new CSBAEntities())
+            {
+                context.Database.ExecuteSqlCommand("sp_SeasonPlayerRecycle_Insert {0}, {1}", _SeasonPlayer.SeasonID, _SeasonPlayer.PlayerGUID);
 
-
-
-
-
-
-
-
-
-
-
+            }
+        }        
 
         public void InsertSeasonPlayer(SeasonPlayerDomainModel _SeasonPlayer)
         {
@@ -76,5 +73,14 @@ namespace CSBA.DataAccessLayer
 
             }
         }
+
+        public void DeleteSeasonRecyclePlayerAll(SeasonPlayerDomainModel _SeasonPlayer)
+        {
+            using (CSBAEntities context = new CSBAEntities())
+            {
+                context.Database.ExecuteSqlCommand("sp_SeasonPlayerRecycle_deleteAll {0}", _SeasonPlayer.SeasonID);
+
+            }
+        }        
     }
 }

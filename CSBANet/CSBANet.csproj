@@ -135,6 +135,7 @@
     <Content Include="Draft\DraftStadium.aspx" />
     <Content Include="ErrorPage.aspx" />
     <Content Include="Player\ManagePlayer.aspx" />
+    <Content Include="Player\PlayerStats.aspx" />
     <Content Include="Season\ManageSeasonPlayer.aspx" />
     <Content Include="Season\ManageSeasonStadium.aspx" />
     <Content Include="Season\ManageSeasonTeam.aspx" />
@@ -274,6 +275,13 @@
     <Compile Include="Player\ManagePlayer.aspx.designer.cs">
       <DependentUpon>ManagePlayer.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Player\PlayerStats.aspx.cs">
+      <DependentUpon>PlayerStats.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Player\PlayerStats.aspx.designer.cs">
+      <DependentUpon>PlayerStats.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Season\ManageSeasonPlayer.aspx.cs">
       <DependentUpon>ManageSeasonPlayer.aspx</DependentUpon>
@@ -397,7 +405,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

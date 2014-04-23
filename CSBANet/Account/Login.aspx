@@ -9,7 +9,7 @@
         <h1><%: Title %>Account Login</h1>
     </hgroup>
     <section id="loginForm">
-        <h2>Use a local account to log in.</h2>
+        <h2>Use your CSBA Account to Log In.</h2>
         <asp:Login ID="Login1" runat="server" ViewStateMode="Disabled" RenderOuterTable="false">
             <LayoutTemplate>
                 <p class="validation-summary-errors">

@@ -67,6 +67,15 @@ namespace CSBANet.Common.WebControls {
         protected global::Telerik.Web.UI.RadDropDownList rDDSeason;
         
         /// <summary>
+        /// rBTNEmptyRecycleBin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadButton rBTNEmptyRecycleBin;
+        
+        /// <summary>
         /// pnlDraftPlayer control.
         /// </summary>
         /// <remarks>
@@ -85,6 +94,15 @@ namespace CSBANet.Common.WebControls {
         protected global::System.Web.UI.WebControls.Table tblTest;
         
         /// <summary>
+        /// hddSeasonID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hddSeasonID;
+        
+        /// <summary>
         /// hddPlayerGUID control.
         /// </summary>
         /// <remarks>
@@ -92,6 +110,15 @@ namespace CSBANet.Common.WebControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hddPlayerGUID;
+        
+        /// <summary>
+        /// hddPrimPosID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hddPrimPosID;
         
         /// <summary>
         /// lblCurrPlayer control.
@@ -175,13 +202,13 @@ namespace CSBANet.Common.WebControls {
         protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
-        /// rGridStats control.
+        /// ucPlayerStats control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadGrid rGridStats;
+        protected global::CSBANet.Common.WebControls.ucPlayerStats ucPlayerStats;
         
         /// <summary>
         /// lblMessage control.

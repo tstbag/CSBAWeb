@@ -1,4 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucDraftPlayer.ascx.cs" Inherits="CSBANet.Common.WebControls.ucDraftPlayer" %>
+<%@ Register Src="~/Common/WebControls/ucPlayerStats.ascx" TagPrefix="uc1" TagName="ucPlayerStats" %>
+
 
 <telerik:RadScriptBlock ID="RadScriptBlock1" runat="server">
     <script type="text/javascript">
@@ -56,6 +58,9 @@
                 AutoPostBack="true">
             </telerik:RadDropDownList>
         </asp:TableCell>
+        <asp:TableCell>
+            <telerik:RadButton ID="rBTNEmptyRecycleBin" ButtonType="SkinnedButton" Skin="<%$ appSettings:Telerik.Skin%>" Text="Empty Recycle Bin" runat="server" OnClick="rBTNEmptyRecycleBin_Click"></telerik:RadButton>
+        </asp:TableCell>
 
     </asp:TableRow>
 </asp:Table>
@@ -68,22 +73,24 @@
 
                 </asp:TableCell>
                 <asp:TableCell Width="50%" >
+                    <asp:HiddenField ID="hddSeasonID" runat="server" />
                     <asp:HiddenField ID="hddPlayerGUID" runat="server" />
-                    <asp:Label ID="lblCurrPlayer" runat="server" Text="Player Name" Width="260px" CssClass="LargerLabels"></asp:Label>
+                    <asp:HiddenField ID="hddPrimPosID" runat="server" />
+                    <asp:Label ID="lblCurrPlayer" runat="server" Text="Player Name" Width="260px" Visible="false" CssClass="LargerLabels"></asp:Label>
                 </asp:TableCell>
 
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableCell Width="50%" >
-                    <telerik:RadBinaryImage ID="imgPlayer" runat="server" Skin="<%$ appSettings:Telerik.Skin%>" AutoAdjustImageControlSize="false" Width="250px" Height="320px" AlternateText="Player Image" />
+                    <telerik:RadBinaryImage ID="imgPlayer" Visible="false" runat="server" Skin="<%$ appSettings:Telerik.Skin%>" AutoAdjustImageControlSize="false" Width="250px" Height="320px" AlternateText="Player Image" />
                 </asp:TableCell>
                 <asp:TableCell Width="50%" >
-                    <telerik:RadBinaryImage ID="imgPositon" runat="server" Skin="<%$ appSettings:Telerik.Skin%>" CssClass="imgAdjust" AutoAdjustImageControlSize="false" Width="250px" Height="230px" AlternateText="Position Image" />
+                    <telerik:RadBinaryImage ID="imgPositon" Visible="false" runat="server" Skin="<%$ appSettings:Telerik.Skin%>" CssClass="imgAdjust" AutoAdjustImageControlSize="false" Width="250px" Height="230px" AlternateText="Position Image" />
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableCell Width="50%">
-                    <telerik:RadButton ID="rBTNAssign" runat="server" Skin="<%$ appSettings:Telerik.Skin%>" Width="75px" Text="Assign" CssClass="MediumLabels" OnClick="rBTNAssign_Click" ButtonType="SkinnedButton"></telerik:RadButton>
+                    <telerik:RadButton ID="rBTNAssign" runat="server" Enabled="false" Skin="<%$ appSettings:Telerik.Skin%>" Width="75px" Text="Assign" CssClass="MediumLabels" OnClick="rBTNAssign_Click" ButtonType="SkinnedButton"></telerik:RadButton>
                 </asp:TableCell>
                 <asp:TableCell Width="50%">
 
@@ -188,18 +195,7 @@
 </asp:Panel>
 <asp:Panel ID="Panel1" runat="server" Height="245px" Width="100%">
     <div style="float: left; width: 100%; padding-left: 0px;">
-        <telerik:RadGrid ID="rGridStats"
-            runat="server" CssClass="Lables"
-            AutoGenerateColumns="true" Width="100%"
-            AllowFilteringByColumn="False"
-            AllowSorting="False"
-            Skin="<%$ appSettings:Telerik.Skin%>"
-            CellSpacing="0"
-            GridLines="None"
-            AllowMultiRowEdit="True"
-            AllowMultiRowSelection="True">
-            <PagerStyle />
-        </telerik:RadGrid>
+        <uc1:ucPlayerStats runat="server" ID="ucPlayerStats" />
     </div>
 </asp:Panel>
 

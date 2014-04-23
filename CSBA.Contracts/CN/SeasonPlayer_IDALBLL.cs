@@ -12,5 +12,7 @@ namespace CSBA.Contracts
         void DeleteSeasonPlayerAll(SeasonPlayerDomainModel _SeasonPlayer);
         List<SeasonPlayerDomainModel> ListSelectedPlayers(int SeasonID);
         List<SeasonPlayerDomainModel> ListRemainingPlayers(int SeasonID);
+        void InsertSeasonPlayerRecycle(SeasonPlayerDomainModel _SeasonPlayer);
+        void DeleteSeasonRecyclePlayerAll(SeasonPlayerDomainModel _SeasonPlayer);
     }
 }

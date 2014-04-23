@@ -14,29 +14,38 @@ namespace CSBA.DataAccessLayer
     public class SeasonPlayerPositionStatDAL : SeasonPlayerPositionStat_IDALBLL
     {
 
+
         public DataTable GetDynamicStats(PickAPlayerDomainModel player)
         {
-            SqlConnection sqlConnection1 = new SqlConnection(ConfigurationManager.ConnectionStrings["CSBAConn"].ToString());
-            SqlCommand cmd = new SqlCommand();
-            SqlDataReader reader;
-            SqlDataAdapter adp = new SqlDataAdapter(cmd);
-            DataSet ds = new DataSet();
+            try
+            {
+                SqlConnection sqlConnection1 = new SqlConnection(ConfigurationManager.ConnectionStrings["CSBAConn"].ToString());
+                SqlCommand cmd = new SqlCommand();
+                SqlDataReader reader;
+                SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
 
 
-            cmd.CommandText = "dbo.sp_Stat_Dynamic_Select";
-            cmd.Parameters.Add("@PlayerGUID", SqlDbType.UniqueIdentifier).Value = player.PlayerGUID;
-            cmd.Parameters.Add("@PositionTypeID", SqlDbType.Int).Value = player.PrimPositionTypeID;
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Connection = sqlConnection1;
+                cmd.CommandText = "dbo.sp_Stat_Dynamic_Select";
+                cmd.Parameters.Add("@SeasonID", SqlDbType.Int).Value = player.SeasonID;
+                cmd.Parameters.Add("@PlayerGUID", SqlDbType.UniqueIdentifier).Value = player.PlayerGUID;
+                cmd.Parameters.Add("@PositionTypeID", SqlDbType.Int).Value = player.PrimPositionTypeID;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Connection = sqlConnection1;
 
-            sqlConnection1.Open();
+                sqlConnection1.Open();
 
-            adp.Fill(ds);
-            // Data is accessible through the DataReader object here.
+                adp.Fill(ds);
+                // Data is accessible through the DataReader object here.
 
-            sqlConnection1.Close();
+                sqlConnection1.Close();
 
-            return ds.Tables[0];
+                return ds.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
         }
 
         public List<v_Stat_Hitter_ViewDomainModel> GetStats(PlayerDomainModel player)

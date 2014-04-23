@@ -7,6 +7,7 @@ namespace CSBA.DomainModels
 {
     public class PickAPlayerDomainModel
     {
+        public int SeasonID { get; set; }
         public System.Guid PlayerGUID { get; set; }
         public string PlayerName { get; set; }
         public byte[] PlayerImage { get; set; }
