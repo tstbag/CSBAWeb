@@ -110,7 +110,8 @@
       [v_Team_Draft_Roster].[Points] AS [Points], 
       [v_Team_Draft_Roster].[PrimPos] AS [PrimPos], 
       [v_Team_Draft_Roster].[SecPos] AS [SecPos], 
-      [v_Team_Draft_Roster].[TeamName] AS [TeamName]
+      [v_Team_Draft_Roster].[TeamName] AS [TeamName], 
+      [v_Team_Draft_Roster].[PlayerGUID] AS [PlayerGUID]
       FROM [dbo].[v_Team_Draft_Roster] AS [v_Team_Draft_Roster]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_PlayerPosition_Player" Association="CSBAModel.Store.FK_PlayerPosition_Player">
@@ -431,7 +432,7 @@
             <PropertyRef Name="OwnerName" />
           </Key>
           <Property Name="SeasonID" Type="int" Nullable="false" />
-          <Property Name="SeasonName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="SeasonName" Type="nchar" Nullable="false" MaxLength="25" />
           <Property Name="TeamID" Type="int" Nullable="false" />
           <Property Name="TeamName" Type="nchar" Nullable="false" MaxLength="25" />
           <Property Name="StadiumOrder" Type="int" />
@@ -470,7 +471,7 @@
             <PropertyRef Name="StartPoints" />
           </Key>
           <Property Name="SeasonID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="SeasonName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="SeasonName" Type="nchar" Nullable="false" MaxLength="25" />
           <Property Name="DraftDate" Type="date" Nullable="false" />
           <Property Name="StartPoints" Type="int" Nullable="false" />
           <Property Name="MinBid" Type="int" />
@@ -519,6 +520,7 @@
             <PropertyRef Name="SeasonName" />
             <PropertyRef Name="TeamID" />
             <PropertyRef Name="TeamName" />
+            <PropertyRef Name="PlayerGUID" />
           </Key>
           <Property Name="SeasonID" Type="int" Nullable="false" />
           <Property Name="SeasonName" Type="varchar" Nullable="false" MaxLength="50" />
@@ -530,6 +532,7 @@
           <Property Name="PrimPos" Type="nchar" MaxLength="20" />
           <Property Name="SecPos" Type="nchar" MaxLength="20" />
           <Property Name="TeamName" Type="nchar" Nullable="false" MaxLength="25" />
+          <Property Name="PlayerGUID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <Association Name="FK_PlayerPosition_Player">
           <End Role="Player" Type="CSBAModel.Store.Player" Multiplicity="1" />
@@ -1085,6 +1088,17 @@
           <Parameter Name="OwnerUserID" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="TeamImage" Type="image" Mode="In" />
         </Function>
+        <Function Name="sp_Team_Roster_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SeasonID" Type="int" Mode="In" />
+          <Parameter Name="TeamID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Team_Roster_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SeasonID" Type="int" Mode="In" />
+          <Parameter Name="PlayerGUID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="TeamID" Type="int" Mode="In" />
+          <Parameter Name="NewTeamID" Type="int" Mode="In" />
+          <Parameter Name="Points" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_Team_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TeamID" Type="int" Mode="In" />
         </Function>
@@ -1441,10 +1455,6 @@
             <Parameter Name="PositionTypeID" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="v_Team_Draft_Roster" EntityType="CSBAModel.v_Team_Draft_Roster" />
-          <FunctionImport Name="sp_Team_Roster_Select" ReturnType="Collection(CSBAModel.sp_Team_Roster_Select_Result)">
-            <Parameter Name="SeasonID" Mode="In" Type="Int32" />
-            <Parameter Name="TeamID" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="Trades" EntityType="CSBAModel.Trade" />
           <EntitySet Name="TradeStatus" EntityType="CSBAModel.TradeStatu" />
           <EntitySet Name="TradeTeams" EntityType="CSBAModel.TradeTeam" />
@@ -1499,6 +1509,17 @@
             <Parameter Name="SeasonID" Mode="In" Type="Int32" />
             <Parameter Name="TradeGUID" Mode="In" Type="Guid" />
           </FunctionImport>
+          <FunctionImport Name="sp_Team_Roster_Select" ReturnType="Collection(CSBAModel.sp_Team_Roster_Select_Result)">
+            <Parameter Name="SeasonID" Mode="In" Type="Int32" />
+            <Parameter Name="TeamID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Team_Roster_Update">
+            <Parameter Name="SeasonID" Mode="In" Type="Int32" />
+            <Parameter Name="PlayerGUID" Mode="In" Type="Guid" />
+            <Parameter Name="TeamID" Mode="In" Type="Int32" />
+            <Parameter Name="NewTeamID" Mode="In" Type="Int32" />
+            <Parameter Name="Points" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Position">
           <Key>
@@ -1543,7 +1564,7 @@
             <PropertyRef Name="StartPoints" />
           </Key>
           <Property Type="Int32" Name="SeasonID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="SeasonName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SeasonName" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
           <Property Type="DateTime" Name="DraftDate" Nullable="false" Precision="0" />
           <Property Type="Int32" Name="StartPoints" Nullable="false" />
           <Property Type="Int32" Name="MinBid" />
@@ -1605,7 +1626,7 @@
             <PropertyRef Name="OwnerName" />
           </Key>
           <Property Type="Int32" Name="SeasonID" Nullable="false" />
-          <Property Type="String" Name="SeasonName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SeasonName" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
           <Property Type="Int32" Name="TeamID" Nullable="false" />
           <Property Type="String" Name="TeamName" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
           <Property Type="Int32" Name="StadiumOrder" />
@@ -2060,6 +2081,7 @@
             <PropertyRef Name="SeasonID" />
             <PropertyRef Name="TeamID" />
             <PropertyRef Name="TeamName" />
+            <PropertyRef Name="PlayerGUID" />
           </Key>
           <Property Type="String" Name="SeasonName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="SeasonID" Nullable="false" />
@@ -2071,19 +2093,8 @@
           <Property Type="Binary" Name="PlayerImage" MaxLength="Max" FixedLength="false" />
           <Property Type="String" Name="SecPos" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Type="String" Name="PrimPos" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Type="Guid" Name="PlayerGUID" Nullable="false" />
         </EntityType>
-        <ComplexType Name="sp_Team_Roster_Select_Result">
-          <Property Type="String" Name="SeasonName" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="SeasonID" Nullable="false" />
-          <Property Type="Int32" Name="TeamID" Nullable="false" />
-          <Property Type="Boolean" Name="ActiveFlg" Nullable="true" />
-          <Property Type="String" Name="TeamName" Nullable="false" MaxLength="25" />
-          <Property Type="Int32" Name="Points" Nullable="true" />
-          <Property Type="String" Name="PlayerName" Nullable="true" MaxLength="50" />
-          <Property Type="Binary" Name="PlayerImage" Nullable="true" MaxLength="Max" />
-          <Property Type="String" Name="SecPos" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="PrimPos" Nullable="true" MaxLength="20" />
-        </ComplexType>
         <EntityType Name="Trade">
           <Key>
             <PropertyRef Name="SeasonID" />
@@ -2250,6 +2261,19 @@
           <Property Type="DateTime" Name="ProposedDate" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="TradeStatusID" Nullable="true" />
           <Property Type="String" Name="TradeStatusDesc" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="sp_Team_Roster_Select_Result">
+          <Property Type="String" Name="SeasonName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="SeasonID" Nullable="false" />
+          <Property Type="Int32" Name="TeamID" Nullable="false" />
+          <Property Type="Boolean" Name="ActiveFlg" Nullable="true" />
+          <Property Type="String" Name="TeamName" Nullable="false" MaxLength="25" />
+          <Property Type="Int32" Name="Points" Nullable="true" />
+          <Property Type="Guid" Name="PlayerGUID" Nullable="false" />
+          <Property Type="String" Name="PlayerName" Nullable="true" MaxLength="50" />
+          <Property Type="Binary" Name="PlayerImage" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="SecPos" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="PrimPos" Nullable="true" MaxLength="20" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2881,6 +2905,7 @@
           <EntitySetMapping Name="v_Team_Draft_Roster">
             <EntityTypeMapping TypeName="CSBAModel.v_Team_Draft_Roster">
               <MappingFragment StoreEntitySet="v_Team_Draft_Roster">
+                <ScalarProperty Name="PlayerGUID" ColumnName="PlayerGUID" />
                 <ScalarProperty Name="PrimPos" ColumnName="PrimPos" />
                 <ScalarProperty Name="SecPos" ColumnName="SecPos" />
                 <ScalarProperty Name="PlayerImage" ColumnName="PlayerImage" />
@@ -2970,6 +2995,24 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Team_Roster_Select" FunctionName="CSBAModel.Store.sp_Team_Roster_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CSBAModel.sp_Team_Roster_Select_Result">
+                <ScalarProperty Name="SeasonName" ColumnName="SeasonName" />
+                <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="ActiveFlg" ColumnName="ActiveFlg" />
+                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="PlayerGUID" ColumnName="PlayerGUID" />
+                <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+                <ScalarProperty Name="PlayerImage" ColumnName="PlayerImage" />
+                <ScalarProperty Name="SecPos" ColumnName="SecPos" />
+                <ScalarProperty Name="PrimPos" ColumnName="PrimPos" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Team_Roster_Update" FunctionName="CSBAModel.Store.sp_Team_Roster_Update" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

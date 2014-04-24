@@ -65,21 +65,6 @@ namespace CSBANet.Controls
 
                     rCal.SelectedDate = (DateTime)(DataBinder.Eval(edtItem.DataItem, "DraftDate"));
                     rCal.FocusedDate = rCal.SelectedDate;
-
-                    //RadTextBox rtb =  (RadTextBox)edtItem.FindControl("txtTest"); 
-
-
-                    //RadAjaxManager m = RadAjaxManager.GetCurrent(this.Page);
-                    //foreach (AjaxSetting aset in m.AjaxSettings)
-                    //{
-                    //    if (aset.AjaxControlID == "RadAjaxManager1")
-                    //    {
-                    //        aset.UpdatedControls.Add(new AjaxUpdatedControl(rGridSeason.ClientID, RadAjaxLoadingPanel1.ClientID));
-                    //        aset.UpdatedControls.Add(new AjaxUpdatedControl(rtb.ClientID, RadAjaxLoadingPanel1.ClientID));  
-                    //    }
-                    //}
-
-
                 }
                 else if (e.Item is GridDataItem)
                 {

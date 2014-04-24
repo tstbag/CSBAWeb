@@ -19,6 +19,7 @@ namespace CSBA.DataAccessLayer
         public Nullable<bool> ActiveFlg { get; set; }
         public string TeamName { get; set; }
         public Nullable<int> Points { get; set; }
+        public System.Guid PlayerGUID { get; set; }
         public string PlayerName { get; set; }
         public byte[] PlayerImage { get; set; }
         public string SecPos { get; set; }

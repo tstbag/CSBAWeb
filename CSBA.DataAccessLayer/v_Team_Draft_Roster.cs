@@ -24,5 +24,6 @@ namespace CSBA.DataAccessLayer
         public byte[] PlayerImage { get; set; }
         public string SecPos { get; set; }
         public string PrimPos { get; set; }
+        public System.Guid PlayerGUID { get; set; }
     }
 }

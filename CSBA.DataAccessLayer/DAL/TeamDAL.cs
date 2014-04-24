@@ -68,12 +68,13 @@ namespace CSBA.DataAccessLayer
             using (CSBAEntities context = new CSBAEntities())
             {
                 list = (from result in context.sp_Team_Roster_Select(SeasonID, TeamID)
-                        select new  v_Team_Draft_RosterDomainModel
+                        select new v_Team_Draft_RosterDomainModel
                         {
                             ActiveFlg = result.ActiveFlg,
                             PlayerImage = result.PlayerImage,
                             PlayerName = result.PlayerName,
                             Points = result.Points,
+                            PlayerGuid = result.PlayerGUID,
                             PrimPos = result.PrimPos,
                             SeasonID = result.SeasonID,
                             SeasonName = result.SeasonName,

@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using CSBA.Contracts;
 using CSBA.DomainModels;
+using CSBA.Contracts;
 using CSBA.DataAccessLayer;
+
 
 namespace CSBA.BusinessLogicLayer
 {
-    public class DraftPlayerBusinessLogicLayer
+    public class DraftPlayerBusinessLogicLayer : DraftPlayerIDALBLL
     {
         DraftPlayerDAL DAL = new DraftPlayerDAL();
         public List<sp_SeasonTeamDraft_Select_ResultDomainModel> DraftTeamList(int SeasonID)
@@ -25,5 +27,15 @@ namespace CSBA.BusinessLogicLayer
         {
             DAL.DraftPlayer(STP);
         }
+
+        public void TradePlayer(SeasonTeamPlayerDomainModel STP, int NewTeamID, int Points)
+        {
+            DAL.TradePlayer(STP, NewTeamID, Points);
+        }
+
+
+
+
+
     }
 }

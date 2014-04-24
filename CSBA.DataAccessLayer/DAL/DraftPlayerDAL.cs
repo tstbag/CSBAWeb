@@ -7,7 +7,7 @@ using CSBA.DomainModels;
 
 namespace CSBA.DataAccessLayer
 {
-    public class DraftPlayerDAL
+    public class DraftPlayerDAL : DraftPlayerIDALBLL
     {
 
         public List<sp_SeasonTeamDraft_Select_ResultDomainModel> DraftTeamList(int SeasonID)
@@ -78,5 +78,17 @@ namespace CSBA.DataAccessLayer
                 context.SaveChanges();
             }
         }
+
+        #region Update
+        public void TradePlayer(SeasonTeamPlayerDomainModel STP, int NewTeamID, int Points)
+        {
+            using (CSBAEntities context = new CSBAEntities())
+            {
+                context.Database.ExecuteSqlCommand("sp_Team_Roster_Update {0}, {1}, {2}, {3}, {4}", STP.SeasonID, STP.PlayerGUID, STP.TeamID, NewTeamID, Points);
+            }
+        }
+        #endregion
+
+
     }
 }

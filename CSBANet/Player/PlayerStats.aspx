@@ -17,8 +17,6 @@
             <asp:TableRow>
                 <asp:TableCell>
                     <asp:Label ID="lblSeason" runat="server" Text="Season: "></asp:Label>
-                </asp:TableCell>
-                <asp:TableCell>
                     <telerik:RadDropDownList ID="rDDSeason"
                         runat="server"
                         Skin="<%$ appSettings:Telerik.Skin%>"

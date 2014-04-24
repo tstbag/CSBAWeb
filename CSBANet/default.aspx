@@ -23,8 +23,8 @@
                 RotatorType="AutomaticAdvance" 
                 DataSourceID="ObjectDataSource1">
                 <ItemTemplate>
-                    <telerik:RadBinaryImage runat="server" ID="RadBinaryImage1" DataValue='<%#Eval("PlayerImage") %>'
-                        AutoAdjustImageControlSize="false" Height="500px" Width="500px" ToolTip='<%#Eval("PlayerName", "Photo of {0}") %>'
+                    <telerik:RadBinaryImage runat="server" CropPosition="Top" ResizeMode="Crop"  ID="RadBinaryImage1" DataValue='<%#Eval("PlayerImage") %>'
+                        AutoAdjustImageControlSize="false" Height="500px" Width="400px" ToolTip='<%#Eval("PlayerName", "Photo of {0}") %>'
                         AlternateText='<%#Eval("PlayerName", "Photo of {0}") %>'></telerik:RadBinaryImage>
                 </ItemTemplate>
             </telerik:RadRotator>

@@ -52,13 +52,14 @@
                                         <telerik:RadMenuItem Text="Team">
                                             <GroupSettings Width="300px" Height="30px" />
                                             <Items>
-                                                <telerik:RadMenuItem Text="Manage Team" NavigateUrl="../Team/ManageTeam.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
+                                                <telerik:RadMenuItem Text="Manage Team" NavigateUrl="../Team/ManageTeam.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>                                                
                                             </Items>
                                         </telerik:RadMenuItem>
                                         <telerik:RadMenuItem Text="Player">
-                                            <GroupSettings Width="300px" Height="30px" />
+                                            <GroupSettings Width="300px" Height="60px" />
                                             <Items>
                                                 <telerik:RadMenuItem Text="Manage Player" NavigateUrl="../Player/ManagePlayer.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
+                                                <telerik:RadMenuItem Text="Player Stats" NavigateUrl="../Player/PlayerStats.aspx" EnableImageSprite="true" CssClass="icon-chair"></telerik:RadMenuItem>
                                             </Items>
                                         </telerik:RadMenuItem>
                                         <telerik:RadMenuItem Text="Draft">

@@ -14,6 +14,7 @@ namespace CSBA.DomainModels
         public Nullable<bool> ActiveFlg { get; set; }
         public string TeamName { get; set; }
         public Nullable<int> Points { get; set; }
+        public Guid? PlayerGuid { get; set; }
         public string PlayerName { get; set; }
         public byte[] PlayerImage { get; set; }
         public string SecPos { get; set; }
