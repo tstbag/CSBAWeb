@@ -47,6 +47,10 @@ namespace CSBA.DataAccessLayer
         public DbSet<v_Stat_Hitter_View> v_Stat_Hitter_View { get; set; }
         public DbSet<SeasonPlayerRecycle> SeasonPlayerRecycles { get; set; }
         public DbSet<v_Team_Draft_Roster> v_Team_Draft_Roster { get; set; }
+        public DbSet<Trade> Trades { get; set; }
+        public DbSet<TradeStatu> TradeStatus { get; set; }
+        public DbSet<TradeTeam> TradeTeams { get; set; }
+        public DbSet<TradeTeamDetail> TradeTeamDetails { get; set; }
     
         public virtual int sp_Season_Delete(Nullable<int> seasonID)
         {
@@ -832,6 +836,69 @@ namespace CSBA.DataAccessLayer
                 new ObjectParameter("TeamID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Team_Roster_Select_Result>("sp_Team_Roster_Select", seasonIDParameter, teamIDParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<System.Guid>> sp_Trade_Insert(Nullable<int> seasonID, Nullable<System.DateTime> proposedDate, Nullable<int> tradeStatusID, Nullable<int> teamID)
+        {
+            var seasonIDParameter = seasonID.HasValue ?
+                new ObjectParameter("SeasonID", seasonID) :
+                new ObjectParameter("SeasonID", typeof(int));
+    
+            var proposedDateParameter = proposedDate.HasValue ?
+                new ObjectParameter("ProposedDate", proposedDate) :
+                new ObjectParameter("ProposedDate", typeof(System.DateTime));
+    
+            var tradeStatusIDParameter = tradeStatusID.HasValue ?
+                new ObjectParameter("TradeStatusID", tradeStatusID) :
+                new ObjectParameter("TradeStatusID", typeof(int));
+    
+            var teamIDParameter = teamID.HasValue ?
+                new ObjectParameter("TeamID", teamID) :
+                new ObjectParameter("TeamID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.Guid>>("sp_Trade_Insert", seasonIDParameter, proposedDateParameter, tradeStatusIDParameter, teamIDParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<System.Guid>> sp_Trade_Update(Nullable<int> seasonID, Nullable<System.Guid> tradeGUID, Nullable<System.DateTime> proposedDate, Nullable<System.DateTime> actionDate, Nullable<int> tradeStatusID, Nullable<int> teamID)
+        {
+            var seasonIDParameter = seasonID.HasValue ?
+                new ObjectParameter("SeasonID", seasonID) :
+                new ObjectParameter("SeasonID", typeof(int));
+    
+            var tradeGUIDParameter = tradeGUID.HasValue ?
+                new ObjectParameter("TradeGUID", tradeGUID) :
+                new ObjectParameter("TradeGUID", typeof(System.Guid));
+    
+            var proposedDateParameter = proposedDate.HasValue ?
+                new ObjectParameter("ProposedDate", proposedDate) :
+                new ObjectParameter("ProposedDate", typeof(System.DateTime));
+    
+            var actionDateParameter = actionDate.HasValue ?
+                new ObjectParameter("ActionDate", actionDate) :
+                new ObjectParameter("ActionDate", typeof(System.DateTime));
+    
+            var tradeStatusIDParameter = tradeStatusID.HasValue ?
+                new ObjectParameter("TradeStatusID", tradeStatusID) :
+                new ObjectParameter("TradeStatusID", typeof(int));
+    
+            var teamIDParameter = teamID.HasValue ?
+                new ObjectParameter("TeamID", teamID) :
+                new ObjectParameter("TeamID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.Guid>>("sp_Trade_Update", seasonIDParameter, tradeGUIDParameter, proposedDateParameter, actionDateParameter, tradeStatusIDParameter, teamIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_TradeData_Select_Result> sp_TradeData_Select(Nullable<int> seasonID, Nullable<System.Guid> tradeGUID)
+        {
+            var seasonIDParameter = seasonID.HasValue ?
+                new ObjectParameter("SeasonID", seasonID) :
+                new ObjectParameter("SeasonID", typeof(int));
+    
+            var tradeGUIDParameter = tradeGUID.HasValue ?
+                new ObjectParameter("TradeGUID", tradeGUID) :
+                new ObjectParameter("TradeGUID", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_TradeData_Select_Result>("sp_TradeData_Select", seasonIDParameter, tradeGUIDParameter);
         }
     }
 }

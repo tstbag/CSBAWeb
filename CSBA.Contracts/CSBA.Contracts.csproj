@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="CN\aspnet_UsersIDALBLL.cs" />
     <Compile Include="CN\DraftStadiumIDALBLL.cs" />
+    <Compile Include="CN\Trade_IDALBLL.cs" />
     <Compile Include="CN\PlayerPosition_IDALBLL.cs" />
     <Compile Include="CN\Player_IDALBLL.cs" />
     <Compile Include="CN\PositionType_IDALBLL.cs" />

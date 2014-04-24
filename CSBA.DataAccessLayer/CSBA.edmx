@@ -30,6 +30,10 @@
           <EntitySet Name="Stadium" EntityType="CSBAModel.Store.Stadium" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Stat" EntityType="CSBAModel.Store.Stat" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Team" EntityType="CSBAModel.Store.Team" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Trade" EntityType="CSBAModel.Store.Trade" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TradeStatus" EntityType="CSBAModel.Store.TradeStatus" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TradeTeam" EntityType="CSBAModel.Store.TradeTeam" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TradeTeamDetail" EntityType="CSBAModel.Store.TradeTeamDetail" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="v_SeasonTeam" EntityType="CSBAModel.Store.v_SeasonTeam" store:Type="Views" store:Schema="dbo" store:Name="v_SeasonTeam">
             <DefiningQuery>SELECT 
       [v_SeasonTeam].[SeasonID] AS [SeasonID], 
@@ -97,16 +101,16 @@
           </EntitySet>
           <EntitySet Name="v_Team_Draft_Roster" EntityType="CSBAModel.Store.v_Team_Draft_Roster" store:Type="Views" store:Schema="dbo" store:Name="v_Team_Draft_Roster">
             <DefiningQuery>SELECT 
-      [v_Team_Draft_Roster].[SeasonName] AS [SeasonName], 
       [v_Team_Draft_Roster].[SeasonID] AS [SeasonID], 
+      [v_Team_Draft_Roster].[SeasonName] AS [SeasonName], 
       [v_Team_Draft_Roster].[TeamID] AS [TeamID], 
       [v_Team_Draft_Roster].[ActiveFlg] AS [ActiveFlg], 
-      [v_Team_Draft_Roster].[TeamName] AS [TeamName], 
-      [v_Team_Draft_Roster].[Points] AS [Points], 
       [v_Team_Draft_Roster].[PlayerName] AS [PlayerName], 
       [v_Team_Draft_Roster].[PlayerImage] AS [PlayerImage], 
+      [v_Team_Draft_Roster].[Points] AS [Points], 
+      [v_Team_Draft_Roster].[PrimPos] AS [PrimPos], 
       [v_Team_Draft_Roster].[SecPos] AS [SecPos], 
-      [v_Team_Draft_Roster].[PrimPos] AS [PrimPos]
+      [v_Team_Draft_Roster].[TeamName] AS [TeamName]
       FROM [dbo].[v_Team_Draft_Roster] AS [v_Team_Draft_Roster]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_PlayerPosition_Player" Association="CSBAModel.Store.FK_PlayerPosition_Player">
@@ -184,6 +188,38 @@
           <AssociationSet Name="FK_Team_aspnet_Users" Association="CSBAModel.Store.FK_Team_aspnet_Users">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="Team" EntitySet="Team" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trade_Season" Association="CSBAModel.Store.FK_Trade_Season">
+            <End Role="Season" EntitySet="Season" />
+            <End Role="Trade" EntitySet="Trade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trade_TradeStatus" Association="CSBAModel.Store.FK_Trade_TradeStatus">
+            <End Role="TradeStatus" EntitySet="TradeStatus" />
+            <End Role="Trade" EntitySet="Trade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TradeTeam_Team" Association="CSBAModel.Store.FK_TradeTeam_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="TradeTeam" EntitySet="TradeTeam" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TradeTeam_Trade" Association="CSBAModel.Store.FK_TradeTeam_Trade">
+            <End Role="Trade" EntitySet="Trade" />
+            <End Role="TradeTeam" EntitySet="TradeTeam" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TradeTeam_TradeStatus" Association="CSBAModel.Store.FK_TradeTeam_TradeStatus">
+            <End Role="TradeStatus" EntitySet="TradeStatus" />
+            <End Role="TradeTeam" EntitySet="TradeTeam" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TradeTeamDetail_Team" Association="CSBAModel.Store.FK_TradeTeamDetail_Team">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="TradeTeamDetail" EntitySet="TradeTeamDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TradeTeamDetail_Team1" Association="CSBAModel.Store.FK_TradeTeamDetail_Team1">
+            <End Role="Team" EntitySet="Team" />
+            <End Role="TradeTeamDetail" EntitySet="TradeTeamDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TradeTeamDetail_TradeTeam" Association="CSBAModel.Store.FK_TradeTeamDetail_TradeTeam">
+            <End Role="TradeTeam" EntitySet="TradeTeam" />
+            <End Role="TradeTeamDetail" EntitySet="TradeTeamDetail" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="aspnet_Users">
@@ -340,6 +376,49 @@
           <Property Name="OwnerEmail" Type="nchar" MaxLength="25" />
           <Property Name="TeamImage" Type="image" />
         </EntityType>
+        <EntityType Name="Trade">
+          <Key>
+            <PropertyRef Name="SeasonID" />
+            <PropertyRef Name="TradeGUID" />
+          </Key>
+          <Property Name="SeasonID" Type="int" Nullable="false" />
+          <Property Name="TradeGUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ProposedDate" Type="datetime" />
+          <Property Name="ActionDate" Type="datetime" />
+          <Property Name="TradeStatusID" Type="int" />
+          <Property Name="TeamID" Type="int" />
+        </EntityType>
+        <EntityType Name="TradeStatus">
+          <Key>
+            <PropertyRef Name="TradeStatusID" />
+          </Key>
+          <Property Name="TradeStatusID" Type="int" Nullable="false" />
+          <Property Name="TradeStatusDesc" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TradeTeam">
+          <Key>
+            <PropertyRef Name="SeasonID" />
+            <PropertyRef Name="TradeGUID" />
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="SeasonID" Type="int" Nullable="false" />
+          <Property Name="TradeGUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TeamID" Type="int" Nullable="false" />
+          <Property Name="TradeStatusID" Type="int" />
+        </EntityType>
+        <EntityType Name="TradeTeamDetail">
+          <Key>
+            <PropertyRef Name="SeasonID" />
+            <PropertyRef Name="TradeGUID" />
+            <PropertyRef Name="TeamID" />
+            <PropertyRef Name="PlayerGUID" />
+          </Key>
+          <Property Name="SeasonID" Type="int" Nullable="false" />
+          <Property Name="TradeGUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TeamID" Type="int" Nullable="false" />
+          <Property Name="PlayerGUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TeamIDTarget" Type="int" />
+        </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'CSBA.dbo.v_SeasonTeam' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
@@ -436,21 +515,21 @@
       -->
         <EntityType Name="v_Team_Draft_Roster">
           <Key>
-            <PropertyRef Name="SeasonName" />
             <PropertyRef Name="SeasonID" />
+            <PropertyRef Name="SeasonName" />
             <PropertyRef Name="TeamID" />
             <PropertyRef Name="TeamName" />
           </Key>
-          <Property Name="SeasonName" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="SeasonID" Type="int" Nullable="false" />
+          <Property Name="SeasonName" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="TeamID" Type="int" Nullable="false" />
           <Property Name="ActiveFlg" Type="bit" />
-          <Property Name="TeamName" Type="nchar" Nullable="false" MaxLength="25" />
-          <Property Name="Points" Type="int" />
           <Property Name="PlayerName" Type="varchar" MaxLength="50" />
           <Property Name="PlayerImage" Type="image" />
-          <Property Name="SecPos" Type="nchar" MaxLength="20" />
+          <Property Name="Points" Type="int" />
           <Property Name="PrimPos" Type="nchar" MaxLength="20" />
+          <Property Name="SecPos" Type="nchar" MaxLength="20" />
+          <Property Name="TeamName" Type="nchar" Nullable="false" MaxLength="25" />
         </EntityType>
         <Association Name="FK_PlayerPosition_Player">
           <End Role="Player" Type="CSBAModel.Store.Player" Multiplicity="1" />
@@ -680,6 +759,108 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Trade_Season">
+          <End Role="Season" Type="CSBAModel.Store.Season" Multiplicity="1" />
+          <End Role="Trade" Type="CSBAModel.Store.Trade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Season">
+              <PropertyRef Name="SeasonID" />
+            </Principal>
+            <Dependent Role="Trade">
+              <PropertyRef Name="SeasonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trade_TradeStatus">
+          <End Role="TradeStatus" Type="CSBAModel.Store.TradeStatus" Multiplicity="0..1" />
+          <End Role="Trade" Type="CSBAModel.Store.Trade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TradeStatus">
+              <PropertyRef Name="TradeStatusID" />
+            </Principal>
+            <Dependent Role="Trade">
+              <PropertyRef Name="TradeStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TradeTeam_Team">
+          <End Role="Team" Type="CSBAModel.Store.Team" Multiplicity="1" />
+          <End Role="TradeTeam" Type="CSBAModel.Store.TradeTeam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="TradeTeam">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TradeTeam_Trade">
+          <End Role="Trade" Type="CSBAModel.Store.Trade" Multiplicity="1" />
+          <End Role="TradeTeam" Type="CSBAModel.Store.TradeTeam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trade">
+              <PropertyRef Name="SeasonID" />
+              <PropertyRef Name="TradeGUID" />
+            </Principal>
+            <Dependent Role="TradeTeam">
+              <PropertyRef Name="SeasonID" />
+              <PropertyRef Name="TradeGUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TradeTeam_TradeStatus">
+          <End Role="TradeStatus" Type="CSBAModel.Store.TradeStatus" Multiplicity="0..1" />
+          <End Role="TradeTeam" Type="CSBAModel.Store.TradeTeam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TradeStatus">
+              <PropertyRef Name="TradeStatusID" />
+            </Principal>
+            <Dependent Role="TradeTeam">
+              <PropertyRef Name="TradeStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TradeTeamDetail_Team">
+          <End Role="Team" Type="CSBAModel.Store.Team" Multiplicity="1" />
+          <End Role="TradeTeamDetail" Type="CSBAModel.Store.TradeTeamDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="TradeTeamDetail">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TradeTeamDetail_Team1">
+          <End Role="Team" Type="CSBAModel.Store.Team" Multiplicity="0..1" />
+          <End Role="TradeTeamDetail" Type="CSBAModel.Store.TradeTeamDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="TradeTeamDetail">
+              <PropertyRef Name="TeamIDTarget" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TradeTeamDetail_TradeTeam">
+          <End Role="TradeTeam" Type="CSBAModel.Store.TradeTeam" Multiplicity="1" />
+          <End Role="TradeTeamDetail" Type="CSBAModel.Store.TradeTeamDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TradeTeam">
+              <PropertyRef Name="SeasonID" />
+              <PropertyRef Name="TradeGUID" />
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="TradeTeamDetail">
+              <PropertyRef Name="SeasonID" />
+              <PropertyRef Name="TradeGUID" />
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="GetSeasonTeamOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SeasonID" Type="int" Mode="In" />
         </Function>
@@ -904,10 +1085,6 @@
           <Parameter Name="OwnerUserID" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="TeamImage" Type="image" Mode="In" />
         </Function>
-        <Function Name="sp_Team_Roster_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="SeasonID" Type="int" Mode="In" />
-          <Parameter Name="TeamID" Type="int" Mode="In" />
-        </Function>
         <Function Name="sp_Team_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TeamID" Type="int" Mode="In" />
         </Function>
@@ -918,6 +1095,24 @@
           <Parameter Name="OwnerUserID" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="OwnerEmail" Type="nchar" Mode="In" />
           <Parameter Name="TeamImage" Type="image" Mode="In" />
+        </Function>
+        <Function Name="sp_Trade_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SeasonID" Type="int" Mode="In" />
+          <Parameter Name="ProposedDate" Type="datetime" Mode="In" />
+          <Parameter Name="TradeStatusID" Type="int" Mode="In" />
+          <Parameter Name="TeamID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Trade_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SeasonID" Type="int" Mode="In" />
+          <Parameter Name="TradeGUID" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="ProposedDate" Type="datetime" Mode="In" />
+          <Parameter Name="ActionDate" Type="datetime" Mode="In" />
+          <Parameter Name="TradeStatusID" Type="int" Mode="In" />
+          <Parameter Name="TeamID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_TradeData_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SeasonID" Type="int" Mode="In" />
+          <Parameter Name="TradeGUID" Type="uniqueidentifier" Mode="In" />
         </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -1250,6 +1445,60 @@
             <Parameter Name="SeasonID" Mode="In" Type="Int32" />
             <Parameter Name="TeamID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Trades" EntityType="CSBAModel.Trade" />
+          <EntitySet Name="TradeStatus" EntityType="CSBAModel.TradeStatu" />
+          <EntitySet Name="TradeTeams" EntityType="CSBAModel.TradeTeam" />
+          <EntitySet Name="TradeTeamDetails" EntityType="CSBAModel.TradeTeamDetail" />
+          <AssociationSet Name="FK_Trade_Season" Association="CSBAModel.FK_Trade_Season">
+            <End Role="Season" EntitySet="Seasons" />
+            <End Role="Trade" EntitySet="Trades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TradeTeam_Team" Association="CSBAModel.FK_TradeTeam_Team">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="TradeTeam" EntitySet="TradeTeams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TradeTeamDetail_Team" Association="CSBAModel.FK_TradeTeamDetail_Team">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="TradeTeamDetail" EntitySet="TradeTeamDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TradeTeamDetail_Team1" Association="CSBAModel.FK_TradeTeamDetail_Team1">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="TradeTeamDetail" EntitySet="TradeTeamDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trade_TradeStatus" Association="CSBAModel.FK_Trade_TradeStatus">
+            <End Role="TradeStatu" EntitySet="TradeStatus" />
+            <End Role="Trade" EntitySet="Trades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TradeTeam_Trade" Association="CSBAModel.FK_TradeTeam_Trade">
+            <End Role="Trade" EntitySet="Trades" />
+            <End Role="TradeTeam" EntitySet="TradeTeams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TradeTeam_TradeStatus" Association="CSBAModel.FK_TradeTeam_TradeStatus">
+            <End Role="TradeStatu" EntitySet="TradeStatus" />
+            <End Role="TradeTeam" EntitySet="TradeTeams" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TradeTeamDetail_TradeTeam" Association="CSBAModel.FK_TradeTeamDetail_TradeTeam">
+            <End Role="TradeTeam" EntitySet="TradeTeams" />
+            <End Role="TradeTeamDetail" EntitySet="TradeTeamDetails" />
+          </AssociationSet>
+          <FunctionImport Name="sp_Trade_Insert" ReturnType="Collection(Guid)">
+            <Parameter Name="SeasonID" Mode="In" Type="Int32" />
+            <Parameter Name="ProposedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="TradeStatusID" Mode="In" Type="Int32" />
+            <Parameter Name="TeamID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Trade_Update" ReturnType="Collection(Guid)">
+            <Parameter Name="SeasonID" Mode="In" Type="Int32" />
+            <Parameter Name="TradeGUID" Mode="In" Type="Guid" />
+            <Parameter Name="ProposedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ActionDate" Mode="In" Type="DateTime" />
+            <Parameter Name="TradeStatusID" Mode="In" Type="Int32" />
+            <Parameter Name="TeamID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_TradeData_Select" ReturnType="Collection(CSBAModel.sp_TradeData_Select_Result)">
+            <Parameter Name="SeasonID" Mode="In" Type="Int32" />
+            <Parameter Name="TradeGUID" Mode="In" Type="Guid" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Position">
           <Key>
@@ -1277,6 +1526,7 @@
           <NavigationProperty Name="Players" Relationship="CSBAModel.SeasonPlayer" FromRole="Season" ToRole="Player" />
           <NavigationProperty Name="Stadia" Relationship="CSBAModel.SeasonStadium" FromRole="Season" ToRole="Stadium" />
           <NavigationProperty Name="SeasonTeamPlayers" Relationship="CSBAModel.FK_SeasonTeamPlayer_Season" FromRole="Season" ToRole="SeasonTeamPlayer" />
+          <NavigationProperty Name="Trades" Relationship="CSBAModel.FK_Trade_Season" FromRole="Season" ToRole="Trade" />
         </EntityType>
         <ComplexType Name="sp_Season_Select_Result">
           <Property Type="Int32" Name="SeasonID" Nullable="false" />
@@ -1501,6 +1751,9 @@
           <NavigationProperty Name="SeasonTeamStadiums" Relationship="CSBAModel.FK_SeasonTeamStadium_Team" FromRole="Team" ToRole="SeasonTeamStadium" />
           <NavigationProperty Name="aspnet_Users" Relationship="CSBAModel.FK_Team_aspnet_Users" FromRole="Team" ToRole="aspnet_Users" />
           <NavigationProperty Name="SeasonTeamPlayers" Relationship="CSBAModel.FK_SeasonTeamPlayer_Team" FromRole="Team" ToRole="SeasonTeamPlayer" />
+          <NavigationProperty Name="TradeTeams" Relationship="CSBAModel.FK_TradeTeam_Team" FromRole="Team" ToRole="TradeTeam" />
+          <NavigationProperty Name="TradeTeamDetails" Relationship="CSBAModel.FK_TradeTeamDetail_Team" FromRole="Team" ToRole="TradeTeamDetail" />
+          <NavigationProperty Name="TradeTeamDetails1" Relationship="CSBAModel.FK_TradeTeamDetail_Team1" FromRole="Team" ToRole="TradeTeamDetail" />
         </EntityType>
         <Association Name="FK_SeasonTeam_Team">
           <End Type="CSBAModel.Team" Role="Team" Multiplicity="1" />
@@ -1830,6 +2083,173 @@
           <Property Type="Binary" Name="PlayerImage" Nullable="true" MaxLength="Max" />
           <Property Type="String" Name="SecPos" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="PrimPos" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <EntityType Name="Trade">
+          <Key>
+            <PropertyRef Name="SeasonID" />
+            <PropertyRef Name="TradeGUID" />
+          </Key>
+          <Property Type="Int32" Name="SeasonID" Nullable="false" />
+          <Property Type="Guid" Name="TradeGUID" Nullable="false" />
+          <Property Type="DateTime" Name="ProposedDate" Precision="3" />
+          <Property Type="DateTime" Name="ActionDate" Precision="3" />
+          <Property Type="Int32" Name="TradeStatusID" />
+          <Property Type="Int32" Name="TeamID" />
+          <NavigationProperty Name="Season" Relationship="CSBAModel.FK_Trade_Season" FromRole="Trade" ToRole="Season" />
+          <NavigationProperty Name="TradeStatu" Relationship="CSBAModel.FK_Trade_TradeStatus" FromRole="Trade" ToRole="TradeStatu" />
+          <NavigationProperty Name="TradeTeams" Relationship="CSBAModel.FK_TradeTeam_Trade" FromRole="Trade" ToRole="TradeTeam" />
+        </EntityType>
+        <EntityType Name="TradeStatu">
+          <Key>
+            <PropertyRef Name="TradeStatusID" />
+          </Key>
+          <Property Type="Int32" Name="TradeStatusID" Nullable="false" />
+          <Property Type="String" Name="TradeStatusDesc" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Trades" Relationship="CSBAModel.FK_Trade_TradeStatus" FromRole="TradeStatu" ToRole="Trade" />
+          <NavigationProperty Name="TradeTeams" Relationship="CSBAModel.FK_TradeTeam_TradeStatus" FromRole="TradeStatu" ToRole="TradeTeam" />
+        </EntityType>
+        <EntityType Name="TradeTeam">
+          <Key>
+            <PropertyRef Name="SeasonID" />
+            <PropertyRef Name="TradeGUID" />
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Type="Int32" Name="SeasonID" Nullable="false" />
+          <Property Type="Guid" Name="TradeGUID" Nullable="false" />
+          <Property Type="Int32" Name="TeamID" Nullable="false" />
+          <Property Type="Int32" Name="TradeStatusID" />
+          <NavigationProperty Name="Team" Relationship="CSBAModel.FK_TradeTeam_Team" FromRole="TradeTeam" ToRole="Team" />
+          <NavigationProperty Name="Trade" Relationship="CSBAModel.FK_TradeTeam_Trade" FromRole="TradeTeam" ToRole="Trade" />
+          <NavigationProperty Name="TradeStatu" Relationship="CSBAModel.FK_TradeTeam_TradeStatus" FromRole="TradeTeam" ToRole="TradeStatu" />
+          <NavigationProperty Name="TradeTeamDetails" Relationship="CSBAModel.FK_TradeTeamDetail_TradeTeam" FromRole="TradeTeam" ToRole="TradeTeamDetail" />
+        </EntityType>
+        <EntityType Name="TradeTeamDetail">
+          <Key>
+            <PropertyRef Name="SeasonID" />
+            <PropertyRef Name="TradeGUID" />
+            <PropertyRef Name="TeamID" />
+            <PropertyRef Name="PlayerGUID" />
+          </Key>
+          <Property Type="Int32" Name="SeasonID" Nullable="false" />
+          <Property Type="Guid" Name="TradeGUID" Nullable="false" />
+          <Property Type="Int32" Name="TeamID" Nullable="false" />
+          <Property Type="Guid" Name="PlayerGUID" Nullable="false" />
+          <Property Type="Int32" Name="TeamIDTarget" />
+          <NavigationProperty Name="Team" Relationship="CSBAModel.FK_TradeTeamDetail_Team" FromRole="TradeTeamDetail" ToRole="Team" />
+          <NavigationProperty Name="Team1" Relationship="CSBAModel.FK_TradeTeamDetail_Team1" FromRole="TradeTeamDetail" ToRole="Team" />
+          <NavigationProperty Name="TradeTeam" Relationship="CSBAModel.FK_TradeTeamDetail_TradeTeam" FromRole="TradeTeamDetail" ToRole="TradeTeam" />
+        </EntityType>
+        <Association Name="FK_Trade_Season">
+          <End Type="CSBAModel.Season" Role="Season" Multiplicity="1" />
+          <End Type="CSBAModel.Trade" Role="Trade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Season">
+              <PropertyRef Name="SeasonID" />
+            </Principal>
+            <Dependent Role="Trade">
+              <PropertyRef Name="SeasonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TradeTeam_Team">
+          <End Type="CSBAModel.Team" Role="Team" Multiplicity="1" />
+          <End Type="CSBAModel.TradeTeam" Role="TradeTeam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="TradeTeam">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TradeTeamDetail_Team">
+          <End Type="CSBAModel.Team" Role="Team" Multiplicity="1" />
+          <End Type="CSBAModel.TradeTeamDetail" Role="TradeTeamDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="TradeTeamDetail">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TradeTeamDetail_Team1">
+          <End Type="CSBAModel.Team" Role="Team" Multiplicity="0..1" />
+          <End Type="CSBAModel.TradeTeamDetail" Role="TradeTeamDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Team">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="TradeTeamDetail">
+              <PropertyRef Name="TeamIDTarget" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trade_TradeStatus">
+          <End Type="CSBAModel.TradeStatu" Role="TradeStatu" Multiplicity="0..1" />
+          <End Type="CSBAModel.Trade" Role="Trade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TradeStatu">
+              <PropertyRef Name="TradeStatusID" />
+            </Principal>
+            <Dependent Role="Trade">
+              <PropertyRef Name="TradeStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TradeTeam_Trade">
+          <End Type="CSBAModel.Trade" Role="Trade" Multiplicity="1" />
+          <End Type="CSBAModel.TradeTeam" Role="TradeTeam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trade">
+              <PropertyRef Name="SeasonID" />
+              <PropertyRef Name="TradeGUID" />
+            </Principal>
+            <Dependent Role="TradeTeam">
+              <PropertyRef Name="SeasonID" />
+              <PropertyRef Name="TradeGUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TradeTeam_TradeStatus">
+          <End Type="CSBAModel.TradeStatu" Role="TradeStatu" Multiplicity="0..1" />
+          <End Type="CSBAModel.TradeTeam" Role="TradeTeam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TradeStatu">
+              <PropertyRef Name="TradeStatusID" />
+            </Principal>
+            <Dependent Role="TradeTeam">
+              <PropertyRef Name="TradeStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TradeTeamDetail_TradeTeam">
+          <End Type="CSBAModel.TradeTeam" Role="TradeTeam" Multiplicity="1" />
+          <End Type="CSBAModel.TradeTeamDetail" Role="TradeTeamDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TradeTeam">
+              <PropertyRef Name="SeasonID" />
+              <PropertyRef Name="TradeGUID" />
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="TradeTeamDetail">
+              <PropertyRef Name="SeasonID" />
+              <PropertyRef Name="TradeGUID" />
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_TradeData_Select_Result">
+          <Property Type="Int32" Name="SeasonID" Nullable="false" />
+          <Property Type="Guid" Name="TradeGUID" Nullable="false" />
+          <Property Type="Int32" Name="TeamID" Nullable="true" />
+          <Property Type="String" Name="TeamName" Nullable="false" MaxLength="25" />
+          <Property Type="DateTime" Name="ActionDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="ProposedDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="TradeStatusID" Nullable="true" />
+          <Property Type="String" Name="TradeStatusDesc" Nullable="true" MaxLength="20" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2474,19 +2894,79 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_Team_Roster_Select" FunctionName="CSBAModel.Store.sp_Team_Roster_Select">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CSBAModel.sp_Team_Roster_Select_Result">
-                <ScalarProperty Name="SeasonName" ColumnName="SeasonName" />
-                <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+          <EntitySetMapping Name="Trades">
+            <EntityTypeMapping TypeName="CSBAModel.Trade">
+              <MappingFragment StoreEntitySet="Trade">
                 <ScalarProperty Name="TeamID" ColumnName="TeamID" />
-                <ScalarProperty Name="ActiveFlg" ColumnName="ActiveFlg" />
+                <ScalarProperty Name="TradeStatusID" ColumnName="TradeStatusID" />
+                <ScalarProperty Name="ActionDate" ColumnName="ActionDate" />
+                <ScalarProperty Name="ProposedDate" ColumnName="ProposedDate" />
+                <ScalarProperty Name="TradeGUID" ColumnName="TradeGUID" />
+                <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="CSBAModel.Trade">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="CSBAModel.Store.sp_Trade_Insert">
+                  <ScalarProperty Name="TeamID" ParameterName="TeamID" />
+                  <ScalarProperty Name="TradeStatusID" ParameterName="TradeStatusID" />
+                  <ScalarProperty Name="ProposedDate" ParameterName="ProposedDate" />
+                  <ScalarProperty Name="SeasonID" ParameterName="SeasonID" />
+                  <ResultBinding Name="TradeGUID" ColumnName="TradeGUID" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="CSBAModel.Store.sp_Trade_Update">
+                  <ScalarProperty Name="TeamID" ParameterName="TeamID" Version="Current" />
+                  <ScalarProperty Name="TradeStatusID" ParameterName="TradeStatusID" Version="Current" />
+                  <ScalarProperty Name="ActionDate" ParameterName="ActionDate" Version="Current" />
+                  <ScalarProperty Name="ProposedDate" ParameterName="ProposedDate" Version="Current" />
+                  <ScalarProperty Name="TradeGUID" ParameterName="TradeGUID" Version="Current" />
+                  <ScalarProperty Name="SeasonID" ParameterName="SeasonID" Version="Current" />
+                </UpdateFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TradeStatus">
+            <EntityTypeMapping TypeName="CSBAModel.TradeStatu">
+              <MappingFragment StoreEntitySet="TradeStatus">
+                <ScalarProperty Name="TradeStatusDesc" ColumnName="TradeStatusDesc" />
+                <ScalarProperty Name="TradeStatusID" ColumnName="TradeStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TradeTeams">
+            <EntityTypeMapping TypeName="CSBAModel.TradeTeam">
+              <MappingFragment StoreEntitySet="TradeTeam">
+                <ScalarProperty Name="TradeStatusID" ColumnName="TradeStatusID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="TradeGUID" ColumnName="TradeGUID" />
+                <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TradeTeamDetails">
+            <EntityTypeMapping TypeName="CSBAModel.TradeTeamDetail">
+              <MappingFragment StoreEntitySet="TradeTeamDetail">
+                <ScalarProperty Name="TeamIDTarget" ColumnName="TeamIDTarget" />
+                <ScalarProperty Name="PlayerGUID" ColumnName="PlayerGUID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="TradeGUID" ColumnName="TradeGUID" />
+                <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_Trade_Insert" FunctionName="CSBAModel.Store.sp_Trade_Insert" />
+          <FunctionImportMapping FunctionImportName="sp_Trade_Update" FunctionName="CSBAModel.Store.sp_Trade_Update" />
+          <FunctionImportMapping FunctionImportName="sp_TradeData_Select" FunctionName="CSBAModel.Store.sp_TradeData_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CSBAModel.sp_TradeData_Select_Result">
+                <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+                <ScalarProperty Name="TradeGUID" ColumnName="TradeGUID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
                 <ScalarProperty Name="TeamName" ColumnName="TeamName" />
-                <ScalarProperty Name="Points" ColumnName="Points" />
-                <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
-                <ScalarProperty Name="PlayerImage" ColumnName="PlayerImage" />
-                <ScalarProperty Name="SecPos" ColumnName="SecPos" />
-                <ScalarProperty Name="PrimPos" ColumnName="PrimPos" />
+                <ScalarProperty Name="ActionDate" ColumnName="ActionDate" />
+                <ScalarProperty Name="ProposedDate" ColumnName="ProposedDate" />
+                <ScalarProperty Name="TradeStatusID" ColumnName="TradeStatusID" />
+                <ScalarProperty Name="TradeStatusDesc" ColumnName="TradeStatusDesc" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

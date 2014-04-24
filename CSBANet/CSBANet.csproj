@@ -54,6 +54,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -61,6 +62,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Telerik.Reporting, Version=7.2.14.127, Culture=neutral, PublicKeyToken=a9d7983dfcc261be" />
     <Reference Include="Telerik.Web.UI">
       <HintPath>..\lib\RCAJAX\2014.1.225.40\Telerik.Web.UI.dll</HintPath>
     </Reference>
@@ -116,6 +118,7 @@
     <Content Include="Common\WebControls\ucStadium.ascx" />
     <Content Include="Common\WebControls\ucTeamGrid.ascx" />
     <Content Include="Common\WebControls\ucTeamRoster.ascx" />
+    <Content Include="Common\WebControls\ucTrade.ascx" />
     <Content Include="Content\images\1B.jpg" />
     <Content Include="Content\images\2B.jpg" />
     <Content Include="Content\images\3B.jpg" />
@@ -143,6 +146,7 @@
     <Content Include="Stadium\ManageStadium.aspx" />
     <Content Include="Team\ManageTeam.aspx" />
     <Content Include="Team\TeamRoster.aspx" />
+    <Content Include="Trade\Trading.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -231,6 +235,13 @@
     </Compile>
     <Compile Include="Common\WebControls\ucTeamRoster.ascx.designer.cs">
       <DependentUpon>ucTeamRoster.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\WebControls\ucTrade.ascx.cs">
+      <DependentUpon>ucTrade.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\WebControls\ucTrade.ascx.designer.cs">
+      <DependentUpon>ucTrade.ascx</DependentUpon>
     </Compile>
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
@@ -331,6 +342,13 @@
     <Compile Include="Team\TeamRoster.aspx.designer.cs">
       <DependentUpon>TeamRoster.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Trade\Trading.aspx.cs">
+      <DependentUpon>Trading.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Trade\Trading.aspx.designer.cs">
+      <DependentUpon>Trading.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -350,7 +368,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CSBA.BusinessLogicLayer\CSBA.BusinessLogicLayer.csproj">
       <Project>{d393076e-29b2-4066-80d0-90a12532dd6a}</Project>
@@ -364,6 +381,9 @@
       <Project>{8f77bd17-d292-49d0-806b-74de8204daee}</Project>
       <Name>CSBA.DomainModels</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Reports\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -10,19 +10,16 @@
 namespace CSBA.DataAccessLayer
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class v_Team_Draft_Roster
+    public partial class sp_TradeData_Select_Result
     {
-        public string SeasonName { get; set; }
         public int SeasonID { get; set; }
-        public int TeamID { get; set; }
-        public Nullable<bool> ActiveFlg { get; set; }
+        public System.Guid TradeGUID { get; set; }
+        public Nullable<int> TeamID { get; set; }
         public string TeamName { get; set; }
-        public Nullable<int> Points { get; set; }
-        public string PlayerName { get; set; }
-        public byte[] PlayerImage { get; set; }
-        public string SecPos { get; set; }
-        public string PrimPos { get; set; }
+        public Nullable<System.DateTime> ActionDate { get; set; }
+        public Nullable<System.DateTime> ProposedDate { get; set; }
+        public Nullable<int> TradeStatusID { get; set; }
+        public string TradeStatusDesc { get; set; }
     }
 }

@@ -12,17 +12,16 @@ namespace CSBA.DataAccessLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class v_Team_Draft_Roster
+    public partial class TradeTeamDetail
     {
-        public string SeasonName { get; set; }
         public int SeasonID { get; set; }
+        public System.Guid TradeGUID { get; set; }
         public int TeamID { get; set; }
-        public Nullable<bool> ActiveFlg { get; set; }
-        public string TeamName { get; set; }
-        public Nullable<int> Points { get; set; }
-        public string PlayerName { get; set; }
-        public byte[] PlayerImage { get; set; }
-        public string SecPos { get; set; }
-        public string PrimPos { get; set; }
+        public System.Guid PlayerGUID { get; set; }
+        public Nullable<int> TeamIDTarget { get; set; }
+    
+        public virtual Team Team { get; set; }
+        public virtual Team Team1 { get; set; }
+        public virtual TradeTeam TradeTeam { get; set; }
     }
 }

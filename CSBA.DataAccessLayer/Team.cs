@@ -19,6 +19,9 @@ namespace CSBA.DataAccessLayer
             this.SeasonTeams = new HashSet<SeasonTeam>();
             this.SeasonTeamStadiums = new HashSet<SeasonTeamStadium>();
             this.SeasonTeamPlayers = new HashSet<SeasonTeamPlayer>();
+            this.TradeTeams = new HashSet<TradeTeam>();
+            this.TradeTeamDetails = new HashSet<TradeTeamDetail>();
+            this.TradeTeamDetails1 = new HashSet<TradeTeamDetail>();
         }
     
         public int TeamID { get; set; }
@@ -32,5 +35,8 @@ namespace CSBA.DataAccessLayer
         public virtual ICollection<SeasonTeamStadium> SeasonTeamStadiums { get; set; }
         public virtual aspnet_Users aspnet_Users { get; set; }
         public virtual ICollection<SeasonTeamPlayer> SeasonTeamPlayers { get; set; }
+        public virtual ICollection<TradeTeam> TradeTeams { get; set; }
+        public virtual ICollection<TradeTeamDetail> TradeTeamDetails { get; set; }
+        public virtual ICollection<TradeTeamDetail> TradeTeamDetails1 { get; set; }
     }
 }

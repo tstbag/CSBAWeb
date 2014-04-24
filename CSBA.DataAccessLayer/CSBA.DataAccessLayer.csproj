@@ -95,6 +95,7 @@
     <Compile Include="DAL\StadiumDAL.cs" />
     <Compile Include="DAL\StatDAL.cs" />
     <Compile Include="DAL\TeamDAL.cs" />
+    <Compile Include="DAL\TradeDAL.cs" />
     <Compile Include="GetSeasonTeamOrder_Result.cs">
       <DependentUpon>CSBA.tt</DependentUpon>
     </Compile>
@@ -174,6 +175,9 @@
     <Compile Include="sp_Team_Select_Result.cs">
       <DependentUpon>CSBA.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_TradeData_Select_Result.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
     <Compile Include="Stadium.cs">
       <DependentUpon>CSBA.tt</DependentUpon>
     </Compile>
@@ -181,6 +185,18 @@
       <DependentUpon>CSBA.tt</DependentUpon>
     </Compile>
     <Compile Include="Team.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Trade.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TradeStatu.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TradeTeam.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TradeTeamDetail.cs">
       <DependentUpon>CSBA.tt</DependentUpon>
     </Compile>
     <Compile Include="v_SeasonTeam.cs">

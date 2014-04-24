@@ -72,6 +72,7 @@
     <Compile Include="BLL\StadiumBusinessLogic.cs" />
     <Compile Include="BLL\StatBusinessLogic.cs" />
     <Compile Include="BLL\TeamBusinessLogicLayer.cs" />
+    <Compile Include="BLL\TradeBusinessLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

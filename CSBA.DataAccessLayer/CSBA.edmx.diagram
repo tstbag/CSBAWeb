@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8682376062234f3880b8f0b9321e9ba6" Name="Diagram1" ZoomLevel="106">
+      <Diagram DiagramId="8682376062234f3880b8f0b9321e9ba6" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="CSBAModel.Position" Width="2.125" PointX="5.875" PointY="4.25" IsExpanded="true" FillColor="0, 192, 0" />
         <EntityTypeShape EntityType="CSBAModel.Season" Width="1.5" PointX="1.25" PointY="17.125" IsExpanded="true" FillColor="0, 192, 0" />
         <EntityTypeShape EntityType="CSBAModel.v_SeasonView" Width="1.5" PointX="22.375" PointY="1.5" />
@@ -39,8 +39,20 @@
         <AssociationConnector Association="CSBAModel.FK_Stat_PositionType" />
         <AssociationConnector Association="CSBAModel.FK_SeasonPlayerPositionStat_Stat" />
         <EntityTypeShape EntityType="CSBAModel.v_Stat_Hitter_View" Width="1.5" PointX="3.9428645092727916" PointY="20.689767996170449" />
-        <EntityTypeShape EntityType="CSBAModel.SeasonPlayerRecycle" Width="1.5" PointX="2.4659401282975173" PointY="12.848745694779208" />
+        <EntityTypeShape EntityType="CSBAModel.SeasonPlayerRecycle" Width="2.375" PointX="2.5" PointY="12.875" />
         <EntityTypeShape EntityType="CSBAModel.v_Team_Draft_Roster" Width="1.5" PointX="6.6260642998973207" PointY="30.327781423147666" />
+        <EntityTypeShape EntityType="CSBAModel.Trade" Width="1.5" PointX="13.375" PointY="28" />
+        <EntityTypeShape EntityType="CSBAModel.TradeStatu" Width="1.5" PointX="16.25" PointY="32" />
+        <EntityTypeShape EntityType="CSBAModel.TradeTeam" Width="1.5" PointX="12.25" PointY="36" />
+        <EntityTypeShape EntityType="CSBAModel.TradeTeamDetail" Width="2.25" PointX="5.875" PointY="35.875" />
+        <AssociationConnector Association="CSBAModel.FK_Trade_Season" />
+        <AssociationConnector Association="CSBAModel.FK_TradeTeam_Team" />
+        <AssociationConnector Association="CSBAModel.FK_TradeTeamDetail_Team" />
+        <AssociationConnector Association="CSBAModel.FK_TradeTeamDetail_Team1" />
+        <AssociationConnector Association="CSBAModel.FK_Trade_TradeStatus" />
+        <AssociationConnector Association="CSBAModel.FK_TradeTeam_Trade" />
+        <AssociationConnector Association="CSBAModel.FK_TradeTeam_TradeStatus" />
+        <AssociationConnector Association="CSBAModel.FK_TradeTeamDetail_TradeTeam" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

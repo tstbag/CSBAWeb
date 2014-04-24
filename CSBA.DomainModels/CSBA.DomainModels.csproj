@@ -67,6 +67,8 @@
     <Compile Include="DM\StadiumDomainModel.cs" />
     <Compile Include="DM\StatDomainModel.cs" />
     <Compile Include="DM\TeamDomainModel.cs" />
+    <Compile Include="DM\TradeDataDomainModel.cs" />
+    <Compile Include="DM\TradeDomainModel.cs" />
     <Compile Include="DM\v_PlayerPositionDomainModel.cs" />
     <Compile Include="DM\v_Stat_Hitter_ViewDomainModel.cs" />
     <Compile Include="DM\v_Team_Draft_RosterDomainModel.cs" />

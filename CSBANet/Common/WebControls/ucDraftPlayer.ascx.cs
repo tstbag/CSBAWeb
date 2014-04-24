@@ -308,10 +308,10 @@ namespace CSBANet.Common.WebControls
 
         public void Timer1_Tick(object sender, EventArgs e)
         {
-            rGridDraftPlayer.Rebind();
-            int icnt = Convert.ToInt32(iCountDown.Text);
-            icnt = icnt - 1;
-            iCountDown.Text = icnt.ToString();
+            //rGridDraftPlayer.Rebind();
+            //int icnt = Convert.ToInt32(iCountDown.Text);
+            //icnt = icnt - 1;
+            //iCountDown.Text = icnt.ToString();
 
         }
 
