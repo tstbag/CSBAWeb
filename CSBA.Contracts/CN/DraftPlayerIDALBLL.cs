@@ -12,6 +12,7 @@ namespace CSBA.Contracts
         PickAPlayerDomainModel PickAPLayer(int SeasonID);
         void DraftPlayer(SeasonTeamPlayerDomainModel STP);
         void TradePlayer(SeasonTeamPlayerDomainModel STP, int NewTeamID, int Points);
+        DraftStatusDomainModel DraftStatus(int SeasonID);
 
     }
 }

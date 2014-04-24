@@ -8,9 +8,7 @@
     AllowSorting="False"
     Skin="<%$ appSettings:Telerik.Skin%>"
     CellSpacing="0"
-    GridLines="None"
-    AllowMultiRowEdit="True"
-    AllowMultiRowSelection="True">
+    GridLines="Both">
     <PagerStyle />
     <GroupingSettings CaseSensitive="False" RetainGroupFootersVisibility="true" />
 

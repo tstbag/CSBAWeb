@@ -32,10 +32,10 @@ namespace CSBA.BusinessLogicLayer
         {
             DAL.TradePlayer(STP, NewTeamID, Points);
         }
-
-
-
-
-
+        
+        public DraftStatusDomainModel DraftStatus(int SeasonID)
+        {
+            return DAL.DraftStatus(SeasonID);
+        }
     }
 }

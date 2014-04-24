@@ -38,6 +38,23 @@ namespace CSBA.DataAccessLayer
             return listTeams;
         }
 
+        public DraftStatusDomainModel DraftStatus(int SeasonID)
+        {
+            DraftStatusDomainModel dStatus = new DraftStatusDomainModel();
+
+            using (CSBAEntities context = new CSBAEntities())
+            {
+                dStatus = (from result in context.DraftPlayerStatus(SeasonID)
+                           select new DraftStatusDomainModel
+                             {
+                                  SeaonPlayerTotal = result.SeaonPlayerTotal,
+                                  SeasonPlayerDrafted = result.SeasonPlayerDrafted
+                             }).FirstOrDefault();
+            } // Guaranteed to close the Connection
+
+            return dStatus;
+        }
+
         public PickAPlayerDomainModel PickAPLayer(int SeasonID)
         {
             PickAPlayerDomainModel PickPlayer = new PickAPlayerDomainModel();

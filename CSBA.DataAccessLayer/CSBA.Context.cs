@@ -925,5 +925,14 @@ namespace CSBA.DataAccessLayer
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Team_Roster_Update", seasonIDParameter, playerGUIDParameter, teamIDParameter, newTeamIDParameter, pointsParameter);
         }
+    
+        public virtual ObjectResult<DraftPlayerStatus_Result> DraftPlayerStatus(Nullable<int> seasonID)
+        {
+            var seasonIDParameter = seasonID.HasValue ?
+                new ObjectParameter("SeasonID", seasonID) :
+                new ObjectParameter("SeasonID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DraftPlayerStatus_Result>("DraftPlayerStatus", seasonIDParameter);
+        }
     }
 }

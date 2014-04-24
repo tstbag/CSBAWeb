@@ -864,6 +864,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="DraftPlayerStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SeasonID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetSeasonTeamOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SeasonID" Type="int" Mode="In" />
         </Function>
@@ -1519,6 +1522,9 @@
             <Parameter Name="TeamID" Mode="In" Type="Int32" />
             <Parameter Name="NewTeamID" Mode="In" Type="Int32" />
             <Parameter Name="Points" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DraftPlayerStatus" ReturnType="Collection(CSBAModel.DraftPlayerStatus_Result)">
+            <Parameter Name="SeasonID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="Position">
@@ -2275,6 +2281,10 @@
           <Property Type="String" Name="SecPos" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="PrimPos" Nullable="true" MaxLength="20" />
         </ComplexType>
+        <ComplexType Name="DraftPlayerStatus_Result">
+          <Property Type="Int32" Name="SeaonPlayerTotal" Nullable="true" />
+          <Property Type="Int32" Name="SeasonPlayerDrafted" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3013,6 +3023,14 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_Team_Roster_Update" FunctionName="CSBAModel.Store.sp_Team_Roster_Update" />
+          <FunctionImportMapping FunctionImportName="DraftPlayerStatus" FunctionName="CSBAModel.Store.DraftPlayerStatus">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CSBAModel.DraftPlayerStatus_Result">
+                <ScalarProperty Name="SeaonPlayerTotal" ColumnName="SeaonPlayerTotal" />
+                <ScalarProperty Name="SeasonPlayerDrafted" ColumnName="SeasonPlayerDrafted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

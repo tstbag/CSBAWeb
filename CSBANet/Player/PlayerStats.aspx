@@ -17,6 +17,8 @@
             <asp:TableRow>
                 <asp:TableCell>
                     <asp:Label ID="lblSeason" runat="server" Text="Season: "></asp:Label>
+                </asp:TableCell>
+                <asp:TableCell>
                     <telerik:RadDropDownList ID="rDDSeason"
                         runat="server"
                         Skin="<%$ appSettings:Telerik.Skin%>"
@@ -24,8 +26,7 @@
                         AutoPostBack="true">
                     </telerik:RadDropDownList>
                 </asp:TableCell>
-            </asp:TableRow>
-            <asp:TableRow>
+
                 <asp:TableCell>
                     <asp:Label ID="lblPositionType" runat="server" Text="Position Type: "></asp:Label>
                 </asp:TableCell>

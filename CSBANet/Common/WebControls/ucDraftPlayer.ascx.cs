@@ -39,6 +39,11 @@ namespace CSBANet.Common.WebControls
             rDDSeason.DataTextField = "SeasonName";
             rDDSeason.DataBind();
 
+            DraftStatusDomainModel DraftStatus = new DraftStatusDomainModel();
+
+            DraftStatus = DraftPlayerBLL.DraftStatus(Convert.ToInt32(rDDSeason.SelectedValue));
+            rLGStatus.Scale.Max = (decimal)DraftStatus.SeaonPlayerTotal;
+            rLGStatus.Pointer.Value = (decimal)DraftStatus.SeasonPlayerDrafted;
 
         }
 

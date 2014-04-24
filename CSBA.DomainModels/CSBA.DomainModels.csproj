@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DM\aspnet_UsersDomainModel.cs" />
+    <Compile Include="DM\DraftStatusDomainModel.cs" />
     <Compile Include="DM\PickAPlayerDomainModel.cs" />
     <Compile Include="DM\PlayerDomainModel.cs" />
     <Compile Include="DM\PlayerPositionDomainModel.cs" />
