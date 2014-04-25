@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.IO;
 using System.Web.Security;
+using System.Text;
 using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Diagnostics;
@@ -15,6 +16,7 @@ using CSBA.Contracts;
 using CSBA.DomainModels;
 using Telerik.Web.UI;
 using Telerik.Web.UI.ImageEditor;
+using CSBA.App_Code;
 
 namespace CSBANet.Common.WebControls
 {
@@ -23,11 +25,7 @@ namespace CSBANet.Common.WebControls
         SeasonBusinessLogic SeasonBLL = new SeasonBusinessLogic();
         SeasonTeamBusinessLogic SeasonTeamBLL = new SeasonTeamBusinessLogic();
         DraftPlayerBusinessLogicLayer DraftPlayerBLL = new DraftPlayerBusinessLogicLayer();
-
         PlayerDomainModel PagePlayer = new PlayerDomainModel();
-
-
-
         PickAPlayerDomainModel PlayerDrafted = new PickAPlayerDomainModel();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -44,6 +42,7 @@ namespace CSBANet.Common.WebControls
             DraftStatus = DraftPlayerBLL.DraftStatus(Convert.ToInt32(rDDSeason.SelectedValue));
             rLGStatus.Scale.Max = (decimal)DraftStatus.SeaonPlayerTotal;
             rLGStatus.Pointer.Value = (decimal)DraftStatus.SeasonPlayerDrafted;
+            rLGStatus.ToolTip = string.Format("Players Drafted: {0}, Players Total: {1}", rLGStatus.Pointer.Value, rLGStatus.Scale.Max);
 
         }
 
@@ -209,7 +208,81 @@ namespace CSBANet.Common.WebControls
 
         protected void rGridDraftPlayer_ItemCommand(object sender, GridCommandEventArgs e)
         {
+            if (e.CommandName == "EmailRosters")
+            {
+                foreach (GridDataItem item in rGridDraftPlayer.Items)
+                {
+                    try
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        TeamBusinessLogicLayer TeamBLL = new TeamBusinessLogicLayer();
+                        RadButton rBTNTeamName = (RadButton)item.FindControl("rBTNTeamName");
+                        Label lblOwnerEmail = (Label)item.FindControl("lblOwnerEmail");
+                        Label lblTeamID = (Label)item.FindControl("lblTeamID");
+                        List<v_Team_Draft_RosterDomainModel> TeamDraft = TeamBLL.ListTeamRoster(Convert.ToInt32(rDDSeason.SelectedValue), Convert.ToInt32(lblTeamID.Text));
 
+                        sb.Append("<table><p class=border>");
+                        sb.Append("<tr>");
+                        sb.Append("<td><b><p class=border>");
+                        sb.Append("Player Name");
+                        sb.Append("</b></td>");
+                        sb.Append("<td><b><p class=border>");
+                        sb.Append("Primary Position  ");
+                        sb.Append("</b></td>");
+                        sb.Append("<td><b><p class=border>");
+                        sb.Append("Secondary Position  ");
+                        sb.Append("</b></td>");
+                        sb.Append("<td><b><p class=border>");
+                        sb.Append("Points   ");
+                        sb.Append("</b></td>");
+
+                        foreach (v_Team_Draft_RosterDomainModel TeamPlayer in TeamDraft)
+                        {
+                            sb.Append("<tr>");
+                            sb.Append("<td>");
+                            sb.Append("<div align=left><p class=border>");
+                            sb.Append(TeamPlayer.PlayerName.Trim());
+                            sb.Append("</td>");
+                            sb.Append("<td>");
+                            sb.Append("<div align=left><p class=border>");
+                            sb.Append(TeamPlayer.PrimPos.Trim());
+                            sb.Append("</td>");
+                            sb.Append("<td>");
+                            sb.Append("<div align=left><p class=border>");
+                            if (TeamPlayer.SecPos == null)
+                            {
+                                sb.Append("n/a");
+                            }
+                            else
+                            {
+                                sb.Append(TeamPlayer.SecPos.Trim());
+                            }
+                            sb.Append("</td>");
+                            sb.Append("<td>");
+                            sb.Append("<div align=right><p class=border>");
+                            sb.Append(TeamPlayer.Points.ToString().Trim());
+                            sb.Append("</td>");
+                            sb.Append("</tr>");
+                        }
+
+                        sb.Append("</table>");
+
+                        string[,] MergeValues = new string[,] { { "{TeamName}", rBTNTeamName.Text.Trim() }, { "{TeamRoster}", sb.ToString() } };
+
+                        cMail.SendMessage("noreply@CSBA.com", lblOwnerEmail.Text.ToString().Trim(), "CSBA Roster", cMail.PopulateBody("~/Content/EmailTemplates/DraftRoster.html", MergeValues));
+                    }
+                    catch (Exception ex)
+                    {
+                        StackTrace st = new StackTrace();
+                        StackFrame sf = st.GetFrame(0);
+                        string errMethod = sf.GetMethod().Name.ToString();  // Get the current method name
+                        string errMsg = "600";                              // Gotta pass something, we're retro-fitting an existing method
+                        Session["LastException"] = ex;                      // Throw the exception in the session variable, will be used in error page
+                        string url = string.Format(ConfigurationManager.AppSettings["ErrorPageURL"], errMethod, errMsg); //Set the URL
+                        Response.Redirect(url);                             // Go to the error page.
+                    }
+                }
+            }
         }
 
         protected void rBTNPickPlayer_Click(object sender, EventArgs e)
@@ -225,14 +298,14 @@ namespace CSBANet.Common.WebControls
                     hddPlayerGUID.Value = PlayerDrafted.PlayerGUID.ToString();
                     hddPrimPosID.Value = PlayerDrafted.PrimPositionTypeID.ToString();
                     imgPlayer.DataValue = PlayerDrafted.PlayerImage;
-                    imgPositon.ImageUrl = "~/Content/images/" + PlayerDrafted.PrimPositionName.Trim() + ".jpg" ;
+                    imgPositon.ImageUrl = "~/Content/images/" + PlayerDrafted.PrimPositionName.Trim() + ".jpg";
 
                     lblCurrPlayer.Text = PlayerDrafted.PlayerName;
 
                     imgPlayer.Visible = true;
                     imgPositon.Visible = true;
                     lblCurrPlayer.Visible = true;
-                    rBTNAssign.Enabled = true; 
+                    rBTNAssign.Enabled = true;
 
                     BindStatsGrid(PlayerDrafted);
                     LoadrDDSeasonTeam();
@@ -287,7 +360,7 @@ namespace CSBANet.Common.WebControls
                 DraftPlayerBLL.DraftPlayer(STP);
             }
             RepaintScreen();
-            
+
         }
 
         protected void rBTNEmptyRecycleBin_Click(object sender, EventArgs e)

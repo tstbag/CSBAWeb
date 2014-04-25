@@ -119,6 +119,7 @@
     <Content Include="Common\WebControls\ucTeamGrid.ascx" />
     <Content Include="Common\WebControls\ucTeamRoster.ascx" />
     <Content Include="Common\WebControls\ucTrade.ascx" />
+    <Content Include="Content\EmailTemplates\DraftRoster.html" />
     <Content Include="Content\images\1B.jpg" />
     <Content Include="Content\images\2B.jpg" />
     <Content Include="Content\images\3B.jpg" />
@@ -159,6 +160,7 @@
     <Compile Include="Account\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Code\cEmail.cs" />
     <Compile Include="Common\WebControls\ucDraftPlayer.ascx.cs">
       <DependentUpon>ucDraftPlayer.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -417,7 +419,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties UseJQuerySupport="True" UseAjaxifiedTemplates="True" />
+      <UserProperties UseAjaxifiedTemplates="True" UseJQuerySupport="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

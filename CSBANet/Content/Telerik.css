@@ -20,6 +20,8 @@
     font-weight: bold;
     font-family: Helvetica;
     text-align: center;
+    white-space: normal;
+    max-width: 100%;
 }
 
 .Labels {

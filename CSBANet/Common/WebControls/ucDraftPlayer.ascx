@@ -8,10 +8,29 @@
             $find('<%=RadAjaxManager1.ClientID %>').ajaxRequest();
         }
     </script>
+    <script type="text/javascript">
+        function onToolBarClientButtonClicking(sender, args) {
+            var button = args.get_item();
+            if (button.get_commandName() == "EmailRosters") {
+                args.set_cancel(!confirm('Email the owners the current rosters?'));
+            }
+        }
+    </script>
 </telerik:RadScriptBlock>
 
 
 <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
+
+    <AjaxSettings>
+        <telerik:AjaxSetting AjaxControlID="Timer1">
+            <UpdatedControls>
+                <telerik:AjaxUpdatedControl ControlID="rNTBCurrBid"></telerik:AjaxUpdatedControl>
+                <telerik:AjaxUpdatedControl ControlID="rDDSeasonTeam" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
+                <telerik:AjaxUpdatedControl ControlID="rGridDraftPlayer" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
+            </UpdatedControls>
+        </telerik:AjaxSetting>
+    </AjaxSettings>
+
     <AjaxSettings>
         <telerik:AjaxSetting AjaxControlID="rNTBCurrBid">
             <UpdatedControls>
@@ -67,16 +86,13 @@
 
 <asp:Panel ID="pnlDraftPlayer" runat="server" Height="455px">
     <div style="float: left; padding-left: 5px; width: 47%; height: 100%;">
-        <asp:Table ID="tblTest" runat="server" Width="100%">
+        <asp:Table ID="tblTest" runat="server" Width="100%" Height="100%">
             <asp:TableRow>
-                <asp:TableCell Width="50%">
-
-                </asp:TableCell>
-                <asp:TableCell Width="50%">
+                <asp:TableCell Width="100%" ColumnSpan="2">
                     <asp:HiddenField ID="hddSeasonID" runat="server" />
                     <asp:HiddenField ID="hddPlayerGUID" runat="server" />
                     <asp:HiddenField ID="hddPrimPosID" runat="server" />
-                    <asp:Label ID="lblCurrPlayer" runat="server" Text="Player Name" Width="260px" Visible="false" CssClass="LargerLabels"></asp:Label>
+                    <asp:Label ID="lblCurrPlayer" runat="server" Text="Player Name" Width="100%" Visible="false" CssClass="LargerLabels"></asp:Label>
                 </asp:TableCell>
 
             </asp:TableRow>
@@ -149,11 +165,37 @@
                 BorderWidth="1px" />
             <GroupingSettings CaseSensitive="False" />
             <MasterTableView DataKeyNames="SeasonID, TeamID"
-                CommandItemDisplay="None" AllowSorting="true"
+                CommandItemDisplay="Top" AllowSorting="true"
                 EditMode="InPlace"
                 EnableHeaderContextAggregatesMenu="True"
                 EnableHeaderContextFilterMenu="True"
                 EnableHeaderContextMenu="True">
+
+
+
+                <CommandItemTemplate>
+                    <telerik:RadToolBar ID="RadToolBar1" runat="server" OnClientButtonClicking="onToolBarClientButtonClicking"
+                        AutoPostBack="true">
+                        <Items>
+                            <telerik:RadToolBarButton Text="Email Rosters" CommandName="EmailRosters">
+                            </telerik:RadToolBarButton>
+                        </Items>
+                    </telerik:RadToolBar>
+                </CommandItemTemplate>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <Columns>
 
                     <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderText="Season ID" Visible="false" DataField="SeasonID" UniqueName="SeasonID">
@@ -165,6 +207,12 @@
                     <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderText="Team ID" Visible="false" DataField="TeamID" UniqueName="TeamID">
                         <ItemTemplate>
                             <asp:Label ID="lblTeamID" runat="server" Visible="false" Text='<%# DataBinder.Eval(Container, "DataItem.TeamID") %>'></asp:Label>
+                        </ItemTemplate>
+                    </telerik:GridTemplateColumn>
+
+                    <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderText="OwnerEmail" Visible="false" DataField="OwnerEmail" UniqueName="OwnerEmail">
+                        <ItemTemplate>
+                            <asp:Label ID="lblOwnerEmail" runat="server" Visible="false" Text='<%# DataBinder.Eval(Container, "DataItem.OwnerEmail") %>'></asp:Label>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
 
@@ -214,6 +262,12 @@
         <uc1:ucPlayerStats runat="server" ID="ucPlayerStats" />
     </div>
 </asp:Panel>
+
+    <asp:Panel ID="pnlTimer" runat="server">
+        <asp:Timer ID="Timer1" runat="server" Interval="3000" OnTick="Timer1_Tick">
+        </asp:Timer>
+    </asp:Panel>
+
 
 <asp:Label ID="lblMessage" runat="server">
 

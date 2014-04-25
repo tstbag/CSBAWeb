@@ -17,8 +17,8 @@
                 ItemHeight="550px"
                 ItemWidth="560px"
                 Skin="<%$ appSettings:Telerik.Skin%>"
-                ScrollDuration="300" EnableRandomOrder="true"
-                FrameDuration="500"
+                ScrollDuration="800" EnableRandomOrder="true"
+                FrameDuration="1000"
                 SlideShowAnimation-Type="CrossFade" 
                 RotatorType="AutomaticAdvance" 
                 DataSourceID="ObjectDataSource1">
