@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Login.aspx" />
+    <Content Include="Account\ResetPassword.aspx" />
     <Content Include="App_Data\RadCaptcha\0.wav" />
     <Content Include="App_Data\RadCaptcha\1.wav" />
     <Content Include="App_Data\RadCaptcha\2.wav" />
@@ -112,6 +113,7 @@
     <Content Include="Common\WebControls\ucDraftStadium.ascx" />
     <Content Include="Common\WebControls\ucPlayerGrid.ascx" />
     <Content Include="Common\WebControls\ucPlayerStats.ascx" />
+    <Content Include="Common\WebControls\ucPosition.ascx" />
     <Content Include="Common\WebControls\ucSeasonPlayer.ascx" />
     <Content Include="Common\WebControls\ucSeasonStadium.ascx" />
     <Content Include="Common\WebControls\ucSeasonTeamOrder.ascx" />
@@ -138,8 +140,10 @@
     <Content Include="Draft\DraftPlayer.aspx" />
     <Content Include="Draft\DraftStadium.aspx" />
     <Content Include="ErrorPage.aspx" />
+    <Content Include="Global.asax" />
     <Content Include="Player\ManagePlayer.aspx" />
     <Content Include="Player\PlayerStats.aspx" />
+    <Content Include="Position\ManagePosition.aspx" />
     <Content Include="Season\ManageSeasonPlayer.aspx" />
     <Content Include="Season\ManageSeasonStadium.aspx" />
     <Content Include="Season\ManageSeasonTeam.aspx" />
@@ -159,6 +163,13 @@
     </Compile>
     <Compile Include="Account\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ResetPassword.aspx.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ResetPassword.aspx.designer.cs">
+      <DependentUpon>ResetPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Code\cEmail.cs" />
     <Compile Include="Common\WebControls\ucDraftPlayer.ascx.cs">
@@ -188,6 +199,13 @@
     </Compile>
     <Compile Include="Common\WebControls\ucPlayerStats.ascx.designer.cs">
       <DependentUpon>ucPlayerStats.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Common\WebControls\ucPosition.ascx.cs">
+      <DependentUpon>ucPosition.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Common\WebControls\ucPosition.ascx.designer.cs">
+      <DependentUpon>ucPosition.ascx</DependentUpon>
     </Compile>
     <Compile Include="Common\WebControls\ucSeason.ascx.cs">
       <DependentUpon>ucSeason.ascx</DependentUpon>
@@ -273,6 +291,9 @@
     <Compile Include="ErrorPage.aspx.designer.cs">
       <DependentUpon>ErrorPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Master\Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -293,6 +314,13 @@
     </Compile>
     <Compile Include="Player\PlayerStats.aspx.designer.cs">
       <DependentUpon>PlayerStats.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Position\ManagePosition.aspx.cs">
+      <DependentUpon>ManagePosition.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Position\ManagePosition.aspx.designer.cs">
+      <DependentUpon>ManagePosition.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Season\ManageSeasonPlayer.aspx.cs">

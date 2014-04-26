@@ -30,8 +30,16 @@ namespace CSBANet.Common.WebControls
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["time"] = DateTime.Now.AddSeconds(40);
+            if (!Roles.IsUserInRole(Page.User.Identity.Name, "CSBA_Admin"))
+            {
+                rBTNAssign.Enabled = false;
+                rBTNPickPlayer.Enabled = false;
+                rDDSeasonTeam.Enabled = false;
+                rBTNEmptyRecycleBin.Enabled = false;
+                rBTNEmptyRecycleBin.Visible = false;
+            }
 
+            Session["time"] = DateTime.Now.AddSeconds(40);
             rDDSeason.DataSource = SeasonBLL.ListSeason();
             rDDSeason.DataValueField = "SeasonID";
             rDDSeason.DataTextField = "SeasonName";
@@ -44,22 +52,10 @@ namespace CSBANet.Common.WebControls
             rLGStatus.Pointer.Value = (decimal)DraftStatus.SeasonPlayerDrafted;
             rLGStatus.ToolTip = string.Format("Players Drafted: {0}, Players Total: {1}", rLGStatus.Pointer.Value, rLGStatus.Scale.Max);
 
+
+
+
         }
-
-        //protected void Timer1_Tick(object sender, EventArgs e)
-        //{
-        //    TimeSpan time1 = new TimeSpan();
-        //    time1 = (DateTime)Session["time"] - DateTime.Now;
-        //    if (time1.Seconds <= 0)
-        //    {
-        //        Label1.Text = "TimeOut!";
-        //    }
-        //    else
-        //    {
-        //        Label1.Text = time1.Seconds.ToString();
-        //    }
-
-        //}
 
         protected void LoadrDDSeasonTeam()
         {
@@ -199,10 +195,12 @@ namespace CSBANet.Common.WebControls
         {
             bool ReturnVal = true;
 
+            //  Check for violation of Max Bid
             if (MaxBid < Convert.ToInt32(rNTBCurrBid.Value))
             {
                 ReturnVal = false;
             }
+
             return ReturnVal;
         }
 
@@ -310,6 +308,7 @@ namespace CSBANet.Common.WebControls
                     BindStatsGrid(PlayerDrafted);
                     LoadrDDSeasonTeam();
 
+                    Application.Add("CurrentPlayer", PlayerDrafted);
                     rNTBCurrBid.Value = 2;
                 }
                 else
@@ -328,6 +327,8 @@ namespace CSBANet.Common.WebControls
                 Response.Redirect(url);                             // Go to the error page.
             }
         }
+
+
 
         protected void rNTBCurrBid_TextChanged(object sender, EventArgs e)
         {

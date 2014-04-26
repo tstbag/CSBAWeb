@@ -1,8 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPlayerGrid.ascx.cs" Inherits="CSBANet.Common.WebControls.ucPlayerGrid" %>
-
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
-
-
 
 <telerik:RadScriptBlock ID="RadScriptBlock1" runat="server">
     <script type="text/javascript">

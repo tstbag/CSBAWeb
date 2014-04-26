@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Diagnostics;
 using System.Text;
+using System.Web.Security;
 using CSBA.BusinessLogicLayer;
 using CSBA.Contracts;
 using CSBA.DomainModels;
@@ -29,6 +30,12 @@ namespace CSBANet.Common.WebControls
             if (!IsPostBack)
             {
                 SetupListBoxes();
+            }
+
+            if (!Roles.IsUserInRole(Page.User.Identity.Name, "CSBA_Admin"))
+            {
+                rBTNSaveChanges.Enabled = false;
+                rBTNCancel.Enabled = false;
             }
         }
 

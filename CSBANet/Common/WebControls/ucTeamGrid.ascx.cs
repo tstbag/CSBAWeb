@@ -53,13 +53,6 @@ namespace CSBANet.Common.WebControls
         {
             try
             {
-                //if (e.Item is GridEditFormInsertItem || e.Item is GridDataInsertItem)
-
-                if (e.Item is GridDataItem)
-                {
-
-                }
-
                 if (e.Item is GridEditFormInsertItem)
                 {
                     GridEditFormInsertItem dataItem = e.Item as GridEditFormInsertItem;
@@ -81,9 +74,7 @@ namespace CSBANet.Common.WebControls
                     rDDUserName.DataTextField = "UserName";
                     rDDUserName.DataBind();
                     rDDUserName.SelectedValue = DataBinder.Eval(dataItem.DataItem, "OwnerUserID").ToString();
-
-
-
+                    
                 }
                 else if (e.Item is GridDataItem)
                 {

@@ -7,6 +7,7 @@ using System.IO;
 using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Diagnostics;
+using System.Web.Security;
 using System.Text;
 using CSBA.BusinessLogicLayer;
 using CSBA.Contracts;
@@ -62,21 +63,13 @@ namespace CSBANet.Common.WebControls
                 {
                     GridDataItem dataItem = e.Item as GridDataItem;
 
-                    //RadDropDownList rDDPrimPosition = (RadDropDownList)dataItem.FindControl("rDDPrimPosition");
-                    //rDDPrimPosition.DataSource = PosBLL.ListPositions();
-                    //rDDPrimPosition.DataValueField = "PositionID";
-                    //rDDPrimPosition.DataTextField = "PositionNameLong";
-                    //rDDPrimPosition.DataBind();
-
-                    //rDDPrimPosition.SelectedValue = DataBinder.Eval(dataItem.DataItem, "PrimaryPositionID").ToString();
-
-                    //RadDropDownList rDDSecPosition = (RadDropDownList)dataItem.FindControl("rDDSecPosition");
-                    //rDDSecPosition.DataSource = PosBLL.ListPositions();
-                    //rDDSecPosition.DataValueField = "PositionID";
-                    //rDDSecPosition.DataTextField = "PositionNameLong";
-                    //rDDSecPosition.DataBind();
-
-                    //rDDSecPosition.SelectedValue = DataBinder.Eval(dataItem.DataItem, "SecondaryPostiionID").ToString();
+                    if (!Roles.IsUserInRole(Page.User.Identity.Name, "CSBA_Admin"))
+                    {
+                        ImageButton EditButton = (ImageButton)dataItem["EditCommandColumn"].Controls[0];
+                        EditButton.Visible = false;
+                        ImageButton deleteButton = (ImageButton)dataItem["Delete"].Controls[0];
+                        deleteButton.Visible = false;
+                    }
                 }
 
                 if (e.Item is GridEditFormInsertItem)
@@ -109,8 +102,8 @@ namespace CSBANet.Common.WebControls
                     rDDPrimPos.DataValueField = "PositionID";
                     rDDPrimPos.DataTextField = "PositionNameLong";
                     rDDPrimPos.DataBind();
-                    var DDLIP = new Telerik.Web.UI.DropDownListItem("-- Select Position --","0");
-                    rDDPrimPos.Items.Insert(0, DDLIP);                    
+                    var DDLIP = new Telerik.Web.UI.DropDownListItem("-- Select Position --", "0");
+                    rDDPrimPos.Items.Insert(0, DDLIP);
                     if (DataBinder.Eval(dataItem.DataItem, "PrimaryPositionID") != null)
                     {
                         rDDPrimPos.SelectedValue = DataBinder.Eval(dataItem.DataItem, "PrimaryPositionID").ToString();
@@ -122,7 +115,7 @@ namespace CSBANet.Common.WebControls
                     rDDSecPos.DataTextField = "PositionNameLong";
                     rDDSecPos.DataBind();
                     var DDLIS = new Telerik.Web.UI.DropDownListItem("-- Select Position --", "0");
-                    rDDSecPos.Items.Insert(0, DDLIS);                    
+                    rDDSecPos.Items.Insert(0, DDLIS);
 
                     if (DataBinder.Eval(dataItem.DataItem, "SecondaryPostiionID") != null)
                     {
@@ -133,8 +126,8 @@ namespace CSBANet.Common.WebControls
 
 
                     //byte[] buffer = null;
-                    
-                    
+
+
                     //buffer = (byte[])dataItem.DataItem["PlayerImage"];
                     //MemoryStream memStream = new MemoryStream(buffer);
                     //MemoryStream memStream1 = new MemoryStream();

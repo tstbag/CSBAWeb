@@ -60,7 +60,6 @@
     </AjaxSettings>
 </telerik:RadAjaxManager>
 
-
 <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Transparency="25">
 </telerik:RadAjaxLoadingPanel>
 
@@ -170,9 +169,6 @@
                 EnableHeaderContextAggregatesMenu="True"
                 EnableHeaderContextFilterMenu="True"
                 EnableHeaderContextMenu="True">
-
-
-
                 <CommandItemTemplate>
                     <telerik:RadToolBar ID="RadToolBar1" runat="server" OnClientButtonClicking="onToolBarClientButtonClicking"
                         AutoPostBack="true">
@@ -182,20 +178,6 @@
                         </Items>
                     </telerik:RadToolBar>
                 </CommandItemTemplate>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <Columns>
 
                     <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderText="Season ID" Visible="false" DataField="SeasonID" UniqueName="SeasonID">
@@ -257,16 +239,16 @@
 
 
 </asp:Panel>
-<asp:Panel ID="Panel1" runat="server" Height="245px" Width="80%">
-    <div style="float: left; width: 80%; padding-left: 0px;">
+<asp:Panel ID="Panel1" runat="server" Height="245px" Width="100%">
+    <div style="float: left; width: 100%; padding-left: 0px; padding-right: 0px">
         <uc1:ucPlayerStats runat="server" ID="ucPlayerStats" />
     </div>
 </asp:Panel>
 
-    <asp:Panel ID="pnlTimer" runat="server">
-        <asp:Timer ID="Timer1" runat="server" Interval="3000" OnTick="Timer1_Tick">
-        </asp:Timer>
-    </asp:Panel>
+<asp:Panel ID="pnlTimer" runat="server">
+    <asp:Timer ID="Timer1" runat="server" Interval="30000" OnTick="Timer1_Tick">
+    </asp:Timer>
+</asp:Panel>
 
 
 <asp:Label ID="lblMessage" runat="server">
