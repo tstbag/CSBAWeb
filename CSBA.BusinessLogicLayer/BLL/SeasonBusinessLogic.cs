@@ -53,5 +53,13 @@ namespace CSBA.BusinessLogicLayer
         {
             dal.ClearSeason(season);
         }
+
+        public void SelectCurrentSeason(SeasonDomainModel season)
+        {
+            dal.SelectCurrentSeason(season);
+        }
+        
+
+
     }
 }

@@ -87,7 +87,9 @@
                     </ItemTemplate>
                     <HeaderStyle Width="125px" />
                 </telerik:GridTemplateColumn>
-                <telerik:GridButtonColumn Text="Delete" CommandName="Delete" UniqueName="Delete" ConfirmText="Are you sure you want to delete this?" ButtonType="ImageButton" />
+                <telerik:GridButtonColumn Text="Select" CommandName="Select" UniqueName="Clear" ConfirmText="Are you sure you want to select this season?" ButtonType="PushButton" ConfirmDialogType="RadWindow">
+                </telerik:GridButtonColumn>
+                    <telerik:GridButtonColumn Text="Delete" CommandName="Delete" UniqueName="Delete" ConfirmText="Are you sure you want to delete this?" ButtonType="ImageButton" />
                 <telerik:GridButtonColumn Text="Clear" CommandName="Clear" UniqueName="Clear" ConfirmText="Are you sure you want to reset this season?" ButtonType="PushButton" ConfirmDialogType="RadWindow">
                     <ItemStyle Height="25px" Width="25px" />
                 </telerik:GridButtonColumn>

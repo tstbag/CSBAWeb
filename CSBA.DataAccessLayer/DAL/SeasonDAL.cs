@@ -46,7 +46,8 @@ namespace CSBA.DataAccessLayer
                             SeasonName = result.SeasonName,
                             StartPoints = result.StartPoints,
                             MinBid = (int)result.MinBid,
-                            DraftDate = result.DraftDate
+                            DraftDate = result.DraftDate,
+                            CurrentSeason = (bool)result.CurrentSeason
                         }).ToList();
 
             } // Guaranteed to close the Connection
@@ -132,6 +133,14 @@ namespace CSBA.DataAccessLayer
             using (CSBAEntities context = new CSBAEntities())
             {
                 context.sp_Season_Clear(season.SeasonID);
+            }
+        }
+
+        public void SelectCurrentSeason(SeasonDomainModel season)
+        {
+            using (CSBAEntities context = new CSBAEntities())
+            {
+                context.sp_Season_Current(season.SeasonID);
             }
         }
     }

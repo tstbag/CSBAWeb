@@ -24,10 +24,18 @@ namespace CSBANet.Common.WebControls
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            rDDSeason.DataSource = SeasonBLL.ListSeason();
+
+            List<SeasonDomainModel> Seasons = new List<SeasonDomainModel>();
+
+            Seasons = SeasonBLL.ListSeason();
+            var CurrentSeasonID = from Season in Seasons where Season.CurrentSeason select Season.SeasonID;
+
+            rDDSeason.DataSource = Seasons;
             rDDSeason.DataValueField = "SeasonID";
             rDDSeason.DataTextField = "SeasonName";
             rDDSeason.DataBind();
+
+            rDDSeason.SelectedValue = CurrentSeasonID.FirstOrDefault().ToString();
 
             if (!IsPostBack)
             {

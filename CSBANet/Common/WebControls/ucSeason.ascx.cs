@@ -147,6 +147,27 @@ namespace CSBANet.Controls
                     Response.Redirect(url);                             // Go to the error page.
 
                 }
+
+            if (e.CommandName == "Select")
+                try
+                {
+                    {
+                        SeasonDomainModel SeasonDM = new SeasonDomainModel();
+                        SeasonDM.SeasonID = (int)e.Item.OwnerTableView.DataKeyValues[e.Item.ItemIndex]["SeasonID"];
+                        BLL.SelectCurrentSeason(SeasonDM);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    StackTrace st = new StackTrace();
+                    StackFrame sf = st.GetFrame(0);
+                    string errMethod = sf.GetMethod().Name.ToString();  // Get the current method name
+                    string errMsg = "600";                              // Gotta pass something, we're retro-fitting an existing method
+                    Session["LastException"] = ex;                      // Throw the exception in the session variable, will be used in error page
+                    string url = string.Format(ConfigurationManager.AppSettings["ErrorPageURL"], errMethod, errMsg); //Set the URL
+                    Response.Redirect(url);                             // Go to the error page.
+
+                }
         }
 
         protected void rGridSeason_UpdIns(object sender, GridCommandEventArgs e, string Action)

@@ -40,10 +40,20 @@ namespace CSBANet.Common.WebControls
             }
 
             Session["time"] = DateTime.Now.AddSeconds(40);
-            rDDSeason.DataSource = SeasonBLL.ListSeason();
+
+
+            List<SeasonDomainModel> Seasons = new List<SeasonDomainModel>();
+
+            Seasons = SeasonBLL.ListSeason();
+            var CurrentSeasonID = from Season in Seasons where Season.CurrentSeason select Season.SeasonID;
+
+
+            rDDSeason.DataSource = Seasons;
             rDDSeason.DataValueField = "SeasonID";
             rDDSeason.DataTextField = "SeasonName";
             rDDSeason.DataBind();
+
+            rDDSeason.SelectedValue = CurrentSeasonID.FirstOrDefault().ToString();
 
             DraftStatusDomainModel DraftStatus = new DraftStatusDomainModel();
 

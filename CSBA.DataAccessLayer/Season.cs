@@ -29,6 +29,7 @@ namespace CSBA.DataAccessLayer
         public System.DateTime DraftDate { get; set; }
         public int StartPoints { get; set; }
         public Nullable<int> MinBid { get; set; }
+        public Nullable<bool> CurrentSeason { get; set; }
     
         public virtual ICollection<SeasonTeamStadium> SeasonTeamStadiums { get; set; }
         public virtual ICollection<SeasonTeam> SeasonTeams { get; set; }

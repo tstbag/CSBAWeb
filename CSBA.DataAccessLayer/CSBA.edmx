@@ -59,6 +59,7 @@
           <Property Name="DraftDate" Type="date" Nullable="false" />
           <Property Name="StartPoints" Type="int" Nullable="false" />
           <Property Name="MinBid" Type="int" />
+          <Property Name="CurrentSeason" Type="bit" />
         </EntityType>
         <EntityType Name="SeasonPlayer">
           <Key>
@@ -712,6 +713,9 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
         <Function Name="sp_Season_Clear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SeasonID" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_Season_Current" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SeasonID" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_Season_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SeasonID" Type="int" Mode="In" />
         </Function>
@@ -1312,7 +1316,7 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
             <Parameter Name="PlayerGUID" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="sp_SeasonPlayer_deleteAll">
-          <Parameter Name="SeasonID" Mode="In" Type="Int32" />
+            <Parameter Name="SeasonID" Mode="In" Type="Int32" />
             <Parameter Name="PositionID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SeasonPlayer_Insert">
@@ -1324,11 +1328,11 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
             <End Role="Season" EntitySet="Seasons" />
           </AssociationSet>
           <FunctionImport Name="sp_SeasonPlayerBySeason_Remaining" ReturnType="Collection(CSBAModel.sp_SeasonPlayerBySeason_Remaining_Result)">
-          <Parameter Name="SeasonID" Mode="In" Type="Int32" />
+            <Parameter Name="SeasonID" Mode="In" Type="Int32" />
             <Parameter Name="PositionID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_SeasonPlayerBySeason_Selected" ReturnType="Collection(CSBAModel.sp_SeasonPlayerBySeason_Selected_Result)">
-          <Parameter Name="SeasonID" Mode="In" Type="Int32" />
+            <Parameter Name="SeasonID" Mode="In" Type="Int32" />
             <Parameter Name="PositionID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_PlayerPosition_Select" ReturnType="Collection(CSBAModel.sp_PlayerPosition_Select_Result)">
@@ -1526,6 +1530,9 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
           <FunctionImport Name="DraftPlayerStatus" ReturnType="Collection(CSBAModel.DraftPlayerStatus_Result)">
           <Parameter Name="SeasonID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="sp_Season_Current">
+          <Parameter Name="SeasonID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Position">
           <Key>
@@ -1554,6 +1561,7 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
           <NavigationProperty Name="Stadia" Relationship="CSBAModel.SeasonStadium" FromRole="Season" ToRole="Stadium" />
           <NavigationProperty Name="SeasonTeamPlayers" Relationship="CSBAModel.FK_SeasonTeamPlayer_Season" FromRole="Season" ToRole="SeasonTeamPlayer" />
           <NavigationProperty Name="Trades" Relationship="CSBAModel.FK_Trade_Season" FromRole="Season" ToRole="Trade" />
+          <Property Name="CurrentSeason" Type="Boolean" />
         </EntityType>
         <ComplexType Name="sp_Season_Select_Result">
           <Property Type="Int32" Name="SeasonID" Nullable="false" />
@@ -2327,6 +2335,7 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
           <EntitySetMapping Name="Seasons">
             <EntityTypeMapping TypeName="CSBAModel.Season">
               <MappingFragment StoreEntitySet="Season">
+                <ScalarProperty Name="CurrentSeason" ColumnName="CurrentSeason" />
                 <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
                 <ScalarProperty Name="SeasonName" ColumnName="SeasonName" />
                 <ScalarProperty Name="DraftDate" ColumnName="DraftDate" />
@@ -3031,6 +3040,7 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Season_Current" FunctionName="CSBAModel.Store.sp_Season_Current" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

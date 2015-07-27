@@ -17,9 +17,9 @@ namespace CSBA.BusinessLogicLayer
             SPDAL.InsertSeasonPlayer(_SeasonPlayer);
         }
 
-        public void DeleteSeasonPlayerAll(SeasonPlayerDomainModel _SeasonPlayer)
+        public void DeleteSeasonPlayerAll(SeasonPlayerDomainModel _SeasonPlayer, PositionDomainModel _Position)
         {
-            SPDAL.DeleteSeasonPlayerAll(_SeasonPlayer);
+            SPDAL.DeleteSeasonPlayerAll(_SeasonPlayer, _Position);
         }
 
 

@@ -14,6 +14,8 @@ namespace CSBA.DomainModels
         public int StartPoints { get; set; }
         public int MinBid { get; set; }
         public int? PlayersDrafted { get; set; }
+
+        public bool CurrentSeason { get; set; }
         #endregion
     }
 }

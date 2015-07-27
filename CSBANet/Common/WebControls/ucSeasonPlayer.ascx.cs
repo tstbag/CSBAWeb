@@ -23,10 +23,18 @@ namespace CSBANet.Common.WebControls
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            rDDSeason.DataSource = SeasonBLL.ListSeason();
+
+            List<SeasonDomainModel> Seasons = new List<SeasonDomainModel>();
+
+            Seasons = SeasonBLL.ListSeason();
+            var CurrentSeasonID = from Season in Seasons where Season.CurrentSeason select Season.SeasonID;
+
+            rDDSeason.DataSource = Seasons;
             rDDSeason.DataValueField = "SeasonID";
             rDDSeason.DataTextField = "SeasonName";
             rDDSeason.DataBind();
+
+            rDDSeason.SelectedValue = CurrentSeasonID.FirstOrDefault().ToString();
 
             rDDPosition.DataSource = PositionBLL.ListPositions();
             rDDPosition.DataTextField = "PositionNameLong";
@@ -74,7 +82,10 @@ namespace CSBANet.Common.WebControls
             SeasonPlayerDomainModel _SeasonPlayer = new SeasonPlayerDomainModel();
             _SeasonPlayer.SeasonID = (Convert.ToInt32(rDDSeason.SelectedValue));
 
-            SPBLL.DeleteSeasonPlayerAll(_SeasonPlayer);
+            PositionDomainModel _Position = new PositionDomainModel();
+            _Position.PositionID = (Convert.ToInt16(rDDPosition.SelectedValue));
+
+            SPBLL.DeleteSeasonPlayerAll(_SeasonPlayer, _Position);
             int iStOrder = 1;
             foreach (RadListBoxItem item in rLBPlayerSelected.Items)
             {

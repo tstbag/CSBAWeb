@@ -65,11 +65,11 @@ namespace CSBA.DataAccessLayer
             }
         }
 
-        public void DeleteSeasonPlayerAll(SeasonPlayerDomainModel _SeasonPlayer)
+        public void DeleteSeasonPlayerAll(SeasonPlayerDomainModel _SeasonPlayer, PositionDomainModel _Position)
         {
             using (CSBAEntities context = new CSBAEntities())
             {
-                context.Database.ExecuteSqlCommand("sp_SeasonPlayer_deleteAll {0}", _SeasonPlayer.SeasonID);
+                context.Database.ExecuteSqlCommand("sp_SeasonPlayer_deleteAll {0}, {1}", _SeasonPlayer.SeasonID, _Position.PositionID);
 
             }
         }
