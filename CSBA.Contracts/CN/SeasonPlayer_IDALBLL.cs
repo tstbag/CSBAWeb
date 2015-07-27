@@ -10,8 +10,8 @@ namespace CSBA.Contracts
     {
         void InsertSeasonPlayer(SeasonPlayerDomainModel _SeasonPlayer);
         void DeleteSeasonPlayerAll(SeasonPlayerDomainModel _SeasonPlayer);
-        List<SeasonPlayerDomainModel> ListSelectedPlayers(int SeasonID);
-        List<SeasonPlayerDomainModel> ListRemainingPlayers(int SeasonID);
+        List<SeasonPlayerDomainModel> ListSelectedPlayers(int SeasonID, int PositionID);
+        List<SeasonPlayerDomainModel> ListRemainingPlayers(int SeasonID, int PositionID);
         void InsertSeasonPlayerRecycle(SeasonPlayerDomainModel _SeasonPlayer);
         void DeleteSeasonRecyclePlayerAll(SeasonPlayerDomainModel _SeasonPlayer);
     }

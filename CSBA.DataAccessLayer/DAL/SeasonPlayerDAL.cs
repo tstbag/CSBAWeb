@@ -11,13 +11,13 @@ namespace CSBA.DataAccessLayer
     {
 
 
-        public List<SeasonPlayerDomainModel> ListSelectedPlayers(int SeasonID)
+        public List<SeasonPlayerDomainModel> ListSelectedPlayers(int SeasonID, int PositionID)
         {
             List<SeasonPlayerDomainModel> list = new List<SeasonPlayerDomainModel>();
             //Create a Context object to Connect to the database
             using (CSBAEntities context = new CSBAEntities())
 
-                list = (from result in context.sp_SeasonPlayerBySeason_Selected(SeasonID)
+                list = (from result in context.sp_SeasonPlayerBySeason_Selected(SeasonID, PositionID)
                         select new SeasonPlayerDomainModel
                         {
                             SeasonID = result.SeasonID,
@@ -29,13 +29,13 @@ namespace CSBA.DataAccessLayer
             return list;
         }
 
-        public List<SeasonPlayerDomainModel> ListRemainingPlayers(int SeasonID)
+        public List<SeasonPlayerDomainModel> ListRemainingPlayers(int SeasonID, int PositionID)
         {
             List<SeasonPlayerDomainModel> list = new List<SeasonPlayerDomainModel>();
             //Create a Context object to Connect to the database
             using (CSBAEntities context = new CSBAEntities())
 
-                list = (from result in context.sp_SeasonPlayerBySeason_Remaining(SeasonID)
+                list = (from result in context.sp_SeasonPlayerBySeason_Remaining(SeasonID,PositionID)
                         select new SeasonPlayerDomainModel
                         {
                             SeasonID = SeasonID,

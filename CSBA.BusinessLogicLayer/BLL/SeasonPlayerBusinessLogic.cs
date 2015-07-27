@@ -23,14 +23,14 @@ namespace CSBA.BusinessLogicLayer
         }
 
 
-        public List<SeasonPlayerDomainModel> ListSelectedPlayers(int SeasonID)
+        public List<SeasonPlayerDomainModel> ListSelectedPlayers(int SeasonID, int PositionID)
         {
-            return SPDAL.ListSelectedPlayers(SeasonID);
+            return SPDAL.ListSelectedPlayers(SeasonID, PositionID);
         }
 
-        public List<SeasonPlayerDomainModel> ListRemainingPlayers(int SeasonID)
+        public List<SeasonPlayerDomainModel> ListRemainingPlayers(int SeasonID, int PositionID)
         {
-            return SPDAL.ListRemainingPlayers(SeasonID);
+            return SPDAL.ListRemainingPlayers(SeasonID, PositionID);
         }
 
 

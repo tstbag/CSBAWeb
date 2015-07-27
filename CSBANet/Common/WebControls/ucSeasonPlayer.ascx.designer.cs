@@ -67,6 +67,24 @@ namespace CSBANet.Common.WebControls {
         protected global::Telerik.Web.UI.RadDropDownList rDDSeason;
         
         /// <summary>
+        /// lblPosition control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPosition;
+        
+        /// <summary>
+        /// rDDPosition control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadDropDownList rDDPosition;
+        
+        /// <summary>
         /// lblFromBox control.
         /// </summary>
         /// <remarks>

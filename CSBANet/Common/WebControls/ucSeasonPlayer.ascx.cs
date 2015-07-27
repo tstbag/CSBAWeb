@@ -19,6 +19,7 @@ namespace CSBANet.Common.WebControls
     {
         SeasonPlayerBusinessLogic SPBLL = new SeasonPlayerBusinessLogic();
         SeasonBusinessLogic SeasonBLL = new SeasonBusinessLogic();
+        PositionBusinessLogic PositionBLL = new PositionBusinessLogic();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -26,6 +27,11 @@ namespace CSBANet.Common.WebControls
             rDDSeason.DataValueField = "SeasonID";
             rDDSeason.DataTextField = "SeasonName";
             rDDSeason.DataBind();
+
+            rDDPosition.DataSource = PositionBLL.ListPositions();
+            rDDPosition.DataTextField = "PositionNameLong";
+            rDDPosition.DataValueField = "PositionID";
+            rDDPosition.DataBind();
 
             if (!IsPostBack)
             {
@@ -42,15 +48,17 @@ namespace CSBANet.Common.WebControls
         protected void SetupListBoxes()
         {
 
-            rLBPlayerRemaining.DataSource = SPBLL.ListRemainingPlayers(Convert.ToInt32(rDDSeason.SelectedValue));
+
+            rLBPlayerRemaining.DataSource = SPBLL.ListRemainingPlayers(Convert.ToInt32(rDDSeason.SelectedValue),Convert.ToInt32(rDDPosition.SelectedValue));
             rLBPlayerRemaining.DataValueField = "PlayerGUID";
             rLBPlayerRemaining.DataTextField = "PlayerName";
             rLBPlayerRemaining.DataBind();
 
-            rLBPlayerSelected.DataSource = SPBLL.ListSelectedPlayers(Convert.ToInt32(rDDSeason.SelectedValue));
+            rLBPlayerSelected.DataSource = SPBLL.ListSelectedPlayers(Convert.ToInt32(rDDSeason.SelectedValue), Convert.ToInt32(rDDPosition.SelectedValue));
             rLBPlayerSelected.DataValueField = "PlayerGUID";
             rLBPlayerSelected.DataTextField = "PlayerName";
             rLBPlayerSelected.DataBind();
+
 
         }
 

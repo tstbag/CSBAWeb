@@ -482,13 +482,17 @@ namespace CSBA.DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SeasonPlayer_delete", seasonIDParameter, playerGUIDParameter);
         }
     
-        public virtual int sp_SeasonPlayer_deleteAll(Nullable<int> seasonID)
+        public virtual int sp_SeasonPlayer_deleteAll(Nullable<int> seasonID, Nullable<int> positionID)
         {
             var seasonIDParameter = seasonID.HasValue ?
                 new ObjectParameter("SeasonID", seasonID) :
                 new ObjectParameter("SeasonID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SeasonPlayer_deleteAll", seasonIDParameter);
+            var positionIDParameter = positionID.HasValue ?
+                new ObjectParameter("PositionID", positionID) :
+                new ObjectParameter("PositionID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SeasonPlayer_deleteAll", seasonIDParameter, positionIDParameter);
         }
     
         public virtual int sp_SeasonPlayer_Insert(Nullable<int> seasonID, Nullable<System.Guid> playerGUID)
@@ -504,22 +508,30 @@ namespace CSBA.DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SeasonPlayer_Insert", seasonIDParameter, playerGUIDParameter);
         }
     
-        public virtual ObjectResult<sp_SeasonPlayerBySeason_Remaining_Result> sp_SeasonPlayerBySeason_Remaining(Nullable<int> seasonID)
+        public virtual ObjectResult<sp_SeasonPlayerBySeason_Remaining_Result> sp_SeasonPlayerBySeason_Remaining(Nullable<int> seasonID, Nullable<int> positionID)
         {
             var seasonIDParameter = seasonID.HasValue ?
                 new ObjectParameter("SeasonID", seasonID) :
                 new ObjectParameter("SeasonID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SeasonPlayerBySeason_Remaining_Result>("sp_SeasonPlayerBySeason_Remaining", seasonIDParameter);
+            var positionIDParameter = positionID.HasValue ?
+                new ObjectParameter("PositionID", positionID) :
+                new ObjectParameter("PositionID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SeasonPlayerBySeason_Remaining_Result>("sp_SeasonPlayerBySeason_Remaining", seasonIDParameter, positionIDParameter);
         }
     
-        public virtual ObjectResult<sp_SeasonPlayerBySeason_Selected_Result> sp_SeasonPlayerBySeason_Selected(Nullable<int> seasonID)
+        public virtual ObjectResult<sp_SeasonPlayerBySeason_Selected_Result> sp_SeasonPlayerBySeason_Selected(Nullable<int> seasonID, Nullable<int> positionID)
         {
             var seasonIDParameter = seasonID.HasValue ?
                 new ObjectParameter("SeasonID", seasonID) :
                 new ObjectParameter("SeasonID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SeasonPlayerBySeason_Selected_Result>("sp_SeasonPlayerBySeason_Selected", seasonIDParameter);
+            var positionIDParameter = positionID.HasValue ?
+                new ObjectParameter("PositionID", positionID) :
+                new ObjectParameter("PositionID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_SeasonPlayerBySeason_Selected_Result>("sp_SeasonPlayerBySeason_Selected", seasonIDParameter, positionIDParameter);
         }
     
         public virtual ObjectResult<sp_PlayerPosition_Select_Result> sp_PlayerPosition_Select(Nullable<System.Guid> playerGUID)

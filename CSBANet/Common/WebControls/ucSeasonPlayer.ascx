@@ -32,6 +32,16 @@
 
         <asp:TableRow>
             <asp:TableCell>
+                <asp:Label ID="lblPosition" runat="server" Text="Position"></asp:Label>
+            </asp:TableCell>
+            <asp:TableCell>
+                <telerik:RadDropDownList ID="rDDPosition" runat="server" OnSelectedIndexChanged="rDDSeason_SelectedIndexChanged" AutoPostBack="true">
+                </telerik:RadDropDownList>
+            </asp:TableCell>
+        </asp:TableRow>
+
+        <asp:TableRow>
+            <asp:TableCell>
                 <asp:Label ID="lblFromBox" CssClass=".Lables" runat="server" Text="Remaining Players"></asp:Label>
             </asp:TableCell>
             <asp:TableCell>
