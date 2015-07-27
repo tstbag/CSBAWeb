@@ -13,13 +13,14 @@ namespace CSBA.ImportData
 {
     public class cImportData
     {
-        const string CWorkbook = "C:\\Users\\Dad\\Source\\Repos\\CSBAWeb\\CSBA.ImportData\\ImportData\\StatList.xls";
+        const string CWorkbook = "C:\\Class\\StatList.xls";
+        const int C_SeasonID = 1025;
 
         static void Main(string[] args)
         {
             //GetStatView();
-            ImportExcelPitchers();
-            //ImportExcelBatters();        }
+            //ImportExcelPitchers();
+            ImportExcelBatters();        
         }
         protected static void GetStatView()
         {
@@ -50,7 +51,7 @@ namespace CSBA.ImportData
                 int rows_count = range.Rows.Count;
                 int cols_count = range.Columns.Count;
 
-                rows_count = 113;
+                rows_count = 126;
 
                 //string output = null;
 
@@ -263,7 +264,7 @@ namespace CSBA.ImportData
             SeasonPlayerPositionStatBusinessLogic sppsBLL = new SeasonPlayerPositionStatBusinessLogic();
             SeasonPlayerPositionStatDomainModel statValue = new SeasonPlayerPositionStatDomainModel();
 
-            statValue.SeasonID = 23;
+            statValue.SeasonID = C_SeasonID;
             statValue.PlayerGUID = player.PlayerGUID;
             sppsBLL.DeleteAllStatsForPlayer(statValue);
 
@@ -300,8 +301,8 @@ namespace CSBA.ImportData
                         stat.StatName = fieldName;
                         stat.PositionTypeID = 1;    // 1 = hitter
                         stat = sBLL.InsertStat(stat);
-                        
-                        statValue.SeasonID = 23;
+
+                        statValue.SeasonID = C_SeasonID;
                         statValue.PlayerGUID = player.PlayerGUID;
                         statValue.PositionID = TransformPos(cHitter.Pos1);
                         statValue.StatID = stat.StatID;
@@ -338,7 +339,7 @@ namespace CSBA.ImportData
                 int rows_count = range.Rows.Count;
                 int cols_count = range.Columns.Count;
 
-                rows_count = 105;
+                rows_count = 112;
 
                 for (int i = 2; i <= rows_count; i++)
                 {
@@ -531,7 +532,7 @@ namespace CSBA.ImportData
             SeasonPlayerPositionStatBusinessLogic sppsBLL = new SeasonPlayerPositionStatBusinessLogic();
             SeasonPlayerPositionStatDomainModel statValue = new SeasonPlayerPositionStatDomainModel();
 
-            statValue.SeasonID = 23;
+            statValue.SeasonID = C_SeasonID;
             statValue.PlayerGUID = player.PlayerGUID;
             sppsBLL.DeleteAllStatsForPlayer(statValue);
 
@@ -567,7 +568,7 @@ namespace CSBA.ImportData
                         stat.PositionTypeID = 2;    // 1 = hitter
                         stat = sBLL.InsertStat(stat);
 
-                        statValue.SeasonID = 23;
+                        statValue.SeasonID = C_SeasonID;
                         statValue.PlayerGUID = player.PlayerGUID;
                         statValue.PositionID = TransformPos(cPitcher.Pos);
                         statValue.StatID = stat.StatID;
