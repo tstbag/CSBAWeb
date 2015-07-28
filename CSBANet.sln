@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSBANet", "CSBANet\CSBANet.csproj", "{F1B97E12-F542-430C-AB56-1E453282A237}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8F77BD17-D292-49D0-806B-74DE8204DAEE} = {8F77BD17-D292-49D0-806B-74DE8204DAEE}
