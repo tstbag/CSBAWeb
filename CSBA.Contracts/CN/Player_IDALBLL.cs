@@ -12,7 +12,7 @@ namespace CSBA.Contracts
         #region Select Signatures
         List<PlayerDomainModel> ListPlayers(string strLetter);
         PlayerDomainModel PlayerDetail(Guid? PlayerGUID);
-        List<v_PlayerPositionDomainModel> ListPlayerPositions();    
+        List<v_PlayerPositionDomainModel> ListDraftPlayers();    
         #endregion
 
         #region Update Signatures

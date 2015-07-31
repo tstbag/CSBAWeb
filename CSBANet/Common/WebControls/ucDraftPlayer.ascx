@@ -37,6 +37,7 @@
                 <telerik:AjaxUpdatedControl ControlID="rNTBCurrBid"></telerik:AjaxUpdatedControl>
                 <telerik:AjaxUpdatedControl ControlID="rDDSeasonTeam" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
                 <telerik:AjaxUpdatedControl ControlID="rGridDraftPlayer" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
+
             </UpdatedControls>
         </telerik:AjaxSetting>
     </AjaxSettings>
@@ -47,17 +48,20 @@
                 <telerik:AjaxUpdatedControl ControlID="rDDSeason"></telerik:AjaxUpdatedControl>
                 <telerik:AjaxUpdatedControl ControlID="rDDSeasonTeam" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
                 <telerik:AjaxUpdatedControl ControlID="rGridDraftPlayer" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
+
             </UpdatedControls>
         </telerik:AjaxSetting>
     </AjaxSettings>
 
     <AjaxSettings>
-        <telerik:AjaxSetting AjaxControlID="rGridDraftPlayer">
+        <telerik:AjaxSetting AjaxControlID="chkDrafted_CheckedChanged">
             <UpdatedControls>
-                <telerik:AjaxUpdatedControl ControlID="rGridDraftPlayer"></telerik:AjaxUpdatedControl>
+                <telerik:AjaxUpdatedControl ControlID="rGridDraftPositionStatus" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
             </UpdatedControls>
         </telerik:AjaxSetting>
     </AjaxSettings>
+
+
 </telerik:RadAjaxManager>
 
 <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server" Transparency="25">
@@ -100,7 +104,7 @@
                     <telerik:RadBinaryImage ID="imgPlayer" Visible="false" runat="server" Skin="<%$ appSettings:Telerik.Skin%>" AutoAdjustImageControlSize="false" Width="250px" Height="320px" AlternateText="Player Image" />
                 </asp:TableCell>
                 <asp:TableCell Width="50%">
-                    <telerik:RadBinaryImage ID="imgPositon" Visible="false" runat="server" Skin="<%$ appSettings:Telerik.Skin%>" CssClass="imgAdjust" AutoAdjustImageControlSize="false" Width="250px" Height="230px" AlternateText="Position Image" />
+                    <telerik:RadBinaryImage ID="imgPositon" Visible="false" runat="server" Skin="<%$ appSettings:Telerik.Skin%>" CssClass="imgAdjust" AutoAdjustImageControlSize="false" Width="125px" Height="125px" AlternateText="Position Image" />
                     <div style="float: left; padding-left: 0px; width: 100%;">
                         <telerik:RadLinearGauge runat="server" Scale-Vertical="false" ID="rLGStatus" Width="250px" Height="100%">
                             <Pointer Shape="Arrow" Value="15">
@@ -143,99 +147,233 @@
     </div>
 
     <div style="float: right; padding-left: 0px; width: 50%;">
-        <telerik:RadGrid ID="rGridDraftPlayer"
-            runat="server"
-            OnNeedDataSource="rGridDraftPlayer_NeedDataSource"
-            OnItemDataBound="rGridDraftPlayer_ItemDataBound"
-            OnItemCommand="rGridDraftPlayer_ItemCommand"
-            AutoGenerateColumns="False"
-            AllowFilteringByColumn="True"
-            AllowSorting="True"
-            Skin="<%$ appSettings:Telerik.Skin%>"
-            CellSpacing="0"
-            GridLines="None"
-            AllowMultiRowEdit="True"
-            AllowMultiRowSelection="True">
-            <PagerStyle />
-            <ClientSettings EnablePostBackOnRowClick="true">
-                <Selecting AllowRowSelect="True" />
-            </ClientSettings>
-            <SelectedItemStyle BackColor="Fuchsia" BorderColor="Purple" BorderStyle="Dashed"
-                BorderWidth="1px" />
-            <GroupingSettings CaseSensitive="False" />
-            <MasterTableView DataKeyNames="SeasonID, TeamID"
-                CommandItemDisplay="Top" AllowSorting="true"
-                EditMode="InPlace"
-                EnableHeaderContextAggregatesMenu="True"
-                EnableHeaderContextFilterMenu="True"
-                EnableHeaderContextMenu="True">
-                <CommandItemTemplate>
-                    <telerik:RadToolBar ID="RadToolBar1" runat="server" OnClientButtonClicking="onToolBarClientButtonClicking"
-                        AutoPostBack="true">
-                        <Items>
-                            <telerik:RadToolBarButton Text="Email Rosters" CommandName="EmailRosters">
-                            </telerik:RadToolBarButton>
-                        </Items>
-                    </telerik:RadToolBar>
-                </CommandItemTemplate>
-                <Columns>
 
-                    <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderText="Season ID" Visible="false" DataField="SeasonID" UniqueName="SeasonID">
-                        <ItemTemplate>
-                            <asp:Label ID="lblSeasonID" runat="server" Visible="false" Text='<%# DataBinder.Eval(Container, "DataItem.SeasonID") %>'></asp:Label>
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
+        <telerik:RadTabStrip runat="server" ID="RadTabStrip1" Width="100%"
+            MultiPageID="RadMultiPage1" SelectedIndex="0">
+            <Tabs>
+                <telerik:RadTab Text="Draft Status" Width="33%"></telerik:RadTab>
+                <telerik:RadTab Text="Positions" Width="33%"></telerik:RadTab>
+                <telerik:RadTab Text="Players Left" Width="33%"></telerik:RadTab>
+            </Tabs>
+        </telerik:RadTabStrip>
 
-                    <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderText="Team ID" Visible="false" DataField="TeamID" UniqueName="TeamID">
-                        <ItemTemplate>
-                            <asp:Label ID="lblTeamID" runat="server" Visible="false" Text='<%# DataBinder.Eval(Container, "DataItem.TeamID") %>'></asp:Label>
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
+        <telerik:RadMultiPage runat="server" ID="RadMultiPage1" SelectedIndex="0" CssClass="outerMultiPage">
+            <telerik:RadPageView runat="server" ID="RadPageView1">
 
-                    <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderText="OwnerEmail" Visible="false" DataField="OwnerEmail" UniqueName="OwnerEmail">
-                        <ItemTemplate>
-                            <asp:Label ID="lblOwnerEmail" runat="server" Visible="false" Text='<%# DataBinder.Eval(Container, "DataItem.OwnerEmail") %>'></asp:Label>
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
 
-                    <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" SortExpression="TeamName" HeaderText="Team Name" DataField="TeamName" UniqueName="TeamName">
-                        <ItemTemplate>
-                            <telerik:RadButton ID="rBTNTeamName" ButtonType="LinkButton" Width="70px" CommandArgument='<%# DataBinder.Eval(Container, "DataItem.TeamID") %>' OnClick="rBTNTeamName_Click" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.TeamName") %>'>
-                            </telerik:RadButton>
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
+                <telerik:RadGrid ID="rGridDraftPlayer"
+                    runat="server"
+                    OnNeedDataSource="rGridDraftPlayer_NeedDataSource"
+                    OnItemDataBound="rGridDraftPlayer_ItemDataBound"
+                    OnItemCommand="rGridDraftPlayer_ItemCommand"
+                    AutoGenerateColumns="False"
+                    AllowFilteringByColumn="False"
+                    AllowSorting="True"
+                    Skin="<%$ appSettings:Telerik.Skin%>"
+                    CellSpacing="0"
+                    GridLines="None"
+                    AllowMultiRowEdit="True"
+                    AllowMultiRowSelection="True">
+                    <PagerStyle />
+                    <ClientSettings EnablePostBackOnRowClick="true">
+                        <Selecting AllowRowSelect="True" />
+                    </ClientSettings>
+                    <SelectedItemStyle BackColor="Fuchsia" BorderColor="Purple" BorderStyle="Dashed"
+                        BorderWidth="1px" />
+                    <GroupingSettings CaseSensitive="False" />
+                    <MasterTableView DataKeyNames="SeasonID, TeamID"
+                        CommandItemDisplay="Top" AllowSorting="true"
+                        EditMode="InPlace"
+                        EnableHeaderContextAggregatesMenu="True"
+                        EnableHeaderContextFilterMenu="True"
+                        EnableHeaderContextMenu="True">
+                        <CommandItemTemplate>
+                            <telerik:RadToolBar ID="RadToolBar1" runat="server" OnClientButtonClicking="onToolBarClientButtonClicking"
+                                AutoPostBack="true">
+                                <Items>
+                                    <telerik:RadToolBarButton Text="Email Rosters" CommandName="EmailRosters">
+                                    </telerik:RadToolBarButton>
+                                </Items>
+                            </telerik:RadToolBar>
+                        </CommandItemTemplate>
+                        <Columns>
 
-                    <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" SortExpression="SumPoints" HeaderStyle-Width="50px" HeaderText="Points Spent" DataField="SumPoints" UniqueName="SumPoints">
-                        <ItemTemplate>
-                            <asp:Label ID="lblSumPoints" Width="50px" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.SumPoints") %>'>
+                            <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderText="Season ID" Visible="false" DataField="SeasonID" UniqueName="SeasonID">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblSeasonID" runat="server" Visible="false" Text='<%# DataBinder.Eval(Container, "DataItem.SeasonID") %>'></asp:Label>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderText="Team ID" Visible="false" DataField="TeamID" UniqueName="TeamID">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblTeamID" runat="server" Visible="false" Text='<%# DataBinder.Eval(Container, "DataItem.TeamID") %>'></asp:Label>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderText="OwnerEmail" Visible="false" DataField="OwnerEmail" UniqueName="OwnerEmail">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblOwnerEmail" runat="server" Visible="false" Text='<%# DataBinder.Eval(Container, "DataItem.OwnerEmail") %>'></asp:Label>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderStyle-Width="100px" SortExpression="TeamName" HeaderText="Team Name" DataField="TeamName" UniqueName="TeamName">
+                                <ItemTemplate>
+                                    <telerik:RadButton ID="rBTNTeamName" ButtonType="LinkButton" Width="100%" CommandArgument='<%# DataBinder.Eval(Container, "DataItem.TeamID") %>' OnClick="rBTNTeamName_Click" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.TeamName") %>'>
+                                    </telerik:RadButton>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" SortExpression="SumPoints" HeaderStyle-Width="50px" HeaderText="Pnt Spent" DataField="SumPoints" UniqueName="SumPoints">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblSumPoints" Width="50px" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.SumPoints") %>'>
                             </asp:Label>
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
 
-                    <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" SortExpression="MaxBid" HeaderText="Max Bid" DataField="MaxBid" UniqueName="MaxBid">
-                        <ItemTemplate>
-                            <asp:Label ID="lblMaxBid" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.MaxBid") %>'>
+                            <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" SortExpression="MaxBid" HeaderText="Max Bid" HeaderStyle-Width="50px" DataField="MaxBid" UniqueName="MaxBid">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblMaxBid" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.MaxBid") %>'>
                             </asp:Label>
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
 
-                    <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderText="# Hitters" HeaderStyle-Width="50px" DataField="CountHitter" UniqueName="CountHitter">
-                        <ItemTemplate>
-                            <asp:Label ID="lblCountHitter" runat="server" Width="50px" Text='<%# DataBinder.Eval(Container, "DataItem.CountHitter") %>'>
+                            <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderText="# Hitters" HeaderStyle-Width="50px" DataField="CountHitter" UniqueName="CountHitter">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblCountHitter" runat="server" Width="50px" Text='<%# DataBinder.Eval(Container, "DataItem.CountHitter") %>'>
                             </asp:Label>
-                        </ItemTemplate>
-                    </telerik:GridTemplateColumn>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
 
-                    <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderText="# Pitchers" DataField="PitcherCount" UniqueName="PitcherCount">
-                        <ItemTemplate>
-                            <asp:Label ID="lblPitcherCount" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.PitcherCount") %>'>
+                            <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderText="# Pitchers" DataField="PitcherCount" HeaderStyle-Width="50px" UniqueName="PitcherCount">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblPitcherCount" runat="server" Width="50px" Text='<%# DataBinder.Eval(Container, "DataItem.PitcherCount") %>'>
                             </asp:Label>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+                        </Columns>
+                    </MasterTableView>
+                </telerik:RadGrid>
+            </telerik:RadPageView>
+            <telerik:RadPageView runat="server" ID="rPageDraftPlayerStatus">
+                <asp:CheckBox ID="chkDrafted" runat="server" Font-Bold="false" CssClass="chkBox" Width="200px" Text="Drafted" AutoPostBack="true" OnCheckedChanged="chkDrafted_CheckedChanged" />
+
+                <telerik:RadGrid ID="rGridDraftPositionStatus"
+                    runat="server"
+                    OnNeedDataSource="rGridDraftPositionStatus_NeedDataSource"
+                    AutoGenerateColumns="False"
+                    AllowFilteringByColumn="False"
+                    AllowSorting="True"
+                    Skin="<%$ appSettings:Telerik.Skin%>"
+                    CellSpacing="0"
+                    GridLines="None"
+                    AllowMultiRowEdit="False"
+                    AllowMultiRowSelection="False">
+                    <PagerStyle />
+                    <ClientSettings EnablePostBackOnRowClick="true">
+                        <Selecting AllowRowSelect="True" />
+                    </ClientSettings>
+                    <SelectedItemStyle BackColor="Fuchsia" BorderColor="Purple" BorderStyle="Dashed"
+                        BorderWidth="1px" />
+                    <GroupingSettings CaseSensitive="False" />
+                    <MasterTableView DataKeyNames="SeasonID, PositionName, Drafted"
+                        CommandItemDisplay="None"
+                        AllowSorting="True"
+                        EditMode="InPlace"
+                        EnableHeaderContextAggregatesMenu="False"
+                        EnableHeaderContextFilterMenu="False"
+                        EnableHeaderContextMenu="False">
+                        <Columns>
+
+                            <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderText="Season ID" Visible="false" DataField="SeasonID" UniqueName="SeasonID">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblSeasonID" runat="server" Visible="false" Text='<%# DataBinder.Eval(Container, "DataItem.SeasonID") %>'></asp:Label>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderText="Position" Visible="true" DataField="PositionName" UniqueName="PositionName">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblPositionName" runat="server" Visible="true" Text='<%# DataBinder.Eval(Container, "DataItem.PositionName") %>'></asp:Label>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderText="Position Count" Visible="true" DataField="PosCount" UniqueName="PosCount">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblPosCount" runat="server" Visible="true" Text='<%# DataBinder.Eval(Container, "DataItem.PosCount") %>'></asp:Label>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+
+                        </Columns>
+                    </MasterTableView>
+                </telerik:RadGrid>
+
+
+            </telerik:RadPageView>
+            <telerik:RadPageView runat="server" ID="radPagePlayers">
+                <asp:CheckBox ID="chkDraftedPlayers" runat="server" Font-Bold="false" CssClass="chkBox" Width="200px" Text="Drafted" AutoPostBack="true" OnCheckedChanged="chkDraftedPlayers_CheckedChanged" />
+                <telerik:RadDropDownList ID="rDDPrimPos" AutoPostBack="true" 
+                    runat="server">
+                </telerik:RadDropDownList>
+                <br />
+
+                <asp:Panel ID="pnlMain" runat="server">
+                    <telerik:RadRotator ID="RadRotator1"
+                        runat="server"
+                        Width="100%"
+                        Height="400px"
+                        CssClass="horizontalRotator"
+                        ItemHeight="100px"
+                        ItemWidth="100px"
+                        Skin="<%$ appSettings:Telerik.Skin%>"
+                        ScrollDuration="500" 
+                        EnableRandomOrder="true"
+                        FrameDuration="500"
+                        SlideShowAnimation-Type="Pulse"  
+                        RotatorType="Carousel"  
+                        
+                        DataSourceID="ObjectDataSource1">
+                        <ItemTemplate>
+                            <telerik:RadBinaryImage runat="server" 
+                                CropPosition="Top" 
+                                ResizeMode="Crop" 
+                                ID="RadBinaryImage1" 
+                                DataValue='<%#Eval("PlayerImage") %>'
+                                AutoAdjustImageControlSize="false" 
+                                Height="100px" 
+                                Width="90px" 
+                                ToolTip='<%#Eval("PlayerName", "Photo of {0}") %>'
+                                AlternateText='<%#Eval("PlayerName", "Photo of {0}") %>'></telerik:RadBinaryImage>
                         </ItemTemplate>
-                    </telerik:GridTemplateColumn>
-                </Columns>
-            </MasterTableView>
-        </telerik:RadGrid>
+                    </telerik:RadRotator>
+                </asp:Panel>
+
+                <asp:ObjectDataSource ID="ObjectDataSource1"
+                    runat="server" 
+                    SelectMethod="ListPlayerPositionSeason" 
+                    TypeName="CSBA.BusinessLogicLayer.PlayerBusinessLogic">
+                    <SelectParameters>
+                        <asp:ControlParameter ControlID="rDDSeason"  Type="Int32" Name="SeasonID" />
+                        <asp:ControlParameter ControlID="rDDPrimPos" Type="Int32" Name="PositionID" />
+                        <asp:ControlParameter ControlID="chkDraftedPlayers" Type="Boolean" Name="bDrafted" />
+                    </SelectParameters>
+                </asp:ObjectDataSource>
+
+
+            </telerik:RadPageView>
+        </telerik:RadMultiPage>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </asp:Panel>

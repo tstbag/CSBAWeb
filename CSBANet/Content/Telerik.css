@@ -30,6 +30,14 @@
     font-family: Helvetica;
 
 }
+.chkBox label   {
+    text-align: left;
+    width:100px;
+    font-weight:bold;
+    font-size:small;
+    display:inline;
+}
+
 
 .EditFormHeader td {
     font-size: 14px;

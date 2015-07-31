@@ -38,6 +38,25 @@ namespace CSBA.DataAccessLayer
             return listTeams;
         }
 
+        public List<DraftPlayerDomainModel> DraftPositionStatus(int SeasonID, int iDrafted)
+        {
+            List<DraftPlayerDomainModel> listPos = new List<DraftPlayerDomainModel>();
+
+            using (CSBAEntities context = new CSBAEntities())
+            {
+                listPos = (from result in context.DraftPositionStatus(SeasonID) where result.Drafted == iDrafted 
+                             select new DraftPlayerDomainModel
+                             {
+                                 Drafted = result.Drafted,
+                                 PosCount = (int)result.PosCount,
+                                 PositionName = result.PositionName,
+                                 SeasonID = result.SeasonID
+                             }).ToList();
+            } // Guaranteed to close the Connection
+
+            return listPos;
+        }
+
         public DraftStatusDomainModel DraftStatus(int SeasonID)
         {
             DraftStatusDomainModel dStatus = new DraftStatusDomainModel();
@@ -47,8 +66,8 @@ namespace CSBA.DataAccessLayer
                 dStatus = (from result in context.DraftPlayerStatus(SeasonID)
                            select new DraftStatusDomainModel
                              {
-                                  SeaonPlayerTotal = result.SeaonPlayerTotal,
-                                  SeasonPlayerDrafted = result.SeasonPlayerDrafted
+                                 SeaonPlayerTotal = result.SeaonPlayerTotal,
+                                 SeasonPlayerDrafted = result.SeasonPlayerDrafted
                              }).FirstOrDefault();
             } // Guaranteed to close the Connection
 

@@ -49,7 +49,29 @@ namespace CSBA.DataAccessLayer
             return list;
         }
 
-        public List<v_PlayerPositionDomainModel> ListPlayerPositions()
+        public List<v_PlayerPositionDomainModel> ListPlayerPositionSeason(int SeasonID, int PositionID, bool bDrafted)
+        {
+            //Create a return type Object
+            List<v_PlayerPositionDomainModel> list = new List<v_PlayerPositionDomainModel>();
+
+            using (CSBAEntities context = new CSBAEntities())
+            {
+                list = (from result in context.DraftPlayersStatus(SeasonID,PositionID, bDrafted)
+                        select new v_PlayerPositionDomainModel
+                        {
+                            PlayerGUID = result.PlayerGUID,
+                            PlayerImage = result.PlayerImage,
+                            PlayerName = result.PlayerName,
+                            PrimaryPositionID = result.PrimaryPositionID,
+
+                        }).ToList();
+            } // Guaranteed to close the Connection
+
+            return list;
+        }
+
+
+        public List<v_PlayerPositionDomainModel> ListDraftPlayers()
         {
             //Create a return type Object
             List<v_PlayerPositionDomainModel> list = new List<v_PlayerPositionDomainModel>();
@@ -67,7 +89,7 @@ namespace CSBA.DataAccessLayer
                             PrimPosName = result.PrimPosName,
                             PrimPosNameLong = result.PrimPosNameLong,
                             SecPosName = result.SecPosName,
-                            SecPosNameLong = result.SecPosNameLong
+                            SecPosNameLong = result.SecPosNameLong                             
 
                         }).ToList();
             } // Guaranteed to close the Connection

@@ -14,5 +14,6 @@ namespace CSBA.Contracts
         void TradePlayer(SeasonTeamPlayerDomainModel STP, int NewTeamID, int Points);
         DraftStatusDomainModel DraftStatus(int SeasonID);
 
+        List<DraftPlayerDomainModel> DraftPositionStatus(int SeasonID, int iDrafted);
     }
 }

@@ -37,7 +37,7 @@
             BorderWidth="1px"
             AllowFilteringByColumn="True"
             AllowSorting="True"
-            Skin="<%$ appSettings:Telerik.Skin%>" 
+            Skin="<%$ appSettings:Telerik.Skin%>"
             CellSpacing="0"
             GridLines="None"
             AllowMultiRowEdit="True"
@@ -59,7 +59,7 @@
                     </telerik:GridTemplateColumn>
                     <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderText="Player Name" DataField="PlayerName" UniqueName="PlayerName">
                         <ItemTemplate>
-                            <asp:Label ID="lblPlayerName" runat="server"  Text='<%# DataBinder.Eval(Container, "DataItem.PlayerName") %>'>
+                            <asp:Label ID="lblPlayerName" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.PlayerName") %>'>
                             </asp:Label>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
@@ -80,14 +80,15 @@
                                 AlternateText='<%#Eval("PlayerName", "Photo of {0}") %>'></telerik:RadBinaryImage>
                         </ItemTemplate>
                     </telerik:GridTemplateColumn>
+
                     <telerik:GridButtonColumn Text="Delete" CommandName="Delete" UniqueName="Delete" ConfirmText="Are you sure you want to delete this?" ButtonType="ImageButton" />
                 </Columns>
                 <EditFormSettings EditFormType="Template">
                     <EditColumn UniqueName="EditCommandColumn1" ButtonType="PushButton" FilterControlAltText="Filter EditCommandColumn1 column"></EditColumn>
                     <FormTemplate>
 
-                        <div style="float: left; padding-top: 10px;  padding-left: 40px">
-                            <asp:Label ID="lblPicture" runat="server"  CssClass="LargerLabels" Text='<%# DataBinder.Eval(Container, "DataItem.PlayerName") %>'></asp:Label>
+                        <div style="float: left; padding-top: 10px; padding-left: 40px">
+                            <asp:Label ID="lblPicture" runat="server" CssClass="LargerLabels" Text='<%# DataBinder.Eval(Container, "DataItem.PlayerName") %>'></asp:Label>
                             <br />
                             <telerik:RadBinaryImage runat="server" ID="imgPlayer" DataValue='<%#Eval("PlayerImage") %>' CssClass="float-right"
                                 AutoAdjustImageControlSize="false" Width="250px" Height="320px" />
@@ -95,7 +96,7 @@
 
                         <div style="float: right; width: 50%">
 
-                            <asp:Table ID="tblEnterAddress" runat="server" CellSpacing="2" CellPadding="1"  Width="100%" CssClass="float-left"
+                            <asp:Table ID="tblEnterAddress" runat="server" CellSpacing="2" CellPadding="1" Width="100%" CssClass="float-left"
                                 Style="border-collapse: collapse;">
                                 <asp:TableRow>
                                     <asp:TableCell Width="10%" Visible="false">
@@ -159,9 +160,10 @@
                                             runat="server" ButtonType="SkinnedButton" CommandName='<%# (Container is GridEditFormInsertItem) ? "PerformInsert" : "Update" %>'>
                                         </telerik:RadButton>
                                         &nbsp;
-                                <telerik:RadButton ID="btnCancel" ButtonType="SkinnedButton" Text="Cancel" runat="server" CausesValidation="False"
-                                    CommandName="Cancel">
-                                </telerik:RadButton>
+                               
+                                        <telerik:RadButton ID="btnCancel" ButtonType="SkinnedButton" Text="Cancel" runat="server" CausesValidation="False"
+                                            CommandName="Cancel">
+                                        </telerik:RadButton>
 
                                     </asp:TableCell>
                                 </asp:TableRow>

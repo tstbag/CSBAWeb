@@ -37,5 +37,11 @@ namespace CSBA.BusinessLogicLayer
         {
             return DAL.DraftStatus(SeasonID);
         }
+
+
+        public List<DraftPlayerDomainModel> DraftPositionStatus(int SeasonID, int iDrafted)
+        {
+            return DAL.DraftPositionStatus(SeasonID, iDrafted);
+        }
     }
 }

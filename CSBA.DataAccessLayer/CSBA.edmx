@@ -641,7 +641,15 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="DraftPlayersStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SeasonID" Type="int" Mode="In" />
+          <Parameter Name="PrimaryPositionID" Type="int" Mode="In" />
+          <Parameter Name="Drafted" Type="bit" Mode="In" />
+        </Function>
         <Function Name="DraftPlayerStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SeasonID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DraftPositionStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SeasonID" Type="int" Mode="In" />
         </Function>
         <Function Name="GetSeasonTeamOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1533,6 +1541,14 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
           <FunctionImport Name="sp_Season_Current">
           <Parameter Name="SeasonID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="DraftPositionStatus" ReturnType="Collection(CSBAModel.DraftPositionStatus_Result)">
+          <Parameter Name="SeasonID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DraftPlayersStatus" ReturnType="Collection(CSBAModel.DraftPlayersStatus_Result)">
+            <Parameter Name="SeasonID" Mode="In" Type="Int32" />
+            <Parameter Name="PrimaryPositionID" Mode="In" Type="Int32" />
+            <Parameter Name="Drafted" Mode="In" Type="Boolean" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Position">
           <Key>
@@ -2293,6 +2309,19 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
           <Property Type="Int32" Name="SeaonPlayerTotal" Nullable="true" />
           <Property Type="Int32" Name="SeasonPlayerDrafted" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="DraftPositionStatus_Result">
+          <Property Type="Int32" Name="SeasonID" Nullable="false" />
+          <Property Type="String" Name="PositionName" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="PosCount" Nullable="true" />
+          <Property Type="Int32" Name="Drafted" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="DraftPlayersStatus_Result">
+          <Property Type="Int32" Name="SeasonID" Nullable="false" />
+          <Property Type="Guid" Name="PlayerGUID" Nullable="false" />
+          <Property Type="String" Name="PlayerName" Nullable="true" MaxLength="50" />
+          <Property Type="Binary" Name="PlayerImage" Nullable="true" MaxLength="Max" />
+          <Property Type="Int32" Name="PrimaryPositionID" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3041,6 +3070,27 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_Season_Current" FunctionName="CSBAModel.Store.sp_Season_Current" />
+          <FunctionImportMapping FunctionImportName="DraftPositionStatus" FunctionName="CSBAModel.Store.DraftPositionStatus">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CSBAModel.DraftPositionStatus_Result">
+                <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+                <ScalarProperty Name="PosCount" ColumnName="PosCount" />
+                <ScalarProperty Name="Drafted" ColumnName="Drafted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DraftPlayersStatus" FunctionName="CSBAModel.Store.DraftPlayersStatus">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CSBAModel.DraftPlayersStatus_Result">
+                <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
+                <ScalarProperty Name="PlayerGUID" ColumnName="PlayerGUID" />
+                <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+                <ScalarProperty Name="PlayerImage" ColumnName="PlayerImage" />
+                <ScalarProperty Name="PrimaryPositionID" ColumnName="PrimaryPositionID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

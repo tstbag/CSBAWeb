@@ -955,5 +955,31 @@ namespace CSBA.DataAccessLayer
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Season_Current", seasonIDParameter);
         }
+    
+        public virtual ObjectResult<DraftPositionStatus_Result> DraftPositionStatus(Nullable<int> seasonID)
+        {
+            var seasonIDParameter = seasonID.HasValue ?
+                new ObjectParameter("SeasonID", seasonID) :
+                new ObjectParameter("SeasonID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DraftPositionStatus_Result>("DraftPositionStatus", seasonIDParameter);
+        }
+    
+        public virtual ObjectResult<DraftPlayersStatus_Result> DraftPlayersStatus(Nullable<int> seasonID, Nullable<int> primaryPositionID, Nullable<bool> drafted)
+        {
+            var seasonIDParameter = seasonID.HasValue ?
+                new ObjectParameter("SeasonID", seasonID) :
+                new ObjectParameter("SeasonID", typeof(int));
+    
+            var primaryPositionIDParameter = primaryPositionID.HasValue ?
+                new ObjectParameter("PrimaryPositionID", primaryPositionID) :
+                new ObjectParameter("PrimaryPositionID", typeof(int));
+    
+            var draftedParameter = drafted.HasValue ?
+                new ObjectParameter("Drafted", drafted) :
+                new ObjectParameter("Drafted", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DraftPlayersStatus_Result>("DraftPlayersStatus", seasonIDParameter, primaryPositionIDParameter, draftedParameter);
+        }
     }
 }

@@ -96,7 +96,13 @@
     <Compile Include="DAL\StatDAL.cs" />
     <Compile Include="DAL\TeamDAL.cs" />
     <Compile Include="DAL\TradeDAL.cs" />
+    <Compile Include="DraftPlayersStatus_Result.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
     <Compile Include="DraftPlayerStatus_Result.cs">
+      <DependentUpon>CSBA.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DraftPositionStatus_Result.cs">
       <DependentUpon>CSBA.tt</DependentUpon>
     </Compile>
     <Compile Include="GetSeasonTeamOrder_Result.cs">

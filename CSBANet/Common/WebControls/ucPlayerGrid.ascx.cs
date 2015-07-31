@@ -35,7 +35,7 @@ namespace CSBANet.Common.WebControls
             {
                 PlayerDomainModel Player = new PlayerDomainModel();
 
-                rGridPlayer.DataSource = PlayerBLL.ListPlayerPositions();
+                rGridPlayer.DataSource = PlayerBLL.ListDraftPlayers();
 
             }
             catch (Exception ex)

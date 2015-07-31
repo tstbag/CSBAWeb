@@ -27,6 +27,9 @@ namespace CSBANet.Common.WebControls
         DraftPlayerBusinessLogicLayer DraftPlayerBLL = new DraftPlayerBusinessLogicLayer();
         PlayerDomainModel PagePlayer = new PlayerDomainModel();
         PickAPlayerDomainModel PlayerDrafted = new PickAPlayerDomainModel();
+        PositionBusinessLogic PosBLL = new PositionBusinessLogic();
+
+        String strPageState = "Pick";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -42,18 +45,26 @@ namespace CSBANet.Common.WebControls
             Session["time"] = DateTime.Now.AddSeconds(40);
 
 
-            List<SeasonDomainModel> Seasons = new List<SeasonDomainModel>();
+            if (!IsPostBack )
+            {
+                List<SeasonDomainModel> Seasons = new List<SeasonDomainModel>();
 
-            Seasons = SeasonBLL.ListSeason();
-            var CurrentSeasonID = from Season in Seasons where Season.CurrentSeason select Season.SeasonID;
+                Seasons = SeasonBLL.ListSeason();
+                var CurrentSeasonID = from Season in Seasons where Season.CurrentSeason select Season.SeasonID;
 
 
-            rDDSeason.DataSource = Seasons;
-            rDDSeason.DataValueField = "SeasonID";
-            rDDSeason.DataTextField = "SeasonName";
-            rDDSeason.DataBind();
+                rDDSeason.DataSource = Seasons;
+                rDDSeason.DataValueField = "SeasonID";
+                rDDSeason.DataTextField = "SeasonName";
+                rDDSeason.DataBind();
 
-            rDDSeason.SelectedValue = CurrentSeasonID.FirstOrDefault().ToString();
+                rDDSeason.SelectedValue = CurrentSeasonID.FirstOrDefault().ToString();
+
+                rDDPrimPos.DataSource = PosBLL.ListPositions();
+                rDDPrimPos.DataValueField = "PositionID";
+                rDDPrimPos.DataTextField = "PositionNameLong";
+                rDDPrimPos.DataBind();
+            }
 
             DraftStatusDomainModel DraftStatus = new DraftStatusDomainModel();
 
@@ -63,6 +74,22 @@ namespace CSBANet.Common.WebControls
             rLGStatus.ToolTip = string.Format("Players Drafted: {0}, Players Total: {1}", rLGStatus.Pointer.Value, rLGStatus.Scale.Max);
 
 
+
+
+        }
+
+        protected void ManageButtons()
+        {
+            if (strPageState == "Pick")
+            {
+                rBTNPickPlayer.Enabled = true;
+                rBTNAssign.Enabled = false;
+            }
+            else if (strPageState == "Picked")
+            {
+                rBTNPickPlayer.Enabled = false;
+                rBTNAssign.Enabled = true;
+            }
 
 
         }
@@ -116,8 +143,12 @@ namespace CSBANet.Common.WebControls
         protected void RepaintScreen()
         {
             GetGridDataSource();
+            GetGridDraftedPosDataSource();
             LoadrDDSeasonTeam();
             rGridDraftPlayer.DataBind();
+            rGridDraftPositionStatus.DataBind();
+            RadRotator1.DataBind();
+
         }
 
         protected void rGridDraftPlayer_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
@@ -320,6 +351,8 @@ namespace CSBANet.Common.WebControls
 
                     Application.Add("CurrentPlayer", PlayerDrafted);
                     rNTBCurrBid.Value = 2;
+                    strPageState = "Picked";
+                    ManageButtons();
                 }
                 else
                 {
@@ -370,6 +403,8 @@ namespace CSBANet.Common.WebControls
 
                 DraftPlayerBLL.DraftPlayer(STP);
             }
+            strPageState = "Pick";
+            ManageButtons();
             RepaintScreen();
 
         }
@@ -401,6 +436,50 @@ namespace CSBANet.Common.WebControls
             //int icnt = Convert.ToInt32(iCountDown.Text);
             //icnt = icnt - 1;
             //iCountDown.Text = icnt.ToString();
+
+        }
+
+        protected void rGridDraftPositionStatus_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
+        {
+            GetGridDraftedPosDataSource();
+
+        }
+
+
+        protected void GetGridDraftedPosDataSource()
+        {
+            int iDrafted = 0;
+            if (chkDrafted.Checked == true)
+                iDrafted = 1;
+            else
+                iDrafted = 0;
+            try
+            {
+                rGridDraftPositionStatus.DataSource = DraftPlayerBLL.DraftPositionStatus(Convert.ToInt32(rDDSeason.SelectedValue), iDrafted);
+            }
+            catch (Exception ex)
+            {
+                StackTrace st = new StackTrace();
+                StackFrame sf = st.GetFrame(0);
+                string errMethod = sf.GetMethod().Name.ToString();  // Get the current method name
+                string errMsg = "600";                              // Gotta pass something, we're retro-fitting an existing method
+                Session["LastException"] = ex;                      // Throw the exception in the session variable, will be used in error page
+                string url = string.Format(ConfigurationManager.AppSettings["ErrorPageURL"], errMethod, errMsg); //Set the URL
+                Response.Redirect(url);                             // Go to the error page.
+
+            }
+        }
+
+
+
+        protected void chkDrafted_CheckedChanged(object sender, EventArgs e)
+        {
+            GetGridDraftedPosDataSource();
+            rGridDraftPositionStatus.DataBind();
+        }
+
+        protected void chkDraftedPlayers_CheckedChanged(object sender, EventArgs e)
+        {
 
         }
 

@@ -24,14 +24,20 @@ namespace CSBA.BusinessLogicLayer
 
         }
 
+        public List<v_PlayerPositionDomainModel> ListPlayerPositionSeason(int SeasonID, int PositionID, bool bDrafted)
+        {
+            return dal.ListPlayerPositionSeason(SeasonID, PositionID, bDrafted);
+
+        }
+
         public PlayerDomainModel PlayerDetail(Guid? PlayerGUID)
         {
             return dal.PlayerDetail(PlayerGUID);
         }
 
-        public List<v_PlayerPositionDomainModel> ListPlayerPositions()
+        public List<v_PlayerPositionDomainModel> ListDraftPlayers()
         {
-            return dal.ListPlayerPositions();
+            return dal.ListDraftPlayers();
         }
         #endregion
 
