@@ -193,6 +193,9 @@
                                 <Items>
                                     <telerik:RadToolBarButton Text="Email Rosters" CommandName="EmailRosters">
                                     </telerik:RadToolBarButton>
+                                    <telerik:RadToolBarButton Text="Test Email" CommandName="TestEmail">
+                                    </telerik:RadToolBarButton>
+
                                 </Items>
                             </telerik:RadToolBar>
                         </CommandItemTemplate>

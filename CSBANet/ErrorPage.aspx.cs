@@ -47,8 +47,8 @@ namespace CSBANet
             }
 
             // Show error details to only you (developer). LOCAL ACCESS ONLY.
-            if (Request.IsLocal)
-            {
+          //  if (Request.IsLocal)
+           // {
                 // Detailed Error Message.
                 ErrorDetailedMsg.Text = ex.Message;
 
@@ -72,7 +72,7 @@ namespace CSBANet
                         InnerTrace.Text = ex.StackTrace.ToString().TrimStart();
                     }
                 }
-            }
+          //  }
 
             // Clear the error from the server.
             Server.ClearError();

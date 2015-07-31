@@ -45,7 +45,7 @@ namespace CSBANet.Common.WebControls
             Session["time"] = DateTime.Now.AddSeconds(40);
 
 
-            if (!IsPostBack )
+            if (!IsPostBack)
             {
                 List<SeasonDomainModel> Seasons = new List<SeasonDomainModel>();
 
@@ -247,6 +247,23 @@ namespace CSBANet.Common.WebControls
 
         protected void rGridDraftPlayer_ItemCommand(object sender, GridCommandEventArgs e)
         {
+            if (e.CommandName == "TestEmail")
+            {
+                try
+                {
+                    cMail.SendMessage("tstbag@verizon.net", "tstbag@verizon.net", "CSBA Test Email", "Test Body");
+                }
+                catch (Exception ex)
+                {
+                    StackTrace st = new StackTrace();
+                    StackFrame sf = st.GetFrame(0);
+                    string errMethod = sf.GetMethod().Name.ToString();  // Get the current method name
+                    string errMsg = "600";                              // Gotta pass something, we're retro-fitting an existing method
+                    Session["LastException"] = ex;                      // Throw the exception in the session variable, will be used in error page
+                    string url = string.Format(ConfigurationManager.AppSettings["ErrorPageURL"], errMethod, errMsg); //Set the URL
+                    Response.Redirect(url);                             // Go to the error page.
+                }
+            }
             if (e.CommandName == "EmailRosters")
             {
                 foreach (GridDataItem item in rGridDraftPlayer.Items)
@@ -308,7 +325,7 @@ namespace CSBANet.Common.WebControls
 
                         string[,] MergeValues = new string[,] { { "{TeamName}", rBTNTeamName.Text.Trim() }, { "{TeamRoster}", sb.ToString() } };
 
-                        cMail.SendMessage("noreply@CSBA.com", lblOwnerEmail.Text.ToString().Trim(), "CSBA Roster", cMail.PopulateBody("~/Content/EmailTemplates/DraftRoster.html", MergeValues));
+                        cMail.SendMessage("tstbag@verizon.net", lblOwnerEmail.Text.ToString().Trim(), "CSBA Roster", cMail.PopulateBody("~/Content/EmailTemplates/DraftRoster.html", MergeValues));
                     }
                     catch (Exception ex)
                     {
