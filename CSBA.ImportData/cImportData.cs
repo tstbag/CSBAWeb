@@ -13,8 +13,10 @@ namespace CSBA.ImportData
 {
     public class cImportData
     {
-        const string CWorkbook = "C:\\Class\\StatList.xls";
-        const int C_SeasonID = 1025;
+        //const string CWorkbook = "C:\\Class\\StatList.xls";
+
+        const string CWorkbook = "C:\\Users\\Dad\\Google Drive\\CSBAweb\\CSBAWeb\\Stats\\StatList.xls";
+        const int C_SeasonID = 1026;
 
         static void Main(string[] args)
         {
@@ -51,7 +53,7 @@ namespace CSBA.ImportData
                 int rows_count = range.Rows.Count;
                 int cols_count = range.Columns.Count;
 
-                rows_count = 126;
+                rows_count = 118;
 
                 //string output = null;
 
@@ -339,7 +341,7 @@ namespace CSBA.ImportData
                 int rows_count = range.Rows.Count;
                 int cols_count = range.Columns.Count;
 
-                rows_count = 112;
+                rows_count = 105;
 
                 for (int i = 2; i <= rows_count; i++)
                 {

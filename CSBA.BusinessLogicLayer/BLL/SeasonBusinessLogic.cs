@@ -24,7 +24,12 @@ namespace CSBA.BusinessLogicLayer
         {
             return dal.ListSeason();
         }
-        
+
+        public List<SeasonDomainModel> ListAllSeason()
+        {
+            return dal.ListAllSeason();
+        }
+
         public List<SeasonDomainModel> ListSeasonView()
         {
             return dal.ListSeasonView();

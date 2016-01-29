@@ -219,7 +219,7 @@ namespace CSBA.DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Position_Update", positionIDParameter, positionTypeIDParameter, positionNameParameter, maxCountParameter, positionNameLongParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> sp_Season_Insert(string seasonName, Nullable<System.DateTime> draftDate, Nullable<int> startPoints, Nullable<int> minBid)
+        public virtual ObjectResult<Nullable<int>> sp_Season_Insert(string seasonName, Nullable<System.DateTime> draftDate, Nullable<int> startPoints, Nullable<int> minBid, Nullable<bool> active)
         {
             var seasonNameParameter = seasonName != null ?
                 new ObjectParameter("SeasonName", seasonName) :
@@ -237,10 +237,14 @@ namespace CSBA.DataAccessLayer
                 new ObjectParameter("MinBid", minBid) :
                 new ObjectParameter("MinBid", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_Season_Insert", seasonNameParameter, draftDateParameter, startPointsParameter, minBidParameter);
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_Season_Insert", seasonNameParameter, draftDateParameter, startPointsParameter, minBidParameter, activeParameter);
         }
     
-        public virtual int sp_Season_Update(Nullable<int> seasonID, string seasonName, Nullable<System.DateTime> draftDate, Nullable<int> startPoints, Nullable<int> minBid)
+        public virtual int sp_Season_Update(Nullable<int> seasonID, string seasonName, Nullable<System.DateTime> draftDate, Nullable<int> startPoints, Nullable<int> minBid, Nullable<bool> active)
         {
             var seasonIDParameter = seasonID.HasValue ?
                 new ObjectParameter("SeasonID", seasonID) :
@@ -262,7 +266,11 @@ namespace CSBA.DataAccessLayer
                 new ObjectParameter("MinBid", minBid) :
                 new ObjectParameter("MinBid", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Season_Update", seasonIDParameter, seasonNameParameter, draftDateParameter, startPointsParameter, minBidParameter);
+            var activeParameter = active.HasValue ?
+                new ObjectParameter("Active", active) :
+                new ObjectParameter("Active", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Season_Update", seasonIDParameter, seasonNameParameter, draftDateParameter, startPointsParameter, minBidParameter, activeParameter);
         }
     
         public virtual int sp_Season_Clear(Nullable<int> seasonID)

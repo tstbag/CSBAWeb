@@ -80,6 +80,8 @@
                     </ItemTemplate>
                     <HeaderStyle Width="125px" />
                 </telerik:GridTemplateColumn>
+
+
                 <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderStyle-Width="125px" HeaderText="Min Bid" DataField="MinBid" UniqueName="MinBid">
                     <ItemTemplate>
                         <asp:Label ID="lblMinBid" runat="server" Width="125px" Text='<%# DataBinder.Eval(Container, "DataItem.MinBid") %>'>
@@ -87,9 +89,18 @@
                     </ItemTemplate>
                     <HeaderStyle Width="125px" />
                 </telerik:GridTemplateColumn>
+
+                <telerik:GridTemplateColumn FilterControlAltText="Filter TemplateColumn column" HeaderStyle-Width="125px" HeaderText="Active" DataField="Active" UniqueName="Active">
+                    <ItemTemplate>
+                        <asp:CheckBox ID="chkActive" runat="server" Enabled="false" Checked='<%# DataBinder.Eval(Container, "DataItem.Active") %>' />
+                    </ItemTemplate>
+                    <HeaderStyle Width="125px" />
+                </telerik:GridTemplateColumn>
+
+
                 <telerik:GridButtonColumn Text="Select" CommandName="Select" UniqueName="Clear" ConfirmText="Are you sure you want to select this season?" ButtonType="PushButton" ConfirmDialogType="RadWindow">
                 </telerik:GridButtonColumn>
-                    <telerik:GridButtonColumn Text="Delete" CommandName="Delete" UniqueName="Delete" ConfirmText="Are you sure you want to delete this?" ButtonType="ImageButton" />
+                <telerik:GridButtonColumn Text="Delete" CommandName="Delete" UniqueName="Delete" ConfirmText="Are you sure you want to delete this?" ButtonType="ImageButton" />
                 <telerik:GridButtonColumn Text="Clear" CommandName="Clear" UniqueName="Clear" ConfirmText="Are you sure you want to reset this season?" ButtonType="PushButton" ConfirmDialogType="RadWindow">
                     <ItemStyle Height="25px" Width="25px" />
                 </telerik:GridButtonColumn>
@@ -99,7 +110,7 @@
                 <FormTemplate>
                     <asp:Table ID="tblEnterAddress" runat="server" CellSpacing="2" CellPadding="1" Width="100%"
                         Style="border-collapse: collapse;">
-                        <asp:TableRow Visible="false" >
+                        <asp:TableRow Visible="false">
                             <asp:TableCell Width="10%">
                                 <asp:Label ID="lblSeason" runat="server" Text="SeasonID">
                                 </asp:Label>
@@ -147,12 +158,26 @@
                                 </telerik:RadNumericTextBox>
                             </asp:TableCell>
                         </asp:TableRow>
+
+                        <asp:TableRow>
+                            <asp:TableCell>
+                                <asp:Label ID="lblActive" runat="server" Text="Active"></asp:Label>
+                            </asp:TableCell>
+                            <asp:TableCell>
+                                <asp:CheckBox ID="chkEditActive" runat="server" Enabled="true" Checked='<%# DataBinder.Eval(Container, "DataItem.Active") %>' />
+                            </asp:TableCell>
+                        </asp:TableRow>
+                       
+
+
+
                         <asp:TableRow>
                             <asp:TableCell ColumnSpan="2">
                                 <telerik:RadButton ID="btnUpdate" Text='<%# (Container is GridEditFormInsertItem) ? "Insert" : "Update" %>'
                                     runat="server" ButtonType="SkinnedButton" CommandName='<%# (Container is GridEditFormInsertItem) ? "PerformInsert" : "Update" %>'>
                                 </telerik:RadButton>
                                 &nbsp;
+                               
                                 <telerik:RadButton ID="btnCancel" Text="Cancel" runat="server" CausesValidation="False"
                                     CommandName="Cancel">
                                 </telerik:RadButton>

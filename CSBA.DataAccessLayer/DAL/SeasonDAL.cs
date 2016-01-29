@@ -22,7 +22,8 @@ namespace CSBA.DataAccessLayer
                         select new SeasonDomainModel
                         {
                             SeasonID = result.SeasonID,
-                            SeasonName = result.SeasonName
+                            SeasonName = result.SeasonName,
+                            Active = result.Active
                         }).ToList();
 
             } // Guaranteed to close the Connection
@@ -40,6 +41,7 @@ namespace CSBA.DataAccessLayer
             using (CSBAEntities context = new CSBAEntities())
             {
                 list = (from result in context.Seasons
+                        where result.Active == true 
                         select new SeasonDomainModel
                         {
                             SeasonID = result.SeasonID,
@@ -47,7 +49,8 @@ namespace CSBA.DataAccessLayer
                             StartPoints = result.StartPoints,
                             MinBid = (int)result.MinBid,
                             DraftDate = result.DraftDate,
-                            CurrentSeason = (bool)result.CurrentSeason
+                            CurrentSeason = (bool)result.CurrentSeason,
+                            Active = result.Active
                         }).ToList();
 
             } // Guaranteed to close the Connection
@@ -55,6 +58,35 @@ namespace CSBA.DataAccessLayer
             //return the list
             return list;
         }
+
+        public List<SeasonDomainModel> ListAllSeason()
+        {
+            //Create a return type Object
+            List<SeasonDomainModel> list = new List<SeasonDomainModel>();
+
+            //Create a Context object to Connect to the database
+            using (CSBAEntities context = new CSBAEntities())
+            {
+                list = (from result in context.Seasons
+                        select new SeasonDomainModel
+                        {
+                            SeasonID = result.SeasonID,
+                            SeasonName = result.SeasonName,
+                            StartPoints = result.StartPoints,
+                            MinBid = (int)result.MinBid,
+                            DraftDate = result.DraftDate,
+                            CurrentSeason = (bool)result.CurrentSeason,
+                            Active = result.Active
+                        }).ToList();
+
+            } // Guaranteed to close the Connection
+
+            //return the list
+            return list;
+        }
+
+
+
         public List<SeasonDomainModel> ListSeasonView()
         {
             //Create a return type Object
@@ -71,7 +103,10 @@ namespace CSBA.DataAccessLayer
                             SeasonName = result.SeasonName,
                             StartPoints = result.StartPoints,
                             MinBid = (int)result.MinBid,
-                            DraftDate = result.DraftDate
+                            DraftDate = result.DraftDate,
+                            Active = result.Active,
+                            CurrentSeason = (bool)result.CurrentSeason
+
                         }).ToList();
 
             } // Guaranteed to close the Connection
@@ -89,7 +124,9 @@ namespace CSBA.DataAccessLayer
                     SeasonName = season.SeasonName,
                     DraftDate = season.DraftDate,
                     StartPoints = season.StartPoints,
-                    MinBid = season.MinBid
+                    MinBid = season.MinBid,
+                    Active = season.Active,
+                    CurrentSeason = season.CurrentSeason
                 };
                 context.Seasons.Add(_cSeason);
                 context.SaveChanges();
@@ -112,6 +149,8 @@ namespace CSBA.DataAccessLayer
                     cSeason.SeasonName = season.SeasonName;
                     cSeason.DraftDate = season.DraftDate;
                     cSeason.MinBid = season.MinBid;
+                    cSeason.Active = season.Active;
+                    cSeason.CurrentSeason = season.CurrentSeason;
                     context.SaveChanges();
                 }
             }

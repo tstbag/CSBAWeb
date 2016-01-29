@@ -16,6 +16,7 @@ namespace CSBA.DomainModels
         public int? PlayersDrafted { get; set; }
 
         public bool CurrentSeason { get; set; }
+        public Nullable<bool> Active { get; set; }
         #endregion
     }
 }

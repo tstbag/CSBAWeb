@@ -30,7 +30,7 @@ namespace CSBANet.Controls
             try
             {
                 SeasonDomainModel Season = new SeasonDomainModel();
-                rGridSeason.DataSource = BLL.ListSeason();
+                rGridSeason.DataSource = BLL.ListAllSeason();
             }
             catch (Exception ex)
             {
@@ -184,6 +184,7 @@ namespace CSBANet.Controls
                 }
                 SeasonDM.SeasonName = (eeditedItem.FindControl("rTBSeason") as RadTextBox).Text.ToString();
                 SeasonDM.MinBid = Convert.ToInt32((eeditedItem.FindControl("rNTBMinBid") as RadNumericTextBox).Text.ToString());
+                SeasonDM.Active = Convert.ToBoolean((eeditedItem.FindControl("chkEditActive") as CheckBox).Checked);
                 SeasonDM.StartPoints = Convert.ToInt32((eeditedItem.FindControl("rTBStartPoints") as RadTextBox).Text.ToString());
                 SeasonDM.DraftDate = (eeditedItem.FindControl("calSeasonStart") as RadCalendar).SelectedDate;
 

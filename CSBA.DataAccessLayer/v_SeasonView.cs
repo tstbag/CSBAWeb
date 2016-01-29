@@ -20,5 +20,7 @@ namespace CSBA.DataAccessLayer
         public int StartPoints { get; set; }
         public Nullable<int> MinBid { get; set; }
         public Nullable<int> PlayersDrafted { get; set; }
+        public Nullable<bool> Active { get; set; }
+        public Nullable<bool> CurrentSeason { get; set; }
     }
 }

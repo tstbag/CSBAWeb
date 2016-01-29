@@ -21,7 +21,7 @@
 
 <telerik:RadAjaxManager ID="RadAjaxManager1" runat="server">
 
-    <AjaxSettings>
+<%--    <AjaxSettings>
         <telerik:AjaxSetting AjaxControlID="Timer1">
             <UpdatedControls>
                 <telerik:AjaxUpdatedControl ControlID="rNTBCurrBid"></telerik:AjaxUpdatedControl>
@@ -29,7 +29,7 @@
                 <telerik:AjaxUpdatedControl ControlID="rGridDraftPlayer" LoadingPanelID="RadAjaxLoadingPanel1"></telerik:AjaxUpdatedControl>
             </UpdatedControls>
         </telerik:AjaxSetting>
-    </AjaxSettings>
+    </AjaxSettings>--%>
 
     <AjaxSettings>
         <telerik:AjaxSetting AjaxControlID="rNTBCurrBid">
@@ -386,10 +386,10 @@
     </div>
 </asp:Panel>
 
-<asp:Panel ID="pnlTimer" runat="server">
+<%--<asp:Panel ID="pnlTimer" runat="server">
     <asp:Timer ID="Timer1" runat="server" Interval="30000" OnTick="Timer1_Tick">
     </asp:Timer>
-</asp:Panel>
+</asp:Panel>--%>
 
 
 <asp:Label ID="lblMessage" runat="server">
