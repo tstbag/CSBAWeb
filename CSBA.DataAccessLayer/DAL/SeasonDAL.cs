@@ -151,6 +151,7 @@ namespace CSBA.DataAccessLayer
                     cSeason.MinBid = season.MinBid;
                     cSeason.Active = season.Active;
                     cSeason.CurrentSeason = season.CurrentSeason;
+                    cSeason.StartPoints = season.StartPoints;
                     context.SaveChanges();
                 }
             }

@@ -164,7 +164,7 @@
                                 <asp:Label ID="lblActive" runat="server" Text="Active"></asp:Label>
                             </asp:TableCell>
                             <asp:TableCell>
-                                <asp:CheckBox ID="chkEditActive" runat="server" Enabled="true" Checked='<%# DataBinder.Eval(Container, "DataItem.Active") %>' />
+                                <asp:CheckBox ID="chkEditActive" runat="server" Enabled="true" Checked='<%# DataBinder.Eval(Container, "DataItem.Active") == DBNull.Value ? false :  DataBinder.Eval(Container, "DataItem.Active") %>' />
                             </asp:TableCell>
                         </asp:TableRow>
                        
