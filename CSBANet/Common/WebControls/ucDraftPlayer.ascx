@@ -14,6 +14,9 @@
             if (button.get_commandName() == "EmailRosters") {
                 args.set_cancel(!confirm('Email the owners the current rosters?'));
             }
+            if (button.get_commandName() == "TestEmail") {
+                args.set_cancel(!confirm('Do you want to send a test email?'));
+            }
         }
     </script>
 </telerik:RadScriptBlock>
@@ -194,6 +197,8 @@
                                     <telerik:RadToolBarButton Text="Email Rosters" CommandName="EmailRosters">
                                     </telerik:RadToolBarButton>
                                     <telerik:RadToolBarButton Text="Test Email" CommandName="TestEmail">
+                                    </telerik:RadToolBarButton>
+                                    <telerik:RadToolBarButton Text="Create Spreadsheets" CommandName="CreateSpreadsheets">
                                     </telerik:RadToolBarButton>
 
                                 </Items>

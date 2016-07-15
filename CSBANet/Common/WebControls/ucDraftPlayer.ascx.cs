@@ -10,13 +10,15 @@ using System.Text;
 using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Diagnostics;
-using System.Text;
 using CSBA.BusinessLogicLayer;
 using CSBA.Contracts;
 using CSBA.DomainModels;
 using Telerik.Web.UI;
 using Telerik.Web.UI.ImageEditor;
 using CSBA.App_Code;
+using System.Net.Mail;
+
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace CSBANet.Common.WebControls
 {
@@ -251,7 +253,9 @@ namespace CSBANet.Common.WebControls
             {
                 try
                 {
-                    cMail.SendMessage("tstbag@verizon.net", "tstbag@verizon.net", "CSBA Test Email", "Test Body");
+                    string strFileName = CSBA.BusinessLogicLayer.Logic.cExcel.CreateSpreadsheet();
+                    Attachment att = new Attachment(strFileName);
+                    cMail.SendMessage("tstbag@verizon.net", "tstbag@verizon.net", "CSBA Test Email", "Test Body", att);
                 }
                 catch (Exception ex)
                 {
@@ -264,6 +268,23 @@ namespace CSBANet.Common.WebControls
                     Response.Redirect(url);                             // Go to the error page.
                 }
             }
+
+            if (e.CommandName == "CreateSpreadsheets")
+            {
+                Excel.Application myApp = new Excel.Application();
+
+                const string CWorkbook = "C:\\Users\\Dad\\Google Drive\\CSBAweb\\CSBAWeb\\Stats\\StatList.xls";
+
+                Excel.Workbook workbook = myApp.Workbooks.Open(CWorkbook,
+                 Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                 Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                 Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                 Type.Missing, Type.Missing);
+
+                Excel.Worksheet sheet = workbook.Sheets["Batters"];
+            }
+
+
             if (e.CommandName == "EmailRosters")
             {
                 foreach (GridDataItem item in rGridDraftPlayer.Items)
@@ -325,7 +346,10 @@ namespace CSBANet.Common.WebControls
 
                         string[,] MergeValues = new string[,] { { "{TeamName}", rBTNTeamName.Text.Trim() }, { "{TeamRoster}", sb.ToString() } };
 
-                        cMail.SendMessage("tstbag@verizon.net", lblOwnerEmail.Text.ToString().Trim(), "CSBA Roster", cMail.PopulateBody("~/Content/EmailTemplates/DraftRoster.html", MergeValues));
+                        string strFileName = CSBA.BusinessLogicLayer.Logic.cExcel.CreateSpreadsheet();
+                        Attachment att = new Attachment(strFileName);
+
+                        cMail.SendMessage("tstbag@verizon.net", lblOwnerEmail.Text.ToString().Trim(), "CSBA Roster", cMail.PopulateBody("~/Content/EmailTemplates/DraftRoster.html", MergeValues),att);
                     }
                     catch (Exception ex)
                     {

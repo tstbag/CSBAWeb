@@ -12,15 +12,16 @@ namespace CSBA.App_Code
 {
     public class cMail
     {
-        public static void SendMessage(string fromEmail, string toEmail, string subject, string body)
+        public static void SendMessage(string fromEmail, string toEmail, string subject, string body, Attachment att)
         {
             MailMessage message = new MailMessage(
                fromEmail,
                toEmail,
                subject,
                body);
-
+           
             message.IsBodyHtml = true;
+            message.Attachments.Add(att);
 
             var section = ConfigurationManager.GetSection("system.net/mailSettings/smtp") as SmtpSection;
 
