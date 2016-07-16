@@ -16,7 +16,7 @@ namespace CSBA.DataAccessLayer
             List<SeasonDomainModel> list = new List<SeasonDomainModel>();
 
             //Create a Context object to Connect to the database
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 list = (from result in context.Seasons
                         select new SeasonDomainModel
@@ -38,7 +38,7 @@ namespace CSBA.DataAccessLayer
             List<SeasonDomainModel> list = new List<SeasonDomainModel>();
 
             //Create a Context object to Connect to the database
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 list = (from result in context.Seasons
                         where result.Active == true 
@@ -65,7 +65,7 @@ namespace CSBA.DataAccessLayer
             List<SeasonDomainModel> list = new List<SeasonDomainModel>();
 
             //Create a Context object to Connect to the database
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 list = (from result in context.Seasons
                         select new SeasonDomainModel
@@ -93,7 +93,7 @@ namespace CSBA.DataAccessLayer
             List<SeasonDomainModel> list = new List<SeasonDomainModel>();
 
             //Create a Context object to Connect to the database
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 list = (from result in context.v_SeasonView
                         select new SeasonDomainModel
@@ -117,7 +117,7 @@ namespace CSBA.DataAccessLayer
 
         public SeasonDomainModel InsertSeason(SeasonDomainModel season)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var _cSeason = new Season
                 {
@@ -141,7 +141,7 @@ namespace CSBA.DataAccessLayer
 
         public void UpdateSeason(SeasonDomainModel season)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var cSeason = context.Seasons.Find(season.SeasonID);
                 if (cSeason != null)
@@ -160,7 +160,7 @@ namespace CSBA.DataAccessLayer
 
         public void DeleteSeason(SeasonDomainModel season)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var cSeason = (from n in context.Seasons where n.SeasonID == season.SeasonID select n).FirstOrDefault();
                 context.Seasons.Remove(cSeason);
@@ -170,7 +170,7 @@ namespace CSBA.DataAccessLayer
 
         public void ClearSeason(SeasonDomainModel season)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 context.sp_Season_Clear(season.SeasonID);
             }
@@ -178,7 +178,7 @@ namespace CSBA.DataAccessLayer
 
         public void SelectCurrentSeason(SeasonDomainModel season)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 context.sp_Season_Current(season.SeasonID);
             }

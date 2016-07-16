@@ -54,7 +54,7 @@ namespace CSBA.DataAccessLayer
             List<v_Stat_Hitter_ViewDomainModel> list = new List<v_Stat_Hitter_ViewDomainModel>();
 
             //Create a Context object to Connect to the database
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 list = (from result in context.v_Stat_Hitter_View
                         select new v_Stat_Hitter_ViewDomainModel
@@ -94,7 +94,7 @@ namespace CSBA.DataAccessLayer
 
         public void DeleteAllStatsForPlayer(SeasonPlayerPositionStatDomainModel statvalue)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 context.Database.ExecuteSqlCommand("sp_SeasonPlayerPositionStat_DeleteAll {0}, {1}", statvalue.SeasonID, statvalue.PlayerGUID);
             }
@@ -102,12 +102,12 @@ namespace CSBA.DataAccessLayer
 
         public void InsertStatValue(SeasonPlayerPositionStatDomainModel statvalue)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var _cStatVal = new SeasonPlayerPositionStat
                 {
                     SeasonID = statvalue.SeasonID,
-                    PlayerGUID = statvalue.PlayerGUID,
+                    PlayerGUID = (Guid)statvalue.PlayerGUID,
                     PositionID = statvalue.PositionID,
                     StatID = statvalue.StatID,
                     StatValue = statvalue.StatValue

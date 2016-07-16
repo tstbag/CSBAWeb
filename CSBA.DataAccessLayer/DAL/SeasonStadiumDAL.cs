@@ -16,7 +16,7 @@ namespace CSBA.DataAccessLayer
 
             //List<SeasonStadiumDomainModel> list = new List<SeasonStadiumDomainModel>();
             ////Create a Context object to Connect to the database
-            //using (CSBAEntities context = new CSBAEntities())
+            //using (CSBAAzureEntities context = new CSBAAzureEntities())
 
             //    #region With EF
             //    list = (from result in context.GetStadiumBySeason(SeasonID, AssignFlg)
@@ -40,7 +40,7 @@ namespace CSBA.DataAccessLayer
             return null;
             //List<SeasonStadiumDomainModel> list = new List<SeasonStadiumDomainModel>();
             ////Create a Context object to Connect to the database
-            //using (CSBAEntities context = new CSBAEntities())
+            //using (CSBAAzureEntities context = new CSBAAzureEntities())
 
             //    #region With EF
             //    list = (from result in context.AvailableStadiums(SeasonID)
@@ -66,7 +66,7 @@ namespace CSBA.DataAccessLayer
             
 
 
-            //using (CSBAEntities context = new CSBAEntities())
+            //using (CSBAAzureEntities context = new CSBAAzureEntities())
             //{
             //    context.AssignStadiumToSeason(SeasonID, StadiumID);
             //}
@@ -74,7 +74,7 @@ namespace CSBA.DataAccessLayer
 
         public void RestartStadiumDraft(int SeasonID)
         {
-            //using (CSBAEntities context = new CSBAEntities())
+            //using (CSBAAzureEntities context = new CSBAAzureEntities())
             //{
             //    context.StartStadiumDraft(SeasonID);
             //}
@@ -84,7 +84,7 @@ namespace CSBA.DataAccessLayer
         {
             List<SeasonStadiumDomainModel> list = new List<SeasonStadiumDomainModel>();
             //Create a Context object to Connect to the database
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
 
                 list = (from result in context.sp_SeasonStadiumBySeason_Selected(SeasonID)
                         select new SeasonStadiumDomainModel
@@ -100,7 +100,7 @@ namespace CSBA.DataAccessLayer
         {
             List<SeasonStadiumDomainModel> list = new List<SeasonStadiumDomainModel>();
             //Create a Context object to Connect to the database
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
 
                 list = (from result in context.sp_SeasonStadiumBySeason_Remaining(SeasonID)
                         select new SeasonStadiumDomainModel
@@ -114,7 +114,7 @@ namespace CSBA.DataAccessLayer
 
         public void InsertSeasonStadium(SeasonStadiumDomainModel _SeasonStadium)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 context.Database.ExecuteSqlCommand("sp_SeasonStadium_Insert {0}, {1}", _SeasonStadium.SeasonID, _SeasonStadium.StadiumID);
 
@@ -123,7 +123,7 @@ namespace CSBA.DataAccessLayer
 
         public void DeleteSeasonStadiumAll(SeasonStadiumDomainModel _SeasonStadium)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 context.Database.ExecuteSqlCommand("sp_SeasonStadium_DeleteAll {0}", _SeasonStadium.SeasonID);
 

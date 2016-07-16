@@ -16,7 +16,7 @@ namespace CSBA.DataAccessLayer
 
             //Create a Context object to Connect to the database
 
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 list = (from result in context.PositionTypes
                         select new PositionTypeDomanModel
@@ -30,7 +30,7 @@ namespace CSBA.DataAccessLayer
 
         public PositionTypeDomanModel InsertPositionType(PositionTypeDomanModel positionType)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var _cpositionType = new PositionType 
                 {
@@ -48,7 +48,7 @@ namespace CSBA.DataAccessLayer
 
         public void UpdatePositionType(PositionTypeDomanModel positionType)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var _cpositionType = context.PositionTypes.Find(positionType.PositionTypeID);
                 if (_cpositionType != null)
@@ -61,7 +61,7 @@ namespace CSBA.DataAccessLayer
 
         public void DeletePositionType(PositionTypeDomanModel positionType)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var cPositionType = (from n in context.PositionTypes where n.PositionTypeID == positionType.PositionTypeID select n).FirstOrDefault();
                 context.PositionTypes.Remove(cPositionType);

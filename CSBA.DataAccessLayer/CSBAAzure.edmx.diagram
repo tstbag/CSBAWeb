@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="14f906adeb0b468c95670b49b05d7eb4" Name="Diagram1" ZoomLevel="119">
+        <EntityTypeShape EntityType="CSBAModel1.Player" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="CSBAModel1.PlayerPosition" Width="1.5" PointX="11.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSBAModel1.Position" Width="1.5" PointX="8" PointY="10.125" IsExpanded="true" FillColor="0, 192, 0" />
+        <EntityTypeShape EntityType="CSBAModel1.PositionType" Width="1.5" PointX="5.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSBAModel1.Season" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" FillColor="Lime" />
+        <EntityTypeShape EntityType="CSBAModel1.SeasonPlayerRecycle" Width="2.375" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSBAModel1.SeasonTeam" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" FillColor="Lime" />
+        <EntityTypeShape EntityType="CSBAModel1.SeasonTeamPlayer" Width="2" PointX="3" PointY="3.125" IsExpanded="true" FillColor="Lime" />
+        <EntityTypeShape EntityType="CSBAModel1.SeasonTeamStadium" Width="2" PointX="3" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSBAModel1.Stadium" Width="1.5" PointX="0.75" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSBAModel1.Stat" Width="1.5" PointX="8" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSBAModel1.Team" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" FillColor="Lime" />
+        <EntityTypeShape EntityType="CSBAModel1.Trade" Width="1.5" PointX="3.75" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSBAModel1.TradeStatu" Width="1.5" PointX="1.5" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSBAModel1.TradeTeam" Width="1.5" PointX="6" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSBAModel1.TradeTeamDetail" Width="1.5" PointX="8.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="CSBAModel1.SeasonPlayerPositionStat" Width="2.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="CSBAModel1.FK_PlayerPosition_Player" ManuallyRouted="false" />
+        <AssociationConnector Association="CSBAModel1.FK_SeasonTeamPlayer_Player" ManuallyRouted="false" />
+        <AssociationConnector Association="CSBAModel1.FK_PlayerPosition_Position" ManuallyRouted="false" />
+        <AssociationConnector Association="CSBAModel1.FK_Position_PositionType" ManuallyRouted="false" />
+        <AssociationConnector Association="CSBAModel1.FK_Stat_PositionType" ManuallyRouted="false" />
+        <AssociationConnector Association="CSBAModel1.FK_SeasonTeam_Season" ManuallyRouted="false" />
+        <AssociationConnector Association="CSBAModel1.FK_SeasonTeamPlayer_Season" ManuallyRouted="false" />
+        <AssociationConnector Association="CSBAModel1.FK_SeasonTeamStadium_Season" ManuallyRouted="false" />
+        <AssociationConnector Association="CSBAModel1.FK_Trade_Season" ManuallyRouted="false" />
+        <AssociationConnector Association="CSBAModel1.FK_SeasonTeam_Team" ManuallyRouted="false" />
+        <AssociationConnector Association="CSBAModel1.FK_SeasonTeamPlayer_Team" ManuallyRouted="false" />
+        <AssociationConnector Association="CSBAModel1.FK_SeasonTeamStadium_Stadium" ManuallyRouted="false" />
+        <AssociationConnector Association="CSBAModel1.FK_SeasonTeamStadium_Team" ManuallyRouted="false" />
+        <AssociationConnector Association="CSBAModel1.FK_TradeTeam_Team" ManuallyRouted="false" />
+        <AssociationConnector Association="CSBAModel1.FK_TradeTeamDetail_Team" ManuallyRouted="false" />
+        <AssociationConnector Association="CSBAModel1.FK_TradeTeamDetail_Team1" ManuallyRouted="false" />
+        <AssociationConnector Association="CSBAModel1.FK_Trade_TradeStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="CSBAModel1.FK_TradeTeam_Trade" ManuallyRouted="false" />
+        <AssociationConnector Association="CSBAModel1.FK_TradeTeam_TradeStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="CSBAModel1.FK_TradeTeamDetail_TradeTeam" ManuallyRouted="false" />
+        <AssociationConnector Association="CSBAModel1.SeasonPlayer" ManuallyRouted="false" />
+        <AssociationConnector Association="CSBAModel1.SeasonStadium" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CSBAModel1.v_SeasonTeam" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CSBAModel1.v_SeasonTeamPlayerPosition" Width="1.5" PointX="10.375" PointY="8.75" />
+        <EntityTypeShape EntityType="CSBAModel1.v_SeasonView" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CSBAModel1.v_Stat_Hitter_View" Width="1.5" PointX="12.375" PointY="8.75" />
+        <EntityTypeShape EntityType="CSBAModel1.v_Team_Draft_Roster" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CSBAModel1.aspnet_Users" Width="1.5" PointX="0.75" PointY="22.125" />
+        <AssociationConnector Association="CSBAModel1.FK_Team_aspnet_Users" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

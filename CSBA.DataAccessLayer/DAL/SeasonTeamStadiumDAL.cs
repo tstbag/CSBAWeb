@@ -14,7 +14,7 @@ namespace CSBA.DataAccessLayer
             return null;
             //List<SeasonTeamStadiumDomainModel> list = new List<SeasonTeamStadiumDomainModel>();
             ////Create a Context object to Connect to the database
-            //using (CSBAEntities context = new CSBAEntities())
+            //using (CSBAAzureEntities context = new CSBAAzureEntities())
 
             //    #region With EF
             //    list = (from result in context.GetSeasonTeamStadiumDraft(SeasonID)
@@ -46,7 +46,7 @@ namespace CSBA.DataAccessLayer
         //    #region Insert With Linked to Entity
 
 
-        //    using (CSBAEntities context = new CSBAEntities())
+        //    using (CSBAAzureEntities context = new CSBAAzureEntities())
         //    {
         //        context.AssignStadiumToTeam(SeasonID, StadiumID, TeamID);
         //    }
@@ -58,7 +58,7 @@ namespace CSBA.DataAccessLayer
         //{
 
         //    #region Insert With Linked to Entity
-        //    using (CSBAEntities context = new CSBAEntities())
+        //    using (CSBAAzureEntities context = new CSBAAzureEntities())
         //    {
         //        context.UnAssignStadiumToTeam(SeasonID, StadiumID, TeamID);
         //    }

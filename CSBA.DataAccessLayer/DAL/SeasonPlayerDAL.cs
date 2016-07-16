@@ -15,7 +15,7 @@ namespace CSBA.DataAccessLayer
         {
             List<SeasonPlayerDomainModel> list = new List<SeasonPlayerDomainModel>();
             //Create a Context object to Connect to the database
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
 
                 list = (from result in context.sp_SeasonPlayerBySeason_Selected(SeasonID, PositionID)
                         select new SeasonPlayerDomainModel
@@ -33,7 +33,7 @@ namespace CSBA.DataAccessLayer
         {
             List<SeasonPlayerDomainModel> list = new List<SeasonPlayerDomainModel>();
             //Create a Context object to Connect to the database
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
 
                 list = (from result in context.sp_SeasonPlayerBySeason_Remaining(SeasonID,PositionID)
                         select new SeasonPlayerDomainModel
@@ -49,7 +49,7 @@ namespace CSBA.DataAccessLayer
 
         public void InsertSeasonPlayerRecycle(SeasonPlayerDomainModel _SeasonPlayer)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 context.Database.ExecuteSqlCommand("sp_SeasonPlayerRecycle_Insert {0}, {1}", _SeasonPlayer.SeasonID, _SeasonPlayer.PlayerGUID);
 
@@ -58,7 +58,7 @@ namespace CSBA.DataAccessLayer
 
         public void InsertSeasonPlayer(SeasonPlayerDomainModel _SeasonPlayer)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 context.Database.ExecuteSqlCommand("sp_SeasonPlayer_Insert {0}, {1}", _SeasonPlayer.SeasonID, _SeasonPlayer.PlayerGUID);
 
@@ -67,7 +67,7 @@ namespace CSBA.DataAccessLayer
 
         public void DeleteSeasonPlayerAll(SeasonPlayerDomainModel _SeasonPlayer, PositionDomainModel _Position)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 context.Database.ExecuteSqlCommand("sp_SeasonPlayer_deleteAll {0}, {1}", _SeasonPlayer.SeasonID, _Position.PositionID);
 
@@ -76,7 +76,7 @@ namespace CSBA.DataAccessLayer
 
         public void DeleteSeasonRecyclePlayerAll(SeasonPlayerDomainModel _SeasonPlayer)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 context.Database.ExecuteSqlCommand("sp_SeasonPlayerRecycle_deleteAll {0}", _SeasonPlayer.SeasonID);
 

@@ -14,7 +14,7 @@ namespace CSBA.DataAccessLayer
         {
             List<sp_SeasonTeamDraft_Select_ResultDomainModel> listTeams = new List<sp_SeasonTeamDraft_Select_ResultDomainModel>();
 
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 listTeams = (from result in context.sp_SeasonTeamDraft_Select(SeasonID)
                              select new sp_SeasonTeamDraft_Select_ResultDomainModel
@@ -42,7 +42,7 @@ namespace CSBA.DataAccessLayer
         {
             List<DraftPlayerDomainModel> listPos = new List<DraftPlayerDomainModel>();
 
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 listPos = (from result in context.DraftPositionStatus(SeasonID) where result.Drafted == iDrafted 
                              select new DraftPlayerDomainModel
@@ -61,7 +61,7 @@ namespace CSBA.DataAccessLayer
         {
             DraftStatusDomainModel dStatus = new DraftStatusDomainModel();
 
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 dStatus = (from result in context.DraftPlayerStatus(SeasonID)
                            select new DraftStatusDomainModel
@@ -78,7 +78,7 @@ namespace CSBA.DataAccessLayer
         {
             PickAPlayerDomainModel PickPlayer = new PickAPlayerDomainModel();
 
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 PickPlayer = (from result in context.PickAPlayer(SeasonID)
                               select new PickAPlayerDomainModel
@@ -100,7 +100,7 @@ namespace CSBA.DataAccessLayer
 
         public void DraftPlayer(SeasonTeamPlayerDomainModel STP)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var _cSTP = new SeasonTeamPlayer
                 {
@@ -118,7 +118,7 @@ namespace CSBA.DataAccessLayer
         #region Update
         public void TradePlayer(SeasonTeamPlayerDomainModel STP, int NewTeamID, int Points)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 context.Database.ExecuteSqlCommand("sp_Team_Roster_Update {0}, {1}, {2}, {3}, {4}", STP.SeasonID, STP.PlayerGUID, STP.TeamID, NewTeamID, Points);
             }

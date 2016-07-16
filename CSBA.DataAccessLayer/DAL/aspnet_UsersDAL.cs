@@ -15,7 +15,7 @@ namespace CSBA.DataAccessLayer
             List<aspnet_UsersDomainModel> list = new List<aspnet_UsersDomainModel>();
 
             //Create a Context object to Connect to the database
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 list = (from result in context.aspnet_Users
                         select new aspnet_UsersDomainModel

@@ -15,7 +15,7 @@ namespace CSBA.DataAccessLayer
             List<PositionDomainModel> list = new List<PositionDomainModel>();
 
             //Create a Context object to Connect to the database
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 list = (from result in context.Positions
                         select new PositionDomainModel
@@ -36,7 +36,7 @@ namespace CSBA.DataAccessLayer
 
         public PositionDomainModel InsertPosition(PositionDomainModel position)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var _cPosition = new Position
                 {
@@ -57,7 +57,7 @@ namespace CSBA.DataAccessLayer
 
         public void UpdatePosition(PositionDomainModel position)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var cPosition = context.Positions.Find(position.PositionID);
                 if (cPosition != null)
@@ -72,7 +72,7 @@ namespace CSBA.DataAccessLayer
 
         public void DeletePosition(PositionDomainModel position)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var cPosition = (from n in context.Positions where n.PositionID == position.PositionID select n).FirstOrDefault();
                 context.Positions.Remove(cPosition);

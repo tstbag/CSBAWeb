@@ -11,7 +11,7 @@ namespace CSBA.DataAccessLayer
     {
         public StatDomainModel InsertStat(StatDomainModel stat)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var _cStat = new Stat
                 {

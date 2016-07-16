@@ -18,7 +18,7 @@ namespace CSBA.DataAccessLayer
 
             if (strLetter != "%")
             {
-                using (CSBAEntities context = new CSBAEntities())
+                using (CSBAAzureEntities context = new CSBAAzureEntities())
                 {
                     list = (from result in context.Players
                             where (result.PlayerName.StartsWith(strLetter))
@@ -32,7 +32,7 @@ namespace CSBA.DataAccessLayer
             }
             else
             {
-                using (CSBAEntities context = new CSBAEntities())
+                using (CSBAAzureEntities context = new CSBAAzureEntities())
                 {
                     list = (from result in context.Players
                             select new PlayerDomainModel
@@ -54,7 +54,7 @@ namespace CSBA.DataAccessLayer
             //Create a return type Object
             List<v_PlayerPositionDomainModel> list = new List<v_PlayerPositionDomainModel>();
 
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 list = (from result in context.DraftPlayersStatus(SeasonID,PositionID, bDrafted)
                         select new v_PlayerPositionDomainModel
@@ -76,7 +76,7 @@ namespace CSBA.DataAccessLayer
             //Create a return type Object
             List<v_PlayerPositionDomainModel> list = new List<v_PlayerPositionDomainModel>();
 
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 list = (from result in context.sp_PlayerPosition_Select(null)
                         select new v_PlayerPositionDomainModel
@@ -103,7 +103,7 @@ namespace CSBA.DataAccessLayer
         {
             PlayerDomainModel player = new PlayerDomainModel();
 
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 player = (from result in context.Players
                           where (result.PlayerGUID == PlayerGUID)
@@ -121,7 +121,7 @@ namespace CSBA.DataAccessLayer
 
         public PlayerDomainModel InsertPlayer(PlayerDomainModel player)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var _cPlayer = new Player
                 {
@@ -142,7 +142,7 @@ namespace CSBA.DataAccessLayer
 
         public void UpdatePlayer(PlayerDomainModel player)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var cPlayer = context.Players.Find(player.PlayerGUID);
                 if (cPlayer != null)
@@ -156,7 +156,7 @@ namespace CSBA.DataAccessLayer
 
         public void DeletePlayer(PlayerDomainModel player)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var cPlayer = (from n in context.Players where n.PlayerGUID == player.PlayerGUID select n).FirstOrDefault();
                 context.Players.Remove(cPlayer);

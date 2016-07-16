@@ -16,7 +16,7 @@ namespace CSBA.DataAccessLayer
             List<TradeDataDomainModel> list = new List<TradeDataDomainModel>();
 
             //Create a Context object to Connect to the database
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 list = (from result in context.sp_TradeData_Select(Trade.SeasonID, Trade.TradeGUID)
                         select new TradeDataDomainModel
@@ -40,7 +40,7 @@ namespace CSBA.DataAccessLayer
         #region Insert Region
         public TradeDomainModel InsertTrade(TradeDomainModel Trade)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var _cTrade = new Trade
                 {
@@ -65,7 +65,7 @@ namespace CSBA.DataAccessLayer
 
         public void UpdateTrade(TradeDomainModel Trade)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var cTrade = context.Trades.Find(Trade.TradeGUID);
                 if (cTrade != null)

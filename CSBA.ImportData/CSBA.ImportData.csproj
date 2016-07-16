@@ -72,6 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="cExcelCreate.cs" />
     <Compile Include="cImportData.cs" />
     <Compile Include="clsHitter.cs" />
     <Compile Include="clsPitcher.cs" />

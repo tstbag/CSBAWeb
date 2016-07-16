@@ -8,7 +8,7 @@ using CSBA.DataAccessLayer;
 
 namespace CSBA.BusinessLogicLayer
 {
-    public class SeasonTeamBusinessLogic: SeasonTeam_IDALBLL
+    public class SeasonTeamBusinessLogic : SeasonTeam_IDALBLL
     {
         #region Private Fields
         //Create a DataAccess Object to call the Methods of the DAL

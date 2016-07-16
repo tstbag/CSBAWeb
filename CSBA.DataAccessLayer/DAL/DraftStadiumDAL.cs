@@ -13,7 +13,7 @@ namespace CSBA.DataAccessLayer
         {
             List<sp_StadiumDraft_Select_Result_DomainModel> listStadiums = new List<sp_StadiumDraft_Select_Result_DomainModel>();
 
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 listStadiums = (from result in context.sp_StadiumDraft_Select(SeasonID, OwnerUserID)
                                 select new sp_StadiumDraft_Select_Result_DomainModel

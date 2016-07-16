@@ -16,12 +16,12 @@ namespace CSBA.ImportData
         //const string CWorkbook = "C:\\Class\\StatList.xls";
 
         const string CWorkbook = "C:\\Users\\Dad\\Google Drive\\CSBAweb\\CSBAWeb\\Stats\\StatList.xls";
-        const int C_SeasonID = 1026;
+        const int C_SeasonID = 1030;
 
         static void Main(string[] args)
         {
             //GetStatView();
-            //ImportExcelPitchers();
+            ImportExcelPitchers();
             ImportExcelBatters();        
         }
         protected static void GetStatView()
@@ -53,7 +53,7 @@ namespace CSBA.ImportData
                 int rows_count = range.Rows.Count;
                 int cols_count = range.Columns.Count;
 
-                rows_count = 118;
+                rows_count = 127;
 
                 //string output = null;
 
@@ -341,7 +341,7 @@ namespace CSBA.ImportData
                 int rows_count = range.Rows.Count;
                 int cols_count = range.Columns.Count;
 
-                rows_count = 105;
+                rows_count = 113;
 
                 for (int i = 2; i <= rows_count; i++)
                 {

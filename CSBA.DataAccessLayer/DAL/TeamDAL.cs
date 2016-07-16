@@ -15,7 +15,7 @@ namespace CSBA.DataAccessLayer
             List<TeamDomainModel> list = new List<TeamDomainModel>();
 
             //Create a Context object to Connect to the database
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 list = (from result in context.sp_Team_Select(null)
                         select new TeamDomainModel
@@ -37,7 +37,7 @@ namespace CSBA.DataAccessLayer
         #region Insert Region
         public TeamDomainModel InsertTeam(TeamDomainModel team)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var _cTeam = new Team
                 {
@@ -65,7 +65,7 @@ namespace CSBA.DataAccessLayer
             List<v_Team_Draft_RosterDomainModel> list = new List<v_Team_Draft_RosterDomainModel>();
 
             //Create a Context object to Connect to the database
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 list = (from result in context.sp_Team_Roster_Select(SeasonID, TeamID)
                         select new v_Team_Draft_RosterDomainModel
@@ -95,7 +95,7 @@ namespace CSBA.DataAccessLayer
         #region Update
         public void UpdateTeam(TeamDomainModel team)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var cTeam = context.Teams.Find(team.TeamID);
                 if (cTeam != null)

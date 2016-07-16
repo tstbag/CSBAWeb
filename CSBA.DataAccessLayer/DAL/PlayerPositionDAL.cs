@@ -12,7 +12,7 @@ namespace CSBA.DataAccessLayer
 
         public void InsertPlayerPosition(PlayerPositionDomainModel _playerPosition)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var _cPlayerPosition = new PlayerPosition
                 {
@@ -28,7 +28,7 @@ namespace CSBA.DataAccessLayer
 
         public void UpdatePlayerPosition(PlayerPositionDomainModel _playerPosition)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var cplayerPosition = context.PlayerPositions.Find(_playerPosition.PlayerGUID);
                 if (cplayerPosition != null)
@@ -49,7 +49,7 @@ namespace CSBA.DataAccessLayer
         public void DeletePlayerPosition(PlayerPositionDomainModel _playerPosition)
         {
 
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 context.Database.ExecuteSqlCommand("sp_PlayerPosition_Delete {0}", _playerPosition.PlayerGUID);
 

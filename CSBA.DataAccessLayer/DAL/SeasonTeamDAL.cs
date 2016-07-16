@@ -13,7 +13,7 @@ namespace CSBA.DataAccessLayer
         {
             List<SeasonTeamDomainModel> list = new List<SeasonTeamDomainModel>();
             //Create a Context object to Connect to the database
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
 
                 list = (from result in context.GetSeasonTeamOrder(SeasonID)
                         select new SeasonTeamDomainModel
@@ -35,9 +35,10 @@ namespace CSBA.DataAccessLayer
         {
             List<SeasonTeamDomainModel> list = new List<SeasonTeamDomainModel>();
             //Create a Context object to Connect to the database
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
 
                 list = (from result in context.sp_SeasonTeamBySeason_Selected(SeasonID)
+                        orderby result.TeamName
                         select new SeasonTeamDomainModel
                         {
                             ActiveFlg = result.ActiveFlg,
@@ -54,7 +55,7 @@ namespace CSBA.DataAccessLayer
         {
             List<SeasonTeamDomainModel> list = new List<SeasonTeamDomainModel>();
             //Create a Context object to Connect to the database
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
 
                 list = (from result in context.sp_SeasonTeamBySeason_Remaining(SeasonID)
                         select new SeasonTeamDomainModel
@@ -68,7 +69,7 @@ namespace CSBA.DataAccessLayer
 
         public void InsertSeasonTeam(SeasonTeamDomainModel _SeasonTeam)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var cSeasonTeam = new SeasonTeam
                 {
@@ -87,7 +88,7 @@ namespace CSBA.DataAccessLayer
 
         public void DeleteSeasonTeamAll(int SeasonID)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 context.Database.ExecuteSqlCommand("sp_SeasonTeam_DeleteAll {0}", SeasonID);
 

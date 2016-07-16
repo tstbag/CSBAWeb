@@ -15,7 +15,7 @@ namespace CSBA.DataAccessLayer
             List<StadiumDomainModel> list = new List<StadiumDomainModel>();
 
             //Create a Context object to Connect to the database
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 list = (from result in context.Stadia
                         //where result.Active_Flg == true
@@ -37,7 +37,7 @@ namespace CSBA.DataAccessLayer
 
         public StadiumDomainModel InsertStadium(StadiumDomainModel stadium)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var _cStadium = new Stadium
                 {
@@ -61,7 +61,7 @@ namespace CSBA.DataAccessLayer
         #region UpdateStatements
         public void UpdateStadium(StadiumDomainModel stadium)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var cstadium = context.Stadia.Find(stadium.StadiumID);
                 if (cstadium != null)
@@ -78,7 +78,7 @@ namespace CSBA.DataAccessLayer
         #region Delete Sections
         public void DeleteStadium(StadiumDomainModel stadium)
         {
-            using (CSBAEntities context = new CSBAEntities())
+            using (CSBAAzureEntities context = new CSBAAzureEntities())
             {
                 var cStadium = (from n in context.Stadia where n.StadiumID == stadium.StadiumID select n).FirstOrDefault();
                 context.Stadia.Remove(cStadium);
