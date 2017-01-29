@@ -16,7 +16,7 @@ namespace CSBA.ImportData
         //const string CWorkbook = "C:\\Class\\StatList.xls";
 
         const string CWorkbook = "C:\\Users\\Dad\\Google Drive\\CSBAweb\\CSBAWeb\\Stats\\StatList.xls";
-        const int C_SeasonID = 1030;
+        const int C_SeasonID = 1031;
 
         static void Main(string[] args)
         {
@@ -266,6 +266,10 @@ namespace CSBA.ImportData
             SeasonPlayerPositionStatBusinessLogic sppsBLL = new SeasonPlayerPositionStatBusinessLogic();
             SeasonPlayerPositionStatDomainModel statValue = new SeasonPlayerPositionStatDomainModel();
 
+            SeasonPlayerBusinessLogic spBLL = new SeasonPlayerBusinessLogic();
+            SeasonPlayerDomainModel spDM = new SeasonPlayerDomainModel();
+
+
             statValue.SeasonID = C_SeasonID;
             statValue.PlayerGUID = player.PlayerGUID;
             sppsBLL.DeleteAllStatsForPlayer(statValue);
@@ -281,6 +285,9 @@ namespace CSBA.ImportData
                 ppBLL.DeletePlayerPosition(playerposition);
                 ppBLL.InsertPlayerPosition(playerposition);
 
+                spDM.PlayerGUID = player.PlayerGUID;
+                spDM.SeasonID = C_SeasonID;
+                spBLL.InsertSeasonPlayer(spDM);
 
                 BindingFlags flags = BindingFlags.Instance |
                     BindingFlags.Public | BindingFlags.NonPublic;
@@ -534,6 +541,10 @@ namespace CSBA.ImportData
             SeasonPlayerPositionStatBusinessLogic sppsBLL = new SeasonPlayerPositionStatBusinessLogic();
             SeasonPlayerPositionStatDomainModel statValue = new SeasonPlayerPositionStatDomainModel();
 
+            SeasonPlayerBusinessLogic spBLL = new SeasonPlayerBusinessLogic();
+            SeasonPlayerDomainModel spDM = new SeasonPlayerDomainModel();
+
+
             statValue.SeasonID = C_SeasonID;
             statValue.PlayerGUID = player.PlayerGUID;
             sppsBLL.DeleteAllStatsForPlayer(statValue);
@@ -549,6 +560,9 @@ namespace CSBA.ImportData
                 ppBLL.DeletePlayerPosition(playerposition);
                 ppBLL.InsertPlayerPosition(playerposition);
 
+                spDM.PlayerGUID = player.PlayerGUID;
+                spDM.SeasonID = C_SeasonID;
+                spBLL.InsertSeasonPlayer(spDM);
 
                 BindingFlags flags = BindingFlags.Instance |
                     BindingFlags.Public | BindingFlags.NonPublic;

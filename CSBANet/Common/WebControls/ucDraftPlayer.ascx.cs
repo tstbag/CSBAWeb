@@ -19,6 +19,8 @@ using CSBA.App_Code;
 using System.Net.Mail;
 
 using Excel = Microsoft.Office.Interop.Excel;
+using System.Reflection;
+using System.Net.Mime;
 
 namespace CSBANet.Common.WebControls
 {
@@ -253,9 +255,9 @@ namespace CSBANet.Common.WebControls
             {
                 try
                 {
-                    string strFileName = CSBA.BusinessLogicLayer.Logic.cExcel.CreateSpreadsheet();
+                    string strFileName = CSBA.BusinessLogicLayer.Logic.cExcel.CreateSpreadsheet(1031);
                     Attachment att = new Attachment(strFileName);
-                    cMail.SendMessage("tstbag@verizon.net", "tstbag@verizon.net", "CSBA Test Email", "Test Body", att);
+                    cMail.SendMessage("tstbag@verizon.net", "tstbag@verizon.net", "CSBA Test Email", "Test Body", strFileName, att);
                 }
                 catch (Exception ex)
                 {
@@ -271,22 +273,70 @@ namespace CSBANet.Common.WebControls
 
             if (e.CommandName == "CreateSpreadsheets")
             {
+
+                List<SeasonDomainModel> Seasons = new List<SeasonDomainModel>();
+                TeamBusinessLogicLayer TeamBLL = new TeamBusinessLogicLayer();
+                SeasonTeamBusinessLogic SeasonTeamBLL = new SeasonTeamBusinessLogic();
+
+                Seasons = SeasonBLL.ListSeason();
+                int SeasonID = 0;
+                foreach (SeasonDomainModel season in Seasons)
+                {
+                    if (season.CurrentSeason == true)
+                    {
+                        SeasonID = season.SeasonID;
+                        break;
+                    }
+                }
+
                 Excel.Application myApp = new Excel.Application();
+                myApp.Visible = true;
+                Excel.Workbook wb = myApp.Workbooks.Add(Excel.XlWBATemplate.xlWBATWorksheet);
+                
 
-                const string CWorkbook = "C:\\Users\\Dad\\Google Drive\\CSBAweb\\CSBAWeb\\Stats\\StatList.xls";
+                List<SeasonTeamDomainModel> listSeasonTeam = SeasonTeamBLL.SeasonTeamOrder(SeasonID);
 
-                Excel.Workbook workbook = myApp.Workbooks.Open(CWorkbook,
-                 Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                 Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                 Type.Missing, Type.Missing, Type.Missing, Type.Missing,
-                 Type.Missing, Type.Missing);
+                foreach (SeasonTeamDomainModel st in listSeasonTeam)
+                {
+                    Excel.Worksheet ws = (Excel.Worksheet)wb.Worksheets.Add();
+                    ws.Name = st.TeamName.Trim();
+                    
+                    List<v_Team_Draft_RosterDomainModel> ListTeam = TeamBLL.ListTeamRoster(SeasonID, st.TeamID);
 
-                Excel.Worksheet sheet = workbook.Sheets["Batters"];
+                    int iRow = 1;
+                    ws.Cells[iRow, 1] = "Primary Position" ;
+                    ws.Cells[iRow, 2] = "Secondary Position";
+                    ws.Cells[iRow, 3] = "Player Name";
+                    ws.Cells[iRow, 4] = "Points";
+                    iRow++;
+                    foreach (v_Team_Draft_RosterDomainModel TDraft in ListTeam)
+                    {
+                        ws.Cells[iRow, 1] = TDraft.PrimPos.Trim();
+                        if (TDraft.SecPos != null)
+                        {
+                            ws.Cells[iRow, 2] = TDraft.SecPos.Trim();
+                        }                        
+                        ws.Cells[iRow, 3] = TDraft.PlayerName.Trim();
+                        ws.Cells[iRow, 4] = TDraft.Points;
+                        iRow++;
+                    }
+
+                }
+                
+
+
+
+
+
+
+
             }
 
 
             if (e.CommandName == "EmailRosters")
             {
+                string strFileName = CSBA.BusinessLogicLayer.Logic.cExcel.CreateSpreadsheet(Convert.ToInt32(rDDSeason.SelectedValue));
+
                 foreach (GridDataItem item in rGridDraftPlayer.Items)
                 {
                     try
@@ -346,10 +396,24 @@ namespace CSBANet.Common.WebControls
 
                         string[,] MergeValues = new string[,] { { "{TeamName}", rBTNTeamName.Text.Trim() }, { "{TeamRoster}", sb.ToString() } };
 
-                        string strFileName = CSBA.BusinessLogicLayer.Logic.cExcel.CreateSpreadsheet();
-                        Attachment att = new Attachment(strFileName);
 
-                        cMail.SendMessage("tstbag@verizon.net", lblOwnerEmail.Text.ToString().Trim(), "CSBA Roster", cMail.PopulateBody("~/Content/EmailTemplates/DraftRoster.html", MergeValues),att);
+                        //Attachment att = null;// = new Attachment(strFileName);
+
+                        if (strFileName != null)
+                        {
+                            Attachment att = new System.Net.Mail.Attachment(strFileName, System.Net.Mime.MediaTypeNames.Application.Octet);
+                            ContentDisposition disposition = att.ContentDisposition;
+                            disposition.CreationDate = File.GetCreationTime(strFileName);
+                            disposition.ModificationDate = File.GetLastWriteTime(strFileName);
+                            disposition.ReadDate = File.GetLastAccessTime(strFileName);
+                            disposition.FileName = Path.GetFileName(strFileName.Trim());
+                            disposition.Size = new FileInfo(strFileName).Length;
+                            disposition.DispositionType = DispositionTypeNames.Attachment;
+
+                            cMail.SendMessage("tstbag@verizon.net", lblOwnerEmail.Text.ToString().Trim(), "CSBA Roster", cMail.PopulateBody("~/Content/EmailTemplates/DraftRoster.html", MergeValues), strFileName,  att);
+                        }
+
+                        
                     }
                     catch (Exception ex)
                     {
