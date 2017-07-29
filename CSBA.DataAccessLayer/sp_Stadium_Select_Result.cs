@@ -11,15 +11,11 @@ namespace CSBA.DataAccessLayer
 {
     using System;
     
-    public partial class sp_TradeData_Select_Result
+    public partial class sp_Stadium_Select_Result
     {
-        public int SeasonID { get; set; }
-        public System.Guid TradeGUID { get; set; }
-        public Nullable<int> TeamID { get; set; }
-        public string TeamName { get; set; }
-        public Nullable<System.DateTime> ActionDate { get; set; }
-        public Nullable<System.DateTime> ProposedDate { get; set; }
-        public Nullable<int> TradeStatusID { get; set; }
-        public string TradeStatusDesc { get; set; }
+        public int StadiumID { get; set; }
+        public string StadiumName { get; set; }
+        public Nullable<bool> Active_Flg { get; set; }
+        public byte[] StadiumImage { get; set; }
     }
 }

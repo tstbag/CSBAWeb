@@ -17,5 +17,11 @@ namespace CSBA.BusinessLogicLayer
         {
             return DAL.ListAspUsers();
         }
+
+        public aspnet_UsersDomainModel ListAspUser(string strUserName)
+        {
+             return DAL.ListAspUsers()
+                .Where(f => f.UserName == strUserName).FirstOrDefault();
+        }
     }
 }

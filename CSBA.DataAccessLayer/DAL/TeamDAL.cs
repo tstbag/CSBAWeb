@@ -80,8 +80,10 @@ namespace CSBA.DataAccessLayer
                             SeasonName = result.SeasonName,
                             SecPos = result.SecPos,
                             TeamID = result.TeamID,
-                            TeamName = result.TeamName
-
+                            TeamName = result.TeamName,
+                            PrimaryPositionID = result.PrimaryPositionID,
+                            PositionTypeDescr = result.PositionTypeDescr,
+                            PositionTypeID = result.PositionTypeID
                         }).ToList();
 
             } // Guaranteed to close the Connection

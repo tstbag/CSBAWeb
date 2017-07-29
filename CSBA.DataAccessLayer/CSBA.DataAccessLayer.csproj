@@ -255,9 +255,6 @@
     <Compile Include="sp_Team_Select_Result.cs">
       <DependentUpon>CSBAAzure.tt</DependentUpon>
     </Compile>
-    <Compile Include="sp_TradeData_Select_Result.cs">
-      <DependentUpon>CSBAAzure.tt</DependentUpon>
-    </Compile>
     <Compile Include="Stadium.cs">
       <DependentUpon>CSBAAzure.tt</DependentUpon>
     </Compile>

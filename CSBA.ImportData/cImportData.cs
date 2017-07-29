@@ -16,7 +16,7 @@ namespace CSBA.ImportData
         //const string CWorkbook = "C:\\Class\\StatList.xls";
 
         const string CWorkbook = "C:\\Users\\Dad\\Google Drive\\CSBAweb\\CSBAWeb\\Stats\\StatList.xls";
-        const int C_SeasonID = 1031;
+        const int C_SeasonID = 1032;
 
         static void Main(string[] args)
         {

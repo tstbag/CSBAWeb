@@ -19,5 +19,8 @@ namespace CSBA.DomainModels
         public byte[] PlayerImage { get; set; }
         public string SecPos { get; set; }
         public string PrimPos { get; set; }
+        public int PrimaryPositionID { get; set; }
+        public Nullable<int> PositionTypeID { get; set; }
+        public string PositionTypeDescr { get; set; }
     }
 }

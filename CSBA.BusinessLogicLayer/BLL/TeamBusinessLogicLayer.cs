@@ -17,6 +17,12 @@ namespace CSBA.BusinessLogicLayer
             return dal.ListTeams();
         }
 
+        public TeamDomainModel ListTeam(Guid OwnerUserID)
+        {
+            return dal.ListTeams()
+                .Where(f => f.OwnerUserID == OwnerUserID).FirstOrDefault();
+        }
+
 
         public TeamDomainModel InsertTeam(TeamDomainModel team)
         {

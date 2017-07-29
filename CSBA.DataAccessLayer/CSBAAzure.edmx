@@ -304,6 +304,7 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
             <PropertyRef Name="TeamID" />
             <PropertyRef Name="TeamName" />
             <PropertyRef Name="PlayerGUID" />
+            <PropertyRef Name="PrimaryPositionID" />
           </Key>
           <Property Name="SeasonName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="SeasonID" Type="int" Nullable="false" />
@@ -316,6 +317,9 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
           <Property Name="SecPos" Type="nchar" MaxLength="20" />
           <Property Name="PrimPos" Type="nchar" MaxLength="20" />
           <Property Name="PlayerGUID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PrimaryPositionID" Type="int" Nullable="false" />
+          <Property Name="PositionTypeID" Type="int" />
+          <Property Name="PositionTypeDescr" Type="nchar" MaxLength="10" />
         </EntityType>
         <Association Name="FK_PlayerPosition_Player">
           <End Role="Player" Type="Self.Player" Multiplicity="1" />
@@ -991,7 +995,10 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
     [v_Team_Draft_Roster].[PlayerImage] AS [PlayerImage], 
     [v_Team_Draft_Roster].[SecPos] AS [SecPos], 
     [v_Team_Draft_Roster].[PrimPos] AS [PrimPos], 
-    [v_Team_Draft_Roster].[PlayerGUID] AS [PlayerGUID]
+    [v_Team_Draft_Roster].[PlayerGUID] AS [PlayerGUID], 
+    [v_Team_Draft_Roster].[PrimaryPositionID] AS [PrimaryPositionID], 
+    [v_Team_Draft_Roster].[PositionTypeID] AS [PositionTypeID], 
+    [v_Team_Draft_Roster].[PositionTypeDescr] AS [PositionTypeDescr]
     FROM [dbo].[v_Team_Draft_Roster] AS [v_Team_Draft_Roster]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_PlayerPosition_Player" Association="Self.FK_PlayerPosition_Player">
@@ -1912,7 +1919,7 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
           <FunctionImport Name="sp_Team_Select" ReturnType="Collection(CSBAModel1.sp_Team_Select_Result)">
           <Parameter Name="TeamID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_TradeData_Select" ReturnType="Collection(CSBAModel1.sp_TradeData_Select_Result)">
+          <FunctionImport Name="sp_TradeData_Select">
             <Parameter Name="SeasonID" Mode="In" Type="Int32" />
             <Parameter Name="TradeGUID" Mode="In" Type="Guid" />
           </FunctionImport>
@@ -1935,13 +1942,13 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
             <Parameter Name="PrimaryPositionID" Mode="In" Type="Int32" />
             <Parameter Name="Drafted" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="sp_Team_Roster_Select" ReturnType="Collection(CSBAModel1.sp_Team_Roster_Select_Result)">
-            <Parameter Name="SeasonID" Mode="In" Type="Int32" />
-            <Parameter Name="TeamID" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="sp_Stat_Insert" ReturnType="Collection(Int32)">
             <Parameter Name="StatName" Mode="In" Type="String" />
             <Parameter Name="PositionTypeID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Team_Roster_Select" ReturnType="Collection(CSBAModel1.sp_Team_Roster_Select_Result)">
+            <Parameter Name="SeasonID" Mode="In" Type="Int32" />
+            <Parameter Name="TeamID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_Season_Select_Result">
@@ -2136,6 +2143,7 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
             <PropertyRef Name="TeamID" />
             <PropertyRef Name="TeamName" />
             <PropertyRef Name="PlayerGUID" />
+            <PropertyRef Name="PrimaryPositionID" />
           </Key>
           <Property Name="SeasonName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="SeasonID" Type="Int32" Nullable="false" />
@@ -2148,6 +2156,9 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
           <Property Name="SecPos" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="PrimPos" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="PlayerGUID" Type="Guid" Nullable="false" />
+          <Property Name="PrimaryPositionID" Type="Int32" Nullable="false" />
+          <Property Name="PositionTypeID" Type="Int32" />
+          <Property Name="PositionTypeDescr" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <ComplexType Name="DraftPositionStatus_Result">
           <Property Type="Int32" Name="SeasonID" Nullable="false" />
@@ -2163,16 +2174,6 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
           <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
           <Property Type="String" Name="OwnerEmail" Nullable="true" MaxLength="25" />
           <Property Type="Binary" Name="TeamImage" Nullable="true" MaxLength="Max" />
-        </ComplexType>
-        <ComplexType Name="sp_TradeData_Select_Result">
-          <Property Type="Int32" Name="SeasonID" Nullable="false" />
-          <Property Type="Guid" Name="TradeGUID" Nullable="false" />
-          <Property Type="Int32" Name="TeamID" Nullable="true" />
-          <Property Type="String" Name="TeamName" Nullable="false" MaxLength="25" />
-          <Property Type="DateTime" Name="ActionDate" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="ProposedDate" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="TradeStatusID" Nullable="true" />
-          <Property Type="String" Name="TradeStatusDesc" Nullable="true" MaxLength="20" />
         </ComplexType>
         <EntityType Name="aspnet_Users">
           <Key>
@@ -2242,6 +2243,9 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
           <Property Type="Binary" Name="PlayerImage" Nullable="true" MaxLength="Max" />
           <Property Type="String" Name="SecPos" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="PrimPos" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="PrimaryPositionID" Nullable="false" />
+          <Property Type="Int32" Name="PositionTypeID" Nullable="true" />
+          <Property Type="String" Name="PositionTypeDescr" Nullable="true" MaxLength="10" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2861,6 +2865,9 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
           <EntitySetMapping Name="v_Team_Draft_Roster">
             <EntityTypeMapping TypeName="CSBAModel1.v_Team_Draft_Roster">
               <MappingFragment StoreEntitySet="v_Team_Draft_Roster">
+                <ScalarProperty Name="PositionTypeDescr" ColumnName="PositionTypeDescr" />
+                <ScalarProperty Name="PositionTypeID" ColumnName="PositionTypeID" />
+                <ScalarProperty Name="PrimaryPositionID" ColumnName="PrimaryPositionID" />
                 <ScalarProperty Name="PlayerGUID" ColumnName="PlayerGUID" />
                 <ScalarProperty Name="PrimPos" ColumnName="PrimPos" />
                 <ScalarProperty Name="SecPos" ColumnName="SecPos" />
@@ -2899,18 +2906,6 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_TradeData_Select" FunctionName="CSBAModel1.Store.sp_TradeData_Select">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CSBAModel1.sp_TradeData_Select_Result">
-                <ScalarProperty Name="SeasonID" ColumnName="SeasonID" />
-                <ScalarProperty Name="TradeGUID" ColumnName="TradeGUID" />
-                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
-                <ScalarProperty Name="TeamName" ColumnName="TeamName" />
-                <ScalarProperty Name="ActionDate" ColumnName="ActionDate" />
-                <ScalarProperty Name="ProposedDate" ColumnName="ProposedDate" />
-                <ScalarProperty Name="TradeStatusID" ColumnName="TradeStatusID" />
-                <ScalarProperty Name="TradeStatusDesc" ColumnName="TradeStatusDesc" />
-              </ComplexTypeMapping>
-            </ResultMapping>
           </FunctionImportMapping>
           <EntitySetMapping Name="aspnet_Users">
             <EntityTypeMapping TypeName="CSBAModel1.aspnet_Users">
@@ -2972,6 +2967,7 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Stat_Insert" FunctionName="CSBAModel1.Store.sp_Stat_Insert" />
           <FunctionImportMapping FunctionImportName="sp_Team_Roster_Select" FunctionName="CSBAModel1.Store.sp_Team_Roster_Select">
             <ResultMapping>
               <ComplexTypeMapping TypeName="CSBAModel1.sp_Team_Roster_Select_Result">
@@ -2986,10 +2982,12 @@ warning 6002: The table/view 'CSBA.dbo.v_Team_Draft_Roster' does not have a prim
                 <ScalarProperty Name="PlayerImage" ColumnName="PlayerImage" />
                 <ScalarProperty Name="SecPos" ColumnName="SecPos" />
                 <ScalarProperty Name="PrimPos" ColumnName="PrimPos" />
+                <ScalarProperty Name="PrimaryPositionID" ColumnName="PrimaryPositionID" />
+                <ScalarProperty Name="PositionTypeID" ColumnName="PositionTypeID" />
+                <ScalarProperty Name="PositionTypeDescr" ColumnName="PositionTypeDescr" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_Stat_Insert" FunctionName="CSBAModel1.Store.sp_Stat_Insert" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -15,25 +15,25 @@ namespace CSBA.DataAccessLayer
             //Create a return type Object
             List<TradeDataDomainModel> list = new List<TradeDataDomainModel>();
 
-            //Create a Context object to Connect to the database
-            using (CSBAAzureEntities context = new CSBAAzureEntities())
-            {
-                list = (from result in context.sp_TradeData_Select(Trade.SeasonID, Trade.TradeGUID)
-                        select new TradeDataDomainModel
-                        {
-                            ActionDate = result.ActionDate,
-                            ProposedDate = result.ProposedDate,
-                            SeasonID = result.SeasonID,
-                            TeamID = result.TeamID,
-                            TradeGUID = result.TradeGUID,
-                            TradeStatusID = result.TradeStatusID,
-                            TeamName = result.TeamName,
-                            TradeStatusDesc = result.TradeStatusDesc
-                        }).ToList();
+            ////Create a Context object to Connect to the database
+            //using (CSBAAzureEntities context = new CSBAAzureEntities())
+            //{
+            //    list = (from result in context.sp_TradeData_Select(Trade.SeasonID, Trade.TradeGUID)
+            //            select new TradeDataDomainModel
+            //            {
+            //                ActionDate = result.ActionDate,
+            //                ProposedDate = result.ProposedDate,
+            //                SeasonID = result.SeasonID,
+            //                TeamID = result.TeamID,
+            //                TradeGUID = result.TradeGUID,
+            //                TradeStatusID = result.TradeStatusID,
+            //                TeamName = result.TeamName,
+            //                TradeStatusDesc = result.TradeStatusDesc
+            //            }).ToList();
 
-            } // Guaranteed to close the Connection
+            //} // Guaranteed to close the Connection
 
-            //return the list
+            ////return the list
             return list;
         }
 

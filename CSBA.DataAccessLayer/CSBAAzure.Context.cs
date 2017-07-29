@@ -823,7 +823,7 @@ namespace CSBA.DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Team_Select_Result>("sp_Team_Select", teamIDParameter);
         }
     
-        public virtual ObjectResult<sp_TradeData_Select_Result> sp_TradeData_Select(Nullable<int> seasonID, Nullable<System.Guid> tradeGUID)
+        public virtual int sp_TradeData_Select(Nullable<int> seasonID, Nullable<System.Guid> tradeGUID)
         {
             var seasonIDParameter = seasonID.HasValue ?
                 new ObjectParameter("SeasonID", seasonID) :
@@ -833,7 +833,7 @@ namespace CSBA.DataAccessLayer
                 new ObjectParameter("TradeGUID", tradeGUID) :
                 new ObjectParameter("TradeGUID", typeof(System.Guid));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_TradeData_Select_Result>("sp_TradeData_Select", seasonIDParameter, tradeGUIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_TradeData_Select", seasonIDParameter, tradeGUIDParameter);
         }
     
         public virtual ObjectResult<DraftPlayerStatus_Result> DraftPlayerStatus(Nullable<int> seasonID)
@@ -880,19 +880,6 @@ namespace CSBA.DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DraftPlayersStatus_Result>("DraftPlayersStatus", seasonIDParameter, primaryPositionIDParameter, draftedParameter);
         }
     
-        public virtual ObjectResult<sp_Team_Roster_Select_Result> sp_Team_Roster_Select(Nullable<int> seasonID, Nullable<int> teamID)
-        {
-            var seasonIDParameter = seasonID.HasValue ?
-                new ObjectParameter("SeasonID", seasonID) :
-                new ObjectParameter("SeasonID", typeof(int));
-    
-            var teamIDParameter = teamID.HasValue ?
-                new ObjectParameter("TeamID", teamID) :
-                new ObjectParameter("TeamID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Team_Roster_Select_Result>("sp_Team_Roster_Select", seasonIDParameter, teamIDParameter);
-        }
-    
         public virtual ObjectResult<Nullable<int>> sp_Stat_Insert(string statName, Nullable<int> positionTypeID)
         {
             var statNameParameter = statName != null ?
@@ -904,6 +891,19 @@ namespace CSBA.DataAccessLayer
                 new ObjectParameter("PositionTypeID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("sp_Stat_Insert", statNameParameter, positionTypeIDParameter);
+        }
+    
+        public virtual ObjectResult<sp_Team_Roster_Select_Result> sp_Team_Roster_Select(Nullable<int> seasonID, Nullable<int> teamID)
+        {
+            var seasonIDParameter = seasonID.HasValue ?
+                new ObjectParameter("SeasonID", seasonID) :
+                new ObjectParameter("SeasonID", typeof(int));
+    
+            var teamIDParameter = teamID.HasValue ?
+                new ObjectParameter("TeamID", teamID) :
+                new ObjectParameter("TeamID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Team_Roster_Select_Result>("sp_Team_Roster_Select", seasonIDParameter, teamIDParameter);
         }
     }
 }
